@@ -14,7 +14,7 @@ module.exports = (app) => {
       }).save();
       res.send(newGroup);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       res.status(422).send();
     }
   });
