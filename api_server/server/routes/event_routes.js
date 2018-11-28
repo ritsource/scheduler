@@ -45,6 +45,48 @@ module.exports = (app) => {
     }
   });
 
+  app.get('/api/event/by/:groupId', requireAuth, async (req, res) => {
+    try {
+      const allEvent = await Event.find({
+        _group: req.params.groupId,
+        _creator: req.user ? req.user.id : DEV_USER_ID,
+        _isDeleted: false
+      });
+      res.send(allEvent);
+    } catch (error) {
+      // console.log(error);
+      res.status(422).send();
+    }
+  });
+
+  app.patch('/api/event/done/:eventId', requireAuth, async (req, res) => {
+    try {
+      const newEvent = await Event.findByIdAndUpdate(
+        req.params.eventId,
+        { _isDone: true },
+        { new: true }
+      );
+      res.send(newEvent);
+    } catch (error) {
+      // console.log(error);
+      res.status(422).send();
+    }
+  });
+
+  app.patch('/api/event/undo/:eventId', requireAuth, async (req, res) => {
+    try {
+      const newEvent = await Event.findByIdAndUpdate(
+        req.params.eventId,
+        { _isDone: false },
+        { new: true }
+      );
+      res.send(newEvent);
+    } catch (error) {
+      // console.log(error);
+      res.status(422).send();
+    }
+  });
+
   app.put('/api/event/edit/:eventId', requireAuth, async (req, res) => {
     try {
       const newEvent = await Event.findByIdAndUpdate(
