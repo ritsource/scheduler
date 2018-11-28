@@ -6,6 +6,8 @@ const keys = require('./config/keys');
 
 require('./db/mongoose'); // Mongoose
 require('./models/user'); // User Model
+require('./models/event'); // Event Model
+require('./models/group'); // Group Model
 require('./services/passport'); // Passport
 
 const app = express();
