@@ -4,6 +4,7 @@ const keys = require('../config/keys');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 
+const facebookMiddleware = require('./strategy/facebook');
 const googleMiddleware = require('./strategy/google');
 
 passport.serializeUser((user, done) => {
@@ -16,4 +17,5 @@ passport.deserializeUser((id, done) => {
   });
 });
 
+facebookMiddleware(passport);
 googleMiddleware(passport);
