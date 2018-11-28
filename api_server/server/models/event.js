@@ -9,7 +9,8 @@ const EventSchema = new Schema({
   date_to: Number,
   notification: { type: Boolean, default: false },
   _group: { type: Schema.Types.ObjectId, ref: 'Group' },
-  _creator: { type: Schema.Types.ObjectId, ref: 'User' }
+  _creator: { type: Schema.Types.ObjectId, ref: 'User' },
+  _isDeleted: { type: Boolean, default: false }
 });
 
 const Event = mongoose.model('Event', EventSchema);

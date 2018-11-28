@@ -25,6 +25,8 @@ app.use(passport.session());
 
 // Routes
 require('./routes/auth_routes')(app);
+require('./routes/event_routes')(app);
+require('./routes/group_routes')(app);
 
 app.get('/', (req, res) => {
   res.send({ name: 'Ritwik' });
