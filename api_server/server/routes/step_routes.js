@@ -21,10 +21,7 @@ module.exports = (app) => {
 
   app.get('/api/step/all', requireAuth, async (req, res) => {
     try {
-      const allStep = await Step.find({
-        _creator: req.user ? req.user.id : DEV_USER_ID,
-        _isDeleted: false
-      });
+      const allStep = await Step.find({ _creator: req.user ? req.user.id : DEV_USER_ID });
       res.send(allStep);
     } catch (error) {
       // console.log(error);
@@ -36,8 +33,7 @@ module.exports = (app) => {
     try {
       const allStep = await Step.find({
         _event: req.params.eventId,
-        _creator: req.user ? req.user.id : DEV_USER_ID,
-        _isDeleted: false
+        _creator: req.user ? req.user.id : DEV_USER_ID
       });
       res.send(allStep);
     } catch (error) {
@@ -88,12 +84,39 @@ module.exports = (app) => {
     }
   });
 
-  app.delete('/api/step/delete/:stepId', requireAuth, async (req, res) => {
+  app.patch('/api/step/delete_arrange/:stepId', requireAuth, async (req, res) => {
     try {
       const delStep = await Step.findByIdAndDelete(req.params.stepId);
       res.send(delStep);
     } catch (error) {
       // console.log(error);
+      res.status(422).send();
+    }
+  });
+
+  app.put('/api/step/rearrange', requireAuth, async (req, res) => {
+    const { focusedStep, fromRank, toRank, movedSteps, eventId } = req.body;
+
+    try {
+      await Step.updateMany(
+        { _id: { $in: [ ...movedSteps ] } },
+        { $inc: { _rank: (fromRank > toRank) ? 1 : -1 } },
+        { new: true }
+      );
+      
+      await Step.findByIdAndUpdate(
+        focusedStep,
+        { $inc: { _rank: (toRank - fromRank) } },
+        { new: true }
+      );
+
+      const allStep = await Step.find({
+        _event: eventId,
+        _creator: req.user ? req.user.id : DEV_USER_ID
+      });
+      res.send(allStep);
+    } catch (error) {
+      console.log(error);
       res.status(422).send();
     }
   });

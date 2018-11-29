@@ -7,7 +7,6 @@ const EventSchema = new Schema({
   hex_color: String,
   date_from: Number,
   date_to: Number,
-  steps: [{ type: Schema.Types.ObjectId, ref: 'Steps' }],
   notification: { type: Boolean, default: false },
   _group: { type: Schema.Types.ObjectId, ref: 'Group' },
   _creator: { type: Schema.Types.ObjectId, ref: 'User' },

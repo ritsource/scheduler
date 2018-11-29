@@ -8,6 +8,7 @@ require('./db/mongoose'); // Mongoose
 require('./models/user'); // User Model
 require('./models/event'); // Event Model
 require('./models/group'); // Group Model
+require('./models/step'); // Step Model
 require('./services/passport'); // Passport
 
 const app = express();
@@ -27,6 +28,7 @@ app.use(passport.session());
 require('./routes/auth_routes')(app);
 require('./routes/event_routes')(app);
 require('./routes/group_routes')(app);
+require('./routes/step_routes')(app);
 
 app.get('/', (req, res) => {
   res.send({ name: 'Ritwik' });

@@ -5,6 +5,7 @@ const StepSchema = new Schema({
   title: String,
   _event: { type: Schema.Types.ObjectId, ref: 'Event' },
   _creator: { type: Schema.Types.ObjectId, ref: 'User' },
+  _rank: { type: Number },
   _isDone: { type: Boolean, default: false }
 });
 
