@@ -84,10 +84,23 @@ module.exports = (app) => {
     }
   });
 
-  app.patch('/api/step/delete_arrange/:stepId', requireAuth, async (req, res) => {
+  app.patch('/api/step/delete_n_arrange', requireAuth, async (req, res) => {
+    const { focusedStep, movedSteps, eventId } = req.body;
+
     try {
-      const delStep = await Step.findByIdAndDelete(req.params.stepId);
-      res.send(delStep);
+      const delStep = await Step.findByIdAndDelete(focusedStep);
+
+      await Step.updateMany(
+        { _id: { $in: [ ...movedSteps ] } },
+        { $inc: { _rank: -1 } },
+        { new: true }
+      );
+      
+      const allStep = await Step.find({
+        _event: eventId,
+        _creator: req.user ? req.user.id : DEV_USER_ID
+      });
+      res.send(allStep);
     } catch (error) {
       // console.log(error);
       res.status(422).send();
