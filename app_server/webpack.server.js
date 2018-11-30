@@ -5,7 +5,7 @@ const webpackNodeExternals = require('webpack-node-externals');
 
 const config = {
   target: 'node',
-  entry: './src/server.ts',
+  entry: './src/server.js',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'build')
@@ -14,3 +14,4 @@ const config = {
 };
 
 module.exports = merge(baseConfig, config);
+
