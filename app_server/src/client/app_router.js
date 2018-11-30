@@ -1,11 +1,16 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
+import App from './app';
 import HomePage from './components/home_page';
+// import NotFoundPage from './components/pages/not_found_page';
 
-const AppRouter = () => (
-  <div>
-    <Route path='/' component={HomePage} exact />
-  </div>
-);
-
-export default AppRouter;
+export default [
+  {
+    ...App,
+    routes: [
+      {
+        ...HomePage,
+        path: '/',
+        exact: true
+      }
+    ]
+  }
+];
