@@ -10,7 +10,7 @@ app.use(proxy('/api', { target: 'http://localhost:5000', changeOrigin: true }));
 app.use(express.static('public'));
 
 app.get('*', (req, res) => {
-  res.send(renderer());
+  res.send(renderer(req));
 });
 
 const PORT = process.env.PORT || 3000;
