@@ -5,7 +5,7 @@ import { asyncFetchProjects } from '../actions/project_actions';
 
 class HomePage extends Component {
   componentDidMount() {
-    // this.props.asyncFetchProjects();
+    this.props.asyncFetchProjects();
   }
   
   render() {
@@ -22,6 +22,15 @@ class HomePage extends Component {
 
 const mapStateToProps = ({ projects }) => ({ projects });
 
+const mapDispatchToProps = (dispatch) => ({
+  asyncFetchProjects: () => dispatch(asyncFetchProjects())
+});
+
+const loadData = async (store) => {
+  return store.dispatch(asyncFetchProjects());
+}
+
 export default {
-  component: connect(mapStateToProps, { asyncFetchProjects })(HomePage)
+  component: connect(mapStateToProps, mapDispatchToProps)(HomePage),
+  loadData
 };

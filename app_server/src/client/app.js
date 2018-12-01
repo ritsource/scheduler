@@ -2,21 +2,24 @@ import React from 'react';
 import { renderRoutes } from 'react-router-config';
 import { connect } from 'react-redux';
 
-import { asyncFetchProjects } from './actions/project_actions';
-import { asyncFetchTexts } from './actions/text_actions';
+import HeaderComp from './components/partials/header/header';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      visHambRodal: false
+      sidebar_visible: true
     }
+  }
+
+  toggleSidebar = () => {
+    this.setState((prevState) => ({ sidebar_visible: !prevState.sidebar_visible }));
   }
 
   render() {
     return (
       <div>
-        <h3>Header</h3>
+        <HeaderComp toggleSidebar={this.toggleSidebar} />
         <div>{renderRoutes(this.props.route.routes)}</div>
       </div>
     );
@@ -27,12 +30,6 @@ const mapStateToProps = (state) => ({
   projects: state.projects
 });
 
-const loadData = async (store) => {
-  await store.dispatch(asyncFetchTexts());
-  return store.dispatch(asyncFetchProjects());
-}
-
 export default {
-  component: connect(mapStateToProps, { asyncFetchProjects, asyncFetchTexts })(App),
-  loadData: loadData
+  component: connect(mapStateToProps)(App),
 };
