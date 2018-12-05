@@ -16,7 +16,10 @@
   cursor: pointer;
 
   p {
-    // border: 1px solid red;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-top: 2px;
   }
 
   .sidebar-item-001-hamburger {

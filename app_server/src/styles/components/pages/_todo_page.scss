@@ -1,8 +1,28 @@
 .todo-page-000 {
-  // border: 1px solid red;
-  // background: yellow;
   display: flex;
   flex-direction: row;
   height: calc(100vh - 73px);
   max-height: calc(100vh - 73px);
+
+  .todo-page-001-content {
+    width: 100%;
+    // border: 1px solid red;
+    // background: yellow;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    h2 {
+      color: $theme-green;
+      display: flex;
+      align-items: center;
+      // border: 1px solid red;
+  
+      span {
+        font-size: 22px;
+        margin-right: 5px;
+      }
+    }
+  }
 }

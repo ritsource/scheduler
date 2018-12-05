@@ -3,6 +3,16 @@ body {
   font-family: 'Krub', sans-serif;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover, &:focus {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
 h1, h2, h3, h4, h5, h6, p {
   margin: 0px;
   padding: 0px;
@@ -14,3 +24,33 @@ button {
     outline: none;
   }
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: $background-grey-2;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $background-grey-3;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $background-grey-3;
+}
+
+// ::-moz-scrollbar {
+//   width: 10px;
+// }
+// ::-moz-scrollbar-track {
+//   background: #d4d4d4;
+// }
+// ::-moz-scrollbar-thumb {
+//   background: $theme-green;
+// }
+// ::-moz-scrollbar-thumb:hover {
+//   background: $theme-green;
+// }

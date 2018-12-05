@@ -19,7 +19,8 @@ export class TodoPage extends React.Component {
 
   componentDidMount() {
     const urlParams = new URLSearchParams(window.location.search);
-    this.setState({ groupId: urlParams.get('group') });
+    this.setState({ groupId: urlParams.get('group') || '' });
+    console.log(this.state.groupId);    
     this.props.handleAppMode(1);
     this.props.asyncFetchGroups();
   }
@@ -27,10 +28,19 @@ export class TodoPage extends React.Component {
   render() {
     return (
       <div className='todo-page-000'>
-        {this.props.sideBar && (
-          <TodoSidebarComp groups={this.props.groups} changeGroupId={this.changeGroupId} />
-        )}
-        <p>GropuName -  {this.state.groupId}</p>
+        <TodoSidebarComp
+          groups={this.props.groups}
+          changeGroupId={this.changeGroupId}
+          active_groupId={this.state.groupId}
+          visible={this.props.sideBar}
+        />
+        <div className='todo-page-001-content'>
+          {this.state.groupId === '' ? (
+            <h2><span>✅❎</span>Your Todos</h2>
+          ) : (
+            <p>GropuName -  {this.state.groupId}</p>
+          )}
+        </div>
       </div>
     );
   }

@@ -1,6 +1,13 @@
 .todo-sidebar-000 {
-  width: 250px;
+  // width: 250px;
   border-right: 1px solid $border-black;
+  max-height: 100%;
+  overflow: overlay;
+  transition: 0.2s;
 
+  .todo-sidebar-001-dropzone {
+    background: $background-grey-1;
+    height: 4px;
+  }
   
 }
