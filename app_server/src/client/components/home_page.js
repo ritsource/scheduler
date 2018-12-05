@@ -1,20 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
-import { asyncFetchProjects } from '../actions/project_actions';
+import { asyncTestAction } from '../actions/test_actions';
+import ListComp from './list_comp';
 
-class HomePage extends Component {
+export class HomePage extends React.Component {
   componentDidMount() {
-    this.props.asyncFetchProjects();
+    this.props.asyncTestAction();
   }
-  
+
   render() {
     return (
       <div>
-        <h1>HomePage</h1>
-        <li>{this.props.projects.map(({ title }, i) => (
-          <li key={i}>{title}</li>
-        ))}</li>
+        HomePage
+        <ListComp projects={this.props.projects}/>
       </div>
     );
   }
@@ -22,15 +21,11 @@ class HomePage extends Component {
 
 const mapStateToProps = ({ projects }) => ({ projects });
 
-const mapDispatchToProps = (dispatch) => ({
-  asyncFetchProjects: () => dispatch(asyncFetchProjects())
-});
-
-const loadData = async (store) => {
-  return store.dispatch(asyncFetchProjects());
+function loadData(store) {
+  return store.dispatch(asyncTestAction());
 }
 
 export default {
-  component: connect(mapStateToProps, mapDispatchToProps)(HomePage),
+  component: connect(mapStateToProps, { asyncTestAction })(HomePage),
   loadData
 };

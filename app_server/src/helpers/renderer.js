@@ -2,15 +2,16 @@ import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import serialize from 'serialize-javascript';
 import { renderRoutes } from 'react-router-config';
-import AppRouter from '../client/app_router';
+import serialize from 'serialize-javascript';
+
+import AppRoutes from '../client/app_routes';
 
 export default (req, store) => {
   const content = renderToString(
     <Provider store={store}>
       <StaticRouter location={req.path} context={{}}>
-        <div>{renderRoutes(AppRouter)}</div>
+        <div>{renderRoutes(AppRoutes)}</div>
       </StaticRouter>
     </Provider>
   );
@@ -23,7 +24,10 @@ export default (req, store) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="icon" href="favicon.ico">
-        <title>Ritwik Saha</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Krub" rel="stylesheet">
+        <link rel="stylesheet" href="styles.css">
+        <title>React SSR</title>
       </head>
       <body>
         <div id="root">${content}<div>

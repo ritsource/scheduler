@@ -1,0 +1,16 @@
+body {
+  color: $text-color;
+  font-family: 'Krub', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0px;
+  padding: 0px;
+}
+
+// input
+button {
+  &:focus {
+    outline: none;
+  }
+}

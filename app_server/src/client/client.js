@@ -7,14 +7,12 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { renderRoutes } from 'react-router-config';
 
-import AppRouter from './app_router';
-import projectReducer from './reducers/project_reducer';
-import textReducer from './reducers/text_reducer';
+import AppRoutes from './app_routes';
+import testReducer from './reducers/test_reducer';
 
 const store = createStore(
   combineReducers({
-    projects: projectReducer,
-    texts: textReducer
+    projects: testReducer
   }),
   window.INITIAL_STATE,
   applyMiddleware(thunk)
@@ -27,7 +25,7 @@ window.showStateDev = () => {
 ReactDOM.hydrate(
   <Provider store={store}>
     <BrowserRouter>
-      <div>{renderRoutes(AppRouter)}</div>
+      <div>{renderRoutes(AppRoutes)}</div>
     </BrowserRouter>
   </Provider>
   , document.querySelector('#root'));

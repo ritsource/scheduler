@@ -14,4 +14,3 @@ const config = {
 };
 
 module.exports = merge(baseConfig, config);
-
