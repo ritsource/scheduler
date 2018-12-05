@@ -8,20 +8,29 @@ import TodoSidebarComp from '../partials/todo_sidebar';
 export class TodoPage extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      groupId: ''
+    }
   }
 
-  async componentDidMount() {
+  changeGroupId = (groupId) => {
+    this.setState({ groupId });
+  }
+
+  componentDidMount() {
+    const urlParams = new URLSearchParams(window.location.search);
+    this.setState({ groupId: urlParams.get('group') });
     this.props.handleAppMode(1);
     this.props.asyncFetchGroups();
   }
   
   render() {
     return (
-      <div>
+      <div className='todo-page-000'>
         {this.props.sideBar && (
-          <TodoSidebarComp groups={this.props.groups} />
+          <TodoSidebarComp groups={this.props.groups} changeGroupId={this.changeGroupId} />
         )}
-        TodoPage
+        <p>GropuName -  {this.state.groupId}</p>
       </div>
     );
   }

@@ -6,8 +6,8 @@ export const asyncFetchGroups = () => async (dispatch) => {
   // console.log(response.data);
   dispatch({ type: ASYNC_FETCH_GROUPS, groups: response.data });
 
-  // return new Promise((resolve, reject) => {
-  //   if (response.data) resolve(response.data);
-  //   else reject('Somenthing went wrong');
-  // });
+  return new Promise((resolve, reject) => {
+    if (response.data) resolve(response.data);
+    else reject('Somenthing went wrong');
+  });
 }

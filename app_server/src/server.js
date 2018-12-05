@@ -3,6 +3,7 @@ import express from 'express';
 import proxy from 'http-proxy-middleware';
 import helmet from 'helmet';
 import { matchRoutes } from 'react-router-config';
+import path from 'path';
 
 import renderer from './helpers/renderer';
 import configureStore from './helpers/configure_store';
@@ -16,6 +17,8 @@ app.use(proxy('/api', { target: 'http://localhost:5000', changeOrigin: true }));
 app.use(proxy('/auth', { target: 'http://localhost:5000', changeOrigin: true }));
 
 app.use(express.static('public'));
+// app.use(express.static(path.join(__dirname + 'public')));
+// console.log('XXXXXXXXXXXX0', path.join(__dirname + 'public'));
 
 app.get('*', (req, res) => {
   const store = configureStore();
@@ -27,8 +30,8 @@ app.get('*', (req, res) => {
   Promise.all(promises).then(() => {  
     res.send(renderer(req, store));
   }).catch((e) => {
-    console.log('Catch **'); 
-    // console.log(e);
+    console.log('Catch **');
+    console.log(e);
   });
 });
 

@@ -1,7 +1,8 @@
 .header-000 {
   // border: 1px solid red;
   border-bottom: 1px solid $border-black;
-  padding: 12px 20px;
+  padding: 12px 20px 12px calc(20px - 13px); // 13px for hamburger padding
+  // padding: 12px 20px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

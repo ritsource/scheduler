@@ -12,7 +12,17 @@ export default [
       { ...LandingPage, path: '/about', exact: true },
       { ...HomePage, path: '/', exact: true },
       { ...CalendarPage, path: '/calendar' },
-      { ...TodoPage, path: '/todo' },
+      {
+        ...TodoPage,
+        path: '/todo',
+        // routes: [
+        //   { path: '/todo/:groupId',
+        //     // component: TodoPage.component
+        //     ...TodoPage
+        //   }
+        // ]
+      },
+      // { ...TodoPage, path: '/todo/:groupId' },
       { ...NotFoundPage }
     ]
   }
