@@ -26,6 +26,9 @@ app.get('*', (req, res) => {
 
   Promise.all(promises).then(() => {  
     res.send(renderer(req, store));
+  }).catch((e) => {
+    console.log('Catch **'); 
+    // console.log(e);
   });
 });
 

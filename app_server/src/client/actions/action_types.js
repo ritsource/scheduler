@@ -1,1 +1,0 @@
-export const ASYNC_TEST_ACTION = 'ASYNC_TEST_ACTION';

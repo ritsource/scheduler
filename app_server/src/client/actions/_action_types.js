@@ -1,0 +1,3 @@
+export const HANDE_APP_MODE =  'HANDE_APP_MODE';
+export const TOGGLE_SIDE_BAR =  'TOGGLE_SIDE_BAR';
+export const ASYNC_FETCH_GROUPS =  'ASYNC_FETCH_GROUPS';

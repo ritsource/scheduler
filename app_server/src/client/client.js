@@ -8,11 +8,15 @@ import thunk from 'redux-thunk';
 import { renderRoutes } from 'react-router-config';
 
 import AppRoutes from './app_routes';
-import testReducer from './reducers/test_reducer';
+import appModeReducer from './reducers/app_mode_reducer';
+import sideBarReducer from './reducers/side_bar_reducer';
+import groupReducer from './reducers/group_reducer';
 
 const store = createStore(
   combineReducers({
-    projects: testReducer
+    appMode: appModeReducer,
+    sideBar: sideBarReducer,
+    groups: groupReducer
   }),
   window.INITIAL_STATE,
   applyMiddleware(thunk)
