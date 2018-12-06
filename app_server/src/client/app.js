@@ -2,11 +2,17 @@ import React, { Component } from 'react';
 import { renderRoutes } from 'react-router-config';
 import { connect } from 'react-redux';
 
+import { asyncFetchGroups } from './actions/group_actions';
+import { asyncFetchEvents } from './actions/event_actions';
 import HeaderComp from './components/partials/header';
 
 class App extends Component {
   constructor(props) {
     super(props);
+  }
+
+  componentDidMount() {
+    this.props.asyncFetchGroups();
   }
 
   render() {
@@ -22,5 +28,9 @@ class App extends Component {
 const mapStateToProps = ({ appMode }) => ({ appMode });
 
 export default {
-  component: connect(mapStateToProps)(App)
+  component: connect(mapStateToProps, { asyncFetchGroups, asyncFetchEvents })(App),
+  loadData: function (store) {
+    store.dispatch(asyncFetchEvents());
+    return store.dispatch(asyncFetchGroups());
+  }
 };

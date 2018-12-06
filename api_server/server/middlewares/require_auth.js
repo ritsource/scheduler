@@ -1,5 +1,5 @@
 module.exports = (req, res, next) => {
-  if (process.env.NODE_ENV.trim() === 'development') {
+  if (process.env.NODE_ENV !== 'developmwnt') {
     console.warn('No Authentication');
     return next();
   }

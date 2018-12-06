@@ -17,8 +17,6 @@ app.use(proxy('/api', { target: 'http://localhost:5000', changeOrigin: true }));
 app.use(proxy('/auth', { target: 'http://localhost:5000', changeOrigin: true }));
 
 app.use(express.static('public'));
-// app.use(express.static(path.join(__dirname + 'public')));
-// console.log('XXXXXXXXXXXX0', path.join(__dirname + 'public'));
 
 app.get('*', (req, res) => {
   const store = configureStore();
@@ -27,7 +25,7 @@ app.get('*', (req, res) => {
     return route.loadData ? route.loadData(store) : null;
   });
 
-  Promise.all(promises).then(() => {  
+  Promise.all(promises).then(() => {
     res.send(renderer(req, store));
   }).catch((e) => {
     console.log('Catch **');

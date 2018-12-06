@@ -25,6 +25,7 @@ export default (req, store) => {
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="icon" href="favicon.ico">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Krub" rel="stylesheet">
         <link rel="stylesheet" href="styles.css">
         <title>React SSR</title>

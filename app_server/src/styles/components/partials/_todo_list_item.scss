@@ -1,0 +1,26 @@
+.todo-list-item-000-active {
+  background: $background-grey-1;
+}
+
+.todo-list-item-000 {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  // border: 1px solid red;
+  border-top: 1px solid $border-black;
+
+  &:hover {
+    background: $background-grey-0;
+  }
+
+  p {
+    // color: $text-color;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-top: 2px;
+  }
+}

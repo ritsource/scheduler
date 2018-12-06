@@ -11,12 +11,14 @@ import AppRoutes from './app_routes';
 import appModeReducer from './reducers/app_mode_reducer';
 import sideBarReducer from './reducers/side_bar_reducer';
 import groupReducer from './reducers/group_reducer';
+import eventReducer from './reducers/event_reducer';
 
 const store = createStore(
   combineReducers({
     appMode: appModeReducer,
     sideBar: sideBarReducer,
-    groups: groupReducer
+    groups: groupReducer,
+    events: eventReducer
   }),
   window.INITIAL_STATE,
   applyMiddleware(thunk)

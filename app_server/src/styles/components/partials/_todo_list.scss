@@ -1,0 +1,68 @@
+.todo-list-000 {
+  // border: 1px solid red;
+  width: 100%;
+  height: 100%;
+  overflow: overlay;
+  transition: 0.2s;
+
+  .todo-list-001-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    // align-items: center;
+    padding: 15px 25px 15px 15px;
+    // border: 1px solid red;
+
+    .list-002-trash-button {
+      color: $theme-green;
+      border: 1px solid white;
+      background: white;
+      cursor: pointer;
+      font-size: 22px;
+
+      &:hover {
+        color: red;
+      }
+    }
+
+    form {
+      display: flex;
+      flex-direction: row;
+
+      button {
+        color: $theme-green;
+        border: 1px solid $theme-green;
+        background: white;
+        cursor: pointer;
+      }
+
+      .list-003-w-se-g-input:focus {
+        border-right: 1px solid $theme-green;
+      }
+
+      .list-003-invalid-input {
+        border: 1px solid red !important;
+      }
+      
+      input {
+        color: $theme-green;
+        font-size: 18px;
+        font-weight: bold;
+        border: 1px solid white;
+        border-right: 0px solid white;
+        width: auto;
+        padding: 6px 10px;
+  
+        &:focus {
+          color: $text-color;
+          outline: none;
+          border: 1px solid $theme-green;
+          border-right: 0px solid white;
+        }
+      }
+    }
+
+    
+  }
+  
+}

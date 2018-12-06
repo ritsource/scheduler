@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { handleAppMode } from '../../actions/app_mode_actions';
-import { asyncFetchGroups } from '../../actions/group_actions';
 import TodoSidebarComp from '../partials/todo_sidebar';
+import TodoListComp from '../partials/todo_list';
 
 export class TodoPage extends React.Component {
   constructor(props) {
@@ -20,9 +20,7 @@ export class TodoPage extends React.Component {
   componentDidMount() {
     const urlParams = new URLSearchParams(window.location.search);
     this.setState({ groupId: urlParams.get('group') || '' });
-    console.log(this.state.groupId);    
     this.props.handleAppMode(1);
-    this.props.asyncFetchGroups();
   }
   
   render() {
@@ -38,7 +36,11 @@ export class TodoPage extends React.Component {
           {this.state.groupId === '' ? (
             <h2><span>✅❎</span>Your Todos</h2>
           ) : (
-            <p>GropuName -  {this.state.groupId}</p>
+            <TodoListComp
+              events={this.props.events}
+              active_groupId={this.state.groupId}
+              listTitle={this.props.groups.find(({ _id }) => (_id === this.state.groupId)).title}
+            />
           )}
         </div>
       </div>
@@ -46,17 +48,15 @@ export class TodoPage extends React.Component {
   }
 }
 
-const mapStateToProps = ({ groups, sideBar }) => ({ groups, sideBar });
+const mapStateToProps = ({ groups, events, sideBar }) => ({ groups, events, sideBar });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleAppMode: (x) => dispatch(handleAppMode(x)),
-  asyncFetchGroups: () => dispatch(asyncFetchGroups())
+  handleAppMode: (x) => dispatch(handleAppMode(x))
 });
 
 export default {
   component: connect(mapStateToProps, mapDispatchToProps)(TodoPage),
   loadData: function (store) {
-    store.dispatch(handleAppMode(1));
-    return store.dispatch(asyncFetchGroups());
+    return store.dispatch(handleAppMode(1));
   }
 };
