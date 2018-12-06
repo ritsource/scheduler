@@ -28,6 +28,12 @@ window.showStateDev = () => {
   console.log('getState', store.getState());
 }
 
+window.scrollToBottom = (selector) => {
+  let _selector = document.querySelector(selector);
+  let _scrollHeight = _selector.scrollHeight;
+  _selector.scrollTop = _scrollHeight;
+}
+
 ReactDOM.hydrate(
   <Provider store={store}>
     <BrowserRouter>

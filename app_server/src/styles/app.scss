@@ -2,6 +2,8 @@
 @import './base/base';
 @import './base/anime';
 
+@import '../custom_modules/react-datepicker.css';
+
 @import './components/partials/header';
 @import './components/partials/todo_sidebar';
 @import './components/partials/todo_sidebar_item';

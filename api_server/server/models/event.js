@@ -1,12 +1,13 @@
+const moment = require('moment');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const EventSchema = new Schema({
-  title: String,
-  description: String,
-  hex_color: String,
-  date_from: Number,
-  date_to: Number,
+  title: { type: String, required: true },
+  description: { type: String, default: '' },
+  hex_color: { type: String, default: '#36A500' },
+  date_from: { type: Number, default: moment() },
+  date_to: { type: Number, default: moment() },
   notification: { type: Boolean, default: false },
   _group: { type: Schema.Types.ObjectId, ref: 'Group' },
   _creator: { type: Schema.Types.ObjectId, ref: 'User' },

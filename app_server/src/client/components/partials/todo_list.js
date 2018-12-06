@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+// import DatePicker from 'react-datepicker';
+// import moment from 'moment';
 
+import { asyncPostEvent } from '../../actions/event_actions';
 import TodoListItem from './todo_list_item';
 
 class TodoListComp extends React.Component {
@@ -8,13 +12,15 @@ class TodoListComp extends React.Component {
     super(props);
     this.state = {
       listTitle: this.props.listTitle || '',
-      newEventTitle: ''
+      title: '',
     }
+    this.listRef = React.createRef();
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.listTitle !== this.state.listTitle) {
       this.setState({ listTitle: nextProps.listTitle });
+      this.setState({ title: '' });
     }
   }
 
@@ -44,12 +50,8 @@ class TodoListComp extends React.Component {
           </div>
 
           {/* <div style={{ background: 'white' }} className='todo-list-001-dropzone' id={0}></div> */}
-          <div className='todo-list-002-the-list'>
-            {[
-              ...this.props.events,
-              ...this.props.events,
-              ...this.props.events,
-            ].map((event, i) => (
+          <div className='todo-list-002-the-list' ref={this.listRef} >
+            {this.props.events.map((event, i) => (
               <React.Fragment>
                 <Link to={`/todo?group=${this.props.active_groupId}&event=${event._id}`} onClick={() => {
                   // this.props.changeEventId(event._id);
@@ -64,25 +66,47 @@ class TodoListComp extends React.Component {
 
         <form className='todo-list-001-new-task-form' onSubmit={(e) => {
           e.preventDefault();
+          this.props.asyncPostEvent({
+            title: this.state.title,
+            _group: this.props.active_groupId
+          }).then(() => {
+            this.setState({ title: '' });
+            scrollToBottom('.todo-list-002-the-list');
+          });
         }}>
-          {/* <div className='todo-list-002-form-add-indicator'>
-            <i class="fas fa-plus"></i>
-          </div> */}
           <input
-            name='newEventTitle'
+            name='title'
             autoComplete='off'
             className=''
             placeholder='+ Add a Task'
-            value={this.state.newEventTitle}
+            value={this.state.title}
             onChange={(e) => {
-              this.setState({ newEventTitle: e.target.value });
+              this.setState({ title: e.target.value });
             }}
           />
-          {this.state.newEventTitle !== '' && (<button type='submit'>Add</button>)}
+          {this.state.title !== '' && (
+            <React.Fragment>
+              {/* <DatePicker
+                selected={this.state.date_from}
+                // onChange={this.date_from_change}
+                onChange={(date) => this.setState({ date_from: date })}
+              />
+              <DatePicker
+                selected={this.state.date_to}
+                // onChange={this.date_to_change}
+                onChange={(date) => this.setState({ date_to: date })}
+              /> */}
+              <button type='submit'>Add</button>
+            </React.Fragment>
+          )}
         </form>
       </div>
     )
   }
 }
 
-export default TodoListComp;
+const mapDispatchToProps = (dispatch) => ({
+  asyncPostEvent: (abc) => dispatch(asyncPostEvent(abc))
+});
+
+export default connect(null, mapDispatchToProps)(TodoListComp);
