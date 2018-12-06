@@ -37,7 +37,6 @@ export class TodoPage extends React.Component {
             <h2><span>✅❎</span>Your Todos</h2>
           ) : (
             <TodoListComp
-              events={this.props.events}
               active_groupId={this.state.groupId}
               listTitle={this.props.groups.find(({ _id }) => (_id === this.state.groupId)).title}
             />

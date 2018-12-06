@@ -68,7 +68,8 @@ class TodoListComp extends React.Component {
           e.preventDefault();
           this.props.asyncPostEvent({
             title: this.state.title,
-            _group: this.props.active_groupId
+            _group: this.props.active_groupId,
+            _rank: (this.props.events.length + 1)
           }).then(() => {
             this.setState({ title: '' });
             scrollToBottom('.todo-list-002-the-list');
@@ -85,19 +86,7 @@ class TodoListComp extends React.Component {
             }}
           />
           {this.state.title !== '' && (
-            <React.Fragment>
-              {/* <DatePicker
-                selected={this.state.date_from}
-                // onChange={this.date_from_change}
-                onChange={(date) => this.setState({ date_from: date })}
-              />
-              <DatePicker
-                selected={this.state.date_to}
-                // onChange={this.date_to_change}
-                onChange={(date) => this.setState({ date_to: date })}
-              /> */}
-              <button type='submit'>Add</button>
-            </React.Fragment>
+            <button type='submit'>Add</button>
           )}
         </form>
       </div>
@@ -105,8 +94,12 @@ class TodoListComp extends React.Component {
   }
 }
 
+const mapStateToProps = ({ events }) => ({
+  events: events.sort((a, b) => a._rank > b._rank ? 1 : -1)
+});
+
 const mapDispatchToProps = (dispatch) => ({
   asyncPostEvent: (abc) => dispatch(asyncPostEvent(abc))
 });
 
-export default connect(null, mapDispatchToProps)(TodoListComp);
+export default connect(mapStateToProps, mapDispatchToProps)(TodoListComp);

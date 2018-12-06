@@ -12,7 +12,8 @@ const EventSchema = new Schema({
   _group: { type: Schema.Types.ObjectId, ref: 'Group' },
   _creator: { type: Schema.Types.ObjectId, ref: 'User' },
   _isDeleted: { type: Boolean, default: false },
-  _isDone: { type: Boolean, default: false }
+  _isDone: { type: Boolean, default: false },
+  _rank: { type: Number, required: true },
 });
 
 const Event = mongoose.model('Event', EventSchema);
