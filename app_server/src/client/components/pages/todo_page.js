@@ -24,6 +24,7 @@ export class TodoPage extends React.Component {
   }
   
   render() {
+    const activeGroup = this.props.groups.find(({ _id }) => (_id === this.state.groupId));
     return (
       <div className='todo-page-000'>
         <TodoSidebarComp
@@ -33,12 +34,15 @@ export class TodoPage extends React.Component {
           visible={this.props.sideBar}
         />
         <div className='todo-page-001-content'>
-          {this.state.groupId === '' ? (
+          {(this.state.groupId === '') ? (
             <h2><span>✅❎</span>Your Todos</h2>
           ) : (
             <TodoListComp
               active_groupId={this.state.groupId}
-              listTitle={this.props.groups.find(({ _id }) => (_id === this.state.groupId)).title}
+              listTitle={activeGroup ? activeGroup.title : undefined}
+              // pushToTodo={() => {
+              //   this.props.history.push('/todo');
+              // }}
             />
           )}
         </div>
