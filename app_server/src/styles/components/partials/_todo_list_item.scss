@@ -8,7 +8,8 @@
   justify-content: flex-start;
   align-items: center;
   padding: 10px;
-  cursor: pointer;
+  margin: 0px 15px;
+  cursor: default;
   // border: 1px solid red;
   border-top: 1px solid $border-black;
 
@@ -22,5 +23,24 @@
     overflow: hidden;
     text-overflow: ellipsis;
     padding-top: 2px;
+  }
+
+  .list-item-001-p-_isDone {
+    text-decoration: line-through;
+  }
+
+  .indicator-_isDone {
+    color: white !important;
+    background: $theme-green !important;
+  }
+
+  .list-item-001-indicator {
+    color: $theme-green;
+    font-size: 10px;
+    border-radius: 50%;
+    border: 1px solid $theme-green;
+    padding: 4px 4px 3px 4px;
+    margin-right: 10px;
+    cursor: pointer;
   }
 }
