@@ -114,4 +114,31 @@ module.exports = (app) => {
       res.status(422).send();
     }
   });
+
+  app.put('/api/event/rearrange', requireAuth, async (req, res) => {
+    const { focusedEvent, fromRank, toRank, movedEvents } = req.body;
+
+    try {
+      await Event.updateMany(
+        { _id: { $in: [ ...movedEvents ] } },
+        { $inc: { _rank: (fromRank > toRank) ? 1 : -1 } },
+        { new: true }
+      );
+      
+      await Event.findByIdAndUpdate(
+        focusedEvent,
+        { $inc: { _rank: (toRank - fromRank) } },
+        { new: true }
+      );
+
+      const allEvent = await Event.find({
+        _creator: req.user ? req.user.id : DEV_USER_ID,
+        _isDeleted: false
+      });
+      res.send(allEvent);
+    } catch (error) {
+      console.log(error);
+      res.status(422).send();
+    }
+  });
 };
