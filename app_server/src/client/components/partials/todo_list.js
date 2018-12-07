@@ -1,12 +1,11 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-// import DatePicker from 'react-datepicker';
-// import moment from 'moment';
 
 import { asyncPostEvent } from '../../actions/event_actions';
 import { asyncEditGroup, asyncDeleteGroup } from '../../actions/group_actions';
 import TodoListItem from './todo_list_item';
+import TodoListDropzone from './todo_list_dropzone';
 import TodoListForm from './todo_list_form';
 import TodoListHeader from './todo_list_header';
 
@@ -17,18 +16,18 @@ class TodoListComp extends React.Component {
       listTitle: this.props.listTitle || '',
       title: '',
     }
-    this.listRef = React.createRef();
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.listTitle !== this.state.listTitle) {
       this.setState({ listTitle: nextProps.listTitle });
-      this.setState({ title: '' });
+      // this.setState({ title: '' });
     }
   }
 
   render() {
     const showFormButton = (this.props.listTitle !== this.state.listTitle && this.state.listTitle !== '');
+    
     return (
       <div className='todo-list-000'>
         {!this.props.listTitle ? (
@@ -47,18 +46,20 @@ class TodoListComp extends React.Component {
                 }}
               />
 
-              {/* <div style={{ background: 'white' }} className='todo-list-001-dropzone' id={0}></div> */}
               <div className='todo-list-002-the-list' ref={this.listRef} >
                 {this.props.events.map((event, i) => (
                   <React.Fragment>
+                    <TodoListDropzone index={i}/>
+                    
                     <Link to={`/todo?group=${this.props.active_groupId}&event=${event._id}`} onClick={() => {
                       // this.props.changeEventId(event._id);
                     }}>
-                      <TodoListItem key={i} event={event} />
+                      <TodoListItem key={i} event={event} handleListItemDrop={() => { console.log('Dropped!!') }}/>
                     </Link>
-                    {/* <div className='todo-list-001-dropzone' id={i + 1}></div> */}
                   </React.Fragment>
                 ))}
+
+                <TodoListDropzone index={this.props.events.length} last={true}/>
               </div>
             </div>
 
@@ -74,7 +75,7 @@ class TodoListComp extends React.Component {
           </React.Fragment>
         )}
       </div>
-    )
+    );
   }
 }
 
