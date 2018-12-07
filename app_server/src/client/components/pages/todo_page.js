@@ -28,7 +28,7 @@ export class TodoPage extends React.Component {
     return (
       <div className='todo-page-000'>
         <TodoSidebarComp
-          groups={this.props.groups}
+          // groups={this.props.groups}
           changeGroupId={this.changeGroupId}
           active_groupId={this.state.groupId}
           visible={this.props.sideBar}

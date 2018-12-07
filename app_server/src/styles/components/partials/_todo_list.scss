@@ -1,3 +1,35 @@
+.todo-list-001-new-task-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0px 13px;
+  padding: 2px 0px;
+  bottom: 0px;
+  // border: 1px solid red;
+  border-top: 1px solid $border-black;
+  border-bottom: 1px solid $border-black;
+
+  button {
+    color: $theme-green;
+    background: white;
+    border: 0px solid white;
+  }
+
+  input {
+    padding: 15px 10px;
+    width: 100%;
+    border: 0px solid white;
+
+    &:focus {
+      outline: none;
+    }
+
+    &::placeholder {
+      color: $theme-green;
+    }
+  }
+}
+
 .todo-list-000 {
   // border: 1px solid red;
   width: 100%;
@@ -12,37 +44,7 @@
     height: 100%;
   }
 
-  .todo-list-001-new-task-form {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin: 0px 13px;
-    padding: 2px 0px;
-    bottom: 0px;
-    // border: 1px solid red;
-    border-top: 1px solid $border-black;
-    border-bottom: 1px solid $border-black;
-
-    button {
-      color: $theme-green;
-      background: white;
-      border: 0px solid white;
-    }
-
-    input {
-      padding: 15px 10px;
-      width: 100%;
-      border: 0px solid white;
-
-      &:focus {
-        outline: none;
-      }
-
-      &::placeholder {
-        color: $theme-green;
-      }
-    }
-  }
+  // .todo-list-001-new-task-form 
 
   .todo-list-002-the-list {
     max-height: 100%;
