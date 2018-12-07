@@ -10,11 +10,11 @@
   padding: 10px;
   margin: 0px 15px;
   cursor: default;
-  // border: 1px solid red;
-  border-top: 1px solid $border-black;
+  // border-top: 1px solid $border-black;
 
   &:hover {
     background: $background-grey-0;
+    // background-image: linear-gradient(white, $background-grey-0, white);
   }
 
   p {

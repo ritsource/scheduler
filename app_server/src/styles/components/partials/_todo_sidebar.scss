@@ -9,16 +9,12 @@
   .todo-sidebar-001-the-list {
     height: 100%;
     max-height: 100%;
-    overflow: overlay;
+    overflow: auto;
 
     .todo-sidebar-001-dropzone {
       background: $background-grey-1;
       height: 4px;
     }
-  }
-
-  .todo-sidebar-001-new-list-form {
-
   }
   
 }
