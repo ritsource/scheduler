@@ -3,6 +3,7 @@
 
 Kind of Todo application with both Calendar and Todo mode. It's like [Microsoft Todo](https://todo.microsoft.com) + [Google Calendar](https://calendar.google.com) in 1 app. Honestly, not that fancier, but good.
 
+### Technologies used
 |:fire:|Technologies|
 |:-:|:---|
 |:frog:| Node - Express |
