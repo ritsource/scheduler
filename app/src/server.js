@@ -3,7 +3,6 @@ import express from 'express';
 import proxy from 'http-proxy-middleware';
 import helmet from 'helmet';
 import { matchRoutes } from 'react-router-config';
-import path from 'path';
 
 import renderer from './helpers/renderer';
 import configureStore from './helpers/configure_store';
@@ -34,4 +33,4 @@ app.get('*', (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, console.log(`Server is up at port ${PORT}..`));
+app.listen(PORT, () => console.log(`Server is up, PORT=${PORT} NODE_ENV=${process.env.NODE_ENV}..`));

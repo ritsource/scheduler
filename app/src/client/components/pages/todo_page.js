@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { createBrowserHistory } from 'history';
 
 import { handleAppMode } from '../../actions/app_mode_actions';
 import TodoSidebarComp from '../partials/todo_sidebar';
@@ -15,6 +16,8 @@ export class TodoPage extends React.Component {
 
   changeGroupId = (groupId) => {
     this.setState({ groupId });
+    const history = createBrowserHistory();
+    history.push(`/todo?group=${groupId}`);
   }
 
   componentDidMount() {

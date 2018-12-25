@@ -4,8 +4,6 @@ import { StaticRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { renderRoutes } from 'react-router-config';
 import serialize from 'serialize-javascript';
-// import { DragDropContextProvider } from 'react-dnd';
-// import HTML5Backend from 'react-dnd-html5-backend';
 
 import AppRoutes from '../client/app_routes';
 
@@ -13,9 +11,7 @@ export default (req, store) => {
   const content = renderToString(
     <Provider store={store}>
       <StaticRouter location={req.path} context={{}}>
-        {/* <DragDropContextProvider backend={HTML5Backend}> */}
-          <div>{renderRoutes(AppRoutes)}</div>
-        {/* </DragDropContextProvider> */}
+        <div>{renderRoutes(AppRoutes)}</div>
       </StaticRouter>
     </Provider>
   );

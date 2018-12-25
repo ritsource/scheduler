@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { createBrowserHistory } from 'history';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
-import { asyncPostEvent } from '../../actions/event_actions';
+import { asyncPostEvent, asyncRearrangeEvents } from '../../actions/event_actions';
 import { asyncEditGroup, asyncDeleteGroup } from '../../actions/group_actions';
 import TodoListItem from './todo_list_item';
-import TodoListDropzone from './todo_list_dropzone';
 import TodoListForm from './todo_list_form';
 import TodoListHeader from './todo_list_header';
 
@@ -17,6 +18,25 @@ class TodoListComp extends React.Component {
       title: '',
     }
   }
+
+  onDragEnd = (result) => {
+    
+  };
+
+  // x = {
+  //   draggableId: 'objectId',
+  //   source: {
+  //     index: 0
+  //   },
+  //   destination: {
+  //     index: 1
+  //   }
+  // }
+
+  changeEventId = (eventId) => {
+    const history = createBrowserHistory();
+    history.push(`/todo?group=${this.props.active_groupId}&event=${eventId}`);
+  };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.listTitle !== this.state.listTitle) {
@@ -46,21 +66,32 @@ class TodoListComp extends React.Component {
                 }}
               />
 
-              <div className='todo-list-002-the-list' ref={this.listRef} >
-                {this.props.events.map((event, i) => (
-                  <React.Fragment>
-                    <TodoListDropzone index={i}/>
-                    
-                    <Link to={`/todo?group=${this.props.active_groupId}&event=${event._id}`} onClick={() => {
-                      // this.props.changeEventId(event._id);
-                    }}>
-                      <TodoListItem key={i} event={event} handleListItemDrop={() => { console.log('Dropped!!') }}/>
-                    </Link>
-                  </React.Fragment>
-                ))}
-
-                <TodoListDropzone index={this.props.events.length} last={true}/>
-              </div>
+              <DragDropContext
+                onDragEnd={this.onDragEnd}
+              >
+                <Droppable droppableId="droppable-1" type="PERSON">
+                  {(provided) => (
+                    <div
+                      ref={provided.innerRef}
+                      // style={{ backgroundColor: snapshot.isDraggingOver ? 'blue' : 'grey' }}
+                      {...provided.droppableProps}
+                      className='todo-list-002-the-list'
+                    >
+                      {this.props.events.map((event, i) => {
+                        return (
+                          <TodoListItem
+                            key={i}
+                            index={i}
+                            event={event}
+                            changeEventId={this.changeEventId}
+                          />
+                        );
+                      })}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </DragDropContext>
             </div>
 
             <TodoListForm
@@ -87,6 +118,7 @@ const mapStateToProps = ({ events }, props) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   asyncPostEvent: (abc) => dispatch(asyncPostEvent(abc)),
+  asyncRearrangeEvents: (abc) => dispatch(asyncRearrangeEvents(abc)),
   asyncEditGroup: (abc, xyz) => dispatch(asyncEditGroup(abc, xyz)),
   asyncDeleteGroup: (abc) => dispatch(asyncDeleteGroup(abc))
 });

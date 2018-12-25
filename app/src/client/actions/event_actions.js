@@ -2,7 +2,7 @@ import axios from 'axios';
 import {
   ASYNC_FETCH_EVENTS,
   ASYNC_POST_EVENT,
-  ASYNC_PATCH_ISDONE
+  ASYNC_PATCH_ISDONE,
 } from './_action_types';
 
 // FETCH ALL EVENTS
@@ -41,4 +41,3 @@ export const asyncPatch_isDone = (eventId, bool) => async (dispatch) => {
     else reject('Somenthing went wrong');
   });
 }
-

@@ -28,7 +28,7 @@ const TodoListHeader = (props) => (
       onClick={() => {
         props.asyncDeleteGroup(props.active_groupId);
       }}
-    ><i class="far fa-trash-alt"></i></button>
+    ><i className="far fa-trash-alt"></i></button>
   </div>
 );
 
