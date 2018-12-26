@@ -16,6 +16,7 @@
     "cookie-session": "^2.0.0-beta.3",
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "lodash": "^4.17.11",
     "moment": "^2.22.2",
     "mongoose": "^5.3.14",
     "nodemon": "^1.18.7",

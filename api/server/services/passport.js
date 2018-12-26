@@ -6,6 +6,7 @@ const User = mongoose.model('User');
 
 const facebookMiddleware = require('./strategy/facebook');
 const googleMiddleware = require('./strategy/google');
+const localMiddleware = require('./strategy/local');
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -19,3 +20,4 @@ passport.deserializeUser((id, done) => {
 
 facebookMiddleware(passport);
 googleMiddleware(passport);
+localMiddleware(passport);

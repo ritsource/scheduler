@@ -22,7 +22,9 @@ class HeaderComp extends React.Component {
             <div></div><div></div><div></div>
           </div>
           <Link to='/'>
+          {/* <a href='/'> */}
             <h2><ReactSVG src='/logo.svg'/>My Calendar</h2>
+          {/* </a> */}
           </Link>
         </div>
 

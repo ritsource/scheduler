@@ -20,7 +20,7 @@ const axiosInstance = axios.create({
   baseURL: '/api'
 });
 
-const store = createStore(
+export const store = createStore(
   combineReducers({
     auth: authReducer,
     appMode: appModeReducer,
