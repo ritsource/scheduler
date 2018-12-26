@@ -2,7 +2,8 @@ import {
   ASYNC_FETCH_GROUPS,
   ASYNC_POST_GROUP,
   ASYNC_EDIT_GROUP,
-  ASYNC_DELETE_GROUP
+  ASYNC_DELETE_GROUP,
+  ASYNC_REARRANGE_GROUPS,
 } from './_action_types';
 
 // FETCH ALL GROUPS
@@ -48,3 +49,20 @@ export const asyncDeleteGroup = (groupId) => async (dispatch, getState, api) => 
     else reject('Somenthing went wrong');
   });
 }
+
+
+// ASYNC_REARRANGE_GROUPS
+export const asyncRearrangeGroups = ({ focusedGroup, fromRank, toRank, movedGroups }) => {
+  return async (dispatch, getState, api) => {
+    const response = await api.put(`/group/rearrange`, {
+      focusedGroup, fromRank, toRank, movedGroups
+    });
+    
+    dispatch({ type: ASYNC_REARRANGE_GROUPS, groups: response.data });
+  
+    return new Promise((resolve, reject) => {
+      if (response.data) resolve(response.data);
+      else reject('Somenthing went wrong');
+    });
+  };
+};

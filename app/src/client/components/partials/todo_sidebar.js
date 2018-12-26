@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
-import { asyncPostGroup } from '../../actions/group_actions';
+import { asyncPostGroup, asyncRearrangeGroups } from '../../actions/group_actions';
 import TodoSidebarItem from './todo_sidebar_item';
 
 class TodoSidebarComp extends React.Component {
@@ -13,19 +14,56 @@ class TodoSidebarComp extends React.Component {
     }
   }
 
+  onDragEnd = (result) => {
+    // focusedGroup, fromRank, toRank, movedGroups
+    if (result.source.index === result.destination.index) return;
+
+    const movedGroups = (result.source.index < result.destination.index)
+      ? Object.values(this.group_rank_map)
+        .slice(result.source.index + 1, result.destination.index + 1)
+        .map(({ _id }) => _id)
+      : Object.values(this.group_rank_map)
+        .slice(result.destination.index, result.source.index)
+        .map(({ _id }) => _id);
+
+    this.props.asyncRearrangeGroups({
+      focusedGroup: result.draggableId,
+      fromRank: this.group_rank_map[result.source.index]._rank,
+      toRank: this.group_rank_map[result.destination.index]._rank,
+      movedGroups: movedGroups
+    });
+  }
+
+  group_rank_map = {}
+
   render() {
     return (
       <div className={`todo-sidebar-000 ${this.props.visible ? 'sidebar-slided-right' : 'sidebar-slided-left'}`}>
-        <div className='todo-sidebar-001-the-list'>
-          {this.props.groups.map((group, i) => (
-            <TodoSidebarItem
-              key={i}
-              group={group}
-              active={group._id === this.props.active_groupId}
-              changeGroupId={this.props.changeGroupId}
-            />
-          ))}
-        </div>
+        <DragDropContext onDragEnd={this.onDragEnd} >
+          <Droppable droppableId='droppableId-sidebar' type='GROUP_DND'>
+            {(provided) => (
+              <div
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+                className='todo-sidebar-001-the-list'
+              >
+                {this.props.groups.map((group, i) => {
+                  this.group_rank_map[i] = { _rank: group._rank, _id: group._id };
+
+                  return (
+                    <TodoSidebarItem
+                      key={i}
+                      index={i}
+                      group={group}
+                      active={group._id === this.props.active_groupId}
+                      changeGroupId={this.props.changeGroupId}
+                    />
+                  );
+                })}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
 
         <form style={{ bottom: '0px' }} className='todo-list-001-new-task-form' onSubmit={(e) => {
           e.preventDefault();
@@ -56,11 +94,12 @@ class TodoSidebarComp extends React.Component {
 }
 
 const mapStateToProps = ({ groups }) => ({
-  groups: groups
+  groups: groups.sort((a, b) => a._rank > b._rank ? 1 : -1)
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  asyncPostGroup: (abc) => dispatch(asyncPostGroup(abc))
+  asyncPostGroup: (abc) => dispatch(asyncPostGroup(abc)),
+  asyncRearrangeGroups: (abc) => dispatch(asyncRearrangeGroups(abc)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoSidebarComp);

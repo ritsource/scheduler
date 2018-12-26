@@ -80,11 +80,10 @@ class TodoListComp extends React.Component {
               <DragDropContext
                 onDragEnd={this.onDragEnd}
               >
-                <Droppable droppableId="droppable-1" type="PERSON">
+                <Droppable droppableId={this.props.active_groupId} type='EVENT_DND'>
                   {(provided) => (
                     <div
                       ref={provided.innerRef}
-                      // style={{ backgroundColor: snapshot.isDraggingOver ? 'blue' : 'grey' }}
                       {...provided.droppableProps}
                       className='todo-list-002-the-list'
                     >
