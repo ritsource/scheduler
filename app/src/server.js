@@ -31,7 +31,7 @@ app.get('*', (req, res) => {
     res.send(content);
   }).catch((e) => {
     console.log('Catch **');
-    // console.log(e);
+    console.log(e.message);
   });
 });
 

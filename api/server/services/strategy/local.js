@@ -21,9 +21,13 @@ module.exports = (passport) => {
           if (err) return err;
 
           if (isMatch) return done(null, oldUser);
-          else return done({ message: 'Incorrect Password' }, false);
+          else return done(null, false, { message: 'Incorrect password' });
         });
+      } else {
+        console.log('LOL');        
+        done(null, false, { message: 'Incorrect email' });
       }
+
     }
   ));
 };

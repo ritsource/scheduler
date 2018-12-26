@@ -32,7 +32,7 @@ module.exports = (app, APP_HOST) => {
           newUser.password = null;
           res.send(newUser);
         } catch (error) {
-          console.log(error.message);          
+          // console.log(error.message);        
           res.status(422).send();
         }
 
