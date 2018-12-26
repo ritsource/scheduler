@@ -14,7 +14,9 @@ const TodoSidebarItem = (props) => (
         }}
       >
         <div className='sidebar-item-001-hamburger'>
-          <div></div><div></div><div></div>
+          <div style={{ background: props.group.hex_color }}></div>
+          <div style={{ background: props.group.hex_color }}></div>
+          <div style={{ background: props.group.hex_color }}></div>
         </div>
         <p>{props.group.title}</p>
       </div>

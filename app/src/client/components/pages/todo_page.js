@@ -30,6 +30,7 @@ export class TodoPage extends React.Component {
   
   render() {
     const activeGroup = this.props.groups.find(({ _id }) => (_id === this.state.groupId));
+
     return (
       <div className='todo-page-000'>
         {this.props.auth ? (
@@ -46,7 +47,8 @@ export class TodoPage extends React.Component {
               ) : (
                 <TodoListComp
                   active_groupId={this.state.groupId}
-                  listTitle={activeGroup ? activeGroup.title : undefined}
+                  // listTitle={activeGroup ? activeGroup.title : undefined}
+                  activeGroup={activeGroup}
                 />
               )}
             </div>

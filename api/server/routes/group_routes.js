@@ -3,9 +3,24 @@ const requireAuth = require('../middlewares/require_auth');
 const mongoose = require('mongoose');
 const Group = mongoose.model('Group');
 
+const group_color_list = {
+  0: '#f03434', // Orange
+  1: '#59abe3', // Indigo
+  2: '#8c14fc', // Purple
+  3: '#2ecc71', // Light Green
+  4: '#f7ca18', // yellow
+  // 5: '', 
+  // 6: '',
+  // 7: '',
+  // 8: '',
+  // 9: '',
+};
+
 module.exports = (app) => {
   app.post('/api/group/new', requireAuth, async (req, res) => {
     try {
+      const hex_color = group_color_list[Math.floor(Math.random() * 5)];
+
       const count = await Group.count({
         _creator: req.user._id,
       });
@@ -13,13 +28,14 @@ module.exports = (app) => {
 
       const newGroup = await new Group({
         ...req.body,
+        hex_color,
         _isPermanent: false,
         _rank: count,
         _creator: req.user._id
       }).save();
       res.send(newGroup);
     } catch (error) {
-      // console.log(error);
+      console.log(error);
       res.status(422).send();
     }
   });

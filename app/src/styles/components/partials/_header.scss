@@ -142,6 +142,10 @@
       border: 1px solid $border-black;
       border-bottom: 0px solid $border-black;
       padding: 6px 10px;
+
+      &:hover {
+        background: $background-grey-0;
+      }
     }
   }
 }

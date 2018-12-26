@@ -9,16 +9,13 @@
   align-items: center;
   padding: 10px;
   margin: 0px 15px;
-  cursor: default;
-  // border-top: 1px solid $border-black;
+  cursor: default !important;
 
   &:hover {
     background: $background-grey-0;
-    // background-image: linear-gradient(white, $background-grey-0, white);
   }
 
   p {
-    // color: $text-color;
     white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis;
@@ -29,16 +26,16 @@
     text-decoration: line-through;
   }
 
-  .indicator-_isDone {
-    color: white !important;
-    background: $theme-green !important;
-  }
+  // .indicator-_isDone {
+  //   color: white !important;
+  //   background: $theme-green !important;
+  // }
 
   .list-item-001-indicator {
-    color: $theme-green;
+    // color: $theme-green;
     font-size: 10px;
     border-radius: 50%;
-    border: 1px solid $theme-green;
+    // border: 1px solid $theme-green;
     padding: 4px 4px 3px 4px;
     margin-right: 10px;
     cursor: pointer;

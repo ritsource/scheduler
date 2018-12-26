@@ -14,7 +14,7 @@ class TodoListComp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      listTitle: this.props.listTitle || '',
+      listTitle: this.props.activeGroup ? this.props.activeGroup.title : '',
       title: '',
     };
   }
@@ -51,17 +51,23 @@ class TodoListComp extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.listTitle !== this.state.listTitle) {
-      this.setState({ listTitle: nextProps.listTitle });
+    if (nextProps.activeGroup) {
+      if (nextProps.activeGroup.title !== this.state.listTitle) {
+        this.setState({ listTitle: nextProps.activeGroup.title });
+      }
     }
   }
 
   render() {
-    const showFormButton = (this.props.listTitle !== this.state.listTitle && this.state.listTitle !== '');
+    const showFormButton = (
+      this.props.activeGroup &&
+      this.props.activeGroup.title !== this.state.listTitle &&
+      this.state.listTitle !== ''
+    );
 
     return (
       <div className='todo-list-000'>
-        {!this.props.listTitle ? (
+        {!this.props.activeGroup ? (
           <Redirect to='/todo' />
         ) : (
           <React.Fragment>
@@ -69,7 +75,8 @@ class TodoListComp extends React.Component {
               <TodoListHeader
                 listTitle={this.state.listTitle}
                 showFormButton={showFormButton}
-                active_groupId={this.props.active_groupId}
+                activeGroup={this.props.activeGroup}
+
                 asyncEditGroup={this.props.asyncEditGroup}
                 asyncDeleteGroup={this.props.asyncDeleteGroup}
                 setParentState={(abc) => {
@@ -97,6 +104,7 @@ class TodoListComp extends React.Component {
                             index={i}
                             event={event}
                             changeEventId={this.changeEventId}
+                            hex_color={this.props.activeGroup.hex_color}
                           />
                         );
                       })}

@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const GroupSchema = new Schema({
   title: String,
+  hex_color: { type: String, default: '#f03434' },
   _creator: { type: Schema.Types.ObjectId, ref: 'User' },
   _isDeleted: { type: Boolean, default: false },
   _isPermanent: { type: Boolean, default: false },

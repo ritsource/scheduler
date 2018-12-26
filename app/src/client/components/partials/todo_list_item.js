@@ -19,6 +19,15 @@ const TodoListItem = (props) => (
       >
         <div
           className={`list-item-001-indicator ${props.event._isDone && 'indicator-_isDone'}`}
+          style={props.event._isDone ? {
+            background: props.hex_color,
+            color: 'white',
+            border: `1px solid ${props.hex_color}`
+          } : {
+            color: props.hex_color,
+            background: 'white',
+            border: `1px solid ${props.hex_color}`
+          }}
           onClick={() => {
             props.asyncPatch_isDone(props.event._id, !props.event._isDone);
           }}

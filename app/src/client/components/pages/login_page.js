@@ -7,7 +7,7 @@ class LoginPage extends React.Component {
       name: '',
       email: '',
       password: '',
-      register_mode: true
+      register_mode: false
     };
   }
 
