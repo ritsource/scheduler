@@ -3,14 +3,13 @@ const requireAuth = require('../middlewares/require_auth');
 const mongoose = require('mongoose');
 const Group = mongoose.model('Group');
 
-const DEV_USER_ID = '5bfec3f0811f796770bdd133';
-
 module.exports = (app) => {
   app.post('/api/group/new', requireAuth, async (req, res) => {
     try {
       const newGroup = await new Group({
         ...req.body,
-        _creator: req.user ? req.user.id : DEV_USER_ID
+        _isPermanent: false,
+        _creator: req.user._id
       }).save();
       res.send(newGroup);
     } catch (error) {
@@ -20,9 +19,11 @@ module.exports = (app) => {
   });
 
   app.get('/api/group/all', requireAuth, async (req, res) => {
+    console.log(req.user._id);
+    
     try {
       const allGroups = await Group.find({
-        _creator: req.user ? req.user.id : DEV_USER_ID,
+        _creator: req.user._id,
         _isDeleted: false
       });
       res.send(allGroups);
@@ -36,7 +37,8 @@ module.exports = (app) => {
     try {
       const theGroup = await Group.findOne({
         _id: req.params.groupId,
-        _creator: req.user ? req.user.id : DEV_USER_ID
+        _creator: req.user._id,
+        _isDeleted: false
       });
       res.send(theGroup);
     } catch (error) {
@@ -47,8 +49,12 @@ module.exports = (app) => {
 
   app.put('/api/group/edit/:groupId', requireAuth, async (req, res) => {
     try {
-      const newGroup = await Group.findByIdAndUpdate(
-        req.params.groupId,
+      const newGroup = await Group.findOneAndUpdate(
+        {
+          _id: req.params.groupId,
+          _creator: req.user._id,
+          _isPermanent: false
+        },
         { ...req.body },
         { new: true }
       );
@@ -61,8 +67,12 @@ module.exports = (app) => {
 
   app.patch('/api/group/delete/:groupId', requireAuth, async (req, res) => {
     try {
-      const delGroup = await Group.findByIdAndUpdate(
-        req.params.groupId,
+      const delGroup = await Group.findOneAndUpdate(
+        {
+          _id: req.params.groupId,
+          _creator: req.user._id,
+          _isPermanent: false
+        },
         { _isDeleted: true },
         { new: true }
       );

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
   ASYNC_FETCH_GROUPS,
   ASYNC_POST_GROUP,
@@ -7,8 +6,8 @@ import {
 } from './_action_types';
 
 // FETCH ALL GROUPS
-export const asyncFetchGroups = () => async (dispatch) => {
-  const response = await axios.get('http://localhost:5000/api/group/all');
+export const asyncFetchGroups = () => async (dispatch, getState, api) => {
+  const response = await api.get('/group/all');
   dispatch({ type: ASYNC_FETCH_GROUPS, groups: response.data });
 
   return new Promise((resolve, reject) => {
@@ -18,8 +17,8 @@ export const asyncFetchGroups = () => async (dispatch) => {
 }
 
 // POST GROUP
-export const asyncPostGroup = (groupObj) => async (dispatch) => {
-  const response = await axios.post(`http://localhost:5000/api/group/new`, { ...groupObj });
+export const asyncPostGroup = (groupObj) => async (dispatch, getState, api) => {
+  const response = await api.post(`/group/new`, { ...groupObj });
   dispatch({ type: ASYNC_POST_GROUP, group: response.data });
 
   return new Promise((resolve, reject) => {
@@ -29,8 +28,8 @@ export const asyncPostGroup = (groupObj) => async (dispatch) => {
 }
 
 // EDIT GROUP
-export const asyncEditGroup = (groupId, groupObj) => async (dispatch) => {
-  const response = await axios.put(`http://localhost:5000/api/group/edit/${groupId}`, { ...groupObj });
+export const asyncEditGroup = (groupId, groupObj) => async (dispatch, getState, api) => {
+  const response = await api.put(`/group/edit/${groupId}`, { ...groupObj });
   dispatch({ type: ASYNC_EDIT_GROUP, group: response.data });
 
   return new Promise((resolve, reject) => {
@@ -40,8 +39,8 @@ export const asyncEditGroup = (groupId, groupObj) => async (dispatch) => {
 }
 
 // DELETE GROUP
-export const asyncDeleteGroup = (groupId) => async (dispatch) => {
-  const response = await axios.patch(`http://localhost:5000/api/group/delete/${groupId}`);
+export const asyncDeleteGroup = (groupId) => async (dispatch, getState, api) => {
+  const response = await api.patch(`/group/delete/${groupId}`);
   dispatch({ type: ASYNC_DELETE_GROUP, _id: response.data._id });
 
   return new Promise((resolve, reject) => {

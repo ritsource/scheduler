@@ -3,20 +3,18 @@ const requireAuth = require('../middlewares/require_auth');
 const mongoose = require('mongoose');
 const Event = mongoose.model('Event');
 
-const DEV_USER_ID = '5bfec3f0811f796770bdd133';
-
 module.exports = (app) => {
   app.post('/api/event/new', requireAuth, async (req, res) => {
     try {
       const count = await Event.count({
-        _creator: req.user ? req.user.id : DEV_USER_ID
+        _creator: req.user._id,
       });
       console.log(count);
       
       const newEvent = await new Event({
         ...req.body,
         _rank: count,
-        _creator: req.user ? req.user.id : DEV_USER_ID
+        _creator: req.user._id,
       }).save();
       res.send(newEvent);
     } catch (error) {
@@ -28,7 +26,7 @@ module.exports = (app) => {
   app.get('/api/event/all', requireAuth, async (req, res) => {
     try {
       const allEvent = await Event.find({
-        _creator: req.user ? req.user.id : DEV_USER_ID,
+        _creator: req.user._id,
         _isDeleted: false
       });
       res.send(allEvent);
@@ -42,7 +40,7 @@ module.exports = (app) => {
     try {
       const theEvent = await Event.findOne({
         _id: req.params.eventId,
-        _creator: req.user ? req.user.id : DEV_USER_ID
+        _creator: req.user._id,
       });
       res.send(theEvent);
     } catch (error) {
@@ -55,7 +53,7 @@ module.exports = (app) => {
     try {
       const allEvent = await Event.find({
         _group: req.params.groupId,
-        _creator: req.user ? req.user.id : DEV_USER_ID,
+        _creator: req.user._id,
         _isDeleted: false
       });
       res.send(allEvent);
@@ -67,8 +65,8 @@ module.exports = (app) => {
 
   app.patch('/api/event/done/:eventId', requireAuth, async (req, res) => {
     try {
-      const newEvent = await Event.findByIdAndUpdate(
-        req.params.eventId,
+      const newEvent = await Event.findOneAndUpdate(
+        { _id: req.params.eventId, _creator: req.user._id },
         { _isDone: true },
         { new: true }
       );
@@ -81,8 +79,8 @@ module.exports = (app) => {
 
   app.patch('/api/event/undo/:eventId', requireAuth, async (req, res) => {
     try {
-      const newEvent = await Event.findByIdAndUpdate(
-        req.params.eventId,
+      const newEvent = await Event.findOneAndUpdate(
+        { _id: req.params.eventId, _creator: req.user._id },
         { _isDone: false },
         { new: true }
       );
@@ -95,8 +93,8 @@ module.exports = (app) => {
 
   app.put('/api/event/edit/:eventId', requireAuth, async (req, res) => {
     try {
-      const newEvent = await Event.findByIdAndUpdate(
-        req.params.eventId,
+      const newEvent = await Event.findOneAndUpdate(
+        { _id: req.params.eventId, _creator: req.user._id },
         { ...req.body },
         { new: true }
       );
@@ -109,8 +107,8 @@ module.exports = (app) => {
 
   app.patch('/api/event/delete/:eventId', requireAuth, async (req, res) => {
     try {
-      const delEvent = await Event.findByIdAndUpdate(
-        req.params.eventId,
+      const delEvent = await Event.findOneAndUpdate(
+        { _id: req.params.eventId, _creator: req.user._id },
         { _isDeleted: true },
         { new: true }
       );
@@ -126,19 +124,19 @@ module.exports = (app) => {
 
     try {
       await Event.updateMany(
-        { _id: { $in: [ ...movedEvents ] } },
+        { _id: { $in: [ ...movedEvents ] }, _creator: req.user._id },
         { $inc: { _rank: (fromRank > toRank) ? 1 : -1 } },
         { new: true }
       );
       
-      await Event.findByIdAndUpdate(
-        focusedEvent,
+      await Event.findOneAndUpdate(
+        { _id: focusedEvent, _creator: req.user._id },
         { $inc: { _rank: (toRank - fromRank) } },
         { new: true }
       );
 
       const allEvent = await Event.find({
-        _creator: req.user ? req.user.id : DEV_USER_ID,
+        _creator: req.user._id,
         _isDeleted: false
       });
       res.send(allEvent);

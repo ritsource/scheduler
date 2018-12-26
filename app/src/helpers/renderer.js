@@ -7,10 +7,10 @@ import serialize from 'serialize-javascript';
 
 import AppRoutes from '../client/app_routes';
 
-export default (req, store) => {
+export default (req, store, context) => {
   const content = renderToString(
     <Provider store={store}>
-      <StaticRouter location={req.path} context={{}}>
+      <StaticRouter location={req.path} context={context}>
         <div>{renderRoutes(AppRoutes)}</div>
       </StaticRouter>
     </Provider>
@@ -25,16 +25,14 @@ export default (req, store) => {
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="icon" href="favicon.ico">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-        <link href="https://fonts.googleapis.com/css?family=Krub" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">        <link href="https://fonts.googleapis.com/css?family=Krub" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
         <link rel="stylesheet" href="styles.css">
         <title>React SSR</title>
       </head>
       <body>
         <div id="root">${content}<div>
-        <script>
-          window.INITIAL_STATE = ${serialize(store.getState())}
-        </script>
+        <script>window.INITIAL_STATE = ${serialize(store.getState())}</script>
         <script src="bundle.js"></script>
       </body>
     </html>

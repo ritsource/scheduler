@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createBrowserHistory } from 'history';
+import ReactSVG from 'react-svg'
+import { Redirect } from 'react-router-dom';
 
 import { handleAppMode } from '../../actions/app_mode_actions';
 import TodoSidebarComp from '../partials/todo_sidebar';
@@ -30,31 +32,34 @@ export class TodoPage extends React.Component {
     const activeGroup = this.props.groups.find(({ _id }) => (_id === this.state.groupId));
     return (
       <div className='todo-page-000'>
-        <TodoSidebarComp
-          // groups={this.props.groups}
-          changeGroupId={this.changeGroupId}
-          active_groupId={this.state.groupId}
-          visible={this.props.sideBar}
-        />
-        <div className='todo-page-001-content'>
-          {(this.state.groupId === '') ? (
-            <h2><span>✅❎</span>Your Todos</h2>
-          ) : (
-            <TodoListComp
+        {this.props.auth ? (
+          <React.Fragment>
+            <TodoSidebarComp
+              // groups={this.props.groups}
+              changeGroupId={this.changeGroupId}
               active_groupId={this.state.groupId}
-              listTitle={activeGroup ? activeGroup.title : undefined}
-              // pushToTodo={() => {
-              //   this.props.history.push('/todo');
-              // }}
+              visible={this.props.sideBar}
             />
-          )}
-        </div>
+            <div className='todo-page-001-content'>
+              {!this.state.groupId ? (
+                <h2><ReactSVG src='/logo.svg'/>Your Todos</h2>
+              ) : (
+                <TodoListComp
+                  active_groupId={this.state.groupId}
+                  listTitle={activeGroup ? activeGroup.title : undefined}
+                />
+              )}
+            </div>
+          </React.Fragment>
+        ) : (
+          <Redirect to='/login' />
+        )}
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ groups, events, sideBar }) => ({ groups, events, sideBar });
+const mapStateToProps = ({ auth, groups, events, sideBar }) => ({ auth, groups, events, sideBar });
 
 const mapDispatchToProps = (dispatch) => ({
   handleAppMode: (x) => dispatch(handleAppMode(x))

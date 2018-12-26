@@ -3,14 +3,12 @@ const requireAuth = require('../middlewares/require_auth');
 const mongoose = require('mongoose');
 const Step = mongoose.model('Step');
 
-const DEV_USER_ID = '5bfec3f0811f796770bdd133';
-
 module.exports = (app) => {
   app.post('/api/step/new', requireAuth, async (req, res) => {
     try {
       const newStep = await new Step({
         ...req.body,
-        _creator: req.user ? req.user.id : DEV_USER_ID
+        _creator: req.user._id
       }).save();
       res.send(newStep);
     } catch (error) {
@@ -21,7 +19,7 @@ module.exports = (app) => {
 
   app.get('/api/step/all', requireAuth, async (req, res) => {
     try {
-      const allStep = await Step.find({ _creator: req.user ? req.user.id : DEV_USER_ID });
+      const allStep = await Step.find({ _creator: req.user._id });
       res.send(allStep);
     } catch (error) {
       // console.log(error);
@@ -33,7 +31,7 @@ module.exports = (app) => {
     try {
       const allStep = await Step.find({
         _event: req.params.eventId,
-        _creator: req.user ? req.user.id : DEV_USER_ID
+        _creator: req.user._id
       });
       res.send(allStep);
     } catch (error) {
@@ -44,8 +42,8 @@ module.exports = (app) => {
 
   app.patch('/api/step/done/:stepId', requireAuth, async (req, res) => {
     try {
-      const newStep = await Step.findByIdAndUpdate(
-        req.params.stepId,
+      const newStep = await Step.findOneAndUpdate(
+        { _id: req.params.stepId, _creator: req.user._id },
         { _isDone: true },
         { new: true }
       );
@@ -58,8 +56,8 @@ module.exports = (app) => {
 
   app.patch('/api/step/undo/:stepId', requireAuth, async (req, res) => {
     try {
-      const newStep = await Step.findByIdAndUpdate(
-        req.params.stepId,
+      const newStep = await Step.findOneAndUpdate(
+        { _id: req.params.stepId, _creator: req.user._id },
         { _isDone: false },
         { new: true }
       );
@@ -72,8 +70,8 @@ module.exports = (app) => {
 
   app.put('/api/step/edit/:stepId', requireAuth, async (req, res) => {
     try {
-      const newStep = await Step.findByIdAndUpdate(
-        req.params.stepId,
+      const newStep = await Step.findOneAndUpdate(
+        { _id: req.params.stepId, _creator: req.user._id },
         { ...req.body },
         { new: true }
       );
@@ -98,7 +96,7 @@ module.exports = (app) => {
       
       const allStep = await Step.find({
         _event: eventId,
-        _creator: req.user ? req.user.id : DEV_USER_ID
+        _creator: req.user._id
       });
       res.send(allStep);
     } catch (error) {
@@ -112,20 +110,20 @@ module.exports = (app) => {
 
     try {
       await Step.updateMany(
-        { _id: { $in: [ ...movedSteps ] } },
+        { _id: { $in: [ ...movedSteps ] }, _creator: req.user._id },
         { $inc: { _rank: (fromRank > toRank) ? 1 : -1 } },
         { new: true }
       );
       
-      await Step.findByIdAndUpdate(
-        focusedStep,
+      await Step.findOneAndUpdate(
+        { _id: focusedStep, _creator: req.user._id },
         { $inc: { _rank: (toRank - fromRank) } },
         { new: true }
       );
 
       const allStep = await Step.find({
         _event: eventId,
-        _creator: req.user ? req.user.id : DEV_USER_ID
+        _creator: req.user._id
       });
       res.send(allStep);
     } catch (error) {

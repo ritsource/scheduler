@@ -3,6 +3,7 @@
 @import './base/anime';
 
 @import '../custom_modules/react-datepicker.css';
+@import '../../node_modules/rodal/lib/rodal.css';
 
 @import './components/partials/header';
 @import './components/partials/todo_sidebar';
@@ -11,3 +12,4 @@
 @import './components/partials/todo_list_item';
 
 @import './components/pages/todo_page';
+@import './components/pages/login_page';

@@ -43,16 +43,6 @@ class TodoListComp extends React.Component {
     });
   };
 
-  // x = {
-  //   draggableId: 'objectId',
-  //   source: {
-  //     index: 0
-  //   },
-  //   destination: {
-  //     index: 1
-  //   }
-  // }
-
   event_rank_map = {};
 
   changeEventId = (eventId) => {
@@ -63,14 +53,11 @@ class TodoListComp extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.listTitle !== this.state.listTitle) {
       this.setState({ listTitle: nextProps.listTitle });
-      // this.setState({ title: '' });
     }
   }
 
   render() {
     const showFormButton = (this.props.listTitle !== this.state.listTitle && this.state.listTitle !== '');
-    // console.log('_rank', this.props.events.map(({ _rank }) => _rank));
-    // console.log('title', this.props.events.map(({ title }) => parseInt(title)));
 
     return (
       <div className='todo-list-000'>

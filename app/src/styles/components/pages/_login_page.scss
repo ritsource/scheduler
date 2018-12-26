@@ -1,0 +1,93 @@
+.login-page-000 {
+  height: $height-without-header;
+  background: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  input, button, h3, p {
+    margin-bottom: 10px;
+  }
+
+  .login-page-div-001 {
+    // border: 1px solid red;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      // width: 100%;
+
+      input {
+        // width: 100%;
+        padding: 8px 14px;
+        // margin-bottom: 10px;
+        border: 1px solid $border-black;
+
+        &:focus {
+          border: 1px solid $theme-color;
+        }
+      }
+
+      div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        // justify-content: space-between;
+        // margin-bottom: 10px;
+
+        button {
+          color: white;
+          border: 0px solid white;
+          padding: 8px 14px;
+          background: $theme-color;
+          cursor: pointer;
+          margin-right: 10px;
+        }
+
+        span {
+          margin-left: 2px;
+        }
+      }      
+    }
+
+    .login-page-oauth-div-002 {
+      display: flex;
+      flex-direction: row;
+      // justify-content: space-between;
+
+      .login-page-buttons-002-google, .login-page-buttons-002-facebook {
+        color: white;
+        border: 0px solid white;
+        padding: 8px 20px;
+        // width: 100%;
+        // margin-bottom: 10px;
+        cursor: pointer;
+        width: calc(100% - 5px);
+    
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    
+        i {
+          font-size: 13px;
+          margin-right: 10px;
+        }
+      }
+  
+      .login-page-buttons-002-google {
+        background: $brand-color-google;
+        margin-right: 5px;
+      }
+  
+      .login-page-buttons-002-facebook {
+        background: $brand-color-facebook;
+        margin-left: 5px;
+      }
+    }
+
+    
+  }
+
+  
+}

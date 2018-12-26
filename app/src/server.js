@@ -18,17 +18,20 @@ app.use(proxy('/auth', { target: 'http://localhost:5000', changeOrigin: true }))
 app.use(express.static('public'));
 
 app.get('*', (req, res) => {
-  const store = configureStore();
+  const store = configureStore(req);
 
   const promises = matchRoutes(AppRoutes, req.path).map(({route}) => {
     return route.loadData ? route.loadData(store) : null;
   });
 
   Promise.all(promises).then(() => {
-    res.send(renderer(req, store));
+    const context = {};
+    const content = renderer(req, store, context);
+    if (context.notFound) res.status(404);
+    res.send(content);
   }).catch((e) => {
     console.log('Catch **');
-    console.log(e);
+    // console.log(e);
   });
 });
 

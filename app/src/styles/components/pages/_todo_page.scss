@@ -17,11 +17,12 @@
       color: $theme-green;
       display: flex;
       align-items: center;
-      // border: 1px solid red;
-  
-      span {
-        font-size: 22px;
-        margin-right: 5px;
+      
+      svg {
+        height: 25px;
+        margin-top: 3px;
+        margin-right: 10px;
+        width: auto;
       }
     }
   }

@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {
   ASYNC_FETCH_EVENTS,
   ASYNC_POST_EVENT,
@@ -8,8 +7,8 @@ import {
 } from './_action_types';
 
 // FETCH ALL EVENTS
-export const asyncFetchEvents = () => async (dispatch) => {
-  const response = await axios.get('http://localhost:5000/api/event/all');
+export const asyncFetchEvents = () => async (dispatch, getState, api) => {
+  const response = await api.get('/event/all');
   // console.log('data', response.data);
   dispatch({ type: ASYNC_FETCH_EVENTS, events: response.data });
 
@@ -20,8 +19,8 @@ export const asyncFetchEvents = () => async (dispatch) => {
 }
 
 // POST NEW EVENT
-export const asyncPostEvent = (eventObj) => async (dispatch) => {
-  const response = await axios.post('http://localhost:5000/api/event/new', { ...eventObj });
+export const asyncPostEvent = (eventObj) => async (dispatch, getState, api) => {
+  const response = await api.post('/event/new', { ...eventObj });
   dispatch({ type: ASYNC_POST_EVENT, event: response.data });
 
   return new Promise((resolve, reject) => {
@@ -31,10 +30,10 @@ export const asyncPostEvent = (eventObj) => async (dispatch) => {
 }
 
 // PATCHEVENT _isDone
-export const asyncPatch_isDone = (eventId, bool) => async (dispatch) => {
+export const asyncPatch_isDone = (eventId, bool) => async (dispatch, getState, api) => {
   let response;
-  if (bool) response = await axios.patch(`http://localhost:5000/api/event/done/${eventId}`);
-  else response = await axios.patch(`http://localhost:5000/api/event/undo/${eventId}`);
+  if (bool) response = await api.patch(`/event/done/${eventId}`);
+  else response = await api.patch(`/event/undo/${eventId}`);
   
   dispatch({ type: ASYNC_PATCH_ISDONE, event: response.data });
 
@@ -46,16 +45,6 @@ export const asyncPatch_isDone = (eventId, bool) => async (dispatch) => {
 
 
 // ASYNC_REARRANGE_EVENTS
-const x = {
-  draggableId: 'objectId',
-  source: {
-    index: 0
-  },
-  destination: {
-    index: 1
-  }
-}
-
 export const rearrangeReduxEvents = ({ fromIndex, toIndex, movedIndex }) => ({
   type: REARRANGE_REDUX_EVENTS,
   fromIndex,
@@ -63,17 +52,19 @@ export const rearrangeReduxEvents = ({ fromIndex, toIndex, movedIndex }) => ({
   movedIndex
 });
 
-export const asyncRearrangeEvents = ({ focusedEvent, fromRank, toRank, movedEvents }) => async (dispatch) => {
-  // console.log({ focusedEvent, fromRank, toRank, movedEvents });
+export const asyncRearrangeEvents = ({ focusedEvent, fromRank, toRank, movedEvents }) => {
+  return async (dispatch, getState, api) => {
+    // console.log({ focusedEvent, fromRank, toRank, movedEvents });
+    
+    const response = await api.put(`/event/rearrange`, {
+      focusedEvent, fromRank, toRank, movedEvents
+    });
+    
+    dispatch({ type: ASYNC_REARRANGE_EVENTS, events: response.data });
   
-  const response = await axios.put(`http://localhost:5000/api/event/rearrange`, {
-    focusedEvent, fromRank, toRank, movedEvents
-  });
-  
-  dispatch({ type: ASYNC_REARRANGE_EVENTS, events: response.data });
-
-  return new Promise((resolve, reject) => {
-    if (response.data) resolve(response.data);
-    else reject('Somenthing went wrong');
-  });
-}
+    return new Promise((resolve, reject) => {
+      if (response.data) resolve(response.data);
+      else reject('Somenthing went wrong');
+    });
+  };
+};

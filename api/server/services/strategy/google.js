@@ -3,6 +3,7 @@ const keys = require('../../config/keys');
 
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const Group = mongoose.model('Group');
 
 module.exports = (passport) => {
   passport.use(new GoogleStrategy({
@@ -23,8 +24,17 @@ module.exports = (passport) => {
         const newUser = await new User({
           googleId: profile.id,
           email: profile.emails[0].value,
-          name: profile.displayName
+          name: profile.displayName,
+          avatar_url: profile._json.image.url
         }).save();
+
+        await new Group({
+          title: 'Tasks',
+          _rank: 0,
+          _isPermanent: true,
+          _creator: newUser._id
+        }).save();
+
         done(null, newUser);
       } catch (error) {
         done(error, null);

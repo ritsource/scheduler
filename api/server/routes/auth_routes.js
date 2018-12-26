@@ -1,13 +1,14 @@
 const passport = require('passport');
 
-module.exports = (app) => {
+module.exports = (app, APP_HOST) => {
   app.get('/auth/google',
     passport.authenticate('google', { scope: ['profile', 'email'] }));
 
   app.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/login' }),
     (req, res) => {
-      res.redirect('/');
+      // res.redirect('/');
+      res.status(301).redirect(APP_HOST);
     });
 
   app.get('/auth/facebook',
@@ -16,12 +17,14 @@ module.exports = (app) => {
   app.get('/auth/facebook/callback',
     passport.authenticate('facebook', { failureRedirect: '/login' }),
     function(req, res) {
-      res.redirect('/');
+      // res.redirect('/');
+      res.status(301).redirect(APP_HOST);
     });
 
   app.get('/auth/logout', (req, res) => {
     req.logout();
-    res.redirect('/');
+    // res.redirect('/');
+    res.status(301).redirect(APP_HOST);
   });
 
   app.get('/api/current_user', (req, res) => {
