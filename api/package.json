@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "",
-    "start": "node server/index.js",
-    "dev": "set NODE_ENV=development && nodemon server/index.js"
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js"
   },
   "author": "Ritwik",
   "license": "ISC",

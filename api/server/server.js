@@ -1,3 +1,5 @@
+if (!process.env.NODE_ENV) process.env.NODE_ENV = 'development';
+
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -37,4 +39,4 @@ app.get('/', (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server is up at port ${PORT}..`));
+app.listen(PORT, () => console.log(`Server is up, PORT=${PORT} NODE_ENV=${process.env.NODE_ENV}..`));

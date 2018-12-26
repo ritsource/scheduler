@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
-import { asyncPostEvent, asyncRearrangeEvents } from '../../actions/event_actions';
+import { asyncPostEvent, asyncRearrangeEvents, rearrangeReduxEvents } from '../../actions/event_actions';
 import { asyncEditGroup, asyncDeleteGroup } from '../../actions/group_actions';
 import TodoListItem from './todo_list_item';
 import TodoListForm from './todo_list_form';
@@ -16,11 +16,31 @@ class TodoListComp extends React.Component {
     this.state = {
       listTitle: this.props.listTitle || '',
       title: '',
-    }
+    };
   }
 
   onDragEnd = (result) => {
-    
+    if (result.source.index === result.destination.index) return;
+
+    this.props.rearrangeReduxEvents({
+      fromIndex: result.source.index,
+      toIndex: result.destination.index
+    });
+
+    const movedEvents = (result.source.index < result.destination.index)
+      ? Object.values(this.event_rank_map)
+        .slice(result.source.index + 1, result.destination.index + 1)
+        .map(({ _id }) => _id)
+      : Object.values(this.event_rank_map)
+        .slice(result.destination.index, result.source.index)
+        .map(({ _id }) => _id);
+
+    this.props.asyncRearrangeEvents({
+      focusedEvent: result.draggableId,
+      fromRank: this.event_rank_map[result.source.index]._rank,
+      toRank: this.event_rank_map[result.destination.index]._rank,
+      movedEvents: movedEvents
+    });
   };
 
   // x = {
@@ -32,6 +52,8 @@ class TodoListComp extends React.Component {
   //     index: 1
   //   }
   // }
+
+  event_rank_map = {};
 
   changeEventId = (eventId) => {
     const history = createBrowserHistory();
@@ -47,7 +69,9 @@ class TodoListComp extends React.Component {
 
   render() {
     const showFormButton = (this.props.listTitle !== this.state.listTitle && this.state.listTitle !== '');
-    
+    // console.log('_rank', this.props.events.map(({ _rank }) => _rank));
+    // console.log('title', this.props.events.map(({ title }) => parseInt(title)));
+
     return (
       <div className='todo-list-000'>
         {!this.props.listTitle ? (
@@ -78,6 +102,9 @@ class TodoListComp extends React.Component {
                       className='todo-list-002-the-list'
                     >
                       {this.props.events.map((event, i) => {
+                        this.event_rank_map[i] = { _rank: event._rank, _id: event._id };
+                        // console.log(this.event_rank_map);
+
                         return (
                           <TodoListItem
                             key={i}
@@ -113,12 +140,14 @@ class TodoListComp extends React.Component {
 const mapStateToProps = ({ events }, props) => ({
   events: events.filter(({ _group }) => {
     return _group === props.active_groupId;
+  // })
   }).sort((a, b) => a._rank > b._rank ? 1 : -1)
 });
 
 const mapDispatchToProps = (dispatch) => ({
   asyncPostEvent: (abc) => dispatch(asyncPostEvent(abc)),
   asyncRearrangeEvents: (abc) => dispatch(asyncRearrangeEvents(abc)),
+  rearrangeReduxEvents: (abc) => dispatch(rearrangeReduxEvents(abc)),
   asyncEditGroup: (abc, xyz) => dispatch(asyncEditGroup(abc, xyz)),
   asyncDeleteGroup: (abc) => dispatch(asyncDeleteGroup(abc))
 });

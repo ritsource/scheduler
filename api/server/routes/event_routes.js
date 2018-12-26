@@ -8,8 +8,14 @@ const DEV_USER_ID = '5bfec3f0811f796770bdd133';
 module.exports = (app) => {
   app.post('/api/event/new', requireAuth, async (req, res) => {
     try {
+      const count = await Event.count({
+        _creator: req.user ? req.user.id : DEV_USER_ID
+      });
+      console.log(count);
+      
       const newEvent = await new Event({
         ...req.body,
+        _rank: count,
         _creator: req.user ? req.user.id : DEV_USER_ID
       }).save();
       res.send(newEvent);

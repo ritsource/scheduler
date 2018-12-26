@@ -5,8 +5,7 @@ const TodoListForm = (props) => (
     e.preventDefault();
     props.asyncPostEvent({
       title: props.title,
-      _group: props.active_groupId,
-      _rank: (props.events.length + 1)
+      _group: props.active_groupId
     }).then(() => {
       props.setParentState({ title: '' });
       scrollToBottom('.todo-list-002-the-list');
