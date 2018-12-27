@@ -6,13 +6,18 @@ const Step = mongoose.model('Step');
 module.exports = (app) => {
   app.post('/api/step/new', requireAuth, async (req, res) => {
     try {
+      const count = await Step.count({
+        _creator: req.user._id,
+      });
+
       const newStep = await new Step({
         ...req.body,
+        _rank: count,
         _creator: req.user._id
       }).save();
       res.send(newStep);
     } catch (error) {
-      // console.log(error);
+      // console.log(error.message);
       res.status(422).send();
     }
   });

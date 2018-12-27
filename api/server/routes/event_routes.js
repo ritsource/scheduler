@@ -9,8 +9,7 @@ module.exports = (app) => {
       const count = await Event.count({
         _creator: req.user._id,
       });
-      // console.log(count);
-      
+            
       const newEvent = await new Event({
         ...req.body,
         _rank: count,

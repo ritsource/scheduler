@@ -1,4 +1,4 @@
-import { ASYNC_FETCH_STEPS_BYEVENT,
+import { ASYNC_FETCH_STEPS,
   ASYNC_POST_STEP,
   ASYNC_EDIT_STEP,
   ASYNC_PATCH_STEP_ISDONE,
@@ -6,9 +6,9 @@ import { ASYNC_FETCH_STEPS_BYEVENT,
 } from './_action_types';
 
 // FETCH ALL STEPS
-export const asyncFetchSteps_byEvent = () => async (dispatch, getState, api) => {
-  const response = await api.get('/step/all');
-  dispatch({ type: ASYNC_FETCH_STEPS_BYEVENT, steps: response.data });
+export const asyncFetchSteps = () => async (dispatch, getState, api) => {
+  const response = await api.get(`/step/all`);
+  dispatch({ type: ASYNC_FETCH_STEPS, steps: response.data });
 
   return new Promise((resolve, reject) => {
     if (response.data) resolve(response.data);
@@ -18,7 +18,7 @@ export const asyncFetchSteps_byEvent = () => async (dispatch, getState, api) => 
 
 // POST NEW STEP
 export const asyncPostStep = (stepObj) => async (dispatch, getState, api) => {
-  const response = await api.post('i/step/new', { ...stepObj });
+  const response = await api.post('/step/new', { ...stepObj });
   dispatch({ type: ASYNC_POST_STEP, step: response.data });
 
   return new Promise((resolve, reject) => {
@@ -51,7 +51,6 @@ export const asyncPatchStep_isDone = (stepId, bool) => async (dispatch, getState
     else reject('Somenthing went wrong');
   });
 }
-
 
 // ASYNC_REARRANGE_STEPS
 export const asyncRearrangeSteps = (eventId, { focusedStep, fromRank, toRank, movedSteps }) => {

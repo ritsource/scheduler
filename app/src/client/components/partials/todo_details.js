@@ -1,8 +1,9 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 import { asyncEditEvent } from '../../actions/event_actions';
+import { asyncFetchSteps } from '../../actions/step_actions';
+import TodoDetailsItem from './todo_details_item';
 
 class TodoDetailsComp extends React.Component {
   constructor(props) {
@@ -12,8 +13,8 @@ class TodoDetailsComp extends React.Component {
     }
   }
 
-  onDragEnd = (result) => {
-
+  componentDidMount() {
+    this.props.asyncFetchSteps();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -44,43 +45,32 @@ class TodoDetailsComp extends React.Component {
             }}
           />
         </form>
-        <div className=''>
-          <DragDropContext onDragEnd={this.onDragEnd}>
-            <Droppable droppableId={activeEvent._id} type='STEP_DND'>
-              {(provided) => (
-                <div
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                  // id='the-event-list-inside-container'
-                  className='any-list-comp-the-list-999'
-                >
-                  {/* {this.props.events.map((event, i) => {
-                    this.event_rank_map[i] = { _rank: event._rank, _id: event._id };
-                    // console.log(this.event_rank_map);
-
-                    return (
-                      <TodoListItem
-                        key={i}
-                        index={i}
-                        event={event}
-                        changeEventId={this.props.changeEventId}
-                        hex_color={this.props.activeGroup.hex_color}
-                      />
-                    );
-                  })} */}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
-        </div>
+        {/* <div className=''> */}
+          <div className='any-list-comp-the-list-999'>
+            {this.props.steps.map((step) => {
+              console.log('step', step);
+              
+              return (
+                <TodoDetailsItem key={i} step={step}/>
+              );
+            })}
+          </div>
+        {/* </div> */}
       </div>
     );
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  asyncEditEvent: (abc, xyz) => dispatch(asyncEditEvent(abc, xyz))
+const mapStateToProps = ({ steps }) => ({
+  steps: steps.filter(({ _event }) => {
+    return _event === props.activeEvent._event;
+  // })
+  }).sort((a, b) => a._rank > b._rank ? 1 : -1)
 });
 
-export default connect(null, mapDispatchToProps)(TodoDetailsComp);
+const mapDispatchToProps = (dispatch) => ({
+  asyncEditEvent: (abc, xyz) => dispatch(asyncEditEvent(abc, xyz)),
+  asyncFetchSteps: () => dispatch(asyncFetchSteps()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoDetailsComp);

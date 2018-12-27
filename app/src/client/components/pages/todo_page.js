@@ -63,7 +63,7 @@ export class TodoPage extends React.Component {
                 />
               )}
             </div>
-            {this.state.eventId && (
+            {activeEvent && (
               <TodoDetailsComp
                 activeEvent={activeEvent}
               />
