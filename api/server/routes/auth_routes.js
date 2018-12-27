@@ -1,6 +1,5 @@
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
-const _ = require('lodash');
 
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
@@ -40,7 +39,7 @@ module.exports = (app, APP_HOST) => {
     });
   });
 
-  app.post('/auth/local', (req, res, next) => {  
+  app.post('/auth/local', (req, res, next) => {
     passport.authenticate('local', {
       successRedirect: '/api/current_user',
       failureRedirect: '/api/current_user'

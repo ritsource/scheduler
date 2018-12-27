@@ -7,36 +7,47 @@ import { Redirect } from 'react-router-dom';
 import { handleAppMode } from '../../actions/app_mode_actions';
 import TodoSidebarComp from '../partials/todo_sidebar';
 import TodoListComp from '../partials/todo_list';
+import TodoDetailsComp from '../partials/todo_details';
 
 export class TodoPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      groupId: ''
+      groupId: '',
+      eventId: ''
     }
   }
 
   changeGroupId = (groupId) => {
-    this.setState({ groupId });
+    this.setState({ groupId, eventId: '' });
     const history = createBrowserHistory();
-    history.push(`/todo?group=${groupId}`);
+    history.push(`/todo?group=${groupId}`);    
+  }
+
+  changeEventId = (eventId) => {
+    this.setState({ eventId });
+    const history = createBrowserHistory();
+    history.push(`/todo?group=${this.state.groupId}&event=${eventId}`);
   }
 
   componentDidMount() {
     const urlParams = new URLSearchParams(window.location.search);
-    this.setState({ groupId: urlParams.get('group') || '' });
+    this.setState({
+      groupId: urlParams.get('group') || '',
+      eventId: urlParams.get('event') || '',
+    });
     this.props.handleAppMode(1);
   }
   
   render() {
     const activeGroup = this.props.groups.find(({ _id }) => (_id === this.state.groupId));
+    const activeEvent = this.props.events.find(({ _id }) => (_id === this.state.eventId));
 
     return (
       <div className='todo-page-000'>
         {this.props.auth ? (
           <React.Fragment>
             <TodoSidebarComp
-              // groups={this.props.groups}
               changeGroupId={this.changeGroupId}
               active_groupId={this.state.groupId}
               visible={this.props.sideBar}
@@ -47,11 +58,16 @@ export class TodoPage extends React.Component {
               ) : (
                 <TodoListComp
                   active_groupId={this.state.groupId}
-                  // listTitle={activeGroup ? activeGroup.title : undefined}
                   activeGroup={activeGroup}
+                  changeEventId={this.changeEventId}
                 />
               )}
             </div>
+            {this.state.eventId && (
+              <TodoDetailsComp
+                activeEvent={activeEvent}
+              />
+            )}
           </React.Fragment>
         ) : (
           <Redirect to='/login' />

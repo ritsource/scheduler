@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createBrowserHistory } from 'history';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 import { asyncPostEvent, asyncRearrangeEvents, rearrangeReduxEvents } from '../../actions/event_actions';
@@ -14,7 +13,6 @@ class TodoListComp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      listTitle: this.props.activeGroup ? this.props.activeGroup.title : '',
       title: '',
     };
   }
@@ -45,26 +43,7 @@ class TodoListComp extends React.Component {
 
   event_rank_map = {};
 
-  changeEventId = (eventId) => {
-    const history = createBrowserHistory();
-    history.push(`/todo?group=${this.props.active_groupId}&event=${eventId}`);
-  };
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.activeGroup) {
-      if (nextProps.activeGroup.title !== this.state.listTitle) {
-        this.setState({ listTitle: nextProps.activeGroup.title });
-      }
-    }
-  }
-
   render() {
-    const showFormButton = (
-      this.props.activeGroup &&
-      this.props.activeGroup.title !== this.state.listTitle &&
-      this.state.listTitle !== ''
-    );
-
     return (
       <div className='todo-list-000'>
         {!this.props.activeGroup ? (
@@ -73,15 +52,9 @@ class TodoListComp extends React.Component {
           <React.Fragment>
             <div className='todo-list-001-content'>
               <TodoListHeader
-                listTitle={this.state.listTitle}
-                showFormButton={showFormButton}
                 activeGroup={this.props.activeGroup}
-
                 asyncEditGroup={this.props.asyncEditGroup}
                 asyncDeleteGroup={this.props.asyncDeleteGroup}
-                setParentState={(abc) => {
-                  this.setState(abc);
-                }}
               />
 
               <DragDropContext
@@ -103,7 +76,7 @@ class TodoListComp extends React.Component {
                             key={i}
                             index={i}
                             event={event}
-                            changeEventId={this.changeEventId}
+                            changeEventId={this.props.changeEventId}
                             hex_color={this.props.activeGroup.hex_color}
                           />
                         );

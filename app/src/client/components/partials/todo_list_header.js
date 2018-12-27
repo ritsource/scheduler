@@ -6,33 +6,36 @@ class TodoListHeader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      title: ' ',
       options_rodal_visible: false
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    const activeGroup = nextProps.activeGroup;
+    if (activeGroup && activeGroup.title !== this.state.title) {
+      this.setState({ title: activeGroup.title });
+    }
+  }
+
   render() {
+    const activeGroup = this.props.activeGroup;
+
     return (
       <div className='list-002-header'>
-        <form onSubmit={(e) => {
+        <form onSubmit={async (e) => {
           e.preventDefault();
-          this.props.asyncEditGroup(
-            this.props.activeGroup._id,
-            { title: this.props.listTitle }
-          ).then(() => {
-            if (document) document.querySelector('#list-002-header-input-inside-form').blur();
-          });
+          await this.props.asyncEditGroup(activeGroup._id, { title: this.state.title });
+          if (document) document.querySelector('#list-002-header-input-inside-form').blur();
         }}>
           <input
             id='list-002-header-input-inside-form'
             name='listname'
             autoComplete='off'
-            className={`
-              ${(this.props.listTitle === '') && 'list-004-invalid-input'}
-              ${!this.props.showFormButton && 'list-004-w-se-g-input'}
-            `}
-            value={this.props.listTitle}
+            className={`${(this.state.title === '') && 'list-004-invalid-input'}`}
+            value={this.state.title}
             onChange={(e) => {
-              this.props.setParentState({ listTitle: e.target.value });
+              this.setState({ title: e.target.value });
             }}
           />
         </form>
@@ -57,17 +60,17 @@ class TodoListHeader extends React.Component {
               this.setState({ options_rodal_visible: false });
               if (document) document.querySelector('#list-002-header-input-inside-form').focus();
             }}>
-              <i style={{ color: this.props.activeGroup.hex_color }} className="far fa-edit"></i>
+              <i style={{ color: activeGroup.hex_color }} className="far fa-edit"></i>
               Rename
             </p>
 
-            {!this.props.activeGroup._isPermanent && (
+            {!activeGroup._isPermanent && (
               <p onClick={() => {
                 this.setState({ options_rodal_visible: false });
-                this.props.asyncDeleteGroup(this.props.activeGroup._id);
+                this.props.asyncDeleteGroup(activeGroup._id);
               }}>
                 <i className="far fa-trash-alt"
-                  style={{ color: this.props.activeGroup.hex_color, marginRight: '8px' }}
+                  style={{ color: activeGroup.hex_color, marginRight: '8px' }}
                 ></i>
                 Delete Group
               </p>
