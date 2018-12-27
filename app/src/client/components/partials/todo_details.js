@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from 'react-redux';
 
 import { asyncEditEvent } from '../../actions/event_actions';
-import { asyncFetchSteps } from '../../actions/step_actions';
+import { asyncFetchSteps, asyncPostStep } from '../../actions/step_actions';
 import TodoDetailsItem from './todo_details_item';
 
 class TodoDetailsComp extends React.Component {
@@ -10,6 +10,8 @@ class TodoDetailsComp extends React.Component {
     super(props);
     this.state = {
       title: ' ',
+      description: '',
+      stepTitle: '',
     }
   }
 
@@ -19,14 +21,16 @@ class TodoDetailsComp extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const activeEvent = nextProps.activeEvent;
-    if (activeEvent && activeEvent.title !== this.state.title) {
-      this.setState({ title: activeEvent.title });
+    if (
+      activeEvent &&
+      activeEvent.title !== this.state.title || activeEvent.description !== this.state.description
+    ) {
+      this.setState({ title: activeEvent.title, description: activeEvent.description });
     }
   }
   
   render() {
     const activeEvent = this.props.activeEvent;
-    console.log(this.props.steps);
     
     return (
       <div className='todo-details-comp-000 any-list-comp-container-999'>
@@ -48,15 +52,44 @@ class TodoDetailsComp extends React.Component {
         </form>
         {/* <div className=''> */}
           <div className='any-list-comp-the-list-999'>
-            {this.props.steps.map((step, i) => {
-              console.log('step', step);
-              
+            {this.props.steps.map((step, i) => {              
               return (
                 <TodoDetailsItem key={i} step={step}/>
               );
             })}
           </div>
         {/* </div> */}
+        <form
+          onSubmit={async (e) =>  {
+            e.preventDefault();
+            await this.props.asyncPostStep({
+              title: this.state.stepTitle,
+              _event: activeEvent._id
+            });
+            this.setState({ stepTitle: '' })
+          }}
+        >
+          <input
+            value={this.state.stepTitle}
+            onChange={(e) => { this.setState({ stepTitle: e.target.value }) }}
+          ></input>
+          <button type='button' onClick={() => { this.setState({ stepTitle: '' }) }}>X</button>
+        </form>
+        <div>
+          <textarea
+            id='todo-details-textarea-for-description'
+            value={this.state.description}
+            onChange={(e) => {
+              this.setState({ description: e.target.value })
+            }}
+          />
+          {(activeEvent.description !== this.state.description) && (
+            <button onClick={async () => {
+              await this.props.asyncEditEvent(activeEvent._id, { description: this.state.description });
+              if (document) document.querySelector('#todo-details-textarea-for-description').blur();
+            }}>Save</button>
+          )}
+        </div>
       </div>
     );
   }
@@ -72,6 +105,7 @@ const mapStateToProps = ({ steps }, props) => ({
 const mapDispatchToProps = (dispatch) => ({
   asyncEditEvent: (abc, xyz) => dispatch(asyncEditEvent(abc, xyz)),
   asyncFetchSteps: () => dispatch(asyncFetchSteps()),
+  asyncPostStep: (abc) => dispatch(asyncPostStep(abc))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoDetailsComp);
