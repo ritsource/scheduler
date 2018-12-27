@@ -57,9 +57,7 @@ class TodoListComp extends React.Component {
                 asyncDeleteGroup={this.props.asyncDeleteGroup}
               />
 
-              <DragDropContext
-                onDragEnd={this.onDragEnd}
-              >
+              <DragDropContext onDragEnd={this.onDragEnd}>
                 <Droppable droppableId={this.props.active_groupId} type='EVENT_DND'>
                   {(provided) => (
                     <div

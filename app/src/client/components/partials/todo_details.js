@@ -26,7 +26,8 @@ class TodoDetailsComp extends React.Component {
   
   render() {
     const activeEvent = this.props.activeEvent;
-
+    console.log(this.props.steps);
+    
     return (
       <div className='todo-details-comp-000 any-list-comp-container-999'>
         <form onSubmit={async (e) => {   
@@ -47,7 +48,7 @@ class TodoDetailsComp extends React.Component {
         </form>
         {/* <div className=''> */}
           <div className='any-list-comp-the-list-999'>
-            {this.props.steps.map((step) => {
+            {this.props.steps.map((step, i) => {
               console.log('step', step);
               
               return (
@@ -61,9 +62,9 @@ class TodoDetailsComp extends React.Component {
   }
 }
 
-const mapStateToProps = ({ steps }) => ({
+const mapStateToProps = ({ steps }, props) => ({
   steps: steps.filter(({ _event }) => {
-    return _event === props.activeEvent._event;
+    return _event === props.activeEvent._id;
   // })
   }).sort((a, b) => a._rank > b._rank ? 1 : -1)
 });
