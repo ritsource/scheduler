@@ -1,6 +1,7 @@
 import {
   ASYNC_FETCH_EVENTS,
   ASYNC_POST_EVENT,
+  ASYNC_EDIT_EVENT,
   ASYNC_PATCH_ISDONE,
   ASYNC_REARRANGE_EVENTS,
   REARRANGE_REDUX_EVENTS
@@ -13,6 +14,9 @@ export default (state = [], action) => {
 
     case ASYNC_POST_EVENT:
       return [ ...state, action.event ];
+
+    case ASYNC_EDIT_EVENT:
+      return [ ...state.filter(({_id}) => _id !== action.event._id), action.event ];
 
     case ASYNC_PATCH_ISDONE:
       return [ ...state.filter(({_id}) => _id !== action.event._id), action.event ];

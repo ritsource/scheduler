@@ -65,15 +65,11 @@ class TodoSidebarComp extends React.Component {
           </Droppable>
         </DragDropContext>
 
-        <form style={{ bottom: '0px' }} className='todo-list-001-new-task-form' onSubmit={(e) => {
+        <form style={{ bottom: '0px' }} className='any-list-comp-bottom-form-999' onSubmit={async (e) => {
           e.preventDefault();
-          this.props.asyncPostGroup({
-            title: this.state.title,
-            _rank: (this.props.groups.length + 1)
-          }).then(() => {
-            this.setState({ title: '' });
-            scrollToBottom('.todo-sidebar-001-the-list');
-          });
+          await this.props.asyncPostGroup({ title: this.state.title, _rank: (this.props.groups.length + 1) });
+          this.setState({ title: '' });
+          scrollToBottom('.todo-sidebar-001-the-list');
         }}>
           <input
             name='title'

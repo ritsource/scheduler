@@ -50,22 +50,21 @@ class TodoListComp extends React.Component {
           <Redirect to='/todo' />
         ) : (
           <React.Fragment>
-            <div className='todo-list-001-content'>
+            <div className='any-list-comp-container-999'>
               <TodoListHeader
                 activeGroup={this.props.activeGroup}
                 asyncEditGroup={this.props.asyncEditGroup}
                 asyncDeleteGroup={this.props.asyncDeleteGroup}
               />
 
-              <DragDropContext
-                onDragEnd={this.onDragEnd}
-              >
+              <DragDropContext onDragEnd={this.onDragEnd}>
                 <Droppable droppableId={this.props.active_groupId} type='EVENT_DND'>
                   {(provided) => (
                     <div
                       ref={provided.innerRef}
                       {...provided.droppableProps}
-                      className='todo-list-002-the-list'
+                      id='the-event-list-inside-container'
+                      className='any-list-comp-the-list-999'
                     >
                       {this.props.events.map((event, i) => {
                         this.event_rank_map[i] = { _rank: event._rank, _id: event._id };

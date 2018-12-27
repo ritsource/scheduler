@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Draggable } from 'react-beautiful-dnd';
 
-import { asyncPatch_isDone } from '../../actions/event_actions';
+import { asyncPatchEvent_isDone } from '../../actions/event_actions';
 
 const TodoListItem = (props) => (
   <Draggable draggableId={props.event._id} index={props.index}>
@@ -29,7 +29,7 @@ const TodoListItem = (props) => (
             border: `1px solid ${props.hex_color}`
           }}
           onClick={() => {
-            props.asyncPatch_isDone(props.event._id, !props.event._isDone);
+            props.asyncPatchEvent_isDone(props.event._id, !props.event._isDone);
           }}
         >
           {props.event._isDone ? (
@@ -45,7 +45,7 @@ const TodoListItem = (props) => (
 );
 
 const mapDispatchToProps = (dispatch) => ({
-  asyncPatch_isDone: (xyz, abc) => dispatch(asyncPatch_isDone(xyz, abc))
+  asyncPatchEvent_isDone: (xyz, abc) => dispatch(asyncPatchEvent_isDone(xyz, abc))
 });
 
 export default connect(null, mapDispatchToProps)(TodoListItem);

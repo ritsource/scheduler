@@ -1,7 +1,8 @@
 import {
   ASYNC_FETCH_EVENTS,
   ASYNC_POST_EVENT,
-  ASYNC_PATCH_ISDONE,
+  ASYNC_EDIT_EVENT,
+  ASYNC_PATCH_EVENT_ISDONE,
   ASYNC_REARRANGE_EVENTS,
   REARRANGE_REDUX_EVENTS,
 } from './_action_types';
@@ -29,13 +30,24 @@ export const asyncPostEvent = (eventObj) => async (dispatch, getState, api) => {
   });
 }
 
+// EDIT NEW EVENT
+export const asyncEditEvent = (eventId, eventObj) => async (dispatch, getState, api) => {
+  const response = await api.put(`/event/edit/${eventId}`, { ...eventObj });
+  dispatch({ type: ASYNC_EDIT_EVENT, event: response.data });
+
+  return new Promise((resolve, reject) => {
+    if (response.data) resolve(response.data);
+    else reject('Somenthing went wrong');
+  });
+}
+
 // PATCHEVENT _isDone
-export const asyncPatch_isDone = (eventId, bool) => async (dispatch, getState, api) => {
+export const asyncPatchEvent_isDone = (eventId, bool) => async (dispatch, getState, api) => {
   let response;
   if (bool) response = await api.patch(`/event/done/${eventId}`);
   else response = await api.patch(`/event/undo/${eventId}`);
   
-  dispatch({ type: ASYNC_PATCH_ISDONE, event: response.data });
+  dispatch({ type: ASYNC_PATCH_EVENT_ISDONE, event: response.data });
 
   return new Promise((resolve, reject) => {
     if (response.data) resolve(response.data);

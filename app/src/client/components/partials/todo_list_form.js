@@ -1,15 +1,11 @@
 import React from 'react';
 
 const TodoListForm = (props) => (
-  <form className='todo-list-001-new-task-form' onSubmit={(e) => {
+  <form className='any-list-comp-bottom-form-999' onSubmit={async (e) => {
     e.preventDefault();
-    props.asyncPostEvent({
-      title: props.title,
-      _group: props.active_groupId
-    }).then(() => {
-      props.setParentState({ title: '' });
-      scrollToBottom('.todo-list-002-the-list');
-    });
+    await props.asyncPostEvent({ title: props.title, _group: props.active_groupId });
+    props.setParentState({ title: '' });
+    scrollToBottom('#the-event-list-inside-container');
   }}>
     <input
       name='title'
