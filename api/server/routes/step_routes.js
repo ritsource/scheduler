@@ -104,7 +104,7 @@ module.exports = (app) => {
 
   app.put('/api/step/rearrange', requireAuth, async (req, res) => {
     const { focusedStep, fromRank, toRank, movedSteps } = req.body;
-    console.log({ focusedStep, fromRank, toRank, movedSteps });
+    // console.log({ focusedStep, fromRank, toRank, movedSteps });
     
     try {
       await Step.updateMany(
@@ -126,7 +126,7 @@ module.exports = (app) => {
       });
       res.send(allSteps);
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
       res.status(422).send();
     }
   });

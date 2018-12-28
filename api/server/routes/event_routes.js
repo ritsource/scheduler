@@ -140,7 +140,7 @@ module.exports = (app) => {
       });
       res.send(allEvent);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       res.status(422).send();
     }
   });

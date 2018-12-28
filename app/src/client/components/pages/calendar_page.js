@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { handleAppMode } from '../../actions/app_mode_actions';
+import CalendarSidebarComp from '../partials/calendar_sidebar';
+import CalendarContentComp from '../partials/calendar_content';
 
 export class CalendarPage extends React.Component {
   componentDidMount() {
@@ -11,9 +13,16 @@ export class CalendarPage extends React.Component {
   
   render() {
     return (
-      <div>
+      <div className='calendar-page-000'>
         {this.props.auth ? (
-          <p>CalendarPage</p>
+          <React.Fragment>
+            <CalendarSidebarComp
+              visible={this.props.sideBar}
+            />
+            <CalendarContentComp
+
+            />
+          </React.Fragment>
         ) : (
           <Redirect to='/login' />
         )}

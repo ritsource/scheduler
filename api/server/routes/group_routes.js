@@ -35,14 +35,12 @@ module.exports = (app) => {
       }).save();
       res.send(newGroup);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       res.status(422).send();
     }
   });
 
-  app.get('/api/group/all', requireAuth, async (req, res) => {
-    console.log(req.user._id);
-    
+  app.get('/api/group/all', requireAuth, async (req, res) => {    
     try {
       const allGroups = await Group.find({
         _creator: req.user._id,
@@ -107,7 +105,7 @@ module.exports = (app) => {
 
   app.put('/api/group/rearrange', requireAuth, async (req, res) => {
     const { focusedGroup, fromRank, toRank, movedGroups } = req.body;
-    console.log({ focusedGroup, fromRank, toRank, movedGroups });
+    // console.log({ focusedGroup, fromRank, toRank, movedGroups });
 
     try {
       await Group.updateMany(

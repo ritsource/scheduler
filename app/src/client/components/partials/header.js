@@ -34,11 +34,13 @@ class HeaderComp extends React.Component {
               <div className='header-001-calendar-nav'>
                 <Link to='/today'><button>Today</button></Link>
                 <Link to='/today'>
-                  <button className='header-002-nav-btn'><i className="fas fa-less-than"></i></button>
+                  {/* <button className='header-002-nav-btn'><i className="fas fa-less-than"></i></button> */}
+                  <button className='header-002-nav-btn'>{'<'}</button>
                 </Link>
-                <h3>December 2018</h3>
+                <p>December 2018</p>
                 <Link to='/today'>
-                  <button className='header-002-nav-btn'><i className="fas fa-greater-than"></i></button>
+                  {/* <button className='header-002-nav-btn'><i className="fas fa-greater-than"></i></button> */}
+                  <button className='header-002-nav-btn'>{'>'}</button>
                 </Link>
               </div>
             )}
