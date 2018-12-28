@@ -5,6 +5,7 @@ import ReactSVG from 'react-svg';
 import moment from 'moment';
 import { createBrowserHistory } from 'history';
 
+import { SET_CALENDAR_MONTH_STATE } from '../../actions/_action_types';
 import { toggleSideBar } from '../../actions/side_bar_actions';
 import CustomRodalComp from '../reusables/custom_rodal';
 
@@ -13,8 +14,8 @@ class HeaderComp extends React.Component {
     super(props);
     this.state = {
       options_rodal_visible: false,
-      year: parseInt(moment().format('YYYY')),
-      month: parseInt(moment().format('M'))
+      // year: parseInt(moment().format('YYYY')),
+      // month: parseInt(moment().format('M'))
     }
   }
 
@@ -31,26 +32,25 @@ class HeaderComp extends React.Component {
       else if (prevMonth === 1) return bool ? prevYear : prevYear - 1
     }
 
-    this.setState((prevState) => ({
-      year: funcHandleYear(prevState.year, prevState.month, bool),
-      month: funcHandleMonth(prevState.month, bool)
-    }));
+    this.props.setReduxCalendar({
+      year: funcHandleYear(this.props.year, this.props.month, bool),
+      month: funcHandleMonth(this.props.month, bool)
+    });
   }
 
   handleNavigation = async (bool) => {
     await this.stateMonthCursor(bool);
     const history = createBrowserHistory();
-    history.push(`/calendar?year=${this.state.year}&month=${this.state.month}`);
+    history.push(`/calendar?year=${this.props.year}&month=${this.props.month}`);
   }
 
-  navigateToNow = () => {
-    this.setState({
+  navigateToNow = async () => {
+    await this.props.setReduxCalendar({
       year: parseInt(moment().format('YYYY')),
       month: parseInt(moment().format('M')),
-    }, () => {
-      const history = createBrowserHistory();
-      history.push(`/calendar?year=${this.state.year}&month=${this.state.month}`);
     });
+    const history = createBrowserHistory();
+    history.push(`/calendar?year=${this.props.year}&month=${this.props.month}`);
   }
 
   month_name_dictionary = {
@@ -59,13 +59,14 @@ class HeaderComp extends React.Component {
     8: 'September', 9: 'October', 10: 'November', 11: 'December',
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     const urlParams = new URLSearchParams(window.location.search);
-    
-    this.setState({
+    await this.props.setReduxCalendar({
       year: parseInt(urlParams.get('year')) || parseInt(moment().format('YYYY')),
       month: parseInt(urlParams.get('month')) || parseInt(moment().format('M')),
     });
+    const history = createBrowserHistory();
+    history.push(`/calendar?year=${this.props.year}&month=${this.props.month}`);
   }
 
   render() {
@@ -92,7 +93,7 @@ class HeaderComp extends React.Component {
                   this.handleNavigation(true);
                 }} className='header-002-nav-btn'>{'>'}</button>
 
-                <p id='mksdvcadhvjahhchaj'>{this.month_name_dictionary[this.state.month - 1]}&nbsp;{this.state.year}</p>
+                <p>{this.month_name_dictionary[this.props.month - 1]}&nbsp;{this.props.year}</p>
 
               </div>
             )}
@@ -144,8 +145,14 @@ class HeaderComp extends React.Component {
   }
 }
 
-// const mapDispatchToProps = (dispatch) => ({
-//   toggleSideBar: () => dispatch(toggleSideBar())
-// })
+const mapStateToProps = ({ calendarMonth }) => ({
+  year: calendarMonth.year,
+  month: calendarMonth.month
+});
 
-export default connect(null, { toggleSideBar })(HeaderComp);
+const mapDispatchToProps = (dispatch) => ({
+  toggleSideBar: () => dispatch(toggleSideBar()),
+  setReduxCalendar: ({ year, month }) => dispatch({ type: SET_CALENDAR_MONTH_STATE, year, month })
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderComp);

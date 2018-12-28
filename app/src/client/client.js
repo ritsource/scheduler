@@ -16,6 +16,7 @@ import sideBarReducer from './reducers/side_bar_reducer';
 import groupReducer from './reducers/group_reducer';
 import eventReducer from './reducers/event_reducer';
 import stepReducer from './reducers/step_reducer';
+import calendarMonthReducer from './reducers/calendar_month_reducer';
 
 const axiosInstance = axios.create({
   baseURL: '/api'
@@ -28,7 +29,8 @@ export const store = createStore(
     sideBar: sideBarReducer,
     groups: groupReducer,
     events: eventReducer,
-    steps: stepReducer
+    steps: stepReducer,
+    calendarMonth: calendarMonthReducer
   }),
   window.INITIAL_STATE,
   applyMiddleware(thunk.withExtraArgument(axiosInstance))

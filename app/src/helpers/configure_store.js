@@ -8,6 +8,7 @@ import sideBarReducer from '../client/reducers/side_bar_reducer';
 import groupReducer from '../client/reducers/group_reducer';
 import eventReducer from '../client/reducers/event_reducer';
 import stepReducer from '../client/reducers/step_reducer';
+import calendarMonthReducer from '../client/reducers/calendar_month_reducer';
 
 export default (req) => {
   const host = req.get('host');
@@ -25,7 +26,8 @@ export default (req) => {
       sideBar: sideBarReducer,
       groups: groupReducer,
       events: eventReducer,
-      steps: stepReducer
+      steps: stepReducer,
+      calendarMonth: calendarMonthReducer
     }),
     {},
     applyMiddleware(thunk.withExtraArgument(axiosInstance))
