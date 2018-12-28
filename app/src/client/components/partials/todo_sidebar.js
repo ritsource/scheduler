@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
-import { asyncPostGroup, asyncRearrangeGroups, rearrangeReduxGroups } from '../../actions/group_actions';
+import { asyncFetchGroups, asyncPostGroup, asyncRearrangeGroups, rearrangeReduxGroups } from '../../actions/group_actions';
 import TodoSidebarItem from './todo_sidebar_item';
 
 class TodoSidebarComp extends React.Component {
@@ -39,6 +39,10 @@ class TodoSidebarComp extends React.Component {
   }
 
   group_rank_map = {}
+
+  componentDidMount() {
+    this.props.asyncFetchGroups();
+  }
 
   render() {
     return (
@@ -98,9 +102,10 @@ const mapStateToProps = ({ groups }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  asyncFetchGroups: (abc) => dispatch(asyncFetchGroups(abc)),
   asyncPostGroup: (abc) => dispatch(asyncPostGroup(abc)),
   asyncRearrangeGroups: (abc) => dispatch(asyncRearrangeGroups(abc)),
-  rearrangeReduxGroups: (abc) => dispatch(rearrangeReduxGroups(abc))
+  rearrangeReduxGroups: (abc) => dispatch(rearrangeReduxGroups(abc)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoSidebarComp);

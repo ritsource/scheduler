@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
-import { asyncPostEvent, asyncRearrangeEvents, rearrangeReduxEvents } from '../../actions/event_actions';
+import { asyncFetchEvents, asyncPostEvent, asyncRearrangeEvents, rearrangeReduxEvents } from '../../actions/event_actions';
 import { asyncEditGroup, asyncDeleteGroup } from '../../actions/group_actions';
 import TodoListItem from './todo_list_item';
 import TodoListForm from './todo_list_form';
@@ -42,6 +42,10 @@ class TodoListComp extends React.Component {
   };
 
   event_rank_map = {};
+
+  componentDidMount() {
+    this.props.asyncFetchEvents();
+  }
 
   render() {
     return (
@@ -111,6 +115,7 @@ const mapStateToProps = ({ events }, props) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  asyncFetchEvents: (abc) => dispatch(asyncFetchEvents(abc)),
   asyncPostEvent: (abc) => dispatch(asyncPostEvent(abc)),
   asyncRearrangeEvents: (abc) => dispatch(asyncRearrangeEvents(abc)),
   rearrangeReduxEvents: (abc) => dispatch(rearrangeReduxEvents(abc)),
