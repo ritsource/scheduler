@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from 'react-redux';
 
 import { asyncEditEvent, asyncPatchEvent_isDone } from '../../actions/event_actions';
-import { asyncFetchSteps, asyncPostStep, asyncPatchStep_isDone, asyncEditStep } from '../../actions/step_actions';
+import { asyncFetchSteps, asyncPostStep, asyncPatchStep_isDone, asyncEditStep, asyncDeleteStep } from '../../actions/step_actions';
 import TodoDetailsItem from './todo_details_item';
 import TodoListIndicator from './todo_list_indicator';
 
@@ -75,6 +75,7 @@ class TodoDetailsComp extends React.Component {
                   hex_color={this.props.hex_color}
                   asyncPatchStep_isDone={this.props.asyncPatchStep_isDone}
                   asyncEditStep={this.props.asyncEditStep}
+                  asyncDeleteStep={this.props.asyncDeleteStep}
                 />
               );
             })}
@@ -151,6 +152,7 @@ const mapDispatchToProps = (dispatch) => ({
   asyncPatchEvent_isDone: (abc, xyz) => dispatch(asyncPatchEvent_isDone(abc, xyz)),
   asyncPatchStep_isDone: (abc, xyz) => dispatch(asyncPatchStep_isDone(abc, xyz)),
   asyncEditStep: (abc, xyz) => dispatch(asyncEditStep(abc, xyz)),
+  asyncDeleteStep: (abc, xyz) => dispatch(asyncDeleteStep(abc)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoDetailsComp);

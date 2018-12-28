@@ -24,7 +24,7 @@ module.exports = (app) => {
 
   app.get('/api/step/all', requireAuth, async (req, res) => {
     try {
-      const allStep = await Step.find({ _creator: req.user._id });
+      const allStep = await Step.find({ _creator: req.user._id, _isDeleted: false });
       res.send(allStep);
     } catch (error) {
       // console.log(error);
@@ -36,7 +36,8 @@ module.exports = (app) => {
     try {
       const allStep = await Step.find({
         _event: req.params.eventId,
-        _creator: req.user._id
+        _creator: req.user._id,
+        _isDeleted: false
       });
       res.send(allStep);
     } catch (error) {
@@ -48,7 +49,7 @@ module.exports = (app) => {
   app.patch('/api/step/done/:stepId', requireAuth, async (req, res) => {
     try {
       const newStep = await Step.findOneAndUpdate(
-        { _id: req.params.stepId, _creator: req.user._id },
+        { _id: req.params.stepId, _creator: req.user._id, _isDeleted: false },
         { _isDone: true },
         { new: true }
       );
@@ -62,7 +63,7 @@ module.exports = (app) => {
   app.patch('/api/step/undo/:stepId', requireAuth, async (req, res) => {
     try {
       const newStep = await Step.findOneAndUpdate(
-        { _id: req.params.stepId, _creator: req.user._id },
+        { _id: req.params.stepId, _creator: req.user._id, _isDeleted: false },
         { _isDone: false },
         { new: true }
       );
@@ -76,7 +77,7 @@ module.exports = (app) => {
   app.put('/api/step/edit/:stepId', requireAuth, async (req, res) => {
     try {
       const newStep = await Step.findOneAndUpdate(
-        { _id: req.params.stepId, _creator: req.user._id },
+        { _id: req.params.stepId, _creator: req.user._id, _isDeleted: false },
         { ...req.body },
         { new: true }
       );
@@ -87,23 +88,14 @@ module.exports = (app) => {
     }
   });
 
-  app.patch('/api/step/delete_n_arrange', requireAuth, async (req, res) => {
-    const { focusedStep, movedSteps, eventId } = req.body;
-
+  app.patch('/api/step/delete/:stepId', requireAuth, async (req, res) => {
     try {
-      const delStep = await Step.findByIdAndDelete(focusedStep);
-
-      await Step.updateMany(
-        { _id: { $in: [ ...movedSteps ] } },
-        { $inc: { _rank: -1 } },
+      const delStep = await Step.findOneAndUpdate(
+        { _id: req.params.stepId, _creator: req.user._id },
+        { _isDeleted: true },
         { new: true }
       );
-      
-      const allStep = await Step.find({
-        _event: eventId,
-        _creator: req.user._id
-      });
-      res.send(allStep);
+      res.send(delStep);
     } catch (error) {
       // console.log(error);
       res.status(422).send();
@@ -127,8 +119,9 @@ module.exports = (app) => {
       );
 
       const allStep = await Step.find({
-        _event: eventId,
-        _creator: req.user._id
+        // _event: eventId,
+        _creator: req.user._id,
+        _isDeleted: false
       });
       res.send(allStep);
     } catch (error) {

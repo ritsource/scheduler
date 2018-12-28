@@ -43,6 +43,12 @@ class TodoDetailsItem extends React.Component {
               }}
             />
           </form>
+          <div
+            className='details-item-step-delete-button-001'
+            onClick={() => {
+              this.props.asyncDeleteStep(thisStep._id);
+            }}
+          >X</div>
         </div>
       // </div>
     );

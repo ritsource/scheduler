@@ -2,6 +2,7 @@ import { ASYNC_FETCH_STEPS,
   ASYNC_POST_STEP,
   ASYNC_EDIT_STEP,
   ASYNC_PATCH_STEP_ISDONE,
+  ASYNC_DELETE_STEP,
   ASYNC_REARRANGE_STEPS
 } from './_action_types';
 
@@ -67,3 +68,14 @@ export const asyncRearrangeSteps = (eventId, { focusedStep, fromRank, toRank, mo
     });
   };
 };
+
+// ASYNC_DELETE_STEP
+export const asyncDeleteStep = (stepId) => async (dispatch, getState, api) => {
+  const response = await api.patch(`/step/delete/${stepId}`);
+  dispatch({ type: ASYNC_DELETE_STEP, _id: response.data._id });
+
+  return new Promise((resolve, reject) => {
+    if (response.data) resolve(response.data);
+    else reject('Somenthing went wrong');
+  });
+}
