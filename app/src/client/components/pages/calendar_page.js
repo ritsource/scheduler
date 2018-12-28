@@ -1,12 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import moment from 'moment';
 
 import { handleAppMode } from '../../actions/app_mode_actions';
 import CalendarSidebarComp from '../partials/calendar_sidebar';
 import CalendarContentComp from '../partials/calendar_content';
 
 export class CalendarPage extends React.Component {
+  constructor(props) {
+    super(props);
+    // this.state = {
+    //   year: moment().format('YYYY'),
+    //   month: moment().format('M')
+    // };
+  }
+  
   componentDidMount() {
     this.props.handleAppMode(0);
   }

@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import ReactSVG from 'react-svg'
+import ReactSVG from 'react-svg';
+import moment from 'moment';
+import { createBrowserHistory } from 'history';
 
 import { toggleSideBar } from '../../actions/side_bar_actions';
 import CustomRodalComp from '../reusables/custom_rodal';
@@ -10,8 +12,60 @@ class HeaderComp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      options_rodal_visible: false
+      options_rodal_visible: false,
+      year: parseInt(moment().format('YYYY')),
+      month: parseInt(moment().format('M'))
     }
+  }
+
+  stateMonthCursor = (bool) => {
+    const funcHandleMonth = (prevMonth, bool) => {
+      if (prevMonth === 1) return bool ? prevMonth + 1 : 12;
+      else if (prevMonth === 12) return bool ? 1 : prevMonth - 1;
+      else return bool ? prevMonth + 1 : prevMonth - 1;
+    }
+
+    const funcHandleYear = (prevYear, prevMonth, bool) => {
+      if (prevMonth !== 1 && prevMonth !== 12) return prevYear;
+      else if (prevMonth === 12) return bool ? prevYear + 1 : prevYear;
+      else if (prevMonth === 1) return bool ? prevYear : prevYear - 1
+    }
+
+    this.setState((prevState) => ({
+      year: funcHandleYear(prevState.year, prevState.month, bool),
+      month: funcHandleMonth(prevState.month, bool)
+    }));
+  }
+
+  handleNavigation = async (bool) => {
+    await this.stateMonthCursor(bool);
+    const history = createBrowserHistory();
+    history.push(`/calendar?year=${this.state.year}&month=${this.state.month}`);
+  }
+
+  navigateToNow = () => {
+    this.setState({
+      year: parseInt(moment().format('YYYY')),
+      month: parseInt(moment().format('M')),
+    }, () => {
+      const history = createBrowserHistory();
+      history.push(`/calendar?year=${this.state.year}&month=${this.state.month}`);
+    });
+  }
+
+  month_name_dictionary = {
+    0: 'January', 1: 'February', 2: 'March', 3: 'April',
+    4: 'May', 5: 'June', 6: 'July', 7: 'August',
+    8: 'September', 9: 'October', 10: 'November', 11: 'December',
+  }
+
+  componentDidMount() {
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    this.setState({
+      year: parseInt(urlParams.get('year')) || parseInt(moment().format('YYYY')),
+      month: parseInt(urlParams.get('month')) || parseInt(moment().format('M')),
+    });
   }
 
   render() {
@@ -21,27 +75,25 @@ class HeaderComp extends React.Component {
           <div className='header-002-hamburger-div' onClick={this.props.toggleSideBar}>
             <div></div><div></div><div></div>
           </div>
-          <Link to='/'>
-          {/* <a href='/'> */}
-            <h2><ReactSVG src='/logo.svg'/>My Calendar</h2>
-          {/* </a> */}
-          </Link>
+          <Link to='/'><h2><ReactSVG src='/logo.svg'/>My Calendar</h2></Link>
         </div>
 
         {this.props.auth ? (
           <React.Fragment>
             {(this.props.appMode === 0) && (
               <div className='header-001-calendar-nav'>
-                <Link to='/today'><button>Today</button></Link>
-                <Link to='/today'>
-                  {/* <button className='header-002-nav-btn'><i className="fas fa-less-than"></i></button> */}
-                  <button className='header-002-nav-btn'>{'<'}</button>
-                </Link>
-                <p>December 2018</p>
-                <Link to='/today'>
-                  {/* <button className='header-002-nav-btn'><i className="fas fa-greater-than"></i></button> */}
-                  <button className='header-002-nav-btn'>{'>'}</button>
-                </Link>
+                <button onClick={this.navigateToNow}>Today</button>
+
+                <button style={{ marginRight: '0px' }} onClick={() => {
+                  this.handleNavigation(false);
+                }} className='header-002-nav-btn'>{'<'}</button>
+
+                <button style={{ marginLeft: '0px' }} onClick={() => {
+                  this.handleNavigation(true);
+                }} className='header-002-nav-btn'>{'>'}</button>
+
+                <p id='mksdvcadhvjahhchaj'>{this.month_name_dictionary[this.state.month - 1]}&nbsp;{this.state.year}</p>
+
               </div>
             )}
 
