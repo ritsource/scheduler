@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Draggable } from 'react-beautiful-dnd';
 
 import { asyncPatchEvent_isDone } from '../../actions/event_actions';
+import TodoListIndicator from './todo_list_indicator';
 
 const TodoListItem = (props) => (
   <Draggable draggableId={props.event._id} index={props.index}>
@@ -17,28 +18,14 @@ const TodoListItem = (props) => (
           props.changeEventId(props.event._id);
         }}
       >
-        <div
-          className={`list-item-001-indicator ${props.event._isDone && 'indicator-_isDone'}`}
-          style={props.event._isDone ? {
-            background: props.hex_color,
-            color: 'white',
-            border: `1px solid ${props.hex_color}`
-          } : {
-            color: props.hex_color,
-            background: 'white',
-            border: `1px solid ${props.hex_color}`
-          }}
-          onClick={() => {
+        <TodoListIndicator
+          _isDone={props.event._isDone}
+          hex_color={props.hex_color}
+          patchFunction={() => {
             props.asyncPatchEvent_isDone(props.event._id, !props.event._isDone);
           }}
-        >
-          {props.event._isDone ? (
-            <i className="fas fa-check"></i>
-          ) : (
-            <i className="fas fa-check"></i>
-          )}
-        </div>
-        <p className={`${props.event._isDone && 'list-item-001-p-_isDone'}`}>{props.event.title}</p>
+        />
+        <p style={props.event._isDone ? { textDecoration: 'line-through' } : {}}>{props.event.title}</p>
       </div>
     )}
   </Draggable>

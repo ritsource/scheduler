@@ -1,3 +1,53 @@
 .todo-details-comp-000 {
-  border: 1px solid red;
+  border-left: 1px solid $border-black;
+  height: calc(100% - 20px);
+  display: flex;
+  flex-direction: column;
+  transition: 0.2s;
+  padding: 10px 20px;
+  
+  form {
+    // border: 1px solid red;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 0px;
+
+    .todo-details-002-invalid-input {
+      border: 1px solid $theme-orange !important;
+    }
+    
+    #todo-details-input-inside-form {
+      color: $text-color-light;
+      font-size: 18px;
+      font-weight: bold;
+      border: 1px solid white;
+      border-right: 0px solid white;
+      width: auto;
+      padding: 6px 10px 6px 0px; // *******
+
+      &:focus {
+        outline: none;
+        border-bottom: 1px solid $text-color-light;
+        border-right: 0px solid white;
+      }
+    }
+  }
+
+  textarea {
+    color: $text-color;
+    // width: calc(100% - 12px);
+    padding: 6px;
+    min-height: 70px;
+    max-height: 70px;
+    min-width: calc(100% - 12px);
+    max-width: calc(100% - 12px);
+  }
+
+  .todo-details-description-button-002 {
+    // margin-top: 
+    border: 0px solid white;
+    color: white;
+    padding: 6px 10px;
+  }
 }

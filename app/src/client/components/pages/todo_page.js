@@ -66,6 +66,7 @@ export class TodoPage extends React.Component {
             {activeEvent && (
               <TodoDetailsComp
                 activeEvent={activeEvent}
+                hex_color={activeGroup.hex_color}
               />
             )}
           </React.Fragment>
