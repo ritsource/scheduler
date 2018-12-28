@@ -103,8 +103,9 @@ module.exports = (app) => {
   });
 
   app.put('/api/step/rearrange', requireAuth, async (req, res) => {
-    const { focusedStep, fromRank, toRank, movedSteps, eventId } = req.body;
-
+    const { focusedStep, fromRank, toRank, movedSteps } = req.body;
+    console.log({ focusedStep, fromRank, toRank, movedSteps });
+    
     try {
       await Step.updateMany(
         { _id: { $in: [ ...movedSteps ] }, _creator: req.user._id },
@@ -118,14 +119,14 @@ module.exports = (app) => {
         { new: true }
       );
 
-      const allStep = await Step.find({
+      const allSteps = await Step.find({
         // _event: eventId,
         _creator: req.user._id,
         _isDeleted: false
       });
-      res.send(allStep);
+      res.send(allSteps);
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
       res.status(422).send();
     }
   });

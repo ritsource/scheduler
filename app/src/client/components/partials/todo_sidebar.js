@@ -1,9 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
-import { asyncPostGroup, asyncRearrangeGroups } from '../../actions/group_actions';
+import { asyncPostGroup, asyncRearrangeGroups, rearrangeReduxGroups } from '../../actions/group_actions';
 import TodoSidebarItem from './todo_sidebar_item';
 
 class TodoSidebarComp extends React.Component {
@@ -15,8 +15,12 @@ class TodoSidebarComp extends React.Component {
   }
 
   onDragEnd = (result) => {
-    // focusedGroup, fromRank, toRank, movedGroups
     if (result.source.index === result.destination.index) return;
+
+    this.props.rearrangeReduxGroups({
+      fromIndex: result.source.index,
+      toIndex: result.destination.index
+    });
 
     const movedGroups = (result.source.index < result.destination.index)
       ? Object.values(this.group_rank_map)
@@ -96,6 +100,7 @@ const mapStateToProps = ({ groups }) => ({
 const mapDispatchToProps = (dispatch) => ({
   asyncPostGroup: (abc) => dispatch(asyncPostGroup(abc)),
   asyncRearrangeGroups: (abc) => dispatch(asyncRearrangeGroups(abc)),
+  rearrangeReduxGroups: (abc) => dispatch(rearrangeReduxGroups(abc))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoSidebarComp);

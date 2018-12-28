@@ -7,19 +7,21 @@ import {
   REARRANGE_REDUX_EVENTS
 } from '../actions/_action_types';
 
+const sortByRank = arr => arr.sort((a, b) => a._rank > b._rank ? 1 : -1);
+
 export default (state = [], action) => {
   switch (action.type) {
     case ASYNC_FETCH_EVENTS:
       return action.events;
 
     case ASYNC_POST_EVENT:
-      return [ ...state, action.event ];
+      return sortByRank([ ...state, action.event ]);
 
     case ASYNC_EDIT_EVENT:
-      return [ ...state.filter(({_id}) => _id !== action.event._id), action.event ];
+      return sortByRank([ ...state.filter(({_id}) => _id !== action.event._id), action.event ]);
 
     case ASYNC_PATCH_EVENT_ISDONE:
-      return [ ...state.filter(({_id}) => _id !== action.event._id), action.event ];
+      return sortByRank([ ...state.filter(({_id}) => _id !== action.event._id), action.event ]);
 
     case REARRANGE_REDUX_EVENTS:
       const { fromIndex, toIndex } = action;
@@ -40,10 +42,10 @@ export default (state = [], action) => {
       newArr[fromIndex]._rank = temp;
       // console.log('_rank', newArr.map(({ _rank }) => _rank));
       // console.log('title', newArr.map(({ title }) => parseInt(title)));
-      return newArr;
+      return sortByRank(newArr);
 
     case ASYNC_REARRANGE_EVENTS:
-      return action.events;
+      return sortByRank(action.events);
       
     default:
       return state;

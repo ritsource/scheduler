@@ -3,7 +3,8 @@ import { ASYNC_FETCH_STEPS,
   ASYNC_EDIT_STEP,
   ASYNC_PATCH_STEP_ISDONE,
   ASYNC_DELETE_STEP,
-  ASYNC_REARRANGE_STEPS
+  ASYNC_REARRANGE_STEPS,
+  REARRANGE_REDUX_STEPS
 } from './_action_types';
 
 // FETCH ALL STEPS
@@ -53,11 +54,19 @@ export const asyncPatchStep_isDone = (stepId, bool) => async (dispatch, getState
   });
 }
 
+// REARRANGE_REDUX_STEPS
+export const rearrangeReduxSteps = ({ fromIndex, toIndex, movedIndex }) => ({
+  type: REARRANGE_REDUX_STEPS,
+  fromIndex,
+  toIndex,
+  movedIndex
+});
+
 // ASYNC_REARRANGE_STEPS
-export const asyncRearrangeSteps = (eventId, { focusedStep, fromRank, toRank, movedSteps }) => {
+export const asyncRearrangeSteps = ({ focusedStep, fromRank, toRank, movedSteps }) => {
   return async (dispatch, getState, api) => {
     const response = await api.put(`/step/rearrange`, {
-      focusedStep, fromRank, toRank, movedSteps, eventId
+      focusedStep, fromRank, toRank, movedSteps
     });
     
     dispatch({ type: ASYNC_REARRANGE_STEPS, steps: response.data });

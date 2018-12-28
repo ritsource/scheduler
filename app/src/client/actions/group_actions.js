@@ -4,6 +4,7 @@ import {
   ASYNC_EDIT_GROUP,
   ASYNC_DELETE_GROUP,
   ASYNC_REARRANGE_GROUPS,
+  REARRANGE_REDUX_GROUPS
 } from './_action_types';
 
 // FETCH ALL GROUPS
@@ -50,6 +51,13 @@ export const asyncDeleteGroup = (groupId) => async (dispatch, getState, api) => 
   });
 }
 
+// REARRANGE_REDUX_GROUPS
+export const rearrangeReduxGroups = ({ fromIndex, toIndex, movedIndex }) => ({
+  type: REARRANGE_REDUX_GROUPS,
+  fromIndex,
+  toIndex,
+  movedIndex
+});
 
 // ASYNC_REARRANGE_GROUPS
 export const asyncRearrangeGroups = ({ focusedGroup, fromRank, toRank, movedGroups }) => {

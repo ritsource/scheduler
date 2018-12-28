@@ -106,8 +106,8 @@ class TodoListComp extends React.Component {
 const mapStateToProps = ({ events }, props) => ({
   events: events.filter(({ _group }) => {
     return _group === props.active_groupId;
-  // })
-  }).sort((a, b) => a._rank > b._rank ? 1 : -1)
+  })
+  // }).sort((a, b) => a._rank > b._rank ? 1 : -1)
 });
 
 const mapDispatchToProps = (dispatch) => ({

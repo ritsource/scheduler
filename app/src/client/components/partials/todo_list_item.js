@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { Draggable } from 'react-beautiful-dnd';
 
 import { asyncPatchEvent_isDone } from '../../actions/event_actions';
