@@ -5,6 +5,7 @@ import ReactSVG from 'react-svg';
 import moment from 'moment';
 import { createBrowserHistory } from 'history';
 
+import { month_name_dictionary } from '../../utils/month_name_dictionary';
 import { SET_CALENDAR_MONTH_STATE } from '../../actions/_action_types';
 import { toggleSideBar } from '../../actions/side_bar_actions';
 import CustomRodalComp from '../reusables/custom_rodal';
@@ -53,21 +54,15 @@ class HeaderComp extends React.Component {
     history.push(`/calendar?year=${this.props.year}&month=${this.props.month}`);
   }
 
-  month_name_dictionary = {
-    0: 'January', 1: 'February', 2: 'March', 3: 'April',
-    4: 'May', 5: 'June', 6: 'July', 7: 'August',
-    8: 'September', 9: 'October', 10: 'November', 11: 'December',
-  }
-
-  async componentDidMount() {
-    const urlParams = new URLSearchParams(window.location.search);
-    await this.props.setReduxCalendar({
-      year: parseInt(urlParams.get('year')) || parseInt(moment().format('YYYY')),
-      month: parseInt(urlParams.get('month')) || parseInt(moment().format('M')),
-    });
-    const history = createBrowserHistory();
-    history.push(`/calendar?year=${this.props.year}&month=${this.props.month}`);
-  }
+  // async componentDidMount() {
+  //   const urlParams = new URLSearchParams(window.location.search);
+  //   await this.props.setReduxCalendar({
+  //     year: parseInt(urlParams.get('year')) || parseInt(moment().format('YYYY')),
+  //     month: parseInt(urlParams.get('month')) || parseInt(moment().format('M')),
+  //   });
+  //   const history = createBrowserHistory();
+  //   history.push(`/calendar?year=${this.props.year}&month=${this.props.month}`);
+  // }
 
   render() {
     return (
@@ -93,7 +88,7 @@ class HeaderComp extends React.Component {
                   this.handleNavigation(true);
                 }} className='header-002-nav-btn'>{'>'}</button>
 
-                <p>{this.month_name_dictionary[this.props.month - 1]}&nbsp;{this.props.year}</p>
+                <p>{month_name_dictionary[this.props.month - 1]}&nbsp;{this.props.year}</p>
 
               </div>
             )}

@@ -19,13 +19,19 @@ class LoginPage extends React.Component {
 
   registerUser = async (e) => {
     e.preventDefault();
-    const response = await axios.post('/auth/register', {
-      name: this.state.name,
-      email: this.state.email,
-      password: this.state.password,
-    });
-    
-    this.setState({ register_mode: false });
+    try {
+      const response = await axios.post('/auth/register', {
+        name: this.state.name,
+        email: this.state.email,
+        password: this.state.password,
+      });
+      
+      this.setState({ register_mode: false });
+    } catch (error) {
+      if (error.response.status === 409) {    
+        return this.setState({ error_message: error.response.data.message })
+      }
+    }
   }
 
   loginUser = async (e) => {
@@ -62,6 +68,9 @@ class LoginPage extends React.Component {
                 <input type='password' name='password' placeholder='Password' value={this.state.password} onChange={(e) => {
                   this.setState({ password: e.target.value });
                 }}/>
+                {this.state.error_message && (
+                  <p className='login-page-div-error_message'>{this.state.error_message}</p>
+                )}
                 <div>
                   <button type='submit'>Register</button>
                   <p>or <span className='the-hover-blue-text' onClick={() => {

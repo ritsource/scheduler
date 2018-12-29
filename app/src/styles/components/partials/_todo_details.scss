@@ -36,12 +36,17 @@
 
   textarea {
     color: $text-color;
+    border: 1px solid $border-black;
     // width: calc(100% - 12px);
     padding: 6px;
     min-height: 70px;
     max-height: 70px;
     min-width: calc(100% - 12px);
     max-width: calc(100% - 12px);
+
+    // &::placeholder {
+    //   color: $border-black;
+    // }
   }
 
   .todo-details-description-button-002 {

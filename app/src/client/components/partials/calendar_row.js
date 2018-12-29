@@ -30,6 +30,7 @@ class CalendarRowComp extends React.Component {
             <CalendarRowItem
               key={i}
               index={i}
+              rowIndex={this.props.index}
               date={this.findRowItemDate(i)}
             />
           );

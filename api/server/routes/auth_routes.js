@@ -12,7 +12,7 @@ module.exports = (app, APP_HOST) => {
       facebookId: { $exists: false }
     });
 
-    if (oldUser) return res.status(409).send();
+    if (oldUser) return res.status(409).send({ message: 'Email has already been in use' });
 
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(req.body.password, salt, async (err, hash) => {

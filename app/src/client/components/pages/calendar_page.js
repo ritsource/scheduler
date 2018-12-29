@@ -24,9 +24,7 @@ export class CalendarPage extends React.Component {
             <CalendarSidebarComp
               visible={this.props.sideBar}
             />
-            <CalendarContentComp
-
-            />
+            <CalendarContentComp />
           </React.Fragment>
         ) : (
           <Redirect to='/login' />
