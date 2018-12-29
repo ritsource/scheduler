@@ -32,9 +32,10 @@ class CalendarContentComp extends React.Component {
 
   render() {
     const monthNow = this.findMomentMonth(this.props.year, this.props.month);
-
-    const numDatesPrev = parseInt(monthNow.subtract('month', 'start').endOf('month').format('D'));
-    const numDatesThis = parseInt(monthNow.subtract('month', 'start').endOf('month').format('D'));
+    const numDatesThis = parseInt(monthNow.endOf('month').format('D'));
+    const numDatesPrev = parseInt(monthNow.subtract(1, 'month').endOf('month').format('D'));
+    const numDatesNext = parseInt(monthNow.add(2, 'month').endOf('month').format('D')); // Cause these functions changes the object
+    
 
     const inFiveRows = (this.state.firstDay + numDatesThis) <= 35;    
     let rowArr;
@@ -52,6 +53,7 @@ class CalendarContentComp extends React.Component {
               numDatesThis={numDatesThis}
               rowFirstDate={((7 * (i - 1)) + 1) + (7 - this.state.firstDay)}
               inFiveRows={inFiveRows}
+              // events
             />
           );
         })}
@@ -60,9 +62,10 @@ class CalendarContentComp extends React.Component {
   }
 }
 
-const mapStateToProps = ({ calendarMonth }) => ({
+const mapStateToProps = ({ calendarMonth, events }) => ({
   year: calendarMonth.year,
-  month: calendarMonth.month
+  month: calendarMonth.month,
+  events: events
 });
 
 const mapDispatchToProps = (dispatch) => ({

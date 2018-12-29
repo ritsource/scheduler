@@ -10,10 +10,6 @@ import CalendarContentComp from '../partials/calendar_content';
 export class CalendarPage extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   year: moment().format('YYYY'),
-    //   month: moment().format('M')
-    // };
   }
   
   componentDidMount() {
