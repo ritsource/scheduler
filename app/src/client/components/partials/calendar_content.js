@@ -53,27 +53,49 @@ class CalendarContentComp extends React.Component {
     const numDatesPrev = parseInt(monthNow.subtract(1, 'month').endOf('month').format('D'));
     const numDatesNext = parseInt(monthNow.add(2, 'month').endOf('month').format('D')); // Cause these functions changes the object
     
-    const inFiveRows = (this.state.firstDay + numDatesThis) <= 35;    
+    const inFiveRows = (this.state.firstDay + numDatesThis) <= 35;
     let rowArr;
     if (inFiveRows) rowArr = [1, 2, 3, 4, 5];
     else rowArr = [1, 2, 3, 4, 5, 6];    
     
     return (
-      <div className='calendar-content-000'>
-        {rowArr.map((x, i) => {
-          return (
-            <CalendarRowComp
-              key={i}
-              index={i}
-              numDatesPrev={numDatesPrev}
-              numDatesThis={numDatesThis}
-              rowFirstDate={((7 * (i - 1)) + 1) + (7 - this.state.firstDay)}
-              inFiveRows={inFiveRows}
-              // events
-            />
-          );
-        })}
-      </div>
+      <React.Fragment>
+        {this.props.miniCalendar ? (
+          <div className='calendar-content-000-mini'>
+            {rowArr.map((x, i) => {
+              return (
+                <CalendarRowComp
+                  key={i}
+                  index={i}
+                  numDatesPrev={numDatesPrev}
+                  numDatesThis={numDatesThis}
+                  rowFirstDate={((7 * (i - 1)) + 1) + (7 - this.state.firstDay)}
+                  inFiveRows={inFiveRows}
+                  miniCalendar={this.props.miniCalendar}
+                  firstDay={this.state.firstDay}
+                />
+              );
+            })}
+          </div>
+        ) : (
+          <div className='calendar-content-000'>
+            {rowArr.map((x, i) => {
+              return (
+                <CalendarRowComp
+                  key={i}
+                  index={i}
+                  numDatesPrev={numDatesPrev}
+                  numDatesThis={numDatesThis}
+                  rowFirstDate={((7 * (i - 1)) + 1) + (7 - this.state.firstDay)}
+                  inFiveRows={inFiveRows}
+                  firstDay={this.state.firstDay}
+                  // events
+                />
+              );
+            })}
+          </div>
+        )}
+      </React.Fragment>
     );
   }
 }

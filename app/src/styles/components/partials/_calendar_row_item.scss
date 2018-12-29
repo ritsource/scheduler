@@ -1,3 +1,38 @@
+.calendar-row-item-000-mini {
+  width: calc(100% / 7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+
+    p {
+      font-weight: bold;
+      font-size: 10px;
+      color: $text-color-light;
+    }
+  }
+}
+
+.calendar-row-item-000-mini-not-in-month {
+  div > p {
+    color: $text-color-light-2;
+  }
+}
+
+.calendar-row-item-mini-active-date {
+  p {
+    color: white !important;
+  }
+  background: $theme-color;
+}
+
 .calendar-row-item-000 {
   border-right: 1px solid $border-black;
   width: calc((100% / 7) - 1px);
@@ -8,13 +43,27 @@
     cursor: pointer;
   }
 
-  p {
-    margin: 10px auto auto 10px;
+  .calendar-row-item-p-002 {
+    margin-right: 10px;
     font-weight: bold;
-    font-size: 12px;
-    color: $text-color-light;
-    span {
-      margin-left: 5px;
+    font-size: 10px;
+  }
+
+  .calendar-row-item-div-001 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin: 5px auto auto 5px;
+
+    p {
+      // margin: 10px auto auto 10px;
+      font-weight: bold;
+      font-size: 10px;
+      color: $text-color-light;
     }
   }
 }
