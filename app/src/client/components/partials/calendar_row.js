@@ -21,47 +21,28 @@ class CalendarRowComp extends React.Component {
     const { rowFirstDate, numDatesPrev, numDatesThis } = this.props;
     let itemArr = [1, 2, 3, 4, 5, 6, 7];
 
+    const miniCalendarStyle = this.props.inFiveRows ? {height: 'calc(100% / 5)'} : {height: 'calc(100% / 6)'};
+    const calendarStyle = this.props.inFiveRows ? {height: 'calc((100% / 5) - 1px)'} : {height: 'calc((100% / 6) - 1px)'};
+
     return (
-      <React.Fragment>
-        {this.props.miniCalendar ? (
-          <div
-            className='calendar-row-000-mini'
-            style={this.props.inFiveRows ? {height: 'calc(100% / 5)'} : {height: 'calc(100% / 6)'}}
-          >
-            {itemArr.map((x, i) => {
-              return (
-                <CalendarRowItem
-                  key={i}
-                  index={i}
-                  rowIndex={this.props.index}
-                  date={this.findRowItemDate(i)}
-                  miniCalendar={this.props.miniCalendar}
-                  firstDay={this.props.firstDay}
-                  numDatesThis={numDatesThis}
-                />
-              );
-            })}
-          </div>
-        ) : (
-          <div
-            className='calendar-row-000'
-            style={this.props.inFiveRows ? {height: 'calc((100% / 5) - 1px)'} : {height: 'calc((100% / 6) - 1px)'}}
-          >
-            {itemArr.map((x, i) => {
-              return (
-                <CalendarRowItem
-                  key={i}
-                  index={i}
-                  rowIndex={this.props.index}
-                  date={this.findRowItemDate(i)}
-                  firstDay={this.props.firstDay}
-                  numDatesThis={numDatesThis}
-                />
-              );
-            })}
-          </div>
-        )}
-      </React.Fragment>
+      <div
+        className={this.props.miniCalendar ? 'calendar-row-000-mini' : 'calendar-row-000'}
+        style={this.props.miniCalendar ? miniCalendarStyle : calendarStyle}
+      >
+        {itemArr.map((x, i) => {
+          return (
+            <CalendarRowItem
+              key={i}
+              index={i}
+              rowIndex={this.props.index}
+              date={this.findRowItemDate(i)}
+              firstDay={this.props.firstDay}
+              numDatesThis={numDatesThis}
+              miniCalendar={this.props.miniCalendar}
+            />
+          );
+        })}
+      </div>
     );
   }
 }

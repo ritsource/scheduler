@@ -59,43 +59,22 @@ class CalendarContentComp extends React.Component {
     else rowArr = [1, 2, 3, 4, 5, 6];    
     
     return (
-      <React.Fragment>
-        {this.props.miniCalendar ? (
-          <div className='calendar-content-000-mini'>
-            {rowArr.map((x, i) => {
-              return (
-                <CalendarRowComp
-                  key={i}
-                  index={i}
-                  numDatesPrev={numDatesPrev}
-                  numDatesThis={numDatesThis}
-                  rowFirstDate={((7 * (i - 1)) + 1) + (7 - this.state.firstDay)}
-                  inFiveRows={inFiveRows}
-                  miniCalendar={this.props.miniCalendar}
-                  firstDay={this.state.firstDay}
-                />
-              );
-            })}
-          </div>
-        ) : (
-          <div className='calendar-content-000'>
-            {rowArr.map((x, i) => {
-              return (
-                <CalendarRowComp
-                  key={i}
-                  index={i}
-                  numDatesPrev={numDatesPrev}
-                  numDatesThis={numDatesThis}
-                  rowFirstDate={((7 * (i - 1)) + 1) + (7 - this.state.firstDay)}
-                  inFiveRows={inFiveRows}
-                  firstDay={this.state.firstDay}
-                  // events
-                />
-              );
-            })}
-          </div>
-        )}
-      </React.Fragment>
+      <div className={this.props.miniCalendar ? 'calendar-content-000-mini' : 'calendar-content-000'}>
+        {rowArr.map((x, i) => {
+          return (
+            <CalendarRowComp
+              key={i}
+              index={i}
+              numDatesPrev={numDatesPrev}
+              numDatesThis={numDatesThis}
+              rowFirstDate={((7 * (i - 1)) + 1) + (7 - this.state.firstDay)}
+              inFiveRows={inFiveRows}
+              firstDay={this.state.firstDay}
+              miniCalendar={this.props.miniCalendar}
+            />
+          );
+        })}
+      </div>
     );
   }
 }

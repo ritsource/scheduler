@@ -45,6 +45,7 @@
 
   .calendar-row-item-p-002 {
     margin-right: 10px;
+    color: $text-color-light;
     font-weight: bold;
     font-size: 10px;
   }
@@ -60,8 +61,7 @@
     margin: 5px auto auto 5px;
 
     p {
-      // margin: 10px auto auto 10px;
-      font-weight: bold;
+      font-weight: normal;
       font-size: 10px;
       color: $text-color-light;
     }

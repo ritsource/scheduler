@@ -9,7 +9,9 @@ class CalendarRowItem extends React.Component {
     const { firstDay, numDatesThis, rowIndex } = this.props;
     const boxIndex = (7 * rowIndex) + this.props.index;
     const aDayOfThisMonth = firstDay <= boxIndex && boxIndex <= (firstDay + numDatesThis  - 1);
-    const _isToday = aDayOfThisMonth && this.props.date === parseInt(moment().format('D'));    
+    const _isToday = aDayOfThisMonth
+      && this.props.month === parseInt(moment().format('M'))
+      && this.props.date === parseInt(moment().format('D'));    
     
     return (
       <React.Fragment>
