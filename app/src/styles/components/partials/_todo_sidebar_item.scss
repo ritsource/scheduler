@@ -13,13 +13,14 @@
   justify-content: flex-start;
   align-items: center;
   padding: 4px 8px;
-  cursor: pointer;
+  // cursor: pointer;
 
   p {
     white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis;
     padding-top: 2px;
+    cursor: default;
   }
 
   .sidebar-item-001-hamburger {
@@ -33,7 +34,7 @@
     margin-right: 10px;
     border: 1px solid white;
     background: white;
-    cursor: pointer;
+    // cursor: pointer;
 
     &:hover {
       border: 1px solid $background-grey-1;

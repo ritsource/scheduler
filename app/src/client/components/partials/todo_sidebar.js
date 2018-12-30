@@ -75,7 +75,7 @@ class TodoSidebarComp extends React.Component {
 
         <form style={{ bottom: '0px' }} className='any-list-comp-bottom-form-999' onSubmit={async (e) => {
           e.preventDefault();
-          await this.props.asyncPostGroup({ title: this.state.title, _rank: (this.props.groups.length + 1) });
+          await this.props.asyncPostGroup({ title: this.state.title });
           this.setState({ title: '' });
           scrollToBottom('.todo-sidebar-001-the-list');
         }}>

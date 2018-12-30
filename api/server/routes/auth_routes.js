@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const Group = mongoose.model('Group');
 
 module.exports = (app, APP_HOST) => {
   app.post('/auth/register', async (req, res) => {
@@ -25,6 +26,13 @@ module.exports = (app, APP_HOST) => {
             email: req.body.email,
             password,
             avatar_url: `/avatar_url/${req.body.name[0].toLowerCase()}.png`
+          }).save();
+
+          await new Group({
+            title: 'Tasks',
+            _rank: 0,
+            _isPermanent: true,
+            _creator: newUser._id
           }).save();
 
           // const xUser = _.omit(newUser, ['password']);

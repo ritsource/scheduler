@@ -24,7 +24,6 @@ module.exports = (app) => {
       const count = await Group.count({
         _creator: req.user._id,
       });
-      // console.log(count);
 
       const newGroup = await new Group({
         ...req.body,

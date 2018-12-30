@@ -28,7 +28,8 @@
 
       &:focus {
         outline: none;
-        border-bottom: 1px solid $text-color-light;
+        border-bottom: 1px solid $border-black;
+        // border-bottom: 1px solid $text-color-light;
         border-right: 0px solid white;
       }
     }

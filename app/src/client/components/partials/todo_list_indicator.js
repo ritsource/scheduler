@@ -17,7 +17,7 @@ const TodoListIndicator = (props) => (
     {props._isDone ? (
       <i className="fas fa-check"></i>
     ) : (
-      <i className="fas fa-check"></i>
+      <i style={props.hide_tick_on_false ? { color: 'white' } : {}} className="fas fa-check"></i>
     )}
   </div>
 );

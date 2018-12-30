@@ -1,0 +1,11 @@
+.calendar-sidebar-item-000 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 15px;
+
+  .todo-list-indicator-000 {
+    border-radius: 4px;
+    padding: 4px;
+  }
+}
