@@ -14,13 +14,13 @@ const CustomRodalComp = (props) => {
       visible={props.visible}
       onClose={props.toggleVisibility}
       customStyles={{
-        border: props.border || '0px solid #bbb',
-        borderBottom: props.borderBottom || '1px solid #bbb',
+        border: props.border || '0px solid #d8d8d8',
+        borderBottom: props.borderBottom || '1px solid #d8d8d8',
         height: 'auto',
         width: props.width || 'auto',
         top: 'auto',
-        left: 'auto',
-        right: props.right || '5%',
+        left: props.left || 'auto',
+        right: props.right || 'auto',
         bottom: 'auto',
         marginTop: props.marginTop || '60px',
         padding: props.padding || '0px',

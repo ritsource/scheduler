@@ -69,11 +69,7 @@ module.exports = (app) => {
   app.put('/api/group/edit/:groupId', requireAuth, async (req, res) => {
     try {
       const newGroup = await Group.findOneAndUpdate(
-        {
-          _id: req.params.groupId,
-          _creator: req.user._id,
-          _isPermanent: false
-        },
+        { _id: req.params.groupId, _creator: req.user._id },
         { ...req.body },
         { new: true }
       );

@@ -68,8 +68,10 @@ class CalendarSidebarComp extends React.Component {
             {this.props.groups.map((group, i) => (
               <CalendarSidebarItem
                 key={i}
+                index={i}
                 group={group}
                 asyncEditGroup={this.props.asyncEditGroup}
+                asyncDeleteGroup={this.props.asyncDeleteGroup}
               />
             ))}
           </div>
