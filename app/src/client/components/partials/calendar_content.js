@@ -21,26 +21,27 @@ class CalendarContentComp extends React.Component {
     return moment(temp_text);
   }
 
-  componentWillReceiveProps({ year, month }) {
-    const temp_first_day = this.findMomentMonth(year, month).startOf('month').day();
+  componentWillReceiveProps(nextProps) {
+    const { year, month } = nextProps.miniCalendarState ? nextProps.miniCalendarState : nextProps;
 
-    if (temp_first_day !== this.state.firstDay) {
-      this.setState({ firstDay: temp_first_day });
-    }
+    const temp_first_day = this.findMomentMonth(year, month).startOf('month').day();
+    if (temp_first_day !== this.state.firstDay) this.setState({ firstDay: temp_first_day });
   }
 
   async componentDidMount() {
+    const { year, month } = this.props.miniCalendarState ? this.props.miniCalendarState : this.props;
+
     const urlParams = new URLSearchParams(window.location.search);
     await this.props.setReduxCalendar({
       year: parseInt(urlParams.get('year')) || parseInt(moment().format('YYYY')),
       month: parseInt(urlParams.get('month')) || parseInt(moment().format('M')),
     });
     const history = createBrowserHistory();
-    history.push(`/calendar?year=${this.props.year}&month=${this.props.month}`);
+    history.push(`/calendar?year=${year}&month=${month}`);
 
     if (this.state.firstDay === 0) {
       this.setState({
-        firstDay: this.findMomentMonth(this.props.year, this.props.month).startOf('month').day()
+        firstDay: this.findMomentMonth(year, month).startOf('month').day()
       });
     }
   }
@@ -48,7 +49,11 @@ class CalendarContentComp extends React.Component {
   // 42 Boxes => 0 to 41
 
   render() {
-    const monthNow = this.findMomentMonth(this.props.year, this.props.month);
+    const tempProps = this.props.miniCalendarState ? this.props.miniCalendarState : this.props;
+    const { year, month } = tempProps;
+
+    const monthNow = this.findMomentMonth(year, month);
+    
     const numDatesThis = parseInt(monthNow.endOf('month').format('D'));
     const numDatesPrev = parseInt(monthNow.subtract(1, 'month').endOf('month').format('D'));
     const numDatesNext = parseInt(monthNow.add(2, 'month').endOf('month').format('D')); // Cause these functions changes the object
@@ -56,7 +61,7 @@ class CalendarContentComp extends React.Component {
     const inFiveRows = (this.state.firstDay + numDatesThis) <= 35;
     let rowArr;
     if (inFiveRows) rowArr = [1, 2, 3, 4, 5];
-    else rowArr = [1, 2, 3, 4, 5, 6];    
+    else rowArr = [1, 2, 3, 4, 5, 6];
     
     return (
       <div className={this.props.miniCalendar ? 'calendar-content-000-mini' : 'calendar-content-000'}>
@@ -71,6 +76,7 @@ class CalendarContentComp extends React.Component {
               inFiveRows={inFiveRows}
               firstDay={this.state.firstDay}
               miniCalendar={this.props.miniCalendar}
+              miniCalendarState={this.props.miniCalendarState}
             />
           );
         })}

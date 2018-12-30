@@ -6,11 +6,13 @@ import { month_name_dictionary } from '../../utils/month_name_dictionary';
 
 class CalendarRowItem extends React.Component {
   render() {
+    const { year, month } = this.props.miniCalendarState ? this.props.miniCalendarState : this.props;
+
     const { firstDay, numDatesThis, rowIndex } = this.props;
     const boxIndex = (7 * rowIndex) + this.props.index;
     const aDayOfThisMonth = firstDay <= boxIndex && boxIndex <= (firstDay + numDatesThis  - 1);
     const _isToday = aDayOfThisMonth
-      && this.props.month === parseInt(moment().format('M'))
+      && month === parseInt(moment().format('M'))
       && this.props.date === parseInt(moment().format('D'));    
     
     return (
@@ -41,9 +43,9 @@ class CalendarRowItem extends React.Component {
                   {(this.props.date === 1) && (
                     <React.Fragment>
                       {(this.props.rowIndex === 0) ? (
-                        <span>{month_name_dictionary[this.props.month - 1].slice(0, 3).toUpperCase()}</span>
+                        <span>{month_name_dictionary[month - 1].slice(0, 3).toUpperCase()}</span>
                       ) : (
-                        <span>{month_name_dictionary[(this.props.month === 12) ? 0 : this.props.month].slice(0, 3).toUpperCase()}</span>
+                        <span>{month_name_dictionary[(month === 12) ? 0 : month].slice(0, 3).toUpperCase()}</span>
                       )}
                     </React.Fragment>
                   )}

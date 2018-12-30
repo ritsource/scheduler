@@ -9,11 +9,8 @@ class CalendarRowComp extends React.Component {
 
   findRowItemDate = (i) => {
     const { rowFirstDate, numDatesPrev, numDatesThis } = this.props;
-
-    if ((rowFirstDate + i) <= 0) return ((numDatesPrev + i) + rowFirstDate);
-    
+    if ((rowFirstDate + i) <= 0) return ((numDatesPrev + i) + rowFirstDate);    
     if ((rowFirstDate + i) > numDatesThis) return (i - (numDatesThis - rowFirstDate));
-
     return (rowFirstDate + i);
   }
   
@@ -39,6 +36,7 @@ class CalendarRowComp extends React.Component {
               firstDay={this.props.firstDay}
               numDatesThis={numDatesThis}
               miniCalendar={this.props.miniCalendar}
+              miniCalendarState={this.props.miniCalendarState}
             />
           );
         })}

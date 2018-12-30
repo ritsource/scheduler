@@ -14,9 +14,7 @@ class HeaderComp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      options_rodal_visible: false,
-      // year: parseInt(moment().format('YYYY')),
-      // month: parseInt(moment().format('M'))
+      options_rodal_visible: false
     }
   }
 
@@ -54,16 +52,6 @@ class HeaderComp extends React.Component {
     history.push(`/calendar?year=${this.props.year}&month=${this.props.month}`);
   }
 
-  // async componentDidMount() {
-  //   const urlParams = new URLSearchParams(window.location.search);
-  //   await this.props.setReduxCalendar({
-  //     year: parseInt(urlParams.get('year')) || parseInt(moment().format('YYYY')),
-  //     month: parseInt(urlParams.get('month')) || parseInt(moment().format('M')),
-  //   });
-  //   const history = createBrowserHistory();
-  //   history.push(`/calendar?year=${this.props.year}&month=${this.props.month}`);
-  // }
-
   render() {
     return (
       <div className='header-000'>
@@ -80,16 +68,23 @@ class HeaderComp extends React.Component {
               <div className='header-001-calendar-nav'>
                 <button onClick={this.navigateToNow}>Today</button>
 
-                <button style={{ marginRight: '0px' }} onClick={() => {
-                  this.handleNavigation(false);
-                }} className='header-002-nav-btn'>{'<'}</button>
+                <button
+                  style={{ marginRight: '0px' }}
+                  className='header-002-nav-btn'
+                  onClick={() => {
+                    this.handleNavigation(false);
+                  }}
+                >{'<'}</button>
 
-                <button style={{ marginLeft: '0px' }} onClick={() => {
-                  this.handleNavigation(true);
-                }} className='header-002-nav-btn'>{'>'}</button>
+                <button
+                  className='header-002-nav-btn'
+                  style={{ marginLeft: '0px' }}
+                  onClick={() => {
+                    this.handleNavigation(true);
+                  }}
+                >{'>'}</button>
 
                 <p>{month_name_dictionary[this.props.month - 1]}&nbsp;{this.props.year}</p>
-
               </div>
             )}
 
