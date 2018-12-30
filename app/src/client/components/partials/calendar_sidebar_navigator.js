@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { month_name_dictionary } from '../../utils/month_name_dictionary';
+import { month_name_dictionary } from '../../utils/constant_data_dictionary';
 
 // miniCalendarState={this.state}
 //           handleNavigation={this.handleNavigation}

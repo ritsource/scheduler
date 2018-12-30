@@ -12,3 +12,7 @@ export const month_name_dictionary = {
   10: 'November',
   11: 'December',
 };
+
+export const day_name_dictionary = [
+  'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'
+];

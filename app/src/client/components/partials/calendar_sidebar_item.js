@@ -20,7 +20,11 @@ class CalendarSidebarItem extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    // console.log(nextProps.group.title);
+    
     if (nextProps.group.title !== this.state.title) {
+      // console.log('loll');
+      
       this.setState({ title: nextProps.group.title });
     }
   }

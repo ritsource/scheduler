@@ -42,7 +42,8 @@ class LoginPage extends React.Component {
     });
 
     if (response.data) {
-      this.props.setAuthState(response.data);
+      // this.props.setAuthState(response.data);
+      window.location.replace('/');
     } else if (response.data === '') {
       this.setState({ error_message: 'Incorrect email or password' })
     }
@@ -52,9 +53,9 @@ class LoginPage extends React.Component {
   render() {
     return (
       <div className='login-page-000'>
-        {this.props.auth ? (
+        {/* {this.props.auth ? (
           <Redirect to='/'/>
-        ) : (
+        ) : ( */}
           <div className='login-page-div-001'>
             <h3>{this.state.register_mode ? 'Create Account' : 'Just Login'}</h3>
             {this.state.register_mode ? (
@@ -112,7 +113,7 @@ class LoginPage extends React.Component {
               </a>
             </div>
           </div>
-        )}
+        {/* )} */}
       </div>
     );
   }

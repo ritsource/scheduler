@@ -13,6 +13,10 @@
     border-radius: 50%;
     cursor: pointer;
 
+    &:hover {
+      background: $background-grey-1;
+    }
+
     p {
       font-weight: bold;
       font-size: 10px;

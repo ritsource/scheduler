@@ -21,6 +21,11 @@ class CalendarContentComp extends React.Component {
     return moment(temp_text);
   }
 
+  handleUrlNavigation = (year, month) => {
+    const history = createBrowserHistory();
+    history.push(`/calendar?year=${year}&month=${month}`);
+  }
+
   componentWillReceiveProps(nextProps) {
     const { year, month } = nextProps.miniCalendarState ? nextProps.miniCalendarState : nextProps;
 
@@ -36,8 +41,8 @@ class CalendarContentComp extends React.Component {
       year: parseInt(urlParams.get('year')) || parseInt(moment().format('YYYY')),
       month: parseInt(urlParams.get('month')) || parseInt(moment().format('M')),
     });
-    const history = createBrowserHistory();
-    history.push(`/calendar?year=${year}&month=${month}`);
+    // const history = createBrowserHistory();
+    // history.push(`/calendar?year=${year}&month=${month}`);
 
     if (this.state.firstDay === 0) {
       this.setState({
@@ -53,7 +58,6 @@ class CalendarContentComp extends React.Component {
     const { year, month } = tempProps;
 
     const monthNow = this.findMomentMonth(year, month);
-    
     const numDatesThis = parseInt(monthNow.endOf('month').format('D'));
     const numDatesPrev = parseInt(monthNow.subtract(1, 'month').endOf('month').format('D'));
     const numDatesNext = parseInt(monthNow.add(2, 'month').endOf('month').format('D')); // Cause these functions changes the object
@@ -75,6 +79,7 @@ class CalendarContentComp extends React.Component {
               rowFirstDate={((7 * (i - 1)) + 1) + (7 - this.state.firstDay)}
               inFiveRows={inFiveRows}
               firstDay={this.state.firstDay}
+              handleUrlNavigation={this.handleUrlNavigation}
               miniCalendar={this.props.miniCalendar}
               miniCalendarState={this.props.miniCalendarState}
             />

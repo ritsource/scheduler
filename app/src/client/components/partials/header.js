@@ -5,7 +5,7 @@ import ReactSVG from 'react-svg';
 import moment from 'moment';
 import { createBrowserHistory } from 'history';
 
-import { month_name_dictionary } from '../../utils/month_name_dictionary';
+import { month_name_dictionary } from '../../utils/constant_data_dictionary';
 import { SET_CALENDAR_MONTH_STATE } from '../../actions/_action_types';
 import { toggleSideBar } from '../../actions/side_bar_actions';
 import CustomRodalComp from '../reusables/custom_rodal';
