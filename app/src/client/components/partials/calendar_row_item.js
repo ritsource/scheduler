@@ -13,7 +13,12 @@ class CalendarRowItem extends React.Component {
     const aDayOfThisMonth = firstDay <= boxIndex && boxIndex <= (firstDay + numDatesThis  - 1);
     const _isToday = aDayOfThisMonth
       && month === parseInt(moment().format('M'))
-      && this.props.date === parseInt(moment().format('D'));    
+      && this.props.date === parseInt(moment().format('D'));
+    
+    const dayNameArr = [
+      // 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
+      'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'
+    ]
     
     return (
       <React.Fragment>
@@ -24,10 +29,14 @@ class CalendarRowItem extends React.Component {
             </div>
           </div>
         ) : (
-          <div
+          <div className='calendar-row-item-000'
             style={(this.props.index === 6) ? {borderRight: '0px solid white'} : {}}
-            className='calendar-row-item-000'
           >
+            {this.props.rowIndex === 0 && (
+              <div style={{ height: '20px', marginLeft: '10px', display: 'flex', alignItems: 'flex-end' }}>
+                <p className='calendar-row-item-p-002'>{dayNameArr[this.props.index]}</p>
+              </div>
+            )}
             {_isToday ? (
               <div className='calendar-row-item-div-001 calendar-row-item-mini-active-date'>
                 <p>{this.props.date}</p>

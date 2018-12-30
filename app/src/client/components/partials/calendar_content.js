@@ -62,9 +62,25 @@ class CalendarContentComp extends React.Component {
     let rowArr;
     if (inFiveRows) rowArr = [1, 2, 3, 4, 5];
     else rowArr = [1, 2, 3, 4, 5, 6];
+
+    // const dayNameArr = [
+    //   // 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'
+    //   'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'
+    // ]
     
     return (
       <div className={this.props.miniCalendar ? 'calendar-content-000-mini' : 'calendar-content-000'}>
+        {/* {!this.props.miniCalendar && (
+          <div className='calendar-row-000' style={{ border: '0px solid white' }}>
+            {dayNameArr.map((day, i) => (
+              <div key={i} className='calendar-row-item-000'
+                style={{ height: '20px', marginLeft: '10px', display: 'flex', alignItems: 'flex-end' }}
+              >
+                <p className='calendar-row-item-p-002'>{day}</p>
+              </div>
+            ))}
+          </div>
+        )} */}
         {rowArr.map((x, i) => {
           return (
             <CalendarRowComp

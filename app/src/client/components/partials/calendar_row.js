@@ -19,12 +19,12 @@ class CalendarRowComp extends React.Component {
     let itemArr = [1, 2, 3, 4, 5, 6, 7];
 
     const miniCalendarStyle = this.props.inFiveRows ? {height: 'calc(100% / 5)'} : {height: 'calc(100% / 6)'};
-    const calendarStyle = this.props.inFiveRows ? {height: 'calc((100% / 5) - 1px)'} : {height: 'calc((100% / 6) - 1px)'};
+    const calendarStyle_first = this.props.inFiveRows ? {height: 'calc((100% / 5) + 20px - 5px)'} : {height: 'calc((100% / 6) + 20px - 4px)'};
+    const calendarStyle_rest = this.props.inFiveRows ? {height: 'calc(((100% - 20px) / 5) - 1px)'} : {height: 'calc(((100% - 20px) / 6) - 1px)'};
 
     return (
-      <div
-        className={this.props.miniCalendar ? 'calendar-row-000-mini' : 'calendar-row-000'}
-        style={this.props.miniCalendar ? miniCalendarStyle : calendarStyle}
+      <div className={this.props.miniCalendar ? 'calendar-row-000-mini' : 'calendar-row-000'}
+        style={this.props.miniCalendar ? miniCalendarStyle : (this.props.index === 0) ? calendarStyle_first : calendarStyle_rest}
       >
         {itemArr.map((x, i) => {
           return (

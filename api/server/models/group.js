@@ -7,6 +7,7 @@ const GroupSchema = new Schema({
   _creator: { type: Schema.Types.ObjectId, ref: 'User' },
   _isDeleted: { type: Boolean, default: false },
   _isPermanent: { type: Boolean, default: false },
+  _isOnCalendar: { type: Boolean, default: true },
   _rank: { type: Number, required: true }
 });
 

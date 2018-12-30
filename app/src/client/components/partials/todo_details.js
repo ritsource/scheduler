@@ -164,7 +164,7 @@ class TodoDetailsComp extends React.Component {
           }}
         />
         <button
-          style={{ marginTop: '10px', paddingBottom: '12px', background: this.props.hex_color }}
+          style={{ marginTop: '10px', background: this.props.hex_color }}
           className='todo-details-description-button-002'
           onClick={async () => {
             await this.props.asyncEditEvent(activeEvent._id, { description: this.state.description });
