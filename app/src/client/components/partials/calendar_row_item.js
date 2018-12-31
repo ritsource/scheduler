@@ -7,12 +7,11 @@ import { SET_CALENDAR_MONTH_STATE } from '../../actions/_action_types';
 
 const CalendarRowItem = (props) => {
   const { year, month } = props.miniCalendarState ? props.miniCalendarState : props;
-  const { firstDay, numDatesThis, rowIndex } = props;
-
-  const boxIndex = (7 * rowIndex) + props.index;
-  const aDayOfThisMonth = firstDay <= boxIndex && boxIndex <= (firstDay + numDatesThis  - 1);
-  const _isToday = aDayOfThisMonth
-    && month === parseInt(moment().format('M'))
+  const { rowIndex, dateStamp } = props;
+  
+  const aDayOfThisMonth = parseInt(moment(dateStamp).format('M')) === month;
+  
+  const _isToday = dateStamp && month === parseInt(moment().format('M'))
     && props.date === parseInt(moment().format('D'));
   
   return (
