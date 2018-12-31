@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import moment from 'moment';
 
-import { generateMomentMonth } from '../../utils/month_cursor_helpers';
+import { generateMomentMonth, formatISOStringForMoment, funcHandleMonth, funcHandleYear } from '../../utils/month_cursor_helpers';
 import { SET_CALENDAR_MONTH_STATE } from '../../actions/_action_types';
 import CalendarRowComp from './calendar_row';
 
@@ -11,7 +11,8 @@ class CalendarContentComp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstDay: 0
+      firstDay: 0,
+      date_distribution_map: {}
     };
   }
 
@@ -20,11 +21,37 @@ class CalendarContentComp extends React.Component {
     history.push(`/calendar?year=${year}&month=${month}`);
   }
 
-  componentWillReceiveProps(nextProps) {
+  updateDateDistribution = (year, month, firstDay) => {
+    const tempDistMap = this.state.date_distribution_map;
+    const numDatesThis = parseInt(generateMomentMonth(year, month).endOf('month').format('D'));
+
+    for (let k = 0; k < 42; k++) {
+      if (k < firstDay) {
+        const value = moment(formatISOStringForMoment(year, month, 1)).subtract(firstDay - k, 'days').valueOf();
+        if (tempDistMap[k] !== value ) tempDistMap[k] = value;
+      } else if (k > firstDay + numDatesThis) {
+        const value = moment(formatISOStringForMoment(year, month, numDatesThis)).add(k - (firstDay + numDatesThis), 'days').valueOf();
+        if (tempDistMap[k] !== value ) tempDistMap[k] = value;
+      } else {
+        const value = moment(formatISOStringForMoment(year, month, (k - firstDay + 1))).valueOf();
+        if (tempDistMap[k] !== value ) tempDistMap[k] = value;
+      }
+    }
+
+    this.setState({ date_distribution_map: tempDistMap });
+  }
+
+  async componentWillReceiveProps(nextProps) {
     const { year, month } = nextProps.miniCalendarState ? nextProps.miniCalendarState : nextProps;
+    const { firstDay } = this.state;
 
     const temp_first_day = generateMomentMonth(year, month).startOf('month').day();
-    if (temp_first_day !== this.state.firstDay) this.setState({ firstDay: temp_first_day });
+    if (temp_first_day !== firstDay) await this.setState({ firstDay: temp_first_day });
+
+    // if (year !== this.props.year || month !== this.props.month) {
+      this.updateDateDistribution(year, month, firstDay);
+    // }
+    
   }
 
   async componentDidMount() {
@@ -39,7 +66,7 @@ class CalendarContentComp extends React.Component {
     // history.push(`/calendar?year=${year}&month=${month}`);
 
     if (this.state.firstDay === 0) {
-      this.setState({
+      await this.setState({
         firstDay: generateMomentMonth(year, month).startOf('month').day()
       });
     }
@@ -50,6 +77,9 @@ class CalendarContentComp extends React.Component {
   render() {
     const tempProps = this.props.miniCalendarState ? this.props.miniCalendarState : this.props;
     const { year, month } = tempProps;
+
+    console.log(this.state.date_distribution_map);
+    
 
     const monthNow = generateMomentMonth(year, month);
     const numDatesThis = parseInt(monthNow.endOf('month').format('D'));
@@ -79,6 +109,7 @@ class CalendarContentComp extends React.Component {
               miniCalendar={this.props.miniCalendar}
               miniCalendarState={this.props.miniCalendarState}
               events={this.props.events}
+              patchDateDistribution={this.patchDateDistribution}
             />
           );
         })}

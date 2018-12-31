@@ -62,7 +62,7 @@ class CalendarRowComp extends React.Component {
         ).startOf('day'),
         endof_row_moment: moment(
           formatStringForMoment(rowEndYear, rowEndMonth, this.findRowItemDate(6))
-        ).startOf('day')
+        ).endOf('day')
       });
 
       // console.log(index, startof_row_moment.format('DD MM YYYY'));
@@ -79,6 +79,12 @@ class CalendarRowComp extends React.Component {
 
   render() {
     const { startof_row_moment, endof_row_moment } = this.state;
+    // const row_events = this.props.events.filter((event) => {
+    //   return (event.date_from >= startof_row_moment) || (event.date_to <= endof_row_moment)
+    // });
+
+    // startof_row_moment.isBefore(moment().format('YYYY-MM-DD'), 'day')
+    // moment(event.date_from).isSame(moment(), 'day')
 
     let itemArr = [1, 2, 3, 4, 5, 6, 7];
   
@@ -89,6 +95,8 @@ class CalendarRowComp extends React.Component {
     const calendarStyle_rest = this.props.isFiveRows
       ? {height: 'calc(((100% - 20px) / 5) - 1px)'}
       : {height: 'calc(((100% - 20px) / 6) - 1px)'};
+
+      // moment(SpecialToDate).isSame(moment(), 'day')
   
     return (
       <div className={this.props.miniCalendar ? 'calendar-row-000-mini' : 'calendar-row-000'}
@@ -100,6 +108,15 @@ class CalendarRowComp extends React.Component {
       >
         <React.Fragment>
           {itemArr.map((x, i) => {
+            // this.props.patchDateDistribution();
+            // console.log(this.findRowItemDate(i));
+            // rowFirstDate, numDatesPrev, numDatesThis
+
+            // year={year}
+            // month={month}
+            // rowFirstDate={((7 * (i - 1)) + 1) + (7 - this.state.firstDay)}
+            // isFiveRows={isFiveRows}
+            
             return (
               <CalendarRowItem
                 key={i}
@@ -111,10 +128,14 @@ class CalendarRowComp extends React.Component {
                 handleUrlNavigation={this.props.handleUrlNavigation}
                 miniCalendar={this.props.miniCalendar}
                 miniCalendarState={this.props.miniCalendarState}
+                // start_events={row_events.filter((event) => {
+                  
+                // })}
+                // end_events={}
               />
             );
           })}
-          {(
+          {/* {(
             this.props.events
             && !this.props.miniCalendar
             && startof_row_moment
@@ -129,14 +150,11 @@ class CalendarRowComp extends React.Component {
               }}
               className='calendar-row-events-level-001'
             >
-              {/* {console.log('**************')} */}
               {this.props.events.map((event, i) => {
                 if (
                   event.date_from > startof_row_moment
                   || event.date_to > endof_row_moment
                 ) {
-                  // console.log(event.title, myX, this.findRowItemDate(i));
-                  // myX++;
                   return (
                     <CalendarEventComp
                       key={i}
@@ -146,10 +164,8 @@ class CalendarRowComp extends React.Component {
                   );
                 }
               })}
-              {/* {console.log('**************')} */}
-              {/* <CalendarEventComp /> */}
             </div>
-          )}
+          )} */}
         </React.Fragment>
       </div>
     );

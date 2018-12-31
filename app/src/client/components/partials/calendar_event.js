@@ -8,7 +8,7 @@ const CalendarEventComp = (props) => {
     <div
       className='calendar-event-comp-000'
       style={{
-        // marginLeft: '100px',
+        left: '100px',
         // left: `calc(100% / ${rowFirstDate - parseInt(moment(event.date_from).format('DD')) * 7})`
       }}
     >

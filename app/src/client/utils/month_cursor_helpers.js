@@ -1,16 +1,16 @@
 
 import moment from 'moment';
 
-export const funcHandleMonth = (prevMonth, bool) => {
-  if (prevMonth === 1) return bool ? prevMonth + 1 : 12;
-  else if (prevMonth === 12) return bool ? 1 : prevMonth - 1;
-  else return bool ? prevMonth + 1 : prevMonth - 1;
-}
-
 export const funcHandleYear = (prevYear, prevMonth, bool) => {
   if (prevMonth !== 1 && prevMonth !== 12) return prevYear;
   else if (prevMonth === 12) return bool ? prevYear + 1 : prevYear;
   else if (prevMonth === 1) return bool ? prevYear : prevYear - 1
+}
+
+export const funcHandleMonth = (prevMonth, bool) => {
+  if (prevMonth === 1) return bool ? prevMonth + 1 : 12;
+  else if (prevMonth === 12) return bool ? 1 : prevMonth - 1;
+  else return bool ? prevMonth + 1 : prevMonth - 1;
 }
 
 export const generateMomentMonth = (year, month) => {
@@ -19,3 +19,9 @@ export const generateMomentMonth = (year, month) => {
   else temp_text = `${year}-${month}`;
   return moment(temp_text);
 }
+
+export const formatISOStringForMoment = (year, month, date) => {
+  const myMonth = (month.toString().length === 1) ? `0${month}` : `${month}`;
+  const myDate = (date.toString().length === 1) ? `0${date}` : `${date}`;
+  return `${year}-${myMonth}-${myDate}`;
+};
