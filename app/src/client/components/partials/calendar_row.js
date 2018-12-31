@@ -133,11 +133,17 @@ class CalendarRowComp extends React.Component {
               {this.props.events.map((event, i) => {
                 if (
                   event.date_from > startof_row_moment
-                  && event.date_to > endof_row_moment
+                  || event.date_to > endof_row_moment
                 ) {
                   // console.log(event.title, myX, this.findRowItemDate(i));
                   // myX++;
-                  return <CalendarEventComp key={i} event={event}/>
+                  return (
+                    <CalendarEventComp
+                      key={i}
+                      event={event}
+                      rowFirstDate={this.rowFirstDate}
+                    />
+                  );
                 }
               })}
               {/* {console.log('**************')} */}

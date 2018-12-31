@@ -8,7 +8,7 @@ import { SET_CALENDAR_MONTH_STATE } from '../../actions/_action_types';
 const CalendarRowItem = (props) => {
   const { year, month } = props.miniCalendarState ? props.miniCalendarState : props;
   const { firstDay, numDatesThis, rowIndex } = props;
-  
+
   const boxIndex = (7 * rowIndex) + props.index;
   const aDayOfThisMonth = firstDay <= boxIndex && boxIndex <= (firstDay + numDatesThis  - 1);
   const _isToday = aDayOfThisMonth
