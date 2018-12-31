@@ -56,9 +56,9 @@ class CalendarContentComp extends React.Component {
     const numDatesPrev = parseInt(monthNow.subtract(1, 'month').endOf('month').format('D'));
     const numDatesNext = parseInt(monthNow.add(2, 'month').endOf('month').format('D')); // Cause these functions changes the object
     
-    const inFiveRows = (this.state.firstDay + numDatesThis) <= 35;
+    const isFiveRows = (this.state.firstDay + numDatesThis) <= 35;
     let rowArr;
-    if (inFiveRows) rowArr = [1, 2, 3, 4, 5];
+    if (isFiveRows) rowArr = [1, 2, 3, 4, 5];
     else rowArr = [1, 2, 3, 4, 5, 6];
     
     return (
@@ -73,7 +73,7 @@ class CalendarContentComp extends React.Component {
               year={year}
               month={month}
               rowFirstDate={((7 * (i - 1)) + 1) + (7 - this.state.firstDay)}
-              inFiveRows={inFiveRows}
+              isFiveRows={isFiveRows}
               firstDay={this.state.firstDay}
               handleUrlNavigation={this.handleUrlNavigation}
               miniCalendar={this.props.miniCalendar}

@@ -1,1 +1,19 @@
-// 
+.calendar-row-events-level-001 {
+  font-size: 12px;
+  // font-family: 'Lato', sans-serif;
+  position: absolute;
+  // float: left;
+  // z-index: 3;
+  width: 100%;
+  // background: yellow;
+  overflow: hidden;
+  // border: 1px solid red;
+}
+
+.calendar-event-comp-000 {
+  padding: 3px 5px;
+  color: white;
+  background: $theme-orange;
+  margin: 0px 2px;
+  float: left;
+}

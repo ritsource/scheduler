@@ -1,8 +1,8 @@
 import React from 'react';
 
-const CalendarEventComp = (event) => {
+const CalendarEventComp = (props) => {
   return (
-    <div>
+    <div className='calendar-event-comp-000'>
       <p>{props.event.title}</p>
     </div>
   );
