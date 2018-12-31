@@ -6,6 +6,7 @@ import moment from 'moment';
 import { createBrowserHistory } from 'history';
 
 import { month_name_dictionary } from '../../utils/constant_data_dictionary';
+import { funcHandleMonth, funcHandleYear } from '../../utils/month_cursor_helpers';
 import { SET_CALENDAR_MONTH_STATE } from '../../actions/_action_types';
 import { toggleSideBar } from '../../actions/side_bar_actions';
 import CustomRodalComp from '../reusables/custom_rodal';
@@ -19,18 +20,6 @@ class HeaderComp extends React.Component {
   }
 
   stateMonthCursor = (bool) => {
-    const funcHandleMonth = (prevMonth, bool) => {
-      if (prevMonth === 1) return bool ? prevMonth + 1 : 12;
-      else if (prevMonth === 12) return bool ? 1 : prevMonth - 1;
-      else return bool ? prevMonth + 1 : prevMonth - 1;
-    }
-
-    const funcHandleYear = (prevYear, prevMonth, bool) => {
-      if (prevMonth !== 1 && prevMonth !== 12) return prevYear;
-      else if (prevMonth === 12) return bool ? prevYear + 1 : prevYear;
-      else if (prevMonth === 1) return bool ? prevYear : prevYear - 1
-    }
-
     this.props.setReduxCalendar({
       year: funcHandleYear(this.props.year, this.props.month, bool),
       month: funcHandleMonth(this.props.month, bool)

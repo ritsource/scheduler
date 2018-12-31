@@ -71,7 +71,7 @@ class CalendarSidebarItem extends React.Component {
 
         <CustomRodalComp
           borderRadius='0px'
-          marginTop={`calc(350px)`}
+          marginTop={`calc(360px)`}
           // left='30px'
           right={`calc(100vw - 240px)`}
           visible={this.state.options_rodal_visible}
