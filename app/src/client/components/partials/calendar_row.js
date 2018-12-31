@@ -8,84 +8,7 @@ import CalendarEventComp from './calendar_event';
 let myX = 0;
 
 class CalendarRowComp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      startof_row_moment: null,
-      endof_row_moment: null
-    }
-  }
-  
-  findRowItemDate = (i) => {
-    const { rowFirstDate, numDatesPrev, numDatesThis } = this.props;
-    
-    if ((rowFirstDate + i) <= 0) return ((numDatesPrev + i) + rowFirstDate);
-    if ((rowFirstDate + i) > numDatesThis) return (i - (numDatesThis - rowFirstDate));
-    return (rowFirstDate + i);
-  }
-
-  async componentWillReceiveProps(nextProps) {
-    const { year, month, firstDay, isFiveRows, rowFirstDate, numDatesThis, index } = nextProps;
-
-      const _isLastRow = isFiveRows ? index === 4 : index === 5;
-
-      let rowStartYear = year, rowEndYear = year;
-      let rowStartMonth = month, rowEndMonth = month;
-      
-      if (index === 0 && firstDay > 0) {
-        rowStartYear = funcHandleYear(year, month, false);
-        rowStartMonth = funcHandleMonth(month, false);
-      }
-      if (_isLastRow && (numDatesThis - rowFirstDate) < 6) {
-        rowEndYear = funcHandleYear(year, month, true);
-        rowEndMonth = funcHandleMonth(month, true);
-      }
-
-      // console.log('moment', moment('2018-12').startOf('month').day());
-
-      const formatStringForMoment = (year, month, date) => {
-        const myMonth = (month.toString().length === 1) ? `0${month}` : `${month}`;
-        const myDate = (date.toString().length === 1) ? `0${date}` : `${date}`;
-        return `${year}-${myMonth}-${myDate}`;
-      }
-
-      // const startof_row_moment = moment(
-      //   formatStringForMoment(rowStartYear, rowStartMonth, this.findRowItemDate(0))
-      // );
-      // const endof_row_moment = moment(
-      //   formatStringForMoment(rowEndYear, rowEndMonth, this.findRowItemDate(6))
-      // );
-
-      await this.setState({
-        startof_row_moment: moment(
-          formatStringForMoment(rowStartYear, rowStartMonth, this.findRowItemDate(0))
-        ).startOf('day'),
-        endof_row_moment: moment(
-          formatStringForMoment(rowEndYear, rowEndMonth, this.findRowItemDate(6))
-        ).endOf('day')
-      });
-
-      // console.log(index, startof_row_moment.format('DD MM YYYY'));
-      // console.log(index, endof_row_moment.format('DD MM YYYY'));
-      // startof_row_moment endof_row_moment
-      // const bool = endof_row_moment.isAfter(moment().format('YYYY-MM-DD'), 'day');
-      // console.log(this.state.startof_row_moment);
-  }
-
-  componentDidMount() {
-    window.moment = moment;
-  }
-
-
   render() {
-    const { startof_row_moment, endof_row_moment } = this.state;
-    // const row_events = this.props.events.filter((event) => {
-    //   return (event.date_from >= startof_row_moment) || (event.date_to <= endof_row_moment)
-    // });
-
-    // startof_row_moment.isBefore(moment().format('YYYY-MM-DD'), 'day')
-    // moment(event.date_from).isSame(moment(), 'day')
-
     let itemArr = [1, 2, 3, 4, 5, 6, 7];
   
     const miniCalendarStyle = this.props.isFiveRows ? {height: 'calc(100% / 5)'} : {height: 'calc(100% / 6)'};
@@ -95,8 +18,6 @@ class CalendarRowComp extends React.Component {
     const calendarStyle_rest = this.props.isFiveRows
       ? {height: 'calc(((100% - 20px) / 5) - 1px)'}
       : {height: 'calc(((100% - 20px) / 6) - 1px)'};
-
-      // moment(SpecialToDate).isSame(moment(), 'day')
   
     return (
       <div className={this.props.miniCalendar ? 'calendar-row-000-mini' : 'calendar-row-000'}
@@ -108,23 +29,15 @@ class CalendarRowComp extends React.Component {
       >
         <React.Fragment>
           {itemArr.map((x, i) => {
-            // this.props.patchDateDistribution();
-            // console.log(this.findRowItemDate(i));
-            // rowFirstDate, numDatesPrev, numDatesThis
+            const dateStamp = this.props.date_distribution_map[i + (this.props.index * 7)];
 
-            // year={year}
-            // month={month}
-            // rowFirstDate={((7 * (i - 1)) + 1) + (7 - this.state.firstDay)}
-            // isFiveRows={isFiveRows}
-            
             return (
               <CalendarRowItem
                 key={i}
                 index={i}
                 rowIndex={this.props.index}
-                date={this.findRowItemDate(i)}
-                firstDay={this.props.firstDay}
-                numDatesThis={this.props.numDatesThis}
+                date={parseInt(moment(dateStamp).format('DD'))}
+                dateStamp={dateStamp}
                 handleUrlNavigation={this.props.handleUrlNavigation}
                 miniCalendar={this.props.miniCalendar}
                 miniCalendarState={this.props.miniCalendarState}
