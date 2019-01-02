@@ -15,6 +15,7 @@ class CalendarContentComp extends React.Component {
     this.state = {
       firstDay: 0,
       date_distribution_map: {},
+      date_distribution_map_inverse: {},
       top_free_space_map: {}
     };
   }
@@ -47,7 +48,7 @@ class CalendarContentComp extends React.Component {
   }
 
   updateTopFreeSpaceMap = async (year, month) => {
-    let tempFreeSpaceMap = {};
+    let tempFreeSpaceMap = { ...this.state.top_free_space_map };
     const { firstDay, date_distribution_map } = this.state;
     const { events }  = this.props;
 
@@ -77,22 +78,32 @@ class CalendarContentComp extends React.Component {
 
   updateDateDistribution = async (year, month, firstDay) => {
     const tempDistMap = { ...this.state.date_distribution_map };
+    const tempDistMapInverse = { ...this.state.date_distribution_map_inverse };
     const numDatesThis = parseInt(generateMomentMonth(year, month).endOf('month').format('D'));
+
+    buildTempMapFunc = (k, value) => {
+      if (tempDistMap[k] !== value) {
+        tempDistMap[k] = value;
+        tempDistMapInverse[moment(value).startOf('day').valueOf()] = k;
+      }
+    };
 
     for (let k = 0; k < 42; k++) {
       if (k < firstDay) {
         const value = moment(formatISOStringForMoment(year, month, 1)).subtract(firstDay - k, 'days').valueOf();
-        if (tempDistMap[k] !== value) tempDistMap[k] = value;
+        buildTempMapFunc(k, value);
       } else if (k >= firstDay + numDatesThis) {
         const value = moment(formatISOStringForMoment(year, month, numDatesThis)).add((k + 1) - (firstDay + numDatesThis), 'days').valueOf();
-        if (tempDistMap[k] !== value) tempDistMap[k] = value;
+        buildTempMapFunc(k, value);
       } else {
         const value = moment(formatISOStringForMoment(year, month, (k - firstDay + 1))).valueOf();
-        if (tempDistMap[k] !== value) tempDistMap[k] = value;
+        buildTempMapFunc(k, value);
       }
     }
-
-    await this.setState({ date_distribution_map: tempDistMap });
+    // date_distribution_map_inverse
+    // console.log('tempDistMapInverse', tempDistMapInverse);
+    
+    await this.setState({ date_distribution_map: tempDistMap, date_distribution_map_inverse: tempDistMapInverse });
   }
 
   async componentWillReceiveProps(nextProps) {
@@ -103,7 +114,7 @@ class CalendarContentComp extends React.Component {
     if (temp_first_day !== firstDay) await this.setState({ firstDay: temp_first_day });
 
     this.updateDateDistribution(year, month, temp_first_day);
-    this.updateTopFreeSpaceMap(year, month, temp_first_day);
+    // this.updateTopFreeSpaceMap(year, month, temp_first_day);
   }
 
   async componentDidMount() {
