@@ -22,7 +22,7 @@
 .calendar-event-000-vis {
   // color: rgb(235, 83, 83);
   // background: rgba(255, 201, 54, 0.534);
-  background: yellow;
+  background: rgba(255, 255, 0, 0.301);
   margin-left: -4px;
 }
 
@@ -36,5 +36,6 @@
   min-height: 12px;
   max-height: 12px;
   margin-bottom: 2px;
-  min-width: 100%;
+  min-width: calc(100% - 10px);
+  width: 200px;
 }

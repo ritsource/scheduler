@@ -54,7 +54,7 @@ const CalendarRowItem = (props) => {
                   marginTop: '5px', height: `calc(100% - 35px)`, width: 'calc(100% / 7)'
                 }}
               >
-                {props.itemEventMap.map((event, i) => {
+                {/* {props.itemEventMap.map((event, i) => {
                   console.log(props.date, props.itemEventMap);                  
                   // console.log('props.itemEvents', props.itemEvents);
                   if (event !== null) {
@@ -66,7 +66,64 @@ const CalendarRowItem = (props) => {
                       />
                     );
                   }
-                })}
+                })} */}
+                {props.itemEventMap[0] && (
+                  <React.Fragment>
+                    <CalendarEventComp
+                      event={props.itemEventMap[0]}
+                      visible={true}
+                      width='200px'
+                    />
+                    <CalendarEventComp
+                      event={props.itemEventMap[0]}
+                      visible={true}
+                      width='100px'
+                    />
+                    <CalendarEventComp
+                      event={props.itemEventMap[0]}
+                      visible={true}
+                      width='500px'
+                    />
+                  </React.Fragment>
+                )}
+                {props.itemEventMap[3] && (
+                  <React.Fragment>
+                    <CalendarEventComp
+                      event={props.itemEventMap[3]}
+                      visible={true}
+                      width='200px'
+                    />
+                    <CalendarEventComp
+                      event={props.itemEventMap[3]}
+                      visible={true}
+                      width='100px'
+                    />
+                    <CalendarEventComp
+                      event={props.itemEventMap[3]}
+                      visible={true}
+                      width='500px'
+                    />
+                  </React.Fragment>
+                )}
+                {props.itemEventMap[4] && (
+                  <React.Fragment>
+                    <CalendarEventComp
+                      event={props.itemEventMap[4]}
+                      visible={true}
+                      width='200px'
+                    />
+                    <CalendarEventComp
+                      event={props.itemEventMap[4]}
+                      visible={true}
+                      width='100px'
+                    />
+                    <CalendarEventComp
+                      event={props.itemEventMap[4]}
+                      visible={true}
+                      width='500px'
+                    />
+                  </React.Fragment>
+                )}
               </div>
             )}
           </React.Fragment>

@@ -9,34 +9,36 @@ class CalendarRowComp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      thisRowEvents: [],
-      prevRowEvents: []
+      // thisRowEvents: [],
+      // prevRowEvents: [],
     };
   }
 
-  async componentWillReceiveProps(nextProps) {
-    const { date_distribution_map, events, index } = nextProps;
+  // async componentWillReceiveProps(nextProps) {
+  //   const { date_distribution_map, events, index } = nextProps;
 
-    const startof_row = date_distribution_map[(index * 7)];
-    const endof_row = date_distribution_map[6 + (index * 7)];
+  //   const startof_row = date_distribution_map[(index * 7)];
+  //   const endof_row = date_distribution_map[6 + (index * 7)];
 
-    await this.setState({
-      thisRowEvents: events.filter((event) => {
-        return moment(event.date_from).isSameOrBefore(endof_row, 'day') && moment(event.date_from).isSameOrAfter(startof_row, 'day');
-      }),
-      prevRowEvents: events.filter((event) => {
-        return moment(event.date_to).isSameOrBefore(endof_row, 'day') && moment(event.date_from).isSameOrBefore(startof_row, 'day');
-      })
-    });
+  //   await this.setState({
+  //     thisRowEvents: events.filter((event) => {
+  //       return moment(event.date_from).isSameOrBefore(endof_row, 'day') && moment(event.date_from).isSameOrAfter(startof_row, 'day');
+  //     }),
+  //     prevRowEvents: events.filter((event) => {
+  //       return moment(event.date_to).isSameOrBefore(endof_row, 'day') && moment(event.date_from).isSameOrBefore(startof_row, 'day');
+  //     })
+  //   });
 
-    // console.log(this.state.thisRowEvents);
-    this.row_events_map = this.state.thisRowEvents;
-    console.log('row_events_map', this.row_events_map);
+  //   // console.log(this.state.thisRowEvents);
+  //   this.row_events_map = this.state.thisRowEvents;
+  //   console.log('row_events_map', this.row_events_map);
     
     
-  }
+  // }
 
-  row_events_map = [];
+  // row_events_map = [];
+
+  
 
   render() {
     const { date_distribution_map } = this.props;
@@ -73,23 +75,23 @@ class CalendarRowComp extends React.Component {
               miniCalendar={this.props.miniCalendar}
               miniCalendarState={this.props.miniCalendarState}
 
-              itemEventMap={this.state.thisRowEvents.map((event, i) => {
-                // const event = this.row_events_map.unshift();
-                // if (Object.isObject(event)) {
-                  console.log('event event event', event);
-                  if (moment(event.date_from).isSame(dateStamp, 'day')) {
-                    // event.client_isVisible = true;
-                    return event;
-                  } else if (moment(event.date_from).isBefore(dateStamp, 'day') && moment(event.date_to).isSameOrAfter(dateStamp, 'day')) {
-                    // event.client_isVisible = false;
-                    // return event;
-                    return false;
-                  }
-                  return null;
+              // itemEventMap={this.state.thisRowEvents.map((event, i) => {
+              //   // const event = this.row_events_map.unshift();
+              //   // if (Object.isObject(event)) {
+              //     console.log('event event event', event);
+              //     if (moment(event.date_from).isSame(dateStamp, 'day')) {
+              //       // event.client_isVisible = true;
+              //       return event;
+              //     } else if (moment(event.date_from).isBefore(dateStamp, 'day') && moment(event.date_to).isSameOrAfter(dateStamp, 'day')) {
+              //       // event.client_isVisible = false;
+              //       // return event;
+              //       return false;
+              //     }
+              //     return null;
                   
-                // }
+              //   // }
                 
-              })}
+              // })}
             />
           );
         })}
