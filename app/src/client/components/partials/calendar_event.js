@@ -2,17 +2,18 @@ import React from 'react';
 import moment from 'moment';
 
 const CalendarEventComp = (props) => {
-  const { event, rowFirstDate } = props;
+  const { event, visible } = props;
 
   return (
     <div
-      className='calendar-event-comp-000'
+      className={`calendar-event-comp-000 ${visible ? 'calendar-event-000-vis' : 'calendar-event-000-invis'}`}
       style={{
-        left: '100px',
-        // left: `calc(100% / ${rowFirstDate - parseInt(moment(event.date_from).format('DD')) * 7})`
+        overflowX: 'visible'
       }}
     >
-      <p>{event.title}</p>
+      {/* {event.client_isVisible && ( */}
+        <p>{event.title}</p>
+      {/* )} */}
     </div>
   );
 }

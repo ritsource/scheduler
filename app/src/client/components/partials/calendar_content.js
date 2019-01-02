@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import moment from 'moment';
 
+// import { LinkedList }
 import { generateMomentMonth, formatISOStringForMoment, funcHandleMonth, funcHandleYear } from '../../utils/month_cursor_helpers';
 import { SET_CALENDAR_MONTH_STATE } from '../../actions/_action_types';
 import CalendarRowComp from './calendar_row';
@@ -21,27 +22,24 @@ class CalendarContentComp extends React.Component {
     history.push(`/calendar?year=${year}&month=${month}`);
   }
 
-  updateDateDistribution = (year, month, firstDay) => {
+  updateDateDistribution = async (year, month, firstDay) => {
     const tempDistMap = this.state.date_distribution_map;
     const numDatesThis = parseInt(generateMomentMonth(year, month).endOf('month').format('D'));
 
     for (let k = 0; k < 42; k++) {
       if (k < firstDay) {
         const value = moment(formatISOStringForMoment(year, month, 1)).subtract(firstDay - k, 'days').valueOf();
-        // console.log('value 1', k, value);
         if (tempDistMap[k] !== value) tempDistMap[k] = value;
       } else if (k >= firstDay + numDatesThis) {
         const value = moment(formatISOStringForMoment(year, month, numDatesThis)).add((k + 1) - (firstDay + numDatesThis), 'days').valueOf();
-        // console.log('value 2', k, value); 
         if (tempDistMap[k] !== value) tempDistMap[k] = value;
       } else {
         const value = moment(formatISOStringForMoment(year, month, (k - firstDay + 1))).valueOf();
-        // console.log('value 3', k, value);
         if (tempDistMap[k] !== value) tempDistMap[k] = value;
       }
     }
 
-    this.setState({ date_distribution_map: tempDistMap });
+    await this.setState({ date_distribution_map: tempDistMap });
   }
 
   async componentWillReceiveProps(nextProps) {
@@ -106,7 +104,7 @@ class CalendarContentComp extends React.Component {
               handleUrlNavigation={this.handleUrlNavigation}
               miniCalendar={this.props.miniCalendar}
               miniCalendarState={this.props.miniCalendarState}
-              events={this.props.events}
+              events={this.props.events || []}
               date_distribution_map={this.state.date_distribution_map}
             />
           );
@@ -124,10 +122,9 @@ const mapStateToProps = ({ calendarMonth, events, groups }, props) => {
   return {
     year: calendarMonth.year,
     month: calendarMonth.month,
-    // TODO: try to find some better algo
     events: events.filter((event) => groups.some(({ _id, _isOnCalendar }) => {
       return (event._group === _id) && _isOnCalendar;
-    }))
+    })).sort((a, b) => (a.date_from - a.date_to) > (b.date_from - b.date_to) ? 1 : -1)
   }
 };
 

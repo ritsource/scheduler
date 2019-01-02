@@ -1,20 +1,40 @@
-.calendar-row-events-level-001 {
+.calendar-row-item-events-level {
   font-size: 12px;
   // font-family: 'Lato', sans-serif;
   position: absolute;
   // float: left;
   // z-index: 3;
-  width: 100%;
+  // width: 100%;
   // background: yellow;
-  overflow: hidden;
-  // border: 1px solid red;
+  // overflow-x: visible;
+  // overflow-x: visible;
+  // overflow-y: hidden;
+  // background: #c9d60f80;
+  border: 0px solid yellow;
+  // overflow-y: auto;
+}
+
+.calendar-event-000-invis {
+  color: red;
+  background: green;
+  // opacity: 0;
+}
+.calendar-event-000-vis {
+  // color: rgb(235, 83, 83);
+  // background: rgba(255, 201, 54, 0.534);
+  background: yellow;
+  margin-left: -4px;
 }
 
 .calendar-event-comp-000 {
+  // font-size: 12px;
+  display: flex;
+  // justify-content: center;
+  align-items: center;
   padding: 3px 5px;
-  color: white;
-  background: $theme-orange;
-  margin: 0px 0px 2px 4px;
-  // float: left;
-  width: auto;
+  height: 12px;
+  min-height: 12px;
+  max-height: 12px;
+  margin-bottom: 2px;
+  min-width: 100%;
 }
