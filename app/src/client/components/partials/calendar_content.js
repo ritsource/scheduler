@@ -25,55 +25,40 @@ class CalendarContentComp extends React.Component {
     history.push(`/calendar?year=${year}&month=${month}`);
   }
 
-  findOutIndex = (year, month, dateVal, firstDay, numDatesThis, numDatesPrev) => {
-    const monthNow = generateMomentMonth(year, month);
-    const _itsPrevMonth = moment(dateVal).isBefore(moment(monthNow).valueOf(), 'month');
-    const _itsNextMonth = moment(dateVal).isAfter(moment(monthNow).valueOf(), 'month');
-
-    if (!numDatesThis) numDatesThis = parseInt(monthNow.endOf('month').format('D'));
-    if (!numDatesPrev) numDatesPrev = parseInt(monthNow.subtract(1, 'month').endOf('month').format('D'));
-
-    const mainDate = parseInt(moment(dateVal).format('DD'));
-
-    console.log(moment(dateVal).format('DD-MM-YYYY'));
-    
-    console.log('_itsPrevMonth', _itsPrevMonth, mainDate);
-    console.log('_itsNextMonth', _itsNextMonth, mainDate);
-    
-    return _itsPrevMonth
-      ? (firstDay - (numDatesPrev - mainDate + 1))
-      : _itsNextMonth
-      ? (firstDay + numDatesThis + mainDate)
-      : (firstDay + mainDate - 1);
-  }
-
-  updateTopFreeSpaceMap = async (year, month) => {
-    let tempFreeSpaceMap = { ...this.state.top_free_space_map };
-    const { firstDay, date_distribution_map } = this.state;
+  updateTopFreeSpaceMap = async () => {
+    let tempFreeSpaceMap = {};
+    const distMap = this.state.date_distribution_map;
+    const invDistMap = this.state.date_distribution_map_inverse;
     const { events }  = this.props;
 
-    // if (events && _.isEmpty(date_distribution_map)) {
-      events.map((event) => {
-        const startDate = parseInt(moment(event.date_from).format('DD'));
-        const startMonth = parseInt(moment(event.date_from).format('MM'));
-        const endDate = parseInt(moment(event.date_to).format('DD'));
-        const endMonth = parseInt(moment(event.date_to).format('MM'));
+    if (events) {
+      await events.filter(({ date_from, date_to }) => {
+        return (
+          moment(date_from).isSameOrAfter(distMap[0], 'day') && moment(date_to).isSameOrBefore(distMap[41], 'day')
+          || moment(date_to).isSameOrAfter(distMap[0], 'day') && moment(date_to).isSameOrBefore(distMap[41], 'day')
+        );
+      }).map((event) => {
+        const eventStart = moment(event.date_from).startOf().valueOf();
+        const eventEnd = moment(event.date_to).startOf().valueOf();
         
-        const monthNow = generateMomentMonth(year, month);
-        const numDatesThis = parseInt(monthNow.endOf('month').format('D'));
-        const numDatesPrev = parseInt(monthNow.subtract(1, 'month').endOf('month').format('D'));
-
-        // const startIndex = findOutIndex(year, month, date, firstDay, numDatesThis, numDatesPrev);
-        // const startIndex = findOutIndex(year, month, date, firstDay, numDatesThis, numDatesPrev);
-        
-        console.log('LOL');
-        
-        tempFreeSpaceMap = this.findOutIndex(year, month, 1549045800000, firstDay, numDatesThis, numDatesPrev);
+        for (let k = invDistMap[eventStart]; k < invDistMap[eventEnd]; k++) {
+          if (!tempFreeSpaceMap[k] || tempFreeSpaceMap[k] === 0) {
+            tempFreeSpaceMap[k] = 1;
+          } else {
+            tempFreeSpaceMap[k] = tempFreeSpaceMap[k] + 1;
+          }
+          // if (tempFreeSpaceMap[k] > 0) {
+          //   console.log('here!');
+          //   tempFreeSpaceMap[k] = tempFreeSpaceMap[k] + 1;
+          // }
+        }
       });
-    // }
+    }
 
-    console.log('tempFreeSpaceMap', tempFreeSpaceMap);    
-    return tempFreeSpaceMap;
+    console.log(tempFreeSpaceMap);
+    
+ 
+    this.setState({ top_free_space_map: tempFreeSpaceMap });
   }
 
   updateDateDistribution = async (year, month, firstDay) => {
@@ -81,7 +66,7 @@ class CalendarContentComp extends React.Component {
     const tempDistMapInverse = { ...this.state.date_distribution_map_inverse };
     const numDatesThis = parseInt(generateMomentMonth(year, month).endOf('month').format('D'));
 
-    buildTempMapFunc = (k, value) => {
+    const buildTempMapFunc = (k, value) => {
       if (tempDistMap[k] !== value) {
         tempDistMap[k] = value;
         tempDistMapInverse[moment(value).startOf('day').valueOf()] = k;
@@ -113,8 +98,8 @@ class CalendarContentComp extends React.Component {
     const temp_first_day = generateMomentMonth(year, month).startOf('month').day();
     if (temp_first_day !== firstDay) await this.setState({ firstDay: temp_first_day });
 
-    this.updateDateDistribution(year, month, temp_first_day);
-    // this.updateTopFreeSpaceMap(year, month, temp_first_day);
+    await this.updateDateDistribution(year, month, temp_first_day);
+    await this.updateTopFreeSpaceMap();
   }
 
   async componentDidMount() {
@@ -137,9 +122,7 @@ class CalendarContentComp extends React.Component {
 
   render() {
     const tempProps = this.props.miniCalendarState ? this.props.miniCalendarState : this.props;
-    const { year, month } = tempProps;
-
-    // console.log(this.state.date_distribution_map);    
+    const { year, month } = tempProps; 
 
     const monthNow = generateMomentMonth(year, month);
     const numDatesThis = parseInt(monthNow.endOf('month').format('D'));
@@ -150,6 +133,9 @@ class CalendarContentComp extends React.Component {
     let rowArr;
     if (isFiveRows) rowArr = [1, 2, 3, 4, 5];
     else rowArr = [1, 2, 3, 4, 5, 6];
+
+    console.log('top_free_space_map', this.state.top_free_space_map);
+    
     
     return (
       <div className={this.props.miniCalendar ? 'calendar-content-000-mini' : 'calendar-content-000'}>
@@ -198,3 +184,9 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CalendarContentComp);
+
+// if (!tempFreeSpaceMap[k] || tempFreeSpaceMap[k] === 0) {
+//   tempFreeSpaceMap[k] = tempFreeSpaceMap[k] + 1;
+// } else {
+//   tempFreeSpaceMap[k] = 0;
+// }
