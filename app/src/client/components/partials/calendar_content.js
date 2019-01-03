@@ -48,7 +48,7 @@ class CalendarContentComp extends React.Component {
           ? [ ...eventDistMap[startIndex], event ]
           : [ event ];
   
-        for (let k = startIndex; k < endIndex; k++) {
+        for (let k = (startIndex + 1); k <= endIndex; k++) {
           eventDistMap[k] = Array.isArray(eventDistMap[k])
             ? [ ...eventDistMap[k], false ]
             : [ false ];
