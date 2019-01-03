@@ -8,7 +8,10 @@ import CalendarEventComp from './calendar_event';
 
 const CalendarRowItem = (props) => {
   const { year, month } = props.miniCalendarState ? props.miniCalendarState : props;
-  const { rowIndex, dateStamp } = props;
+  const { index, rowIndex, dateStamp, dateDistMap, dateDistMapInverse, eventDistMap } = props;
+  
+  const itemIndex = (rowIndex * 7) + index;
+  // console.log(`eventDistMap[${itemIndex}]`, eventDistMap[itemIndex]);
   
   const aDayOfThisMonth = parseInt(moment(dateStamp).format('M')) === month;
   
@@ -29,7 +32,7 @@ const CalendarRowItem = (props) => {
           style={(props.index === 6) ? {borderRight: '0px solid white'} : {}}
         >
           <React.Fragment>
-            {props.rowIndex === 0 && (
+            {rowIndex === 0 && (
               <div style={{ height: '20px', marginLeft: '10px', display: 'flex', alignItems: 'flex-end' }}>
                 <p className='calendar-row-item-p-002'>{day_name_dictionary[props.index]}</p>
               </div>
@@ -45,26 +48,28 @@ const CalendarRowItem = (props) => {
                 </div>
               </div>
             )}
-            {(props.itemEventMap && !props.miniCalendar) && (
-              <div
-                className='calendar-row-item-events-level'
-                style={(props.rowIndex === 0) ? {
-                  marginTop: '5px', height: `calc(100% - 55px)`, width: 'calc(100% / 7)'
-                } : {
-                  marginTop: '5px', height: `calc(100% - 35px)`, width: 'calc(100% / 7)'
-                }}
+            {!props.miniCalendar && (
+              <div className='calendar-row-item-events-level'
+                style={
+                  (rowIndex === 0) ? {
+                    marginTop: '5px', height: `calc(100% - 55px)`, width: 'calc(100% / 7)'
+                  } : {
+                    marginTop: '5px', height: `calc(100% - 35px)`, width: 'calc(100% / 7)'
+                  }
+                }
               >
-                {props.itemEventMap.map((event, i) => {
-                  console.log(props.date, props.itemEventMap);                  
-                  // console.log('props.itemEvents', props.itemEvents);
-                  if (event !== null) {
+                {/* const { rowIndex, dateStamp, dateDistMap, dateDistMapInverse, eventDistMap } = props;  */}
+                {eventDistMap[itemIndex] && eventDistMap[itemIndex].map((event, i) => {
+                  if (event === false) {
+                    return (<div key={i} className='calendar-row-item-empty-event'></div>);
+                  } else {
                     return (
                       <CalendarEventComp
                         key={i}
                         event={event}
-                        visible={!!event}
+                        // visible={event}
                       />
-                    );
+                    )
                   }
                 })}
               </div>
