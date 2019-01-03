@@ -8,7 +8,7 @@ import CalendarEventComp from './calendar_event';
 
 const CalendarRowItem = (props) => {
   const { year, month } = props.miniCalendarState ? props.miniCalendarState : props;
-  const { index, rowIndex, dateStamp, dateDistMap, dateDistMapInverse, eventDistMap } = props;
+  const { index, rowIndex, dateStamp, firstDay, dateDistMap, dateDistMapInverse, eventDistMap } = props;
   
   const itemIndex = (rowIndex * 7) + index;
   // console.log(`eventDistMap[${itemIndex}]`, eventDistMap[itemIndex]);
@@ -62,12 +62,13 @@ const CalendarRowItem = (props) => {
                 {eventDistMap[itemIndex] && eventDistMap[itemIndex].map((event, i) => {
                   if (event === false) {
                     return (<div key={i} className='calendar-row-item-empty-event'></div>);
-                  } else {
+                  } else if (event === null) {
+                    return (<div key={i} className='calendar-row-item-empty-event'></div>);
+                  } else if (event) {
                     return (
                       <CalendarEventComp
                         key={i}
                         event={event}
-                        // visible={event}
                       />
                     )
                   }

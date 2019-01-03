@@ -30,6 +30,7 @@ class CalendarContentComp extends React.Component {
     const { events } = this.props;
 
     if (events) {
+      // Filter event's that are only from 3 current months - This, Prev, Next
       const myEvents = events.filter(({ date_from, date_to }) => {
         return (
           moment(date_from).isSameOrAfter(dateDistMap[0], 'day') && moment(date_to).isSameOrBefore(dateDistMap[41], 'day')
@@ -37,21 +38,70 @@ class CalendarContentComp extends React.Component {
         );
       });
   
+      // Map over myEvents to build a Event-map
       await myEvents.map((event) => {
+        // Event start and end timestamp
         const eventStart = moment(event.date_from).startOf('day').valueOf();
         const eventEnd = moment(event.date_to).startOf('day').valueOf();
   
+        // Event start and end index (index on calendar => 0-to-41)
         const startIndex = dateDistMapInverse[eventStart];
-        const endIndex = dateDistMapInverse[eventEnd];        
+        const endIndex = dateDistMapInverse[eventEnd];
+        
+        // Setting startIndex & endIndex on the event object
+        event.startIndex = startIndex;
+        event.endIndex = endIndex;
+
+        // tempLength => records length of calendar-index (only where startIndex matches)
+        let tempLength;
+        if (Array.isArray(eventDistMap[startIndex])) {
+          tempLength = eventDistMap[startIndex].length;
+
+          // setDone => saves from adding two same eventObj
+          let setDone = false;
+          // loop over elements of calendar-index (only where startIndex matches)
+          for (let f = 0; f < eventDistMap[startIndex].length; f++) {
+            // if some spot is { null } it sets the new event there
+            if (eventDistMap[startIndex][f] === null) {
+              eventDistMap[startIndex][f] = event;
+              setDone = true;
+              break;
+            }
+          }
+          // if no { null } element then concat the eventObj 
+          if (!setDone) eventDistMap[startIndex] = [ ...eventDistMap[startIndex], event ];
+        } else {
+          // If the value on eventDistMap is not an array
+          tempLength = 0;
+          eventDistMap[startIndex] = [ event ];
+        }
   
-        eventDistMap[startIndex] = Array.isArray(eventDistMap[startIndex])
-          ? [ ...eventDistMap[startIndex], event ]
-          : [ event ];
-  
+        // For loop that iretates between { startIndex + 1 } and { endIndex } & sets the value to { false }
         for (let k = (startIndex + 1); k <= endIndex; k++) {
-          eventDistMap[k] = Array.isArray(eventDistMap[k])
-            ? [ ...eventDistMap[k], false ]
-            : [ false ];
+          // To ignore the null spaces
+          for (let g = 0; g < tempLength; g++) {
+            if (Array.isArray(eventDistMap[k])) {
+              if (eventDistMap[k][g] !== false) eventDistMap[k][g] = null;
+            } else {
+              eventDistMap[k] = [ null ];
+            }
+          }
+
+          // If finds all { false } on the loop, concat { false }
+          // But if Calendar-index is start of row add rest of the same event to it
+          if (k % 7 === 0) {            
+            const tempEvent = { ...event };
+            tempEvent.startIndex = k;
+            tempEvent.endIndex = endIndex;
+
+            eventDistMap[k] = Array.isArray(eventDistMap[k])
+              ? [ ...eventDistMap[k], tempEvent ]
+              : [ tempEvent ];
+          } else {
+            eventDistMap[k] = Array.isArray(eventDistMap[k])
+              ? [ ...eventDistMap[k], false ]
+              : [ false ];
+          }
         }
       });
   
@@ -129,7 +179,7 @@ class CalendarContentComp extends React.Component {
     if (isFiveRows) rowArr = [1, 2, 3, 4, 5];
     else rowArr = [1, 2, 3, 4, 5, 6];
 
-    // console.log('eventDistMap', this.state.eventDistMap);
+    console.log('eventDistMap', this.state.eventDistMap);
     
     
     return (
@@ -172,7 +222,12 @@ const mapStateToProps = ({ calendarMonth, events, groups }, props) => {
     month: calendarMonth.month,
     events: events.filter((event) => groups.some(({ _id, _isOnCalendar }) => {
       return (event._group === _id) && _isOnCalendar;
-    })).sort((a, b) => (a.date_from - a.date_to) > (b.date_from - b.date_to) ? 1 : -1)
+    })).sort((a, b) => {
+      if (a.date_from === b.date_from) {
+        return (a.date_from - a.date_to) > (b.date_from - b.date_to) ? 1 : -1;
+      }
+      return a.date_from > b.date_from ? 1 : -1;
+    })
   }
 };
 
