@@ -16,7 +16,8 @@ class CalendarContentComp extends React.Component {
       firstDay: 0,
       date_distribution_map: {},
       date_distribution_map_inverse: {},
-      top_free_space_map: {}
+      top_free_space_map: {},
+      event_distribution_map: {}
     };
   }
 
@@ -25,51 +26,90 @@ class CalendarContentComp extends React.Component {
     history.push(`/calendar?year=${year}&month=${month}`);
   }
 
-  updateTopFreeSpaceMap = async () => {
-    let tempFreeSpaceMap = {};
-    const distMap = this.state.date_distribution_map;
-    const invDistMap = this.state.date_distribution_map_inverse;
-    const { events }  = this.props;
+  updateEventDistribution = async () => {
+    const eventDistMap = {};
+    // const eventDistMap = { ...this.state.event_distribution_map };
+    const dateDistMapInverse = { ...this.state.date_distribution_map_inverse };
+    const dateDistMap = { ...this.state.date_distribution_map };
+    const events = this.props.events;
 
     if (events) {
-      await events.filter(({ date_from, date_to }) => {
+      const myEvents = events.filter(({ date_from, date_to }) => {
         return (
-          moment(date_from).isSameOrAfter(distMap[0], 'day') && moment(date_to).isSameOrBefore(distMap[41], 'day')
-          || moment(date_to).isSameOrAfter(distMap[0], 'day') && moment(date_to).isSameOrBefore(distMap[41], 'day')
+          moment(date_from).isSameOrAfter(dateDistMap[0], 'day') && moment(date_to).isSameOrBefore(dateDistMap[41], 'day')
+          || moment(date_to).isSameOrAfter(dateDistMap[0], 'day') && moment(date_to).isSameOrBefore(dateDistMap[41], 'day')
         );
-      }).map((event) => {
-        const eventStart = moment(event.date_from).startOf().valueOf();
-        const eventEnd = moment(event.date_to).startOf().valueOf();
+      });
+  
+      await myEvents.map((event) => {
+        const eventStart = moment(event.date_from).startOf('day').valueOf();
+        const eventEnd = moment(event.date_to).startOf('day').valueOf();
+  
+        const startIndex = dateDistMapInverse[eventStart];
+        const endIndex = dateDistMapInverse[eventEnd];
+        console.log('startIndex', eventStart, event.title);
         
-        for (let k = invDistMap[eventStart]; k < invDistMap[eventEnd]; k++) {
-          if (!tempFreeSpaceMap[k] || tempFreeSpaceMap[k] === 0) {
-            tempFreeSpaceMap[k] = 1;
-          } else {
-            tempFreeSpaceMap[k] = tempFreeSpaceMap[k] + 1;
-          }
-          // if (tempFreeSpaceMap[k] > 0) {
-          //   console.log('here!');
-          //   tempFreeSpaceMap[k] = tempFreeSpaceMap[k] + 1;
-          // }
+  
+        eventDistMap[startIndex] = Array.isArray(eventDistMap[startIndex])
+          ? [ ...eventDistMap[startIndex], event ]
+          : [ event ];
+  
+        for (let k = startIndex; k < endIndex; k++) {
+          eventDistMap[k] = Array.isArray(eventDistMap[k])
+            ? [ ...eventDistMap[k], false ]
+            : [ false ];
         }
       });
+  
+      await this.setState({ event_distribution_map: eventDistMap });
     }
-
-    console.log(tempFreeSpaceMap);
-    
- 
-    this.setState({ top_free_space_map: tempFreeSpaceMap });
   }
 
+  // updateTopFreeSpaceMap = async () => {
+  //   let tempFreeSpaceMap = {};
+  //   const distMap = this.state.date_distribution_map;
+  //   const invDistMap = this.state.date_distribution_map_inverse;
+  //   const { events }  = this.props;
+
+  //   if (events) {
+  //     await events.filter(({ date_from, date_to }) => {
+  //       return (
+  //         moment(date_from).isSameOrAfter(distMap[0], 'day') && moment(date_to).isSameOrBefore(distMap[41], 'day')
+  //         || moment(date_to).isSameOrAfter(distMap[0], 'day') && moment(date_to).isSameOrBefore(distMap[41], 'day')
+  //       );
+  //     }).map((event) => {
+  //       const eventStart = moment(event.date_from).startOf().valueOf();
+  //       const eventEnd = moment(event.date_to).startOf().valueOf();
+        
+  //       for (let k = invDistMap[eventStart]; k < invDistMap[eventEnd]; k++) {
+  //         if (!tempFreeSpaceMap[k] || tempFreeSpaceMap[k] === 0) {
+  //           tempFreeSpaceMap[k] = 1;
+  //         } else {
+  //           tempFreeSpaceMap[k] = tempFreeSpaceMap[k] + 1;
+  //         }
+  //         // if (tempFreeSpaceMap[k] > 0) {
+  //         //   console.log('here!');
+  //         //   tempFreeSpaceMap[k] = tempFreeSpaceMap[k] + 1;
+  //         // }
+  //       }
+  //     });
+  //   }
+
+  //   console.log(tempFreeSpaceMap);
+    
+ 
+  //   this.setState({ top_free_space_map: tempFreeSpaceMap });
+  // }
+
   updateDateDistribution = async (year, month, firstDay) => {
-    const tempDistMap = { ...this.state.date_distribution_map };
-    const tempDistMapInverse = { ...this.state.date_distribution_map_inverse };
+    const dateDistMap = { ...this.state.date_distribution_map };
+    const dateDistMapInverse = { ...this.state.date_distribution_map_inverse };
     const numDatesThis = parseInt(generateMomentMonth(year, month).endOf('month').format('D'));
 
     const buildTempMapFunc = (k, value) => {
-      if (tempDistMap[k] !== value) {
-        tempDistMap[k] = value;
-        tempDistMapInverse[moment(value).startOf('day').valueOf()] = k;
+      if (dateDistMap[k] !== value) {
+        dateDistMap[k] = value;
+        dateDistMapInverse[moment(value).startOf('day').valueOf()] = k;
       }
     };
 
@@ -86,9 +126,9 @@ class CalendarContentComp extends React.Component {
       }
     }
     // date_distribution_map_inverse
-    // console.log('tempDistMapInverse', tempDistMapInverse);
+    // console.log('dateDistMapInverse', dateDistMapInverse);
     
-    await this.setState({ date_distribution_map: tempDistMap, date_distribution_map_inverse: tempDistMapInverse });
+    await this.setState({ date_distribution_map: dateDistMap, date_distribution_map_inverse: dateDistMapInverse });
   }
 
   async componentWillReceiveProps(nextProps) {
@@ -99,7 +139,8 @@ class CalendarContentComp extends React.Component {
     if (temp_first_day !== firstDay) await this.setState({ firstDay: temp_first_day });
 
     await this.updateDateDistribution(year, month, temp_first_day);
-    await this.updateTopFreeSpaceMap();
+    // await this.updateTopFreeSpaceMap();
+    await this.updateEventDistribution();
   }
 
   async componentDidMount() {
@@ -134,7 +175,8 @@ class CalendarContentComp extends React.Component {
     if (isFiveRows) rowArr = [1, 2, 3, 4, 5];
     else rowArr = [1, 2, 3, 4, 5, 6];
 
-    console.log('top_free_space_map', this.state.top_free_space_map);
+    console.log('event_dist_amp', this.state.event_distribution_map);
+    console.log('dist_map_inv', this.state.date_distribution_map_inverse);
     
     
     return (
