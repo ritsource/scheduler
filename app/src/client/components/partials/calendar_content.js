@@ -4,7 +4,6 @@ import { createBrowserHistory } from 'history';
 import moment from 'moment';
 import _ from 'lodash';
 
-// import { LinkedList }
 import { generateMomentMonth, formatISOStringForMoment, funcHandleMonth, funcHandleYear } from '../../utils/month_cursor_helpers';
 import { SET_CALENDAR_MONTH_STATE } from '../../actions/_action_types';
 import CalendarRowComp from './calendar_row';
@@ -14,9 +13,9 @@ class CalendarContentComp extends React.Component {
     super(props);
     this.state = {
       firstDay: 0,
-      date_distribution_map: {},
-      date_distribution_map_inverse: {},
-      top_free_space_map: {}
+      dateDistMap: {},
+      dateDistMapInverse: {},
+      eventDistMap: {}
     };
   }
 
@@ -25,70 +24,66 @@ class CalendarContentComp extends React.Component {
     history.push(`/calendar?year=${year}&month=${month}`);
   }
 
-  updateTopFreeSpaceMap = async () => {
-    let tempFreeSpaceMap = {};
-    const distMap = this.state.date_distribution_map;
-    const invDistMap = this.state.date_distribution_map_inverse;
-    const { events }  = this.props;
+  updateEventDistribution = async () => {
+    const eventDistMap = {};
+    const { dateDistMapInverse, dateDistMap } = this.state;
+    const { events } = this.props;
 
     if (events) {
-      await events.filter(({ date_from, date_to }) => {
+      const myEvents = events.filter(({ date_from, date_to }) => {
         return (
-          moment(date_from).isSameOrAfter(distMap[0], 'day') && moment(date_to).isSameOrBefore(distMap[41], 'day')
-          || moment(date_to).isSameOrAfter(distMap[0], 'day') && moment(date_to).isSameOrBefore(distMap[41], 'day')
+          moment(date_from).isSameOrAfter(dateDistMap[0], 'day') && moment(date_to).isSameOrBefore(dateDistMap[41], 'day')
+          || moment(date_to).isSameOrAfter(dateDistMap[0], 'day') && moment(date_to).isSameOrBefore(dateDistMap[41], 'day')
         );
-      }).map((event) => {
-        const eventStart = moment(event.date_from).startOf().valueOf();
-        const eventEnd = moment(event.date_to).startOf().valueOf();
-        
-        for (let k = invDistMap[eventStart]; k < invDistMap[eventEnd]; k++) {
-          if (!tempFreeSpaceMap[k] || tempFreeSpaceMap[k] === 0) {
-            tempFreeSpaceMap[k] = 1;
-          } else {
-            tempFreeSpaceMap[k] = tempFreeSpaceMap[k] + 1;
-          }
-          // if (tempFreeSpaceMap[k] > 0) {
-          //   console.log('here!');
-          //   tempFreeSpaceMap[k] = tempFreeSpaceMap[k] + 1;
-          // }
+      });
+  
+      await myEvents.map((event) => {
+        const eventStart = moment(event.date_from).startOf('day').valueOf();
+        const eventEnd = moment(event.date_to).startOf('day').valueOf();
+  
+        const startIndex = dateDistMapInverse[eventStart];
+        const endIndex = dateDistMapInverse[eventEnd];        
+  
+        eventDistMap[startIndex] = Array.isArray(eventDistMap[startIndex])
+          ? [ ...eventDistMap[startIndex], event ]
+          : [ event ];
+  
+        for (let k = startIndex; k < endIndex; k++) {
+          eventDistMap[k] = Array.isArray(eventDistMap[k])
+            ? [ ...eventDistMap[k], false ]
+            : [ false ];
         }
       });
+  
+      await this.setState({ eventDistMap });
     }
-
-    console.log(tempFreeSpaceMap);
-    
- 
-    this.setState({ top_free_space_map: tempFreeSpaceMap });
   }
 
   updateDateDistribution = async (year, month, firstDay) => {
-    const tempDistMap = { ...this.state.date_distribution_map };
-    const tempDistMapInverse = { ...this.state.date_distribution_map_inverse };
+    const { dateDistMap, dateDistMapInverse } = this.state;
     const numDatesThis = parseInt(generateMomentMonth(year, month).endOf('month').format('D'));
 
-    const buildTempMapFunc = (k, value) => {
-      if (tempDistMap[k] !== value) {
-        tempDistMap[k] = value;
-        tempDistMapInverse[moment(value).startOf('day').valueOf()] = k;
+    const mapBuilder = (k, value) => {
+      if (dateDistMap[k] !== value) {
+        dateDistMap[k] = value;
+        dateDistMapInverse[moment(value).startOf('day').valueOf()] = k;
       }
     };
 
     for (let k = 0; k < 42; k++) {
       if (k < firstDay) {
         const value = moment(formatISOStringForMoment(year, month, 1)).subtract(firstDay - k, 'days').valueOf();
-        buildTempMapFunc(k, value);
+        mapBuilder(k, value);
       } else if (k >= firstDay + numDatesThis) {
         const value = moment(formatISOStringForMoment(year, month, numDatesThis)).add((k + 1) - (firstDay + numDatesThis), 'days').valueOf();
-        buildTempMapFunc(k, value);
+        mapBuilder(k, value);
       } else {
         const value = moment(formatISOStringForMoment(year, month, (k - firstDay + 1))).valueOf();
-        buildTempMapFunc(k, value);
+        mapBuilder(k, value);
       }
     }
-    // date_distribution_map_inverse
-    // console.log('tempDistMapInverse', tempDistMapInverse);
     
-    await this.setState({ date_distribution_map: tempDistMap, date_distribution_map_inverse: tempDistMapInverse });
+    await this.setState({ dateDistMap, dateDistMapInverse });
   }
 
   async componentWillReceiveProps(nextProps) {
@@ -99,7 +94,7 @@ class CalendarContentComp extends React.Component {
     if (temp_first_day !== firstDay) await this.setState({ firstDay: temp_first_day });
 
     await this.updateDateDistribution(year, month, temp_first_day);
-    await this.updateTopFreeSpaceMap();
+    await this.updateEventDistribution();
   }
 
   async componentDidMount() {
@@ -134,7 +129,7 @@ class CalendarContentComp extends React.Component {
     if (isFiveRows) rowArr = [1, 2, 3, 4, 5];
     else rowArr = [1, 2, 3, 4, 5, 6];
 
-    console.log('top_free_space_map', this.state.top_free_space_map);
+    // console.log('eventDistMap', this.state.eventDistMap);
     
     
     return (
@@ -144,19 +139,21 @@ class CalendarContentComp extends React.Component {
             <CalendarRowComp
               key={i}
               index={i}
-              // date_distribution_map={this.state.date_distribution_map}
-              numDatesPrev={numDatesPrev}
-              numDatesThis={numDatesThis}
-              year={year}
-              month={month}
-              rowFirstDate={((7 * (i - 1)) + 1) + (7 - this.state.firstDay)}
-              isFiveRows={isFiveRows}
-              firstDay={this.state.firstDay}
-              handleUrlNavigation={this.handleUrlNavigation}
-              miniCalendar={this.props.miniCalendar}
-              miniCalendarState={this.props.miniCalendarState}
-              events={this.props.events || []}
-              date_distribution_map={this.state.date_distribution_map}
+              numDatesPrev={numDatesPrev} // Number of days in the Previous Month
+              numDatesThis={numDatesThis} // Number of days in the This Month
+              year={year} // { year } from Redux State
+              month={month} // { month } from Redux State
+              // rowFirstDate={((7 * (i - 1)) + 1) + (7 - this.state.firstDay)} // First Date of The Row
+              isFiveRows={isFiveRows} // if a 5-row-month { true } else { flase }
+              // firstDay={this.state.firstDay} // First Day Of Month's Index in row-1
+              handleUrlNavigation={this.handleUrlNavigation} // Function for Month Navigation + URL
+              dateDistMap={this.state.dateDistMap} // { dateDistMap } from Component-State
+              dateDistMapInverse={this.state.dateDistMapInverse} // { dateDistMapInverse } from Component-State
+              eventDistMap={this.state.eventDistMap} // { eventDistMap } from Component-State
+              // For Mini-Calendar Only
+              miniCalendar={this.props.miniCalendar} // If it's Mini-Calendar or Not
+              miniCalendarState={this.props.miniCalendarState} // Mini-Calendar State { year } and { month }
+              // events={this.props.events || []}
             />
           );
         })}
@@ -184,9 +181,3 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(CalendarContentComp);
-
-// if (!tempFreeSpaceMap[k] || tempFreeSpaceMap[k] === 0) {
-//   tempFreeSpaceMap[k] = tempFreeSpaceMap[k] + 1;
-// } else {
-//   tempFreeSpaceMap[k] = 0;
-// }
