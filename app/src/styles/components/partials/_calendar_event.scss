@@ -39,3 +39,13 @@
   min-width: calc(100% - 10px);
   width: 200px;
 }
+
+.calendar-row-item-empty-event {
+  background: red;
+  padding: 3px 5px;
+  height: 12px;
+  min-height: 12px;
+  max-height: 12px;
+  margin-bottom: 2px;
+  width: calc(100% - 10px);
+}
