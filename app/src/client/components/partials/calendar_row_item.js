@@ -1,23 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
 
-import { month_name_dictionary, day_name_dictionary } from '../../utils/constant_data_dictionary';
+import { month_name_dictionary, day_name_dictionary } from '../../utils/constants';
 import { SET_CALENDAR_MONTH_STATE } from '../../actions/_action_types';
 import CalendarEventComp from './calendar_event';
 
 const CalendarRowItem = (props) => {
   const { year, month } = props.miniCalendarState ? props.miniCalendarState : props;
-  const { index, rowIndex, dateStamp, firstDay, dateDistMap, dateDistMapInverse, eventDistMap } = props;
+  const { index, rowIndex, dateStamp, dayOneIndex, dateDistMap, dateDistMapInverse, eventDistMap } = props;
   
   const itemIndex = (rowIndex * 7) + index;
-  // console.log(`eventDistMap[${itemIndex}]`, eventDistMap[itemIndex]);
-  
-  const aDayOfThisMonth = parseInt(moment(dateStamp).format('M')) === month;
-  
-  const _isToday = dateStamp && aDayOfThisMonth && month === parseInt(moment().format('M'))
-    && props.date === parseInt(moment().format('D'));
-  
+  const aDayOfThisMonth = new Date(dateStamp).getMonth() === month;  
+  const _isToday = props.date === new Date().getDate() && aDayOfThisMonth;
+
   return (
     <React.Fragment>
       {props.miniCalendar ? (

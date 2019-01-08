@@ -1,10 +1,10 @@
 import React from 'react';
-import moment from 'moment';
 
 const CalendarEventComp = (props) => {
   const { event, visible } = props;
   const { startIndex, endIndex } = event;
   const widthExtra = (endIndex - startIndex);
+  
   return (
     <div
       className={`calendar-event-comp-000 ${visible ? 'calendar-event-000-vis' : 'calendar-event-000-invis'}`}
