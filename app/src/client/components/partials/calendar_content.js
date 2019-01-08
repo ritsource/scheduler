@@ -1,10 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createBrowserHistory } from 'history';
-import moment from 'moment';
-import _ from 'lodash';
 
-import { generateMomentMonth, formatISOStringForMoment, funcHandleMonth, funcHandleYear } from '../../utils/month_cursor_helpers';
 import { SET_CALENDAR_MONTH_STATE } from '../../actions/_action_types';
 import CalendarRowComp from './calendar_row';
 
@@ -12,16 +9,33 @@ class CalendarContentComp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstDay: 0,
+      dayOneIndex: 0,
       dateDistMap: {},
       dateDistMapInverse: {},
       eventDistMap: {}
     };
   }
 
+  asyncSetState = (obj) => {
+    return new Promise((resolve) => {
+      this.setState(obj, resolve)
+    });
+  }
+
   handleUrlNavigation = (year, month) => {
     const history = createBrowserHistory();
     history.push(`/calendar?year=${year}&month=${month}`);
+  }
+
+  updateDateDistribution = async (year, month) => {
+    const { dayOneIndex, dateDistMap, dateDistMapInverse }  = this.state;
+    // Loop for 42 Times - for 42 Box-es
+    for (let k = 0; k < 42; k++) {
+      const value = new Date(year, month, (k - dayOneIndex + 1)).valueOf();
+      dateDistMap[k] = value;
+      dateDistMapInverse[value] = k;
+    }
+    await this.asyncSetState({ dateDistMap, dateDistMapInverse });
   }
 
   updateEventDistribution = async () => {
@@ -33,16 +47,16 @@ class CalendarContentComp extends React.Component {
       // Filter event's that are only from 3 current months - This, Prev, Next
       const myEvents = events.filter(({ date_from, date_to }) => {
         return (
-          moment(date_from).isSameOrAfter(dateDistMap[0], 'day') && moment(date_to).isSameOrBefore(dateDistMap[41], 'day')
-          || moment(date_to).isSameOrAfter(dateDistMap[0], 'day') && moment(date_to).isSameOrBefore(dateDistMap[41], 'day')
+          date_from >= dateDistMap[0] && date_to <= dateDistMap[41]
+          || date_to >= dateDistMap[0] && date_to <= dateDistMap[41]
         );
       });
   
       // Map over myEvents to build a Event-map
       await myEvents.map((event) => {
         // Event start and end timestamp
-        const eventStart = moment(event.date_from).startOf('day').valueOf();
-        const eventEnd = moment(event.date_to).startOf('day').valueOf();
+        const eventStart = new Date(event.date_from).setHours(0,0,0,0).valueOf();
+        const eventEnd = new Date(event.date_to).setHours(0,0,0,0).valueOf();
   
         // Event start and end index (index on calendar => 0-to-41)
         const startIndex = dateDistMapInverse[eventStart];
@@ -109,41 +123,14 @@ class CalendarContentComp extends React.Component {
     }
   }
 
-  updateDateDistribution = async (year, month, firstDay) => {
-    const { dateDistMap, dateDistMapInverse } = this.state;
-    const numDatesThis = parseInt(generateMomentMonth(year, month).endOf('month').format('D'));
-
-    const mapBuilder = (k, value) => {
-      if (dateDistMap[k] !== value) {
-        dateDistMap[k] = value;
-        dateDistMapInverse[moment(value).startOf('day').valueOf()] = k;
-      }
-    };
-
-    for (let k = 0; k < 42; k++) {
-      if (k < firstDay) {
-        const value = moment(formatISOStringForMoment(year, month, 1)).subtract(firstDay - k, 'days').valueOf();
-        mapBuilder(k, value);
-      } else if (k >= firstDay + numDatesThis) {
-        const value = moment(formatISOStringForMoment(year, month, numDatesThis)).add((k + 1) - (firstDay + numDatesThis), 'days').valueOf();
-        mapBuilder(k, value);
-      } else {
-        const value = moment(formatISOStringForMoment(year, month, (k - firstDay + 1))).valueOf();
-        mapBuilder(k, value);
-      }
-    }
-    
-    await this.setState({ dateDistMap, dateDistMapInverse });
-  }
-
   async componentWillReceiveProps(nextProps) {
     const { year, month } = nextProps.miniCalendarState ? nextProps.miniCalendarState : nextProps;
-    const { firstDay } = this.state;
+    const { dayOneIndex } = this.state;
 
-    const temp_first_day = generateMomentMonth(year, month).startOf('month').day();
-    if (temp_first_day !== firstDay) await this.setState({ firstDay: temp_first_day });
-
-    await this.updateDateDistribution(year, month, temp_first_day);
+    const tempDayOne = new Date(year, month, 1).getDay();
+    if (tempDayOne !== dayOneIndex) await this.asyncSetState({ dayOneIndex: tempDayOne });
+    
+    await this.updateDateDistribution(year, month);
     await this.updateEventDistribution();
   }
 
@@ -152,35 +139,25 @@ class CalendarContentComp extends React.Component {
 
     const urlParams = new URLSearchParams(window.location.search);
     await this.props.setReduxCalendar({
-      year: parseInt(urlParams.get('year')) || parseInt(moment().format('YYYY')),
-      month: parseInt(urlParams.get('month')) || parseInt(moment().format('M')),
+      year: parseInt(urlParams.get('year')) || new Date().getFullYear(),
+      month: parseInt(urlParams.get('month')) || new Date().getMonth(),
     });
-    // const history = createBrowserHistory();
-    // history.push(`/calendar?year=${year}&month=${month}`);
+    
+    await this.updateDateDistribution(this.props.year, this.props.month);
 
-    if (this.state.firstDay === 0) {
-      await this.setState({
-        firstDay: generateMomentMonth(year, month).startOf('month').day()
-      });
+    if (this.state.dayOneIndex === 0) {
+      await this.asyncSetState({ dayOneIndex: new Date(year, month, 1).getDay() });
     }
   }
 
   render() {
     const tempProps = this.props.miniCalendarState ? this.props.miniCalendarState : this.props;
-    const { year, month } = tempProps; 
+    const { year, month } = tempProps;
 
-    const monthNow = generateMomentMonth(year, month);
-    const numDatesThis = parseInt(monthNow.endOf('month').format('D'));
-    const numDatesPrev = parseInt(monthNow.subtract(1, 'month').endOf('month').format('D'));
-    const numDatesNext = parseInt(monthNow.add(2, 'month').endOf('month').format('D')); // Cause these functions changes the object
-    
-    const isFiveRows = (this.state.firstDay + numDatesThis) <= 35;
-    let rowArr;
-    if (isFiveRows) rowArr = [1, 2, 3, 4, 5];
-    else rowArr = [1, 2, 3, 4, 5, 6];
-
-    // console.log('eventDistMap', this.state.eventDistMap);
-    
+    const numDatesThis = new Date(year, month + 1, 0).getDate();
+    const numDatesPrev = new Date(year, month, 0).getDate();
+    const isFiveRows = (this.state.dayOneIndex + numDatesThis) <= 35;
+    const rowArr = isFiveRows ? [1, 2, 3, 4, 5] : [1, 2, 3, 4, 5, 6];    
     
     return (
       <div className={this.props.miniCalendar ? 'calendar-content-000-mini' : 'calendar-content-000'}>
@@ -193,9 +170,9 @@ class CalendarContentComp extends React.Component {
               numDatesThis={numDatesThis} // Number of days in the This Month
               year={year} // { year } from Redux State
               month={month} // { month } from Redux State
-              // rowFirstDate={((7 * (i - 1)) + 1) + (7 - this.state.firstDay)} // First Date of The Row
+              // rowFirstDate={((7 * (i - 1)) + 1) + (7 - this.state.dayOneIndex)} // First Date of The Row
               isFiveRows={isFiveRows} // if a 5-row-month { true } else { flase }
-              // firstDay={this.state.firstDay} // First Day Of Month's Index in row-1
+              // dayOneIndex={this.state.dayOneIndex} // First Day Of Month's Index in row-1
               handleUrlNavigation={this.handleUrlNavigation} // Function for Month Navigation + URL
               dateDistMap={this.state.dateDistMap} // { dateDistMap } from Component-State
               dateDistMapInverse={this.state.dateDistMapInverse} // { dateDistMapInverse } from Component-State

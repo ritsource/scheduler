@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-// import moment from 'moment';
 
 import { handleAppMode } from '../../actions/app_mode_actions';
 import CalendarSidebarComp from '../partials/calendar_sidebar';

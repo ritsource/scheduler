@@ -44,7 +44,6 @@
     "http-proxy-middleware": "0.19.1",
     "jest": "23.6.0",
     "mini-css-extract-plugin": "0.4.5",
-    "moment": "^2.23.0",
     "mongoose": "5.3.14",
     "node-sass": "4.10.0",
     "nodemon": "1.18.7",

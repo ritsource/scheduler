@@ -1,17 +1,10 @@
 import React from 'react';
 
-import { month_name_dictionary } from '../../utils/constant_data_dictionary';
-
-// miniCalendarState={this.state}
-//           handleNavigation={this.handleNavigation}
-//           navigateToNow={this.navigateToNow}
+import { month_name_dictionary } from '../../utils/constants';
 
 const CalendarSidebarNavigator = (props) => (
   <div className='calendar-sidebar-navigation-000'>
-    <p>{month_name_dictionary[props.miniCalendarState.month - 1]}&nbsp;{props.miniCalendarState.year}</p>
-  
-    {/* <button onClick={props.navigateToNow}>Today</button> */}
-
+    <p>{month_name_dictionary[props.miniCalendarState.month]}&nbsp;{props.miniCalendarState.year}</p>
     <div>
       <button
         style={{ marginRight: '2px' }}

@@ -2,11 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ReactSVG from 'react-svg';
-import moment from 'moment';
 import { createBrowserHistory } from 'history';
 
-import { month_name_dictionary } from '../../utils/constant_data_dictionary';
-import { funcHandleMonth, funcHandleYear } from '../../utils/month_cursor_helpers';
+import { month_name_dictionary } from '../../utils/constants';
+import { funcHandleMonth, funcHandleYear } from '../../utils/funcs';
 import { SET_CALENDAR_MONTH_STATE } from '../../actions/_action_types';
 import { toggleSideBar } from '../../actions/side_bar_actions';
 import CustomRodalComp from '../reusables/custom_rodal';
@@ -34,8 +33,8 @@ class HeaderComp extends React.Component {
 
   navigateToNow = async () => {
     await this.props.setReduxCalendar({
-      year: parseInt(moment().format('YYYY')),
-      month: parseInt(moment().format('M')),
+      year: new Date().getFullYear(),
+      month: new Date().getMonth(),
     });
     const history = createBrowserHistory();
     history.push(`/calendar?year=${this.props.year}&month=${this.props.month}`);
@@ -73,7 +72,7 @@ class HeaderComp extends React.Component {
                   }}
                 >{'>'}</button>
 
-                <p>{month_name_dictionary[this.props.month - 1]}&nbsp;{this.props.year}</p>
+                <p>{month_name_dictionary[this.props.month]}&nbsp;{this.props.year}</p>
               </div>
             )}
 
