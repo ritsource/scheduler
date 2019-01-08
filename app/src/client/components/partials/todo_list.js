@@ -72,7 +72,6 @@ class TodoListComp extends React.Component {
                     >
                       {this.props.events.map((event, i) => {
                         this.event_rank_map[i] = { _rank: event._rank, _id: event._id };
-                        // console.log(this.event_rank_map);
 
                         return (
                           <TodoListItem

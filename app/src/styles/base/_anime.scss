@@ -1,7 +1,10 @@
 .sidebar-slided-left {
-  width: 0px;
+  min-width: 0px !important;
+  width: 0px !important;
+  transition: 0.3s;
 }
 
 .sidebar-slided-right {
-  width: 250px;
+  width: 250px !important;
+  transition: 0.3s;
 }

@@ -21,7 +21,7 @@
   // background: rgba(255, 255, 255, 0);
 
   button {
-    color: $theme-green;
+    color: $theme-color;
     background: white;
     border: 0px solid white;
   }
@@ -36,7 +36,7 @@
     }
 
     &::placeholder {
-      color: $theme-green;
+      color: $theme-color;
       opacity: 1;
     }
   }

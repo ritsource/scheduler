@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   transition: 0.3s;
+  min-width: 250px;
 
   .todo-sidebar-001-the-list {
     height: 100%;

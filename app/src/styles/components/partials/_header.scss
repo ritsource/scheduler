@@ -27,12 +27,12 @@
     }
 
     &:disabled {
-      // color: $theme-green;
-      // border: 1px solid $theme-green;
+      // color: $theme-color;
+      // border: 1px solid $theme-color;
       // background: white;
       color: white;
-      border: 1px solid $theme-green;
-      background: $theme-green;
+      border: 1px solid $theme-color;
+      background: $theme-color;
       cursor: default;
     }
   }
@@ -99,7 +99,7 @@
     }
 
     h2 {
-      color: $theme-green;
+      color: $theme-color;
       display: flex;
       align-items: center;
 

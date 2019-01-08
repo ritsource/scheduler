@@ -11,6 +11,7 @@ const CalendarEventComp = (props) => {
       style={{
         overflowX: 'visible',
         width: `calc(${(widthExtra + 1) * 100}% - 10px - 4px)`,
+        background: true ? '#42a4f4' : event.hex_color
       }}
     >
       <div className='calendar-event-div-over-title-001'>

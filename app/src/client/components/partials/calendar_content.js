@@ -179,7 +179,7 @@ class CalendarContentComp extends React.Component {
     if (isFiveRows) rowArr = [1, 2, 3, 4, 5];
     else rowArr = [1, 2, 3, 4, 5, 6];
 
-    console.log('eventDistMap', this.state.eventDistMap);
+    // console.log('eventDistMap', this.state.eventDistMap);
     
     
     return (
