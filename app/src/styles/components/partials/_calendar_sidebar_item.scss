@@ -38,17 +38,16 @@
 
   .sidebar-item-002-header-rodal-content {
     p {
-      border: 1px solid $border-black;
-      border-bottom: 0px solid $border-black;
-      padding: 6px 10px;
+      padding: 10px 20px;
       cursor: pointer;
-
-      i {
-        margin-right: 5px;
-      }
+      background: white;
+      background: linear-gradient(to right, $background-grey-0 50%, white 50%);
+      background-size: 200% 100%;
+      background-position: right bottom;
+      transition: all 0.2s ease;
 
       &:hover {
-        background: $background-grey-0;
+        background-position: left bottom;
       }
     }
   }

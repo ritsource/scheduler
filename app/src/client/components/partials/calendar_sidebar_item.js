@@ -1,15 +1,18 @@
 import React from 'react';
+import { MdDelete, MdSettings } from "react-icons/md";
 
 import TodoListIndicator from './todo_list_indicator';
-import CustomRodalComp from '../reusables/custom_rodal';
+import Dropdown from 'react-dropdown-modal';
 
 class CalendarSidebarItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: '...',
+      title: '. . .',
       input_disable: true,
-      options_rodal_visible: false
+      dropdown_visible: false,
+      screenX: null,
+      screenY: null
     }
   }
 
@@ -19,15 +22,18 @@ class CalendarSidebarItem extends React.Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
-    // console.log(nextProps.group.title);
-    
-    if (nextProps.group.title !== this.state.title) {
-      // console.log('loll');
-      
+  componentWillReceiveProps(nextProps) {    
+    if (nextProps.group.title !== this.state.title) {      
       this.setState({ title: nextProps.group.title });
     }
   }
+
+  generateTopOfDropdwown = (docId) => {
+    if (!document) return '360px';
+    else {
+      const scrollTop = document.getElementById(`#${docId}`).scrollTop();
+    }
+  };
   
   render() {
     const { group } = this.props;
@@ -63,44 +69,54 @@ class CalendarSidebarItem extends React.Component {
           </form>
         </div>
 
-        <button className='calendar-sidebar-item-options-btn' onClick={() => {
-          this.setState({ options_rodal_visible: true });
-        }}>
-          <i className="fas fa-ellipsis-h"></i>
-        </button>
-
-        <CustomRodalComp
-          borderRadius='0px'
-          marginTop={`calc(360px)`}
-          // left='30px'
-          right={`calc(100vw - 240px)`}
-          visible={this.state.options_rodal_visible}
-          toggleVisibility={() => {
-            this.setState({ options_rodal_visible: false });
+        <Dropdown
+          visible={this.state.dropdown_visible}
+          // visible={this.state.title === 'Tasks' ? true : this.state.dropdown_visible}
+          onButtonClick={(e) => {
+            console.log(e.screenX, e.screenY);
+            this.setState({ screenX: e.screenX, screenY: e.screenY, dropdown_visible: true });
           }}
-        >
-          <div className='sidebar-item-002-header-rodal-content'>
-            <p onClick={async () => {
-              await this.setState({ options_rodal_visible: false, input_disable: false });
-              if (document) document.querySelector(`#calendar-sidebar-item-input-inside-form-${group._id}`).focus();
-            }}>
-              <i style={{ color: group.hex_color }} className="far fa-edit"></i>
-              Rename
-            </p>
+          onClose={() => {
+            this.setState({ screenX: null, screenY: null, dropdown_visible: false });
+          }}
+          showArrow={false}
+          arrowPosition={{ right: '0px' }}
+          position={{
+            left: `calc(${this.state.screenX}px - 8px)`,
+            // top: `${this.state.screenY}px`,
+            bottom: `calc(100vh - ${this.state.screenY}px + 80px)`
+          }}
+          modalShadow='0px 3px 13px 0px rgba(0,0,0,0.20)'
+          modalBorder={false}
+          // backgroundMaskColor='rgba(1, 1, 1, 0.1)'
+          modalContent={() => (
+            <div className='sidebar-item-002-header-rodal-content'>
+              {!group._isPermanent && (
+                <p onClick={() => {
+                  this.setState({ dropdown_visible: false });
+                  this.props.asyncDeleteGroup(group._id);
+                }}><MdDelete style={{
+                  marginRight: '8px',
+                  marginBottom: '-2px'
+                }}/>Delete Group</p>
+              )}
 
-            {!group._isPermanent && (
-              <p onClick={() => {
-                this.setState({ options_rodal_visible: false });
-                this.props.asyncDeleteGroup(group._id);
-              }}>
-                <i className="far fa-trash-alt"
-                  style={{ color: group.hex_color, marginRight: '8px' }}
-                ></i>
-                Delete Group
-              </p>
-            )}
-          </div>
-        </CustomRodalComp>
+              <p onClick={async () => {
+                await this.setState({ dropdown_visible: false, input_disable: false });
+                if (document) document.querySelector(`#calendar-sidebar-item-input-inside-form-${group._id}`).focus();
+              }}><MdSettings style={{
+                marginRight: '8px',
+                marginBottom: '-2px'
+              }}/>Rename</p>
+            </div>
+          )}
+        >
+          <button className='calendar-sidebar-item-options-btn' onClick={() => {
+            this.setState({ dropdown_visible: true });
+          }}>
+            <i className="fas fa-ellipsis-h"></i>
+          </button>
+        </Dropdown>
       </div>
     );
   }

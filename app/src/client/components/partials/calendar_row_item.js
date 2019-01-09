@@ -10,7 +10,7 @@ const CalendarRowItem = (props) => {
   const { index, rowIndex, dateStamp, dayOneIndex, dateDistMap, dateDistMapInverse, eventDistMap } = props;
   
   const itemIndex = (rowIndex * 7) + index;
-  const aDayOfThisMonth = new Date(dateStamp).getMonth() === month;  
+  const aDayOfThisMonth = new Date().getMonth() === month;  
   const _isToday = props.date === new Date().getDate() && aDayOfThisMonth;
 
   return (
