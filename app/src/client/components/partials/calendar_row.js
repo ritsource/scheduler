@@ -18,7 +18,7 @@ const CalendarRowComp = (props) => {
       style={miniCalendar ? miniCalendarStyle : (index === 0) ? calendarStyle_first : calendarStyle_rest}
     >
       {itemArr.map((x, i) => {
-        const dateStamp = dateDistMap[i + (index * 7)];         
+        const dateStamp = dateDistMap[i + (index * 7)];       
         
         return (
           <CalendarRowItem

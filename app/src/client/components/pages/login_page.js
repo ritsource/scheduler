@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { ASYNC_FETCH_USER } from '../../actions/_action_types';
+import { handleAppMode } from '../../actions/app_mode_actions';
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -48,6 +49,10 @@ class LoginPage extends React.Component {
       this.setState({ error_message: 'Incorrect email or password' })
     }
 
+  }
+
+  componentDidMount() {
+    this.props.handleAppMode(2);
   }
 
   render() {
@@ -122,7 +127,8 @@ class LoginPage extends React.Component {
 const mapStateToProps = ({ auth }) => ({ auth });
 
 const mapDispatchToProps = (dispatch) => ({
-  setAuthState: (authObj) => dispatch({ type: ASYNC_FETCH_USER, auth: authObj })
+  setAuthState: (authObj) => dispatch({ type: ASYNC_FETCH_USER, auth: authObj }),
+  handleAppMode: (x) => dispatch(handleAppMode(x))
 })
 
 export default {

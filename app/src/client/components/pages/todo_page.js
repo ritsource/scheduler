@@ -54,7 +54,13 @@ export class TodoPage extends React.Component {
             />
             <div className='todo-page-001-content'>
               {!this.state.groupId ? (
-                <h2><ReactSVG src='/logo.svg'/>Your Todos</h2>
+                <React.Fragment>
+                  {this.props.groups[0] ? (
+                    <Redirect to={`/todo?group=${this.props.groups[0]._id}`}/>
+                  ) : (
+                    <h2><ReactSVG src='/logo.svg'/>Your Todos</h2>
+                  )}
+                </React.Fragment>
               ) : (
                 <TodoListComp
                   active_groupId={this.state.groupId}

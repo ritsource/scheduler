@@ -41,10 +41,10 @@
 .calendar-row-item-000 {
   border-right: 1px solid $border-black;
   width: calc((100% / 7) - 1px);
-  background: white;
+  background: $background-color;
   cursor: pointer;
 
-  background: white;
+  background: $background-color;
   background: linear-gradient(to right, $background-grey-0 50%, white 50%);
   background-size: 200% 100%;
   background-position: right bottom;

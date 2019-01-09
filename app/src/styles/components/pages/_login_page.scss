@@ -1,6 +1,6 @@
 .login-page-000 {
   height: $height-without-header;
-  background: white;
+  background: $background-color;
 
   display: flex;
   align-items: center;
@@ -41,8 +41,8 @@
         // margin-bottom: 10px;
 
         button {
-          color: white;
-          border: 0px solid white;
+          color: $background-color;
+          border: 0px solid $background-color;
           padding: 8px 14px;
           background: $theme-color;
           cursor: pointer;
@@ -61,8 +61,8 @@
       // justify-content: space-between;
 
       .login-page-buttons-002-google, .login-page-buttons-002-facebook {
-        color: white;
-        border: 0px solid white;
+        color: $background-color;
+        border: 0px solid $background-color;
         padding: 8px 20px;
         // width: 100%;
         // margin-bottom: 10px;

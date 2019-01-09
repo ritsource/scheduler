@@ -145,9 +145,9 @@ class CalendarContentComp extends React.Component {
     
     await this.updateDateDistribution(this.props.year, this.props.month);
 
-    if (this.state.dayOneIndex === 0) {
+    // if (this.state.dayOneIndex === 0) {
       await this.asyncSetState({ dayOneIndex: new Date(year, month, 1).getDay() });
-    }
+    // }
   }
 
   render() {

@@ -13,13 +13,13 @@
 
   form {
     input {
-      border: 0px solid white;
+      border: 0px solid $background-color;
       margin-left: -2px;
       padding: 2px 2px;
       background: $background-grey-0;
 
       &:disabled {
-        background: white;
+        background: $background-color;
       }
     }
   }
@@ -29,8 +29,8 @@
     // font-weight: normal;
     color: $text-color-light;
     transform: rotate(90deg);
-    background: white;
-    border: 0px solid white;
+    background: $background-color;
+    border: 0px solid $background-color;
     padding: 0px;
     margin-right: -2px;
     cursor: pointer;
