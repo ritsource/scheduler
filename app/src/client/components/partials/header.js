@@ -3,18 +3,23 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ReactSVG from 'react-svg';
 import { createBrowserHistory } from 'history';
+import { FaArrowRight } from 'react-icons/fa';
+import { MdSettings } from 'react-icons/md';
+import { GoOrganization } from 'react-icons/go';  
 
 import { month_name_dictionary } from '../../utils/constants';
 import { funcHandleMonth, funcHandleYear } from '../../utils/funcs';
 import { SET_CALENDAR_MONTH_STATE } from '../../actions/_action_types';
 import { toggleSideBar } from '../../actions/side_bar_actions';
-import CustomRodalComp from '../reusables/custom_rodal';
+import Dropdown from 'react-dropdown-modal';
 
 class HeaderComp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      options_rodal_visible: false
+      dropdown_visible: false,
+      screenX: null,
+      screenY: null
     }
   }
 
@@ -81,31 +86,61 @@ class HeaderComp extends React.Component {
                 <Link to='/calendar'><button disabled={this.props.appMode === 0}>Calendar</button></Link>
                 <Link to='/todo'><button disabled={this.props.appMode === 1}>Todo</button></Link>
               </div>
-              <div
-                className='header-002-avatar-div'
-                onClick={() => this.setState({ options_rodal_visible: true })}
+              <Dropdown
+                visible={this.state.dropdown_visible}
+                onButtonClick={() => {
+                  this.setState({ dropdown_visible: true });
+                }}
+                onClose={() => {
+                  this.setState({ dropdown_visible: false });
+                }}
+                showArrow={true}
+                arrowPosition={{ right: '0px' }}
+                position={{
+                  right: '20px',
+                  top: '55px'
+                }}
+                modalShadow='0px 3px 13px 0px rgba(0,0,0,0.20)'
+                modalBorder={false}
+                modalContent={() => (
+                  <div>
+                    <p className='any-dropdown-content-item-999'
+                    >Signed in as <span style={{fontWeight: 'bold'}}>
+                      {this.props.auth.name.split(' ')[0]}</span>
+                    </p>
+
+                    {/* <Link to='/about'>
+                      <p className='any-dropdown-content-item-999'><GoOrganization style={{
+                        marginRight: '8px',
+                        marginBottom: '-2px'
+                      }}/>About</p>
+                    </Link> */}
+
+                    <Link to='/settings'>
+                      <p className='any-dropdown-content-item-999'><MdSettings style={{
+                        marginRight: '8px',
+                        marginBottom: '-2px'
+                      }}/>Settings</p>
+                    </Link>
+
+                    <a href='/auth/logout'>
+                      <p className='any-dropdown-content-item-999'><FaArrowRight style={{
+                        marginRight: '8px',
+                        marginBottom: '-2px'
+                      }}/>Logout</p>
+                    </a>
+                  </div>
+                )}
               >
-                <img src={this.props.auth.avatar_url}/>
-                <i className="fas fa-sort-down"></i>
-              </div>
+                <div
+                  className='header-002-avatar-div'
+                  onClick={() => this.setState({ options_rodal_visible: true })}
+                >
+                  <img src={this.props.auth.avatar_url}/>
+                  <i className="fas fa-sort-down"></i>
+                </div>
+              </Dropdown>
             </div>
-        
-            <CustomRodalComp
-              borderRadius='0px'
-              marginTop='55px'
-              right='20px'
-              visible={this.state.options_rodal_visible}
-              toggleVisibility={() => {
-                this.setState({ options_rodal_visible: false });
-              }}
-            >
-              <div className='header-rodal-content-003'>
-                <Link onClick={() => {
-                  this.setState({ options_rodal_visible: false });
-                }} to='/settings'><p>Settings</p></Link>
-                <a href='/auth/logout'><p>Logout</p></a>
-              </div>
-            </CustomRodalComp>
           </React.Fragment>
         ) : (
           <div className='header-unauth-button-row-001'>

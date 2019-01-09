@@ -1,5 +1,5 @@
 import React from 'react';
-import { MdDelete, MdSettings } from "react-icons/md";
+import { MdDelete, MdModeEdit } from 'react-icons/md';
 
 import TodoListIndicator from './todo_list_indicator';
 import Dropdown from 'react-dropdown-modal';
@@ -27,13 +27,6 @@ class CalendarSidebarItem extends React.Component {
       this.setState({ title: nextProps.group.title });
     }
   }
-
-  generateTopOfDropdwown = (docId) => {
-    if (!document) return '360px';
-    else {
-      const scrollTop = document.getElementById(`#${docId}`).scrollTop();
-    }
-  };
   
   render() {
     const { group } = this.props;
@@ -90,9 +83,9 @@ class CalendarSidebarItem extends React.Component {
           modalBorder={false}
           // backgroundMaskColor='rgba(1, 1, 1, 0.1)'
           modalContent={() => (
-            <div className='sidebar-item-002-header-rodal-content'>
+            <div>
               {!group._isPermanent && (
-                <p onClick={() => {
+                <p className='any-dropdown-content-item-999' onClick={() => {
                   this.setState({ dropdown_visible: false });
                   this.props.asyncDeleteGroup(group._id);
                 }}><MdDelete style={{
@@ -101,10 +94,10 @@ class CalendarSidebarItem extends React.Component {
                 }}/>Delete Group</p>
               )}
 
-              <p onClick={async () => {
+              <p className='any-dropdown-content-item-999' onClick={async () => {
                 await this.setState({ dropdown_visible: false, input_disable: false });
                 if (document) document.querySelector(`#calendar-sidebar-item-input-inside-form-${group._id}`).focus();
-              }}><MdSettings style={{
+              }}><MdModeEdit style={{
                 marginRight: '8px',
                 marginBottom: '-2px'
               }}/>Rename</p>

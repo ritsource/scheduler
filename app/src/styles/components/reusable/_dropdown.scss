@@ -1,0 +1,14 @@
+.any-dropdown-content-item-999 {
+  padding: 10px 20px;
+  cursor: pointer;
+  word-spacing: 2px;
+  background: white;
+  background: linear-gradient(to right, $background-grey-0 50%, white 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-position: left bottom;
+  }
+}

@@ -1,13 +1,17 @@
 import React from 'react';
+import { MdDelete, MdModeEdit } from 'react-icons/md';
 
 import CustomRodalComp from '../reusables/custom_rodal';
+import Dropdown from 'react-dropdown-modal';
 
 class TodoListHeader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       title: ' ',
-      options_rodal_visible: false
+      dropdown_visible: false,
+      screenX: null,
+      screenY: null
     };
   }
 
@@ -39,44 +43,52 @@ class TodoListHeader extends React.Component {
             }}
           />
         </form>
-        
-        <button onClick={() => {
-          this.setState({ options_rodal_visible: true });
-        }}>
-          <i className="fas fa-ellipsis-h"></i>
-        </button>
 
-        <CustomRodalComp
-          borderRadius='0px'
-          marginTop='126px'
-          right='30px'
-          visible={this.state.options_rodal_visible}
-          toggleVisibility={() => {
-            this.setState({ options_rodal_visible: false });
+        <Dropdown
+          visible={this.state.dropdown_visible}
+          onButtonClick={(e) => {
+            this.setState({ screenX: e.screenX, screenY: e.screenY, dropdown_visible: true });
           }}
+          onClose={() => {
+            this.setState({ screenX: null, screenY: null, dropdown_visible: false });
+          }}
+          showArrow={false}
+          arrowPosition={{ right: '0px' }}
+          position={{
+            right: `calc(100vw - ${this.state.screenX}px - 8px)`,
+            top: `calc(${this.state.screenY}px - 120px)`
+          }}
+          modalShadow='0px 3px 13px 0px rgba(0,0,0,0.20)'
+          modalBorder={false}
+          // backgroundMaskColor='rgba(1, 1, 1, 0.1)'
+          modalContent={() => (
+            <div>
+              <p className='any-dropdown-content-item-999' onClick={async () => {
+                await this.setState({ dropdown_visible: false, input_disable: false });
+                if (document) document.querySelector('#list-002-header-input-inside-form').focus();
+              }}><MdModeEdit style={{
+                marginRight: '8px',
+                marginBottom: '-2px'
+              }}/>Rename</p>
+              
+              {!activeGroup._isPermanent && (
+                <p className='any-dropdown-content-item-999' onClick={() => {
+                  this.setState({ dropdown_visible: false });
+                  this.props.asyncDeleteGroup(activeGroup._id);
+                }}><MdDelete style={{
+                  marginRight: '8px',
+                  marginBottom: '-2px'
+                }}/>Delete Group</p>
+              )}
+            </div>
+          )}
         >
-          <div className='list-002-header-rodal-content'>
-            <p onClick={() => {
-              this.setState({ options_rodal_visible: false });
-              if (document) document.querySelector('#list-002-header-input-inside-form').focus();
-            }}>
-              <i style={{ color: activeGroup.hex_color }} className="far fa-edit"></i>
-              Rename
-            </p>
-
-            {!activeGroup._isPermanent && (
-              <p onClick={() => {
-                this.setState({ options_rodal_visible: false });
-                this.props.asyncDeleteGroup(activeGroup._id);
-              }}>
-                <i className="far fa-trash-alt"
-                  style={{ color: activeGroup.hex_color, marginRight: '8px' }}
-                ></i>
-                Delete Group
-              </p>
-            )}
-          </div>
-        </CustomRodalComp>
+          <button onClick={() => {
+            this.setState({ options_rodal_visible: true });
+          }}>
+            <i className="fas fa-ellipsis-h"></i>
+          </button>
+        </Dropdown>
       </div>
     );
   }
