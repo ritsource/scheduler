@@ -1,8 +1,10 @@
 import React from 'react';
+import Dropdown from 'react-dropdown-modal';
+import { IoIosBrush } from 'react-icons/io';
 import { MdDelete, MdModeEdit } from 'react-icons/md';
 
 import TodoListIndicator from './todo_list_indicator';
-import Dropdown from 'react-dropdown-modal';
+import CalendarSidebarColorComp from './calendar_sidebar_color';
 
 class CalendarSidebarItem extends React.Component {
   constructor(props) {
@@ -12,7 +14,12 @@ class CalendarSidebarItem extends React.Component {
       input_disable: true,
       dropdown_visible: false,
       screenX: null,
-      screenY: null
+      screenY: null,
+      color_panel: {
+        visible: false,
+        screenX: null,
+        screenY: null,
+      }
     }
   }
 
@@ -42,7 +49,7 @@ class CalendarSidebarItem extends React.Component {
             }}
             hide_tick_on_false={true}
           />
-          <form onSubmit={(e) => {
+          <form className='calendar-sidebar-item-title-form-002' onSubmit={(e) => {
             e.preventDefault();
             this.submitEditedTitle();
           }}>
@@ -64,28 +71,26 @@ class CalendarSidebarItem extends React.Component {
 
         <Dropdown
           visible={this.state.dropdown_visible}
-          // visible={this.state.title === 'Tasks' ? true : this.state.dropdown_visible}
           onButtonClick={(e) => {
-            console.log(e.screenX, e.screenY);
             this.setState({ screenX: e.screenX, screenY: e.screenY, dropdown_visible: true });
           }}
           onClose={() => {
             this.setState({ screenX: null, screenY: null, dropdown_visible: false });
           }}
+          preventDefaultClose={false}
           showArrow={false}
           arrowPosition={{ right: '0px' }}
           position={{
             left: `calc(${this.state.screenX}px - 8px)`,
-            // top: `${this.state.screenY}px`,
             bottom: `calc(100vh - ${this.state.screenY}px + 80px)`
           }}
           modalShadow='0px 3px 13px 0px rgba(0,0,0,0.20)'
           modalBorder={false}
-          // backgroundMaskColor='rgba(1, 1, 1, 0.1)'
           modalContent={() => (
             <div>
               {!group._isPermanent && (
-                <p className='any-dropdown-content-item-999' onClick={() => {
+                <p className='any-dropdown-content-item-999' onClick={(e) => {
+                  e.stopPropagation();
                   this.setState({ dropdown_visible: false });
                   this.props.asyncDeleteGroup(group._id);
                 }}><MdDelete style={{
@@ -94,13 +99,46 @@ class CalendarSidebarItem extends React.Component {
                 }}/>Delete Group</p>
               )}
 
-              <p className='any-dropdown-content-item-999' onClick={async () => {
-                await this.setState({ dropdown_visible: false, input_disable: false });
+              <p className='any-dropdown-content-item-999' onClick={async (e) => {
+                e.stopPropagation();
+                this.setState({ dropdown_visible: false, input_disable: false });
                 if (document) document.querySelector(`#calendar-sidebar-item-input-inside-form-${group._id}`).focus();
               }}><MdModeEdit style={{
                 marginRight: '8px',
                 marginBottom: '-2px'
               }}/>Rename</p>
+
+              <Dropdown
+                visible={this.state.color_panel.visible}
+                // onButtonClick={(e) => {
+                //   const tempState = { screenX: e.screenX, screenY: e.screenY, visible: true };
+                //   this.setState({ color_panel: tempState });
+                // }}
+                onClose={() => {
+                  const tempState = { screenX: null, screenY: null, visible: false };
+                  this.setState({ color_panel: tempState });
+                }}
+                showArrow={false}
+                position={{
+                  left: `calc(${this.state.color_panel.screenX}px - 8px)`,
+                  bottom: `calc(100vh - ${this.state.color_panel.screenY}px + 80px)`
+                }}
+                modalShadow='0px 3px 13px 0px rgba(0,0,0,0.20)'
+                modalBorder={false}
+                customZIndex={21}
+                modalContent={() => (
+                  <CalendarSidebarColorComp color_options={this.props.color_options}/>
+                )}
+              >
+                <p className='any-dropdown-content-item-999' onClick={(e) => {
+                  e.stopPropagation();
+                  const tempState = { screenX: e.screenX, screenY: e.screenY, visible: true };
+                  this.setState({ color_panel: tempState });
+                }}>
+                  <IoIosBrush style={{ marginRight: '8px', marginBottom: '-2px' }}/>
+                  Color
+                </p>
+              </Dropdown>              
             </div>
           )}
         >

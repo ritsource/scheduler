@@ -3,7 +3,7 @@ import React from 'react';
 const TodoListForm = (props) => (
   <form className='any-list-comp-bottom-form-999' onSubmit={async (e) => {
     e.preventDefault();
-    await props.asyncPostEvent({ title: props.title, _group: props.active_groupId });
+    await props.asyncPostEvent({ title: props.title, _group: props.active_groupId, hex_color: props.hex_color });
     props.setParentState({ title: '' });
     scrollToBottom('#the-event-list-inside-container');
   }}>

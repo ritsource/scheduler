@@ -3,18 +3,7 @@ const requireAuth = require('../middlewares/require_auth');
 const mongoose = require('mongoose');
 const Group = mongoose.model('Group');
 
-const group_color_list = {
-  0: '#f03434', // Orange
-  1: '#59abe3', // Indigo
-  2: '#8c14fc', // Purple
-  3: '#2ecc71', // Light Green
-  4: '#f7ca18', // yellow
-  // 5: '', 
-  // 6: '',
-  // 7: '',
-  // 8: '',
-  // 9: '',
-};
+const group_color_list = ['#f03434', '#59abe3', '#8c14fc', '#2ecc71', '#f7ca18'];
 
 module.exports = (app) => {
   app.post('/api/group/new', requireAuth, async (req, res) => {

@@ -93,6 +93,7 @@ class TodoListComp extends React.Component {
             <TodoListForm
               title={this.state.title}
               active_groupId={this.props.active_groupId}
+              hex_color={this.props.activeGroup.hex_color}
               events={this.props.events}
               asyncPostEvent={this.props.asyncPostEvent}
               setParentState={(abc) => {

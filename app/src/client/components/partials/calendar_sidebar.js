@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { funcHandleYear, funcHandleMonth } from '../../utils/funcs';
+import { builtin_color_list } from '../../utils/constants';
+
 import { asyncFetchGroups, asyncPostGroup, asyncEditGroup, asyncDeleteGroup } from '../../actions/group_actions';
 import CalendarContentComp from './calendar_content';
 import CalendarSidebarNavigator from './calendar_sidebar_navigator';
@@ -60,6 +62,7 @@ class CalendarSidebarComp extends React.Component {
                 group={group}
                 asyncEditGroup={this.props.asyncEditGroup}
                 asyncDeleteGroup={this.props.asyncDeleteGroup}
+                color_options={builtin_color_list}
               />
             ))}
           </div>
@@ -93,7 +96,7 @@ class CalendarSidebarComp extends React.Component {
   }
 }
 
-const mapStateToProps = ({ groups }) => ({ groups });
+const mapStateToProps = ({ groups, auth }) => ({ groups, auth });
 
 const mapDispatchToProps = (dispatch) => ({
   asyncFetchGroups: () => dispatch(asyncFetchGroups()),

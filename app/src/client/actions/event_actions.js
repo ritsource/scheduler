@@ -8,7 +8,7 @@ import {
 } from './_action_types';
 
 // FETCH ALL EVENTS
-export const asyncFetchEvents = () => async (dispatch, getState, api) => {
+export const asyncFetchEvents = () => async (dispatch, getState, api) => {  
   const response = await api.get('/event/all');
   // console.log('data', response.data);
   dispatch({ type: ASYNC_FETCH_EVENTS, events: response.data });
