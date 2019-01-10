@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const Group = mongoose.model('Group');
+const requireAuth = require('../middlewares/require_auth');
 
 module.exports = (app, APP_HOST) => {
   app.post('/auth/register', async (req, res) => {
@@ -83,5 +84,19 @@ module.exports = (app, APP_HOST) => {
   app.get('/api/current_user', (req, res) => {
     if (req.user) req.user.password = null;    
     res.send(req.user);
+  });
+
+  app.post('/api/add_custom_colors', requireAuth, async (req, res) => {
+    try {
+      await User.findOneAndUpdate(
+        { _id: req.user._id },
+        { $addToSet: { custom_colors: req.body.new_color }},
+        { new: true }
+      );
+      res.redirect('/api/current_user');
+    } catch (e) {
+      console.log(e.message);      
+      res.status(422).send();
+    }
   });
 };

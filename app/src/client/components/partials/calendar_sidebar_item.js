@@ -127,7 +127,10 @@ class CalendarSidebarItem extends React.Component {
                 modalBorder={false}
                 customZIndex={21}
                 modalContent={() => (
-                  <CalendarSidebarColorComp color_options={this.props.color_options}/>
+                  <CalendarSidebarColorComp
+                    color_options={this.props.color_options}
+                    changeColorFunc={this.props.changeColorFunc}
+                  />
                 )}
               >
                 <p className='any-dropdown-content-item-999' onClick={(e) => {

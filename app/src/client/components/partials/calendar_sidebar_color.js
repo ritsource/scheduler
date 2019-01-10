@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { IoIosBrush } from 'react-icons/io';
+
+import { asyncAddCustomColor } from '../../actions/auth_actions';
 
 class CalendarSidebarColorComp extends Component {
   constructor(props) {
@@ -40,8 +43,8 @@ class CalendarSidebarColorComp extends Component {
               <span
                 key={i}
                 className='calendar-sidebar-color-spans-002'
-                onClick={() => {
-
+                onClick={async () => {
+                  await this.props.changeColorFunc(hexVal);
                 }}
                 style={{ background: hexVal }}
               ></span>
@@ -50,13 +53,19 @@ class CalendarSidebarColorComp extends Component {
         </p>
 
         {this.state.input_visible ? (
-          <form style={{ maxWidth: '120px' }}
+          <form style={{ maxWidth: '145px' }}
             className='calendar-sidebar-color-form-002'
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
               e.preventDefault();
-              if (this.state.new_color_hex.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)) {
-                this.setState({ submit_error: false });
-                console.log('POSTEDDD');              
+              const value = this.state.new_color_hex;
+              if (value.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)) {
+                try {
+                  const ret = await this.props.asyncAddCustomColor(value);
+                  this.setState({ submit_error: false });
+                  console.log('POSTED');                  
+                } catch (error) {
+                  this.setState({ submit_error: 'Something went wrong' });
+                }
               } else {
                 this.setState({ submit_error: 'Only hex-codes' });
               }
@@ -86,4 +95,8 @@ class CalendarSidebarColorComp extends Component {
   }
 }
 
-export default CalendarSidebarColorComp;
+const mapDispatchToProps = (dispatch) => ({
+  asyncAddCustomColor: (xyz) => dispatch(asyncAddCustomColor(xyz))
+});
+
+export default connect(null, mapDispatchToProps)(CalendarSidebarColorComp);

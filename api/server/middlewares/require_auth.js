@@ -1,7 +1,9 @@
 module.exports = (req, res, next) => {
   if (process.env.NODE_ENV === 'development') {
-    console.warn('No Authentication');
-    if (!req.user) req.user = { _id : '5bfec3f0811f796770bdd133' };
+    if (!req.user) {
+      console.warn('No Authentication');
+      req.user = { _id : '5c34b0d7a04a8b0d78bcf5ac' }
+    };
   }
 
   if (!req.user) {

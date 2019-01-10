@@ -62,7 +62,10 @@ class CalendarSidebarComp extends React.Component {
                 group={group}
                 asyncEditGroup={this.props.asyncEditGroup}
                 asyncDeleteGroup={this.props.asyncDeleteGroup}
-                color_options={builtin_color_list}
+                color_options={[ ...builtin_color_list, ...this.props.auth.custom_colors]}
+                changeColorFunc={async (color) => {
+                  await this.props.asyncEditGroup(group._id, { hex_color: color });
+                }}
               />
             ))}
           </div>
