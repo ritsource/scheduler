@@ -25,7 +25,7 @@ const CalendarRowComp = (props) => {
             key={i}
             index={i}
             rowIndex={index} // Index of the Parent Row
-            date={new Date(dateStamp).getDate() || 0} // Date
+            date={new Date(dateStamp).getDate() || '. . .'} // Date
             dateStamp={dateStamp} // Date Timestamp
             dateDistMap={dateDistMap} // { dateDistMap } from Props
             dateDistMapInverse={dateDistMapInverse} // { dateDistMap } from Props

@@ -19,20 +19,22 @@ app.use(express.static('public'));
 
 app.get('*', (req, res) => {
   const store = configureStore(req);
+  const context = {
+    year: req.query.year || new Date().getFullYear(),
+    month: req.query.month || new Date().getMonth()
+  };
 
   const promises = matchRoutes(AppRoutes, req.path).map(({route}) => {
-    return route.loadData ? route.loadData(store) : null;
+    return route.loadData ? route.loadData(store, context) : null;
   });
 
   Promise.all(promises).then(() => {
-    const context = {};
     const content = renderer(req, store, context);
     if (context.notFound) res.status(404);
     res.send(content);
   }).catch((e) => {
     console.log('Catch **');
     console.log(e.message);
-    // console.log(e.message);
   });
 });
 

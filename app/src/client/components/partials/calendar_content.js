@@ -123,8 +123,8 @@ class CalendarContentComp extends React.Component {
     }
   }
 
-  async componentWillReceiveProps(nextProps) {
-    const { year, month } = nextProps.miniCalendarState ? nextProps.miniCalendarState : nextProps;
+  updateStateDistributionMaps = async (props) => {
+    const { year, month } = props.miniCalendarState ? props.miniCalendarState : props;
     const { dayOneIndex } = this.state;
 
     const tempDayOne = new Date(year, month, 1).getDay();
@@ -134,20 +134,12 @@ class CalendarContentComp extends React.Component {
     await this.updateEventDistribution();
   }
 
-  async componentDidMount() {
-    const { year, month } = this.props.miniCalendarState ? this.props.miniCalendarState : this.props;
-
-    const urlParams = new URLSearchParams(window.location.search);
-    await this.props.setReduxCalendar({
-      year: parseInt(urlParams.get('year')) || new Date().getFullYear(),
-      month: parseInt(urlParams.get('month')) || new Date().getMonth(),
-    });
-    
-    await this.updateDateDistribution(this.props.year, this.props.month);
-
-    // if (this.state.dayOneIndex === 0) {
-      await this.asyncSetState({ dayOneIndex: new Date(year, month, 1).getDay() });
-    // }
+  async componentWillReceiveProps(nextProps) {
+    await this.updateStateDistributionMaps(nextProps);
+  }
+  
+  async componentWillMount() {    
+    await this.updateStateDistributionMaps(this.props);
   }
 
   render() {
@@ -208,8 +200,4 @@ const mapStateToProps = ({ calendarMonth, events, groups }, props) => {
   }
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  setReduxCalendar: ({ year, month }) => dispatch({ type: SET_CALENDAR_MONTH_STATE, year, month })
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(CalendarContentComp);
+export default connect(mapStateToProps)(CalendarContentComp);
