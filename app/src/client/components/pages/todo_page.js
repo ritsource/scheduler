@@ -36,7 +36,12 @@ export class TodoPage extends React.Component {
       groupId: urlParams.get('group') || '',
       eventId: urlParams.get('event') || '',
     });
+    
     this.props.handleAppMode(1);
+
+    if (!urlParams.get('group') && this.props.groups[0]) {
+      this.setState({ groupId: this.props.groups[0]._id });
+    }
   }
   
   render() {
@@ -54,13 +59,7 @@ export class TodoPage extends React.Component {
             />
             <div className='todo-page-001-content'>
               {!this.state.groupId ? (
-                <React.Fragment>
-                  {this.props.groups[0] ? (
-                    <Redirect to={`/todo?group=${this.props.groups[0]._id}`}/>
-                  ) : (
-                    <h2><ReactSVG src='/logo.svg'/>Your Todos</h2>
-                  )}
-                </React.Fragment>
+                <h2><ReactSVG src='/logo.svg'/>Loading..</h2>
               ) : (
                 <TodoListComp
                   active_groupId={this.state.groupId}
@@ -72,7 +71,7 @@ export class TodoPage extends React.Component {
             {activeEvent && (
               <TodoDetailsComp
                 activeEvent={activeEvent}
-                hex_color={activeGroup.hex_color}
+                hex_color={activeEvent.hex_color}
               />
             )}
           </React.Fragment>

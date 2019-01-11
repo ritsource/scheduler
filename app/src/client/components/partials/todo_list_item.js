@@ -20,7 +20,7 @@ const TodoListItem = (props) => (
       >
         <TodoListIndicator
           _isDone={props.event._isDone}
-          hex_color={props.hex_color}
+          hex_color={props.event.hex_color}
           patchFunction={() => {
             props.asyncPatchEvent_isDone(props.event._id, !props.event._isDone);
           }}

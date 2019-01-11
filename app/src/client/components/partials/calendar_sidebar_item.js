@@ -70,6 +70,7 @@ class CalendarSidebarItem extends React.Component {
         </div>
 
         <Dropdown
+          // backgroundMaskColor='rgba(1, 1, 1, 0.2)'
           visible={this.state.dropdown_visible}
           onButtonClick={(e) => {
             this.setState({ screenX: e.screenX, screenY: e.screenY, dropdown_visible: true });
@@ -101,8 +102,10 @@ class CalendarSidebarItem extends React.Component {
 
               <p className='any-dropdown-content-item-999' onClick={async (e) => {
                 e.stopPropagation();
-                this.setState({ dropdown_visible: false, input_disable: false });
-                if (document) document.querySelector(`#calendar-sidebar-item-input-inside-form-${group._id}`).focus();
+                await this.setState({ dropdown_visible: false, input_disable: false });
+                if (document) {             
+                  document.querySelector(`#calendar-sidebar-item-input-inside-form-${group._id}`).focus();
+                }
               }}><MdModeEdit style={{
                 marginRight: '8px',
                 marginBottom: '-2px'

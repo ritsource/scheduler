@@ -1,26 +1,42 @@
-import React from 'react';
+import React, { Component } from 'react';
+// import Datepicker from 'awesome-react-datepicker';
 
-const TodoListForm = (props) => (
-  <form className='any-list-comp-bottom-form-999' onSubmit={async (e) => {
-    e.preventDefault();
-    await props.asyncPostEvent({ title: props.title, _group: props.active_groupId, hex_color: props.hex_color });
-    props.setParentState({ title: '' });
-    scrollToBottom('#the-event-list-inside-container');
-  }}>
-    <input
-      name='title'
-      autoComplete='off'
-      className=''
-      placeholder='+ Add a Task'
-      value={props.title}
-      onChange={(e) => {
-        props.setParentState({ title: e.target.value });
-      }}
-    />
-    {props.title !== '' && (
-      <button type='submit'>Add</button>
-    )}
-  </form>
-);
+class TodoListForm extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: '',
+    };
+  }
+
+  render() {
+    return (
+      <form className='any-list-comp-bottom-form-999' onSubmit={async (e) => {
+        e.preventDefault();
+        await this.props.asyncPostEvent({
+          title: this.state.title,
+          _group: this.props.activeGroup._id,
+          hex_color: this.props.activeGroup.hex_color
+        });
+        this.setState({ title: '' });
+        scrollToBottom('#the-event-list-inside-container');
+      }}>
+        <input
+          name='title'
+          autoComplete='off'
+          className=''
+          placeholder='+ Add a Task'
+          value={this.state.title}
+          onChange={(e) => {
+            this.setState({ title: e.target.value });
+          }}
+        />
+        {this.state.title !== '' && (
+          <button type='submit'>Add</button>
+        )}
+      </form>
+    );
+  }
+}
 
 export default TodoListForm;

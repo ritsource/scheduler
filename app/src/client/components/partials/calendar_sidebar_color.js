@@ -83,7 +83,7 @@ class CalendarSidebarColorComp extends Component {
             />
           </form>
         ) : (
-          <p>+</p>
+          <p onClick={() => this.setState({ input_visible: true })}>+</p>
         )}
 
         {this.state.submit_error && (

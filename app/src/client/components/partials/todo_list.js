@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
@@ -10,13 +10,6 @@ import TodoListForm from './todo_list_form';
 import TodoListHeader from './todo_list_header';
 
 class TodoListComp extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: '',
-    };
-  }
-
   onDragEnd = (result) => {
     if (result.source.index === result.destination.index) return;
 
@@ -79,7 +72,6 @@ class TodoListComp extends React.Component {
                             index={i}
                             event={event}
                             changeEventId={this.props.changeEventId}
-                            hex_color={this.props.activeGroup.hex_color}
                           />
                         );
                       })}
@@ -91,14 +83,15 @@ class TodoListComp extends React.Component {
             </div>
 
             <TodoListForm
-              title={this.state.title}
-              active_groupId={this.props.active_groupId}
-              hex_color={this.props.activeGroup.hex_color}
-              events={this.props.events}
+              // title={this.state.title}
+              // active_groupId={this.props.active_groupId}
+              activeGroup={this.props.activeGroup}
+              // hex_color={this.props.activeGroup.hex_color}
+              // events={this.props.events}
               asyncPostEvent={this.props.asyncPostEvent}
-              setParentState={(abc) => {
-                this.setState(abc);
-              }}
+              // setParentState={(abc) => {
+              //   this.setState(abc);
+              // }}
             />
           </React.Fragment>
         )}

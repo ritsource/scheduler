@@ -2,8 +2,8 @@
 @import './base/base';
 @import './base/anime';
 
-@import '../custom_modules/react-datepicker.css';
-@import '../../node_modules/rodal/lib/rodal.css';
+@import '../../node_modules/react-dropdown-modal/lib/dropdown.css';
+// @import '../../node_modules/rodal/lib/rodal.css';
 
 @import './components/partials/header';
 @import './components/partials/todo_sidebar';
