@@ -11,7 +11,8 @@ class TodoListHeader extends React.Component {
       title: ' ',
       dropdown_visible: false,
       screenX: null,
-      screenY: null
+      screenY: null,
+      windowHeightDiff: 0
     };
   }
 
@@ -47,7 +48,9 @@ class TodoListHeader extends React.Component {
         <Dropdown
           visible={this.state.dropdown_visible}
           onButtonClick={(e) => {
-            this.setState({ screenX: e.screenX, screenY: e.screenY, dropdown_visible: true });
+            // console.log({ x: e.screenX, y: e.screenY });
+            const windowHeightDiff = window ? (window.outerHeight - window.innerHeight) : 0;
+            this.setState({ screenX: e.screenX, screenY: e.screenY, dropdown_visible: true, windowHeightDiff });
           }}
           onClose={() => {
             this.setState({ screenX: null, screenY: null, dropdown_visible: false });
@@ -56,7 +59,8 @@ class TodoListHeader extends React.Component {
           arrowPosition={{ right: '0px' }}
           position={{
             right: `calc(100vw - ${this.state.screenX}px - 8px)`,
-            top: `calc(${this.state.screenY}px - 120px)`
+            // top: `calc(${this.state.screenY}px - 120px)`
+            top: (this.state.screenY - this.state.windowHeightDiff - 80)
           }}
           modalShadow='0px 3px 13px 0px rgba(0,0,0,0.20)'
           modalBorder={false}

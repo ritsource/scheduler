@@ -15,6 +15,7 @@ class CalendarSidebarItem extends React.Component {
       dropdown_visible: false,
       screenX: null,
       screenY: null,
+      windowHeightDiff: 0,
       color_panel: {
         visible: false,
         screenX: null,
@@ -37,6 +38,7 @@ class CalendarSidebarItem extends React.Component {
   
   render() {
     const { group } = this.props;
+    const { screenX, screenY, windowHeightDiff, color_panel } = this.state;
 
     return (
       <div className='calendar-sidebar-item-000'>
@@ -73,7 +75,8 @@ class CalendarSidebarItem extends React.Component {
           // backgroundMaskColor='rgba(1, 1, 1, 0.2)'
           visible={this.state.dropdown_visible}
           onButtonClick={(e) => {
-            this.setState({ screenX: e.screenX, screenY: e.screenY, dropdown_visible: true });
+            const windowHeightDiff = window ? (window.outerHeight - window.innerHeight) : 0;
+            this.setState({ screenX: e.screenX, screenY: e.screenY, dropdown_visible: true, windowHeightDiff });
           }}
           onClose={() => {
             this.setState({ screenX: null, screenY: null, dropdown_visible: false });
@@ -82,8 +85,8 @@ class CalendarSidebarItem extends React.Component {
           showArrow={false}
           arrowPosition={{ right: '0px' }}
           position={{
-            left: `calc(${this.state.screenX}px - 8px)`,
-            bottom: `calc(100vh - ${this.state.screenY}px + 80px)`
+            left: `calc(${screenX}px - 8px)`,
+            bottom: `calc(100vh - ${screenY - windowHeightDiff + 8}px)`
           }}
           modalShadow='0px 3px 13px 0px rgba(0,0,0,0.20)'
           modalBorder={false}
@@ -123,8 +126,8 @@ class CalendarSidebarItem extends React.Component {
                 }}
                 showArrow={false}
                 position={{
-                  left: `calc(${this.state.color_panel.screenX}px - 8px)`,
-                  bottom: `calc(100vh - ${this.state.color_panel.screenY}px + 80px)`
+                  left: `calc(${color_panel.screenX}px - 8px)`,
+                  bottom: `calc(100vh - ${color_panel.screenY - windowHeightDiff + 8}px)`
                 }}
                 modalShadow='0px 3px 13px 0px rgba(0,0,0,0.20)'
                 modalBorder={false}

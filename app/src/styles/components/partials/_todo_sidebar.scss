@@ -1,5 +1,5 @@
 .todo-sidebar-000 {
-  border-right: 1px solid $border-black;
+  border-right: 1px solid var(--border-color);
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -11,10 +11,10 @@
     max-height: 100%;
     overflow: auto;
 
-    .todo-sidebar-001-dropzone {
-      background: $background-grey-0;
-      height: 4px;
-    }
+    // .todo-sidebar-001-dropzone {
+    //   background: var(--hover-mint-light);
+    //   height: 4px;
+    // }
   }
   
 }

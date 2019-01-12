@@ -1193,6 +1193,16 @@ atob@^2.1.1:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
+awesome-react-datepicker@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/awesome-react-datepicker/-/awesome-react-datepicker-1.1.0.tgz#3a00db5a19cc75750309c3ade73c796d050c9af2"
+  integrity sha512-S/pqt3BWE9OD1ZLpu9+DoxFCmAe7zusC2aUz1UQstNQiE9SFAZEu/hPcwVT9E5IqqdPrDolIbVbGkqdZaWhHpg==
+  dependencies:
+    react "16.7.0"
+    react-dom "16.7.0"
+    react-dropdown-modal "^1.1.1"
+    react-icons "3.2.2"
+
 aws-sign2@~0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.7.0.tgz#b46e890934a9591f2d2f6f86d7e6a9f1b3fe76a8"
@@ -6941,7 +6951,25 @@ react-dom@16.6.3:
     prop-types "^15.6.2"
     scheduler "^0.11.2"
 
-react-icons@^3.2.2:
+react-dom@16.7.0, react-dom@^16.7.0:
+  version "16.7.0"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.7.0.tgz#a17b2a7ca89ee7390bc1ed5eb81783c7461748b8"
+  integrity sha512-D0Ufv1ExCAmF38P2Uh1lwpminZFRXEINJe53zRAbm4KPwSyd6DY/uDoS0Blj9jvPpn1+wivKpZYc8aAAN/nAkg==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    scheduler "^0.12.0"
+
+react-dropdown-modal@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-dropdown-modal/-/react-dropdown-modal-1.1.1.tgz#de9a846ac7880aa54dd6283ef83cbb1631264606"
+  integrity sha512-1+qYagHrA6R51/fchH/o9v8AEm1yaMNgOXyPylRF5Eq8duF2t+243A51BpGVelWKUd3ZHTKNQS69CvnA2B1OUA==
+  dependencies:
+    react "^16.7.0"
+    react-dom "^16.7.0"
+
+react-icons@3.2.2, react-icons@^3.2.2:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.2.2.tgz#7b1dc795004a119a35175e62ecef91e5c9c90962"
   integrity sha512-0DiXTcECUNoMvze2zcFwYYrHAFgQ2rBM0+HIHfaECKRfE1NZYwfuUSbwyg9s1uVPuy7o/KqQKSwBGMWQFvdrhQ==
@@ -7044,6 +7072,16 @@ react@16.6.3:
     object-assign "^4.1.1"
     prop-types "^15.6.2"
     scheduler "^0.11.2"
+
+react@16.7.0, react@^16.7.0:
+  version "16.7.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.7.0.tgz#b674ec396b0a5715873b350446f7ea0802ab6381"
+  integrity sha512-StCz3QY8lxTb5cl2HJxjwLFOXPIFQp+p+hxQfc8WE0QiLfCtIlKj8/+5tjjKm8uSTlAW+fCPaavGFS06V9Ar3A==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    scheduler "^0.12.0"
 
 read-pkg-up@^1.0.1:
   version "1.0.1"

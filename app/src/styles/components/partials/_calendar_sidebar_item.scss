@@ -16,7 +16,7 @@
       border: 0px solid $background-color;
       margin-left: -2px;
       padding: 2px 2px;
-      background: $background-grey-0;
+      background: var(--hover-mint-deep);
 
       &:disabled {
         background: $background-color;
@@ -27,7 +27,7 @@
   .calendar-sidebar-item-options-btn {
     font-size: 10px;
     // font-weight: normal;
-    color: $text-color-light;
+    color: var(--text-color-light);
     transform: rotate(90deg);
     background: $background-color;
     border: 0px solid $background-color;

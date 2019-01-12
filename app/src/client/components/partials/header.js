@@ -52,7 +52,8 @@ class HeaderComp extends React.Component {
           <div className='header-002-hamburger-div' onClick={this.props.toggleSideBar}>
             <div></div><div></div><div></div>
           </div>
-          <Link to='/'><h2><ReactSVG src='/logo.svg'/>My Calendar</h2></Link>
+          {/* <Link to='/'><h2><ReactSVG src='/logo.svg'/>My Calendar</h2></Link> */}
+          <Link to='/'><h2>My Calendar</h2></Link>
         </div>
 
         {this.props.auth ? (

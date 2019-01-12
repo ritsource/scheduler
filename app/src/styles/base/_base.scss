@@ -1,5 +1,5 @@
 body {
-  color: $text-color;
+  color: var(--text-color);
   font-size: 14px;
   // font-family: 'Krub', sans-serif;
   font-family: 'Lato', sans-serif;
@@ -38,7 +38,7 @@ button {
   cursor: pointer;
 
   &:hover {
-    color: $theme-color;
+    color: var(--theme-color);
     text-decoration: underline;
   }
 }
@@ -74,8 +74,8 @@ button {
 //   background: #d4d4d4;
 // }
 // ::-moz-scrollbar-thumb {
-//   background: $theme-color;
+//   background: var(--theme-color);
 // }
 // ::-moz-scrollbar-thumb:hover {
-//   background: $theme-color;
+//   background: var(--theme-color);
 // }

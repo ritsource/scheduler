@@ -14,20 +14,20 @@
     cursor: pointer;
 
     &:hover {
-      background: $background-grey-0;
+      // background: var(--hover-mint-light);
     }
 
     p {
       font-weight: bold;
       font-size: 10px;
-      color: $text-color-light;
+      color: var(--text-color-light);
     }
   }
 }
 
 .calendar-row-item-000-mini-not-in-month {
   div > p {
-    color: $text-color-light-2;
+    color: var(--text-color-light-2);
   }
 }
 
@@ -35,17 +35,17 @@
   p {
     color: white !important;
   }
-  background: $theme-color;
+  background: var(--theme-color);
 }
 
 .calendar-row-item-000 {
-  border-right: 1px solid $border-black;
+  border-right: 1px solid var(--border-color);
   width: calc((100% / 7) - 1px);
   background: $background-color;
   cursor: pointer;
 
   background: $background-color;
-  background: linear-gradient(to right, $background-grey-0 50%, white 50%);
+  background: linear-gradient(to right, var(--hover-mint-light) 50%, white 50%);
   background-size: 200% 100%;
   background-position: right bottom;
   transition: all 0.2s ease;
@@ -56,8 +56,8 @@
 
   .calendar-row-item-p-002 {
     margin-right: 10px;
-    color: $theme-color;
-    // color: $text-color-light;
+    color: var(--theme-color);
+    // color: var(--text-color-light);
     font-weight: bold;
     font-size: 10px;
   }
@@ -75,7 +75,7 @@
     p {
       font-weight: normal;
       font-size: 10px;
-      color: $text-color;
+      color: var(--text-color);
     }
   }
 }

@@ -3,7 +3,7 @@
   cursor: pointer;
   word-spacing: 2px;
   background: $background-color;
-  background: linear-gradient(to right, $background-grey-0 50%, white 50%);
+  background: linear-gradient(to right, var(--hover-mint-light) 50%, white 50%);
   background-size: 200% 100%;
   background-position: right bottom;
   transition: all 0.2s ease;
