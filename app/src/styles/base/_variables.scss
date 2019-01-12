@@ -1,21 +1,36 @@
+// Light
+
 html {
-  // --background-color: rgb(228, 177, 177);
   --background-color: white;
-  // --background-color-2: rgb(255, 204, 204);
   --border-color: #d8d8d8;
-  --hover-mint-light: #eff9d7;
-  --hover-mint-deep: #dce9bb;
-  --theme-color: #1e893c;
+  --hover-mint-light: #f3f3f3;
+  --hover-mint-medium: #ebebeb;
+  --hover-mint-deep: #dddddd;
+  --theme-color: rgb(255, 155, 23);
   --text-color: #424242;
   --text-color-light: #707070;
   --text-color-light-2: #b8b8b8;
 }
 
+// Dark 
+
+// html {
+//   --background-color: #151a1d;
+//   --border-color: #292f33;
+//   --hover-mint-light: #1c2225;
+//   --hover-mint-medium: #292f33;
+//   --hover-mint-deep: #292f33;
+//   --theme-color: rgb(255, 155, 23);
+//   --text-color: white;
+//   --text-color-light: white;
+//   --text-color-light-2: #707070;
+// }
+
 // Mint Theme
 // html {
 //   --background-color: white;
 //   --border-color: #d8d8d8;
-//   --hover-mint-light: #eff9d7;
+//   --hover-mint-medium: #eff9d7;
 //   --hover-mint-deep: #dce9bb;
 //   --theme-color: #1e893c;
 //   --text-color: #424242;

@@ -1,5 +1,5 @@
 .todo-list-item-000-active {
-  background: var(--hover-mint-light);
+  background: var(--hover-mint-medium);
 }
 
 .todo-list-item-000 {
@@ -12,7 +12,7 @@
   cursor: default !important;
 
   &:hover {
-    background: var(--hover-mint-light);
+    background: var(--hover-mint-medium);
   }
 
   p {

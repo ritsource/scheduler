@@ -1,10 +1,16 @@
-.calendar-sidebar-color-spans-002 {
-  width: 16px;
-  height: 16px;
-  margin: 0px 5px 10px 5px;
-  float: left;
-  border-radius: 50%;
-  cursor: pointer;
+.calendar-sidebar-color-options-p-001 {
+  padding: 0px 15px;
+  max-width: 156px;
+  background: var(--background-color) !important;
+
+  .calendar-sidebar-color-spans-002 {
+    width: 16px;
+    height: 16px;
+    margin: 0px 5px 10px 5px;
+    float: left;
+    border-radius: 50%;
+    cursor: pointer;
+  }
 }
 
 .calendar-sidebar-color-form-002 {
@@ -13,9 +19,12 @@
   flex-direction: row;
   width: calc(100% - 40px);
   margin: 10px 20px;
+  // background: var(--background-color);
   
   input {
-    border: 0px solid white;
+    color: var(--text-color);
+    background: var(--background-color);
+    border: 0px solid var(--background-color);
     flex-flow: 1;
     width: 100%;
   }

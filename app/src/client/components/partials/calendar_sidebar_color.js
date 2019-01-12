@@ -29,7 +29,9 @@ class CalendarSidebarColorComp extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{
+        background: 'var(--background-color)'
+      }}>
         <p className='any-dropdown-content-item-999' onClick={(e) => {
           e.stopPropagation();
         }}>
@@ -37,7 +39,7 @@ class CalendarSidebarColorComp extends Component {
           Color
         </p>
 
-        <p style={{ padding: '0px 15px', maxWidth: '156px' }}>
+        <p className='calendar-sidebar-color-options-p-001'>
           {this.props.color_options.map((hexVal, i) => {
             return (
               <span

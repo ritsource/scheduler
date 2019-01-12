@@ -27,6 +27,7 @@
   }
 
   input {
+    color: var(--text-color);
     padding: 15px 10px;
     width: 100%;
     border: 0px solid var(--background-color);
@@ -58,41 +59,42 @@
 
     button {
       color: var(--text-color-light);
-      border: 1px solid var(--hover-mint-light);
-      background: var(--hover-mint-light);
+      border: 1px solid var(--hover-mint-medium);
+      background: var(--hover-mint-medium);
       border-radius: 2px;
       padding: 6px;
       margin: 0px 5px;
       cursor: pointer;
 
       &:hover {
-        border: 1px solid var(--hover-mint-deep);
-        background: var(--hover-mint-deep);
+        border: 1px solid var(--hover-mint-medium);
+        background: var(--hover-mint-medium);
       }
     }
+  }
 
-    form {
-      display: flex;
-      flex-direction: row;
+  .list-002-header > form {
+    display: flex;
+    flex-direction: row;
 
-      .list-004-invalid-input {
-        border: 1px solid $theme-orange !important;
-      }
-      
-      input {
-        color: var(--text-color-light);
-        font-size: 18px;
-        font-weight: bold;
-        border: 1px solid var(--background-color);
-        border-right: 0px solid var(--background-color);
-        width: auto;
-        padding: 6px 10px;
-        background: var(--background-color);
-  
-        &:focus {
-          outline: none;
-          border-bottom: 1px solid var(--border-color);
-        }
+    .list-004-invalid-input {
+      border: 1px solid $theme-orange !important;
+    }
+    
+    input {
+      color: var(--text-color);
+      // color: var(--text-color-light);
+      font-size: 18px;
+      font-weight: bold;
+      border: 1px solid var(--background-color);
+      border-right: 0px solid var(--background-color);
+      width: auto;
+      padding: 6px 10px;
+      background: var(--background-color);
+
+      &:focus {
+        outline: none;
+        border-bottom: 1px solid var(--border-color);
       }
     }
   }

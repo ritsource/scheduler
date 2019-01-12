@@ -14,7 +14,7 @@
     cursor: pointer;
 
     &:hover {
-      // background: var(--hover-mint-light);
+      background: var(--hover-mint-medium);
     }
 
     p {
@@ -32,10 +32,15 @@
 }
 
 .calendar-row-item-mini-active-date {
+  background: var(--theme-color);
+
+  &:hover {
+    background: var(--theme-color) !important;
+  }
+
   p {
     color: white !important;
   }
-  background: var(--theme-color);
 }
 
 .calendar-row-item-000 {

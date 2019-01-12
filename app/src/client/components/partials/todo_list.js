@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
+import { builtin_color_list } from '../../utils/constants';
 import { asyncFetchEvents, asyncPostEvent, asyncRearrangeEvents, rearrangeReduxEvents } from '../../actions/event_actions';
 import { asyncEditGroup, asyncDeleteGroup } from '../../actions/group_actions';
 import TodoListItem from './todo_list_item';
@@ -52,6 +53,11 @@ class TodoListComp extends React.Component {
                 activeGroup={this.props.activeGroup}
                 asyncEditGroup={this.props.asyncEditGroup}
                 asyncDeleteGroup={this.props.asyncDeleteGroup}
+                
+                color_options={[ ...builtin_color_list, ...this.props.auth.custom_colors]}
+                changeColorFunc={async (color) => {
+                  await this.props.asyncEditGroup(group._id, { hex_color: color });
+                }}
               />
 
               <DragDropContext onDragEnd={this.onDragEnd}>
@@ -100,7 +106,8 @@ class TodoListComp extends React.Component {
   }
 }
 
-const mapStateToProps = ({ events }, props) => ({
+const mapStateToProps = ({ events, auth }, props) => ({
+  auth,
   events: events.filter(({ _group }) => {
     return _group === props.active_groupId;
   })

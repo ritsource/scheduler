@@ -1,11 +1,8 @@
 import React from 'react';
-import Dropdown from 'react-dropdown-modal';
-import { IoIosBrush } from 'react-icons/io';
-import { MdDelete, MdModeEdit } from 'react-icons/md';
 import { FaEllipsisV } from 'react-icons/fa';
 
 import TodoListIndicator from './todo_list_indicator';
-import CalendarSidebarColorComp from './calendar_sidebar_color';
+import GreopOptDropdownComp from './group_opt_dropdown';
 
 class CalendarSidebarItem extends React.Component {
   constructor(props) {
@@ -73,92 +70,27 @@ class CalendarSidebarItem extends React.Component {
           </form>
         </div>
 
-        <Dropdown
-          // backgroundMaskColor='rgba(1, 1, 1, 0.2)'
-          visible={this.state.dropdown_visible}
-          onButtonClick={(e) => {
-            const windowHeightDiff = window ? (window.outerHeight - window.innerHeight) : 0;
-            this.setState({ screenX: e.screenX, screenY: e.screenY, dropdown_visible: true, windowHeightDiff });
-          }}
-          onClose={() => {
-            this.setState({ screenX: null, screenY: null, dropdown_visible: false });
-          }}
-          preventDefaultClose={false}
-          showArrow={false}
-          arrowPosition={{ right: '0px' }}
-          position={{
+        <GreopOptDropdownComp
+          { ...this.state }
+          { ...this.props }
+          positionObj={{
             left: `calc(${screenX}px - 8px)`,
             bottom: `calc(100vh - ${screenY - windowHeightDiff + 8}px)`
           }}
-          modalShadow='0px 3px 13px 0px rgba(0,0,0,0.20)'
-          modalBorder={false}
-          modalContent={() => (
-            <div>
-              {!group._isPermanent && (
-                <p className='any-dropdown-content-item-999' onClick={(e) => {
-                  e.stopPropagation();
-                  this.setState({ dropdown_visible: false });
-                  this.props.asyncDeleteGroup(group._id);
-                }}><MdDelete style={{
-                  marginRight: '8px',
-                  marginBottom: '-2px'
-                }}/>Delete Group</p>
-              )}
-
-              <p className='any-dropdown-content-item-999' onClick={async (e) => {
-                e.stopPropagation();
-                await this.setState({ dropdown_visible: false, input_disable: false });
-                if (document) {             
-                  document.querySelector(`#calendar-sidebar-item-input-inside-form-${group._id}`).focus();
-                }
-              }}><MdModeEdit style={{
-                marginRight: '8px',
-                marginBottom: '-2px'
-              }}/>Rename</p>
-
-              <Dropdown
-                visible={this.state.color_panel.visible}
-                // onButtonClick={(e) => {
-                //   const tempState = { screenX: e.screenX, screenY: e.screenY, visible: true };
-                //   this.setState({ color_panel: tempState });
-                // }}
-                onClose={() => {
-                  const tempState = { screenX: null, screenY: null, visible: false };
-                  this.setState({ color_panel: tempState });
-                }}
-                showArrow={false}
-                position={{
-                  left: `calc(${color_panel.screenX}px - 8px)`,
-                  bottom: `calc(100vh - ${color_panel.screenY - windowHeightDiff + 8}px)`
-                }}
-                modalShadow='0px 3px 13px 0px rgba(0,0,0,0.20)'
-                modalBorder={false}
-                customZIndex={21}
-                modalContent={() => (
-                  <CalendarSidebarColorComp
-                    color_options={this.props.color_options}
-                    changeColorFunc={this.props.changeColorFunc}
-                  />
-                )}
-              >
-                <p className='any-dropdown-content-item-999' onClick={(e) => {
-                  e.stopPropagation();
-                  const tempState = { screenX: e.screenX, screenY: e.screenY, visible: true };
-                  this.setState({ color_panel: tempState });
-                }}>
-                  <IoIosBrush style={{ marginRight: '8px', marginBottom: '-2px' }}/>
-                  Color
-                </p>
-              </Dropdown>              
-            </div>
-          )}
+          subPositionObj={{
+            left: `calc(${color_panel.screenX}px - 8px)`,
+            bottom: `calc(100vh - ${color_panel.screenY - windowHeightDiff + 8}px)`
+          }}
+          setParentState={(obj) => {
+            this.setState(obj);
+          }}
         >
           <button className='calendar-sidebar-item-options-btn' onClick={() => {
             this.setState({ dropdown_visible: true });
           }}>
             <FaEllipsisV />
           </button>
-        </Dropdown>
+        </GreopOptDropdownComp>
       </div>
     );
   }

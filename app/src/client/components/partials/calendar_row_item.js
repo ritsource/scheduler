@@ -44,7 +44,7 @@ const CalendarRowItem = (props) => {
               </div>
             </div>
           )}
-          {!props.miniCalendar && (
+          {/* {!props.miniCalendar && ( */}
             <div className='calendar-row-item-events-level'
               style={
                 (rowIndex === 0) ? {
@@ -70,7 +70,7 @@ const CalendarRowItem = (props) => {
                 }
               })}
             </div>
-          )}
+          {/* )} */}
         </React.Fragment>
       </div>
     );

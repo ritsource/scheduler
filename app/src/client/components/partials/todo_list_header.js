@@ -1,19 +1,23 @@
 import React from 'react';
-import { MdDelete, MdModeEdit } from 'react-icons/md';
 import { FaEllipsisH } from 'react-icons/fa';
 
 import CustomRodalComp from '../reusables/custom_rodal';
-import Dropdown from 'react-dropdown-modal';
+import GreopOptDropdownComp from './group_opt_dropdown';
 
 class TodoListHeader extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: ' ',
+      title: props.title || ' ',
       dropdown_visible: false,
       screenX: null,
       screenY: null,
-      windowHeightDiff: 0
+      windowHeightDiff: 0,
+      color_panel: {
+        visible: false,
+        screenX: null,
+        screenY: null,
+      }
     };
   }
 
@@ -24,8 +28,13 @@ class TodoListHeader extends React.Component {
     }
   }
 
+  // componentWillMount() {
+  //   if (this.props.title) this.setState({ title: this.props.title });
+  // }
+
   render() {
     const activeGroup = this.props.activeGroup;
+    const { screenX, screenY, windowHeightDiff, color_panel } = this.state;
 
     return (
       <div className='list-002-header'>
@@ -46,56 +55,30 @@ class TodoListHeader extends React.Component {
           />
         </form>
 
-        <Dropdown
-          visible={this.state.dropdown_visible}
-          onButtonClick={(e) => {
-            // console.log({ x: e.screenX, y: e.screenY });
-            const windowHeightDiff = window ? (window.outerHeight - window.innerHeight) : 0;
-            this.setState({ screenX: e.screenX, screenY: e.screenY, dropdown_visible: true, windowHeightDiff });
-          }}
-          onClose={() => {
-            this.setState({ screenX: null, screenY: null, dropdown_visible: false });
-          }}
-          showArrow={false}
-          arrowPosition={{ right: '0px' }}
-          position={{
+        <GreopOptDropdownComp
+          { ...this.state }
+          { ...this.props }
+          group={activeGroup}
+          positionObj={{
             right: `calc(100vw - ${this.state.screenX}px - 8px)`,
-            // top: `calc(${this.state.screenY}px - 120px)`
             top: (this.state.screenY - this.state.windowHeightDiff - 8)
           }}
-          modalShadow='0px 3px 13px 0px rgba(0,0,0,0.20)'
-          modalBorder={false}
-          // backgroundMaskColor='rgba(1, 1, 1, 0.1)'
-          modalContent={() => (
-            <div>
-              <p className='any-dropdown-content-item-999' onClick={async () => {
-                await this.setState({ dropdown_visible: false, input_disable: false });
-                if (document) document.querySelector('#list-002-header-input-inside-form').focus();
-              }}><MdModeEdit style={{
-                marginRight: '8px',
-                marginBottom: '-2px'
-              }}/>Rename</p>
-              
-              {!activeGroup._isPermanent && (
-                <p className='any-dropdown-content-item-999' onClick={() => {
-                  this.setState({ dropdown_visible: false });
-                  this.props.asyncDeleteGroup(activeGroup._id);
-                }}><MdDelete style={{
-                  marginRight: '8px',
-                  marginBottom: '-2px'
-                }}/>Delete Group</p>
-              )}
-            </div>
-          )}
+          subPositionObj={{
+            left: (color_panel.screenX - 185 + 8),
+            bottom: `calc(100vh - ${color_panel.screenY - windowHeightDiff + 8}px)`
+          }}
+          setParentState={(obj) => {
+            this.setState(obj);
+          }}
         >
-          <button onClick={() => {
-            this.setState({ options_rodal_visible: true });
+          <button className='calendar-sidebar-item-options-btn' onClick={() => {
+            this.setState({ dropdown_visible: true });
           }}>
             <FaEllipsisH style={{
               marginBottom: '-2px'
-            }}/>
+            }} />
           </button>
-        </Dropdown>
+        </GreopOptDropdownComp>
       </div>
     );
   }

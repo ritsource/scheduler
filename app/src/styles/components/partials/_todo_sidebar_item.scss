@@ -1,9 +1,9 @@
 .todo-sidebar-item-000-active {
-  background: var(--hover-mint-light);
+  background: var(--hover-mint-medium);
 
   .sidebar-item-001-hamburger {
-    border: 1px solid var(--hover-mint-light) !important;
-    background: var(--hover-mint-light) !important;
+    border: 1px solid var(--hover-mint-medium) !important;
+    background: var(--hover-mint-medium) !important;
   }
 }
 
@@ -37,8 +37,8 @@
     // cursor: pointer;
 
     &:hover {
-      border: 1px solid var(--hover-mint-light);
-      background: var(--hover-mint-light);
+      border: 1px solid var(--hover-mint-medium);
+      background: var(--hover-mint-medium);
     }
   }
 

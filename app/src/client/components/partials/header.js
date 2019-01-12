@@ -101,6 +101,7 @@ class HeaderComp extends React.Component {
                   right: '20px',
                   top: '55px'
                 }}
+                // modalBackground='var(--background-color)'
                 modalShadow='0px 3px 13px 0px rgba(0,0,0,0.20)'
                 modalBorder={false}
                 modalContent={() => (
