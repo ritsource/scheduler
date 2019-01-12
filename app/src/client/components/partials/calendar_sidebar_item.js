@@ -2,6 +2,7 @@ import React from 'react';
 import Dropdown from 'react-dropdown-modal';
 import { IoIosBrush } from 'react-icons/io';
 import { MdDelete, MdModeEdit } from 'react-icons/md';
+import { FaEllipsisV } from 'react-icons/fa';
 
 import TodoListIndicator from './todo_list_indicator';
 import CalendarSidebarColorComp from './calendar_sidebar_color';
@@ -50,6 +51,7 @@ class CalendarSidebarItem extends React.Component {
               await this.props.asyncEditGroup(group._id, { _isOnCalendar: !group._isOnCalendar });
             }}
             hide_tick_on_false={true}
+            squareShaped={true}
           />
           <form className='calendar-sidebar-item-title-form-002' onSubmit={(e) => {
             e.preventDefault();
@@ -154,7 +156,7 @@ class CalendarSidebarItem extends React.Component {
           <button className='calendar-sidebar-item-options-btn' onClick={() => {
             this.setState({ dropdown_visible: true });
           }}>
-            <i className="fas fa-ellipsis-h"></i>
+            <FaEllipsisV />
           </button>
         </Dropdown>
       </div>

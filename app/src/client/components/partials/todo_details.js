@@ -134,12 +134,7 @@ class TodoDetailsComp extends React.Component {
           }}
         >
           <input
-            style={{
-              // '::placeholder': {
-              //   color: this.props.hex_color
-              // },
-              padding: '6px 0px'
-            }}
+            style={{ padding: '6px 0px' }}
             name='title'
             autoComplete='off'
             placeholder='+ Add Step'
@@ -164,7 +159,7 @@ class TodoDetailsComp extends React.Component {
           }}
         />
         <button
-          style={{ marginTop: '10px', background: this.props.hex_color }}
+          style={{ marginTop: '10px', background: this.props.hex_color, color: 'white' }}
           className='todo-details-description-button-002'
           onClick={async () => {
             await this.props.asyncEditEvent(activeEvent._id, { description: this.state.description });

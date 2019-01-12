@@ -1,5 +1,6 @@
 import React from 'react';
 import { MdDelete, MdModeEdit } from 'react-icons/md';
+import { FaEllipsisH } from 'react-icons/fa';
 
 import CustomRodalComp from '../reusables/custom_rodal';
 import Dropdown from 'react-dropdown-modal';
@@ -60,7 +61,7 @@ class TodoListHeader extends React.Component {
           position={{
             right: `calc(100vw - ${this.state.screenX}px - 8px)`,
             // top: `calc(${this.state.screenY}px - 120px)`
-            top: (this.state.screenY - this.state.windowHeightDiff - 80)
+            top: (this.state.screenY - this.state.windowHeightDiff - 8)
           }}
           modalShadow='0px 3px 13px 0px rgba(0,0,0,0.20)'
           modalBorder={false}
@@ -90,7 +91,9 @@ class TodoListHeader extends React.Component {
           <button onClick={() => {
             this.setState({ options_rodal_visible: true });
           }}>
-            <i className="fas fa-ellipsis-h"></i>
+            <FaEllipsisH style={{
+              marginBottom: '-2px'
+            }}/>
           </button>
         </Dropdown>
       </div>

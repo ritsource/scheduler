@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { FaGoogle, FaFacebookF } from 'react-icons/fa';
 
 import { ASYNC_FETCH_USER } from '../../actions/_action_types';
 import { handleAppMode } from '../../actions/app_mode_actions';
@@ -106,13 +106,19 @@ class LoginPage extends React.Component {
             <div className='login-page-oauth-div-002'>
               <a href='/auth/google'>
                 <button className='login-page-buttons-002-google'>
-                  <i className="fab fa-google"></i>
+                  <FaGoogle style={{
+                    fontSize: '13px',
+                    marginRight: '10px'
+                  }} />
                   Google
                 </button>
               </a>
               <a href='/auth/facebook'>
                 <button className='login-page-buttons-002-facebook'>
-                  <i className="fab fa-facebook-f"></i>
+                  <FaFacebookF style={{
+                    fontSize: '13px',
+                    marginRight: '10px'
+                  }} />
                   Facebook
                 </button>
               </a>

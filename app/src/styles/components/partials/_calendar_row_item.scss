@@ -41,11 +41,11 @@
 .calendar-row-item-000 {
   border-right: 1px solid var(--border-color);
   width: calc((100% / 7) - 1px);
-  background: $background-color;
+  // background: $background-color;
   cursor: pointer;
 
-  background: $background-color;
-  background: linear-gradient(to right, var(--hover-mint-light) 50%, white 50%);
+  background: var(--background-color);
+  background: linear-gradient(to right, var(--hover-mint-light) 50%, var(--background-color) 50%);
   background-size: 200% 100%;
   background-position: right bottom;
   transition: all 0.2s ease;

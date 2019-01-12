@@ -21,16 +21,15 @@
       color: var(--text-color-light);
       font-size: 18px;
       font-weight: bold;
-      border: 1px solid $background-color;
-      border-right: 0px solid $background-color;
+      border: 1px solid var(--background-color);
+      border-right: 0px solid var(--background-color);
       width: auto;
       padding: 6px 10px 6px 0px; // *******
+      background: var(--background-color);
 
       &:focus {
         outline: none;
         border-bottom: 1px solid var(--border-color);
-        // border-bottom: 1px solid var(--text-color-light);
-        border-right: 0px solid $background-color;
       }
     }
   }
@@ -44,6 +43,7 @@
     max-height: 70px;
     min-width: calc(100% - 12px);
     max-width: calc(100% - 12px);
+    background: var(--hover-mint-light);
 
     // &::placeholder {
     //   color: var(--border-color);
@@ -51,8 +51,7 @@
   }
 
   .todo-details-description-button-002 {
-    border: 0px solid $background-color;
-    color: $background-color;
+    border: 0px solid var(--background-color);
     padding: 6px 10px;
     cursor: pointer;
   }

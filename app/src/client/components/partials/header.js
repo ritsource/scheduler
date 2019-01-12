@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ReactSVG from 'react-svg';
 import { createBrowserHistory } from 'history';
-import { FaArrowRight } from 'react-icons/fa';
+import { FaArrowRight, FaSortDown } from 'react-icons/fa';
 import { MdSettings } from 'react-icons/md';
 import { GoOrganization } from 'react-icons/go';  
 
@@ -138,7 +138,10 @@ class HeaderComp extends React.Component {
                   onClick={() => this.setState({ options_rodal_visible: true })}
                 >
                   <img src={this.props.auth.avatar_url}/>
-                  <i className="fas fa-sort-down"></i>
+                  <FaSortDown style={{
+                    marginTop: '5px',
+                    marginLeft: '5px'
+                  }}/>
                 </div>
               </Dropdown>
             </div>

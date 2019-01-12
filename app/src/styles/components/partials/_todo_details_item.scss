@@ -16,7 +16,8 @@
       padding: 0px;
       margin: 0px;
       width: 100%;
-      border: 0px solid $background-color;
+      border: 0px solid var(--background-color);
+      background: var(--background-color);
     }
   }
 
