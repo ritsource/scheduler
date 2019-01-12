@@ -45,7 +45,7 @@ class TodoSidebarComp extends React.Component {
 
   render() {
     return (
-      <div className={`todo-sidebar-000 ${this.props.visible ? 'sidebar-slided-right' : 'sidebar-slided-left'}`}>
+      <div className={`todo-sidebar-000 ${!this.props.visible ? 'sidebar-slided-right' : 'sidebar-slided-left'}`}>
         <DragDropContext onDragEnd={this.onDragEnd} >
           <Droppable droppableId='droppableId-sidebar' type='GROUP_DND'>
             {(provided) => (

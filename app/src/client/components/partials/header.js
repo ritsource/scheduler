@@ -4,11 +4,12 @@ import { connect } from 'react-redux';
 import ReactSVG from 'react-svg';
 import { createBrowserHistory } from 'history';
 import { FaArrowRight, FaSortDown } from 'react-icons/fa';
-import { MdSettings } from 'react-icons/md';
+import { MdSettings, MdInvertColors } from 'react-icons/md';
 import { GoOrganization } from 'react-icons/go';  
 
 import { month_name_dictionary } from '../../utils/constants';
 import { funcHandleMonth, funcHandleYear } from '../../utils/funcs';
+import changeAppTheme from '../../helpers/change_theme';
 import { SET_CALENDAR_MONTH_STATE } from '../../actions/_action_types';
 import { toggleSideBar } from '../../actions/side_bar_actions';
 import Dropdown from 'react-dropdown-modal';
@@ -46,6 +47,7 @@ class HeaderComp extends React.Component {
   }
 
   render() {
+    const myAppTheme = window.localStorage.getItem('myAppTheme');
     return (
       <div className='header-000'>
         <div className='header-001-left-div'>
@@ -101,7 +103,7 @@ class HeaderComp extends React.Component {
                   right: '20px',
                   top: '55px'
                 }}
-                // modalBackground='var(--background-color)'
+                modalBackground='var(--background-color)'
                 modalShadow='0px 3px 13px 0px rgba(0,0,0,0.20)'
                 modalBorder={false}
                 modalContent={() => (
@@ -124,6 +126,36 @@ class HeaderComp extends React.Component {
                         marginBottom: '-2px'
                       }}/>Settings</p>
                     </Link>
+
+                    <p className='any-dropdown-content-item-999'
+                      onClick={(e) => {
+                        changeAppTheme(myAppTheme === 'darkOnly' ? 'lightOnly' : 'darkOnly')
+                      }}
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center'
+                      }}
+                    ><MdInvertColors style={{
+                      marginRight: '8px',
+                      marginBottom: '-2px'
+                    }}/>
+                      Dark theme
+                      <div style={myAppTheme === 'darkOnly' ? {
+                        background: 'var(--theme-color)',
+                        height: '13px',
+                        width: '13px',
+                        border: '1px solid var(--theme-color)',
+                        marginLeft: '10px',
+                        borderRadius: '50%'
+                      } : {
+                        height: '13px',
+                        width: '13px',
+                        border: '1px solid var(--theme-color)',
+                        marginLeft: '10px',
+                        borderRadius: '50%'
+                      }}></div>
+                    </p>
 
                     <a href='/auth/logout'>
                       <p className='any-dropdown-content-item-999'><FaArrowRight style={{

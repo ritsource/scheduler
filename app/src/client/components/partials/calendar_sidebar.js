@@ -44,8 +44,9 @@ class CalendarSidebarComp extends React.Component {
   }
 
   render() {
+    // console.log('this.props.visible', this.props.visible);    
     return (
-      <div className={`calendar-sidebar-000 ${this.props.visible ? 'sidebar-slided-right' : 'sidebar-slided-left'}`}>
+      <div className={`calendar-sidebar-000 ${!this.props.visible ? 'sidebar-slided-right' : 'sidebar-slided-left'}`}>
         <CalendarSidebarNavigator
           miniCalendarState={{ year: this.state.year, month: this.state.month }}
           handleNavigation={this.handleNavigation}
