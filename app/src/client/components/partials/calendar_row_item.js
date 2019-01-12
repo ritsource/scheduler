@@ -11,7 +11,7 @@ const CalendarRowItem = (props) => {
   
   const itemIndex = (rowIndex * 7) + index;
   const aDayOfThisMonth = new Date(dateStamp).getMonth() === month;  
-  const _isToday = props.date === new Date().getDate() && new Date().getMonth() === month;
+  const _isToday = dateStamp === new Date().setHours(0,0,0,0).valueOf();
 
   if (props.miniCalendar) {
     return (

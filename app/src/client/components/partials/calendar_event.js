@@ -7,6 +7,7 @@ const CalendarEventComp = (props) => {
   
   return (
     <div
+      draggable
       className={`calendar-event-comp-000 ${visible ? 'calendar-event-000-vis' : 'calendar-event-000-invis'}`}
       style={{
         overflowX: 'visible',

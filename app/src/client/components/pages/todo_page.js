@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createBrowserHistory } from 'history';
-import ReactSVG from 'react-svg'
+import ReactSVG from 'react-svg';
 import { Redirect } from 'react-router-dom';
 
 import { handleAppMode } from '../../actions/app_mode_actions';
@@ -59,7 +59,7 @@ export class TodoPage extends React.Component {
             />
             <div className='todo-page-001-content'>
               {!this.state.groupId ? (
-                <h2><ReactSVG src='/logo.svg'/>Loading..</h2>
+                <h2><ReactSVG src='/logo.svg'/>Loading...</h2>
               ) : (
                 <TodoListComp
                   active_groupId={this.state.groupId}
@@ -71,7 +71,7 @@ export class TodoPage extends React.Component {
             {activeEvent && (
               <TodoDetailsComp
                 activeEvent={activeEvent}
-                hex_color={activeEvent.hex_color}
+                hex_color={activeGroup.hex_color}
               />
             )}
           </React.Fragment>

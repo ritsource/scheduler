@@ -58,7 +58,7 @@ class HeaderComp extends React.Component {
           <Link to='/'><h2>My Calendar</h2></Link>
         </div>
 
-        {this.props.auth ? (
+        {this.props.auth && (
           <React.Fragment>
             {(this.props.appMode === 0) && (
               <div className='header-001-calendar-nav'>
@@ -146,13 +146,13 @@ class HeaderComp extends React.Component {
                         height: '13px',
                         width: '13px',
                         border: '1px solid var(--theme-color)',
-                        marginLeft: '10px',
+                        marginLeft: '9px',
                         borderRadius: '50%'
                       } : {
                         height: '13px',
                         width: '13px',
                         border: '1px solid var(--theme-color)',
-                        marginLeft: '10px',
+                        marginLeft: '9px',
                         borderRadius: '50%'
                       }}></div>
                     </p>
@@ -179,7 +179,7 @@ class HeaderComp extends React.Component {
               </Dropdown>
             </div>
           </React.Fragment>
-        ) : (
+        )/* : (
           <div className='header-unauth-button-row-001'>
             <Link className='the-hover-blue-text' to='/login'>Login</Link>
             <Link className='the-hover-blue-text' to='/about'>About</Link>
@@ -189,7 +189,7 @@ class HeaderComp extends React.Component {
               href='https://github.com/ritwik310/my-calendar'
             >Github</a>
           </div>
-        )}
+        )*/}
       </div>
     );
   }

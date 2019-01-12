@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import ReactSVG from 'react-svg';
 import { connect } from 'react-redux';
 import { FaGoogle, FaFacebookF } from 'react-icons/fa';
 
@@ -61,6 +62,9 @@ class LoginPage extends React.Component {
         {/* {this.props.auth ? (
           <Redirect to='/'/>
         ) : ( */}
+          <div className='login-page--svg-div-001'>
+            <ReactSVG src='/undraw_events.svg'/>
+          </div>
           <div className='login-page-div-001'>
             <h3>{this.state.register_mode ? 'Create Account' : 'Just Login'}</h3>
             {this.state.register_mode ? (

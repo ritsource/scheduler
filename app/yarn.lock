@@ -1193,10 +1193,10 @@ atob@^2.1.1:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-awesome-react-datepicker@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/awesome-react-datepicker/-/awesome-react-datepicker-1.1.0.tgz#3a00db5a19cc75750309c3ade73c796d050c9af2"
-  integrity sha512-S/pqt3BWE9OD1ZLpu9+DoxFCmAe7zusC2aUz1UQstNQiE9SFAZEu/hPcwVT9E5IqqdPrDolIbVbGkqdZaWhHpg==
+awesome-react-datepicker@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/awesome-react-datepicker/-/awesome-react-datepicker-1.1.1.tgz#94250e96d6536404dfaf6ac65b38cf583c8e71ac"
+  integrity sha512-g7yAkEgmoiFL402sDE7Ejbv/1hcXmUXTvqCTdVlVVnbu++/Y5Chgs8bI2xMu+3bdrh0gP1TcQMSvikI/AxuSFA==
   dependencies:
     react "16.7.0"
     react-dom "16.7.0"

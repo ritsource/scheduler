@@ -78,6 +78,7 @@ class TodoListComp extends React.Component {
                             index={i}
                             event={event}
                             changeEventId={this.props.changeEventId}
+                            hex_color={this.props.activeGroup.hex_color}
                           />
                         );
                       })}

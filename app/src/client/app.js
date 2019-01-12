@@ -8,6 +8,7 @@ import { asyncFetchEvents } from './actions/event_actions';
 import { asyncFetchUser } from './actions/auth_actions';
 import { setupSideBar } from './actions/side_bar_actions';
 import HeaderComp from './components/partials/header';
+import LoadingPage from './components/pages/loading_page';
 
 class App extends Component {
   constructor(props) {
@@ -43,7 +44,7 @@ class App extends Component {
             <div>{renderRoutes(this.props.route.routes)}</div>
           </React.Fragment>
         ) : (
-          <h3>Loading...</h3>
+          <LoadingPage.component />
         )}
       </div>
     );

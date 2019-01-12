@@ -1,6 +1,6 @@
 .login-page-000 {
   height: $height-without-header;
-  background: $background-color;
+  background: var(--background-color);
 
   display: flex;
   align-items: center;
@@ -10,13 +10,18 @@
     margin-bottom: 10px;
   }
 
-  .login-page-div-001 {
-    // border: 1px solid red;
+  .login-page--svg-div-001 {
+    svg {
+      height: 300px;
+      width: auto;
+      margin-right: 30px;
+    }
+  }
 
+  .login-page-div-001 {
     form {
       display: flex;
       flex-direction: column;
-      // width: 100%;
 
       .login-page-div-error_message {
         color: $theme-orange;
@@ -24,9 +29,7 @@
 
       input {
         color: var(--text-color);
-        // width: 100%;
         padding: 8px 14px;
-        // margin-bottom: 10px;
         border: 1px solid var(--border-color);
 
         &:focus {
@@ -38,12 +41,10 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        // justify-content: space-between;
-        // margin-bottom: 10px;
 
         button {
-          color: $background-color;
-          border: 0px solid $background-color;
+          color: white;
+          border: 0px solid var(--background-color);
           padding: 8px 14px;
           background: var(--theme-color);
           cursor: pointer;
@@ -59,14 +60,11 @@
     .login-page-oauth-div-002 {
       display: flex;
       flex-direction: row;
-      // justify-content: space-between;
 
       .login-page-buttons-002-google, .login-page-buttons-002-facebook {
-        color: $background-color;
-        border: 0px solid $background-color;
+        color: white;
+        border: 0px solid var(--background-color);
         padding: 8px 20px;
-        // width: 100%;
-        // margin-bottom: 10px;
         cursor: pointer;
         width: calc(100% - 5px);
     
