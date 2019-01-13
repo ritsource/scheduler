@@ -2,6 +2,7 @@ import {
   ASYNC_FETCH_EVENTS,
   ASYNC_POST_EVENT,
   ASYNC_EDIT_EVENT,
+  ASYNC_DELETE_EVENT,
   ASYNC_PATCH_EVENT_ISDONE,
   ASYNC_REARRANGE_EVENTS,
   REARRANGE_REDUX_EVENTS,
@@ -37,6 +38,17 @@ export const asyncEditEvent = (eventId, eventObj) => async (dispatch, getState, 
 
   return new Promise((resolve, reject) => {
     if (response.data) resolve(response.data);
+    else reject('Somenthing went wrong');
+  });
+}
+
+// DELETE NEW EVENT
+export const asyncDeleteEvent = (eventId) => async (dispatch, getState, api) => {
+  const response = await api.patch(`/api/event/delete/${eventId}`);
+  dispatch({ type: ASYNC_DELETE_EVENT, eventId: response.data._id });
+
+  return new Promise((resolve, reject) => {
+    if (response.data) resolve(response.data._id);
     else reject('Somenthing went wrong');
   });
 }

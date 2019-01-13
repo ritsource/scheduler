@@ -2,6 +2,7 @@ import {
   ASYNC_FETCH_EVENTS,
   ASYNC_POST_EVENT,
   ASYNC_EDIT_EVENT,
+  ASYNC_DELETE_EVENT,
   ASYNC_PATCH_EVENT_ISDONE,
   ASYNC_REARRANGE_EVENTS,
   REARRANGE_REDUX_EVENTS
@@ -19,6 +20,9 @@ export default (state = [], action) => {
 
     case ASYNC_EDIT_EVENT:
       return sortByRank([ ...state.filter(({_id}) => _id !== action.event._id), action.event ]);
+
+    case ASYNC_DELETE_EVENT:
+      return sortByRank([ ...state.filter(({_id}) => _id !== action.eventId) ]);
 
     case ASYNC_PATCH_EVENT_ISDONE:
       return sortByRank([ ...state.filter(({_id}) => _id !== action.event._id), action.event ]);

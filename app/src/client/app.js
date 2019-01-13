@@ -64,3 +64,8 @@ export default {
     return store.dispatch(asyncFetchGroups());
   }
 };
+
+
+Date.prototype.getFormattedDate = function() {
+  return `${this.getFullYear()}-${this.getMonth()}-${this.getDate()}`;
+}
