@@ -67,5 +67,5 @@ export default {
 
 
 Date.prototype.getFormattedDate = function() {
-  return `${this.getFullYear()}-${this.getMonth()}-${this.getDate()}`;
+  return `${this.getFullYear()}-${this.getMonth() + 1}-${this.getDate()}`;
 }
