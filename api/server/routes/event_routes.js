@@ -104,6 +104,34 @@ module.exports = (app) => {
     }
   });
 
+  app.put('/api/event/edit_date/:eventId', requireAuth, async (req, res) => {
+    try {
+      let date_from, date_to;
+      const oldEvent = await Event.findOne({ _id: req.params.eventId, _creator: req.user._id });
+      if (req.body.date_from && req.body.date_from !== oldEvent.date_from) {
+        date_from = req.body.date_from;
+        date_to = oldEvent.date_to + (req.body.date_from - oldEvent.date_from)
+      }
+      if (req.body.date_to) {
+        if (req.body.date_to < oldEvent.date_from) date_to = oldEvent.date_from;
+        else date_to = req.body.date_to;
+      }
+
+      if (!date_from) date_from = oldEvent.date_from;
+      if (!date_to) date_to = oldEvent.date_to;
+
+      const newEvent = await Event.findOneAndUpdate(
+        { _id: req.params.eventId, _creator: req.user._id },
+        { date_from, date_to },
+        { new: true }
+      );
+      res.send(newEvent);
+    } catch (error) {
+      // console.log(error);
+      res.status(422).send();
+    }
+  });
+
   app.patch('/api/event/delete/:eventId', requireAuth, async (req, res) => {
     try {
       const delEvent = await Event.findOneAndUpdate(

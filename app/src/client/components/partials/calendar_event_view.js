@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Datepicker from 'awesome-react-datepicker';
 
-import { asyncDeleteEvent, asyncEditEvent } from '../../actions/event_actions';
+import { asyncDeleteEvent, asyncEditEventDate } from '../../actions/event_actions';
 
 class CalendarEventViewComp extends Component {
   constructor(props) {
@@ -35,16 +35,15 @@ class CalendarEventViewComp extends Component {
             initDate={new Date(event.date_from)}
             onDateSelect={(timeStamp) => {
               this.setState({ dFromAsync: true });
-              this.props.asyncEditEvent(event._id, { date_from: timeStamp }).then(() => {
+              this.props.asyncEditEventDate(event._id, { date_from: timeStamp }).then(() => {
                 this.setState({ dFromAsync: false });
               });
             }}
-            renderChildren={() => (
-              <button className={`view-dates-box-btn-002 ${dFromAsync && 'view-dates-box-btn-002-async'}`}>
-                {new Date(event.date_from).getFormattedDate()}
-              </button>
-            )}
-          />
+          >
+            <button className={`view-dates-box-btn-002 ${dFromAsync && 'view-dates-box-btn-002-async'}`}>
+              {new Date(event.date_from).getFormattedDate()}
+            </button>
+          </Datepicker>
 
           <p style={{ margin: '5px' }}>to</p>
 
@@ -52,16 +51,15 @@ class CalendarEventViewComp extends Component {
             initDate={new Date(event.date_to)}
             onDateSelect={(timeStamp) => {
               this.setState({ dToAsync: true });
-              this.props.asyncEditEvent(event._id, { date_to: timeStamp }).then(() => {
+              this.props.asyncEditEventDate(event._id, { date_to: timeStamp }).then(() => {
                 this.setState({ dToAsync: false });
               });
             }}
-            renderChildren={() => (
-              <button className={`view-dates-box-btn-002 ${dToAsync && 'view-dates-box-btn-002-async'}`}>
-                {new Date(event.date_to).getFormattedDate()}
-              </button>
-            )}
-          />
+          >
+            <button className={`view-dates-box-btn-002 ${dToAsync && 'view-dates-box-btn-002-async'}`}>
+              {new Date(event.date_to).getFormattedDate()}
+            </button>
+          </Datepicker>
         
         </div>
       </div>
@@ -71,7 +69,7 @@ class CalendarEventViewComp extends Component {
 
 const mapDispatchToProps = (dispatch) => ({
   asyncDeleteEvent: (xyz) => dispatch(asyncDeleteEvent(xyz)),
-  asyncEditEvent: (xyz, abc) => dispatch(asyncEditEvent(xyz, abc))
+  asyncEditEventDate: (xyz, abc) => dispatch(asyncEditEventDate(xyz, abc))
 })
 
 export default connect(null, mapDispatchToProps)(CalendarEventViewComp);

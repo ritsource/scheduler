@@ -42,6 +42,17 @@ export const asyncEditEvent = (eventId, eventObj) => async (dispatch, getState, 
   });
 }
 
+// EDIT EVENT DATE
+export const asyncEditEventDate = (eventId, eventObj) => async (dispatch, getState, api) => {
+  const response = await api.put(`/event/edit_date/${eventId}`, { ...eventObj });
+  dispatch({ type: ASYNC_EDIT_EVENT, event: response.data });
+
+  return new Promise((resolve, reject) => {
+    if (response.data) resolve(response.data);
+    else reject('Somenthing went wrong');
+  });
+}
+
 // DELETE NEW EVENT
 export const asyncDeleteEvent = (eventId) => async (dispatch, getState, api) => {
   const response = await api.patch(`/api/event/delete/${eventId}`);
