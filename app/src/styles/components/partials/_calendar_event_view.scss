@@ -6,12 +6,17 @@
   width: 300px;
   background: var(--background-color);
 
+  .view-group-delector-box-002-async {
+    transition : border 0.3s ease-out;
+    animation: asyncButtonText 0.6s infinite;
+  }
+
   .calendar-event-view-dates-box-001 {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
-    margin: 5px 0px;
+    margin: 10px 0px;
 
     .view-dates-box-btn-002 {
       font-family: 'Lato', sans-serif;
@@ -27,7 +32,6 @@
     }
 
     .view-dates-box-btn-002-async {
-      // border: 1px solid var(--theme-color);
       animation: asyncButtonBorder 0.6s infinite;
     }
   }
@@ -65,3 +69,18 @@
     border: 1px solid var(--hover-mint-medium);
   }
 }
+
+@keyframes asyncButtonText {
+  0% {
+    color: var(--text-color);
+  }
+
+  50% {
+    color: var(--theme-color);
+  }
+
+  100% {
+    color: var(--text-color);
+  }
+}
+
