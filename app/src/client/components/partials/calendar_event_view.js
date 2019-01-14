@@ -40,6 +40,7 @@ class CalendarEventViewComp extends Component {
         <div className='calendar-event-view-title-box-001'>
         <form>
           <input
+            className='awesome-app-transparent-input-999'
             placeholder='Title'
             value={this.state.title}
             onChange={(e) => {
@@ -101,14 +102,14 @@ class CalendarEventViewComp extends Component {
           numOptionsVisible={4}
           selectorBoxShadow='0px 3px 13px 0px rgba(0,0,0,0.20)'
           renderBtn={() => (
-            <p
+            <div
               className={`any-dropdown-content-item-999 ${groupAsync && 'view-group-delector-box-002-async'}`}
             >
               <FaCircle style={groupAsync ? {
                 marginRight: '8px', marginBottom: '-2px'
               } : { color: groupNow.hex_color, marginRight: '8px', marginBottom: '-2px' }}/>
               {groupNow.title}
-            </p>
+            </div>
           )}
         >
           {this.props.groups.map((group, i) => (

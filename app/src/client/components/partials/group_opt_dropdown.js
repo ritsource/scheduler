@@ -28,7 +28,7 @@ const GreopOptDropdownComp = (props) => {
       modalBorder={false}
       modalContent={() => (
         <div>
-          <p className='any-dropdown-content-item-999' onClick={async (e) => {
+          <div className='any-dropdown-content-item-999' onClick={async (e) => {
             e.stopPropagation();
             await props.setParentState({ dropdown_visible: false, input_disable: false });
             if (document) {             
@@ -37,17 +37,17 @@ const GreopOptDropdownComp = (props) => {
           }}><MdModeEdit style={{
             marginRight: '8px',
             marginBottom: '-2px'
-          }}/>Rename</p>
+          }}/>Rename</div>
 
           {!group._isPermanent && (
-            <p className='any-dropdown-content-item-999' onClick={(e) => {
+            <div className='any-dropdown-content-item-999' onClick={(e) => {
               e.stopPropagation();
               props.setParentState({ dropdown_visible: false });
               props.asyncDeleteGroup(group._id);
             }}><MdDelete style={{
               marginRight: '8px',
               marginBottom: '-2px'
-            }}/>Delete Group</p>
+            }}/>Delete Group</div>
           )}
   
           <Dropdown
@@ -73,14 +73,14 @@ const GreopOptDropdownComp = (props) => {
               />
             )}
           >
-            <p className='any-dropdown-content-item-999' onClick={(e) => {
+            <div className='any-dropdown-content-item-999' onClick={(e) => {
               e.stopPropagation();
               const tempState = { screenX: e.screenX, screenY: e.screenY, visible: true };
               props.setParentState({ color_panel: tempState });
             }}>
               <IoIosBrush style={{ marginRight: '8px', marginBottom: '-2px' }}/>
               Color
-            </p>
+            </div>
           </Dropdown>              
         </div>
       )}

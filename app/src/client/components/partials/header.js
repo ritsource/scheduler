@@ -108,26 +108,26 @@ class HeaderComp extends React.Component {
                 modalBorder={false}
                 modalContent={() => (
                   <div>
-                    <p className='any-dropdown-content-item-999'
+                    <div className='any-dropdown-content-item-999'
                     >Signed in as <span style={{fontWeight: 'bold'}}>
                       {this.props.auth.name.split(' ')[0]}</span>
-                    </p>
+                    </div>
 
                     {/* <Link to='/about'>
-                      <p className='any-dropdown-content-item-999'><GoOrganization style={{
+                      <div className='any-dropdown-content-item-999'><GoOrganization style={{
                         marginRight: '8px',
                         marginBottom: '-2px'
-                      }}/>About</p>
+                      }}/>About</div>
                     </Link> */}
 
                     <Link to='/settings'>
-                      <p className='any-dropdown-content-item-999'><MdSettings style={{
+                      <div className='any-dropdown-content-item-999'><MdSettings style={{
                         marginRight: '8px',
                         marginBottom: '-2px'
-                      }}/>Settings</p>
+                      }}/>Settings</div>
                     </Link>
 
-                    <p className='any-dropdown-content-item-999'
+                    <div className='any-dropdown-content-item-999'
                       onClick={(e) => {
                         changeAppTheme(myAppTheme === 'darkOnly' ? 'lightOnly' : 'darkOnly')
                       }}
@@ -155,13 +155,13 @@ class HeaderComp extends React.Component {
                         marginLeft: '9px',
                         borderRadius: '50%'
                       }}></div>
-                    </p>
+                    </div>
 
                     <a href='/auth/logout'>
-                      <p className='any-dropdown-content-item-999'><FaArrowRight style={{
+                      <div className='any-dropdown-content-item-999'><FaArrowRight style={{
                         marginRight: '8px',
                         marginBottom: '-2px'
-                      }}/>Logout</p>
+                      }}/>Logout</div>
                     </a>
                   </div>
                 )}

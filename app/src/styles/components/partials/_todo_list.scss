@@ -76,26 +76,11 @@
   .list-002-header > form {
     display: flex;
     flex-direction: row;
+    width: 100%;
 
-    .list-004-invalid-input {
-      border: 1px solid $theme-orange !important;
-    }
-    
     input {
-      color: var(--text-color);
-      // color: var(--text-color-light);
-      font-size: 18px;
-      font-weight: bold;
-      border: 1px solid var(--background-color);
-      border-right: 0px solid var(--background-color);
-      width: auto;
-      padding: 6px 10px;
-      background: var(--background-color);
-
-      &:focus {
-        outline: none;
-        border-bottom: 1px solid var(--border-color);
-      }
+      // flex-grow: 1;
+      width: 100%;
     }
   }
 }

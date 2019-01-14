@@ -64,8 +64,10 @@ class TodoDetailsComp extends React.Component {
       <div className='todo-details-comp-000 any-list-comp-container-999'>
         <form onSubmit={async (e) => {   
           e.preventDefault();
-          await this.props.asyncEditEvent(activeEvent._id, { title: this.state.title });
-          if (document) document.querySelector('#todo-details-input-inside-form').blur();
+          if (this.state.title !== '') {
+            await this.props.asyncEditEvent(activeEvent._id, { title: this.state.title });
+            if (document) document.querySelector('#todo-details-input-inside-form').blur();
+          }
         }}>
           <TodoListIndicator
             _isDone={activeEvent._isDone}
@@ -81,7 +83,8 @@ class TodoDetailsComp extends React.Component {
             id='todo-details-input-inside-form'
             name='listname'
             autoComplete='off'
-            className={`${(this.state.title === '') && 'todo-details-002-invalid-input'}`}
+            // className={`${(this.state.title === '') && 'todo-details-002-invalid-input'}`}
+            className='awesome-app-transparent-input-999'
             value={this.state.title}
             onChange={(e) => {
               this.setState({ title: e.target.value });

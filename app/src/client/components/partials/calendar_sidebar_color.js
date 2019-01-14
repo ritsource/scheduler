@@ -32,12 +32,12 @@ class CalendarSidebarColorComp extends Component {
       <div style={{
         background: 'var(--background-color)'
       }}>
-        <p className='any-dropdown-content-item-999' onClick={(e) => {
+        <div className='any-dropdown-content-item-999' onClick={(e) => {
           e.stopPropagation();
         }}>
           <IoIosBrush style={{ marginRight: '8px', marginBottom: '-2px' }}/>
           Color
-        </p>
+        </div>
 
         <p className='calendar-sidebar-color-options-p-001'>
           {this.props.color_options.map((hexVal, i) => {

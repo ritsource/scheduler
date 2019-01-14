@@ -40,14 +40,17 @@ class TodoListHeader extends React.Component {
       <div className='list-002-header'>
         <form onSubmit={async (e) => {
           e.preventDefault();
-          await this.props.asyncEditGroup(activeGroup._id, { title: this.state.title });
-          if (document) document.querySelector('#list-002-header-input-inside-form').blur();
+          if (this.state.title !== '') {
+            await this.props.asyncEditGroup(activeGroup._id, { title: this.state.title });
+            if (document) document.querySelector('#list-002-header-input-inside-form').blur();
+          }
         }}>
           <input
             id='list-002-header-input-inside-form'
+            className='awesome-app-transparent-input-999'
             name='listname'
             autoComplete='off'
-            className={`${(this.state.title === '') && 'list-004-invalid-input'}`}
+            placeholder='Title'
             value={this.state.title}
             onChange={(e) => {
               this.setState({ title: e.target.value });

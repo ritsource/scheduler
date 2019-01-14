@@ -15,3 +15,17 @@
     background-position: left bottom;
   }
 }
+
+.awesome-app-transparent-input-999 {
+  color: var(--text-color);
+  font-size: 22px;
+  // padding: 5px 10px;
+  border: 0px solid var(--border-color);
+  border-bottom: 1px solid var(--background-color);
+  background: var(--background-color);
+  transition : border 0.3s ease-out;
+
+  &:focus {
+    border-bottom: 1px solid var(--theme-color);
+  }
+}

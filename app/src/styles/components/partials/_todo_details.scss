@@ -12,26 +12,6 @@
     flex-direction: row;
     align-items: center;
     margin-top: 0px;
-
-    .todo-details-002-invalid-input {
-      border: 1px solid $theme-orange !important;
-    }
-    
-    #todo-details-input-inside-form {
-      color: var(--text-color-light);
-      font-size: 18px;
-      font-weight: bold;
-      border: 1px solid var(--background-color);
-      border-right: 0px solid var(--background-color);
-      width: auto;
-      padding: 6px 10px 6px 0px; // *******
-      background: var(--background-color);
-
-      &:focus {
-        outline: none;
-        border-bottom: 1px solid var(--border-color);
-      }
-    }
   }
 
   textarea {

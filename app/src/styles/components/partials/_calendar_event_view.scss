@@ -44,25 +44,6 @@
       animation: asyncButtonBorder 0.6s infinite;
     }
   }
-
-  .calendar-event-view-title-box-001 {
-    input, p {
-      color: var(--text-color);
-      font-size: 22px;
-      // padding: 5px 10px;
-      border: 0px solid var(--border-color);
-      border-bottom: 1px solid var(--background-color);
-      background: var(--background-color);
-    }
-
-    input {  
-      transition : border 0.3s ease-out;
-
-      &:focus {
-        border-bottom: 1px solid var(--theme-color);
-      }
-    }
-  }
 }
 
 @keyframes asyncButtonBorder {
