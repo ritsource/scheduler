@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import Datepicker from 'awesome-react-datepicker';
 import { Selector, Option } from 'react-dropdown-selector';
 import { GoCheck } from 'react-icons/go';
-import { FaCircle } from 'react-icons/fa';
+import { FaCircle, FaStream, FaTrash, FaEllipsisV } from 'react-icons/fa';
+import { MdDelete } from 'react-icons/md';
 
 import { asyncDeleteEvent, asyncEditEventDate, asyncEditEvent } from '../../actions/event_actions';
 
@@ -11,30 +12,48 @@ class CalendarEventViewComp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      editTitle: true,
+      title: props.event.title || '',
       dFromAsync: false,
       dToAsync: false,
       groupAsync: false,
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.state.title !== nextProps.title) {
+      this.setState({ title: nextProps.title });
+    }
+  }
+
   render() {
-    const { editTitle, dFromAsync, dToAsync, groupAsync } = this.state;
+    const { dFromAsync, dToAsync, groupAsync } = this.state;
     const { event } = this.props;
     const groupNow = this.props.groups.find(({ _id }) => _id === event._group);
 
     return (
       <div className='calendar-event-view-comp-000' onClick={(e) => e.stopPropagation()}>
+        <div className='calendar-event-view-tools-box-001'>
+          <FaStream style={{ marginLeft: '15px' }}/>
+          <FaTrash style={{ marginLeft: '15px' }}/>
+          <FaEllipsisV style={{ marginLeft: '15px' }}/>
+        </div>
         <div className='calendar-event-view-title-box-001'>
-          {editTitle ? (
-            <form>
-              <input
-                value='React Native'
-              />
-            </form>
-          ) : (
-            <p>React Native</p>
-          )}
+        <form>
+          <input
+            placeholder='Title'
+            value={this.state.title}
+            onChange={(e) => {
+              this.setState({ title: e.target.value });
+            }}
+            // onBlur={(e) => {
+            //   if (this.state.title !== this.props.title) {
+            //     console.log('LLLLLLLLLLL');
+            //     e.target.value = this.props.title;
+            //     this.setState({ title: this.props.title });
+            //   }
+            // }}
+          />
+        </form>
         </div>
         <div className='calendar-event-view-dates-box-001'>
           <Datepicker uniqueId={'sakcjaskca-1'}
@@ -92,19 +111,21 @@ class CalendarEventViewComp extends Component {
             </p>
           )}
         >
-          {this.props.groups.map((group) => (
-            <Option id={group._id}><p className='any-dropdown-content-item-999' style={{
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between'
-            }}>
-              <div style={{ display: 'flex', flexDirection: 'row', lignItems: 'center' }}>
-                <FaCircle style={{ color: group.hex_color, marginRight: '8px', marginBottom: '-2px' }}/>
-                {group.title}
+          {this.props.groups.map((group, i) => (
+            <Option key={i} id={group._id}>
+              <div className='any-dropdown-content-item-999' style={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between'
+              }}>
+                <div style={{ display: 'flex', flexDirection: 'row', lignItems: 'center' }}>
+                  <FaCircle style={{ color: group.hex_color, marginRight: '8px', marginBottom: '-2px' }}/>
+                  {group.title}
+                </div>
+                {group._id === groupNow._id && <GoCheck />}
               </div>
-              {group._id === groupNow._id && <GoCheck />}
-            </p></Option>
+            </Option>
           ))}
         </Selector>
         </div>

@@ -10,12 +10,26 @@ class CalendarEventComp extends Component {
       dropdown_visible: false,
       screenX: null,
       screenY: null,
-      windowHeightDiff: 0,
-      date_from_panel: { visible: false, screenX: null, screenY: null },
-      date_to_panel: { visible: false, screenX: null, screenY: null },
-      color_panel: { visible: false, screenX: null, screenY: null }
+      // windowHeightDiff: 0,
+      windowHeight: null,
+      // windowWidth: null
     };
   }
+
+  returnModalPosition = () => {
+    const { screenX, screenY, windowHeight } = this.state;
+    const mHeight = 178;
+    const mWidth = 340;
+
+    const toBeDown = windowHeight && (screenY + 200) < windowHeight;
+    const toBeRight = screenX < 350;
+
+    return {
+      left: toBeRight ? (screenX - 8) : (screenX - mWidth + 8),
+      top: toBeDown ? (screenY - 8) : (screenY - mHeight + 8)
+    }
+  }
+
   render() {
     const { event, visible } = this.props;
     const { startIndex, endIndex } = event;
@@ -27,7 +41,11 @@ class CalendarEventComp extends Component {
         onButtonClick={(e) => {
           const windowHeightDiff = window ? (window.outerHeight - window.innerHeight) : 0;
           this.setState({
-            screenX: e.screenX, screenY: e.screenY, dropdown_visible: true, windowHeightDiff
+            screenX: e.screenX,
+            screenY: e.screenY - windowHeightDiff,
+            dropdown_visible: true,
+            windowHeight: window ? document.documentElement.offsetHeight : null,
+            // windowWidth: window ? document.documentElement.offsetWidth : null,
           });
         }}
         onClose={() => {
@@ -35,10 +53,7 @@ class CalendarEventComp extends Component {
         }}
         // preventDefaultClose={false}
         showArrow={false}
-        position={{
-          right: `calc(100vw - ${this.state.screenX}px - 8px)`,
-          top: (this.state.screenY - this.state.windowHeightDiff - 8)
-        }}
+        position={this.returnModalPosition()}
         modalShadow='0px 3px 13px 0px rgba(0,0,0,0.20)'
         modalBorder={false}
         modalContent={() => (
@@ -52,8 +67,7 @@ class CalendarEventComp extends Component {
             width: `calc(${(widthExtra + 1) * 100}% - 10px - 4px)`,
             background: event.hex_color
           }}
-          onClick={() => {
-            console.log('lol');            
+          onClick={() => {        
             this.setState({ dropdown_visible: true })
           }}
         >

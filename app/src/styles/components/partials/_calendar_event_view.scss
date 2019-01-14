@@ -6,6 +6,15 @@
   width: 300px;
   background: var(--background-color);
 
+  .calendar-event-view-tools-box-001 {
+    color: var(--text-color);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+  }
+
   .view-group-delector-box-002-async {
     transition : border 0.3s ease-out;
     animation: asyncButtonText 0.6s infinite;
