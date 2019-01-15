@@ -13,22 +13,9 @@
   }
 
   button {
-    color: var(--text-color);
-    border: 1px solid var(--hover-mint-medium);
-    background: var(--hover-mint-medium);
-    border-radius: 2px;
-    padding: 6px;
     margin: 0px 5px;
-    cursor: pointer;
-
-    // &:hover {
-    //   border: 1px solid var(--hover-mint-deep);
-    //   background: var(--hover-mint-deep);
-    // }
 
     &:disabled {
-      // color: var(--theme-color);
-      // border: 1px solid var(--theme-color);
       color: white;
       border: 1px solid var(--theme-color);
       background: var(--theme-color);

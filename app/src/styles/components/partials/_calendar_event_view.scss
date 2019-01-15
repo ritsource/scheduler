@@ -27,20 +27,8 @@
     align-items: center;
     margin: 10px 0px;
 
-    .view-dates-box-btn-002 {
-      font-family: 'Lato', sans-serif;
-      font-size: 14px;
-      color: var(--text-color);
-      border: 1px solid var(--hover-mint-medium);
-      background: var(--hover-mint-medium);
-      border-radius: 2px;
-      padding: 6px;
-      cursor: pointer;
-
-      transition : border 0.3s ease-out;
-    }
-
     .view-dates-box-btn-002-async {
+      transition : border 0.3s ease-out;
       animation: asyncButtonBorder 0.6s infinite;
     }
   }

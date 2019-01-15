@@ -53,6 +53,7 @@ export class CalendarPage extends React.Component {
               <EventDetailsComp
                 activeEvent={activeEvent}
                 hex_color={activeEvent.hex_color}
+                closeEventDetails={() => this.toggleEventDetails(null)}
               />
             )}
           </React.Fragment>

@@ -67,14 +67,14 @@ class CalendarEventComp extends Component {
           <CalendarEventViewComp
             addEvent={false}
             event={event}
-            toggleEventDetails={() => {
+            animatedClosing={(someFunc) => {
               this.setState({ dropdown_close: true });
-              this.props.toggleEventDetails(event);
+              someFunc();
               setTimeout(() => {
                 this.setState({ dropdown_visible: false, dropdown_close: false });
-                // this.props.toggleEventDetails(event);
               }, 300);
             }}
+            toggleEventDetails={this.props.toggleEventDetails}
           />
         )}
       >

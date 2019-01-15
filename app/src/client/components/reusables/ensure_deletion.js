@@ -6,7 +6,8 @@ const EnsureDeletionComp = (props) => {
     <Dropdown
       visible={props.visible}
       onButtonClick={() => {}}
-      onClose={props.onCancel}
+      // preventDefaultClose={true}
+      onClose={props.onClose}
       showArrow={false}
       arrowPosition={{ right: '0px' }}
       centerPositioning={true}
@@ -23,8 +24,8 @@ const EnsureDeletionComp = (props) => {
           <div className='ensure-deletion-btn-div-002'>
             <button onClick={props.onCancel}>Cancel</button>
             <button className='ensure-deletion-del-btn-003' onClick={async () => {
-              await props.onDelete();
               props.onCancel();
+              await props.onDelete();
             }}>Delete</button>
           </div>
         </div>

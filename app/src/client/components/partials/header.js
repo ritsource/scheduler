@@ -62,7 +62,10 @@ class HeaderComp extends React.Component {
           <React.Fragment>
             {(this.props.appMode === 0) && (
               <div className='header-001-calendar-nav'>
-                <button onClick={this.navigateToNow}>Today</button>
+                <button
+                  className='awesome-app-unique-btn-999'
+                  onClick={this.navigateToNow}
+                >Today</button>
 
                 <button
                   style={{ marginRight: '0px' }}
@@ -86,8 +89,12 @@ class HeaderComp extends React.Component {
 
             <div className='header-001-right-div'>
               <div className='header-002-app-mode-div'>
-                <Link to='/calendar'><button disabled={this.props.appMode === 0}>Calendar</button></Link>
-                <Link to='/todo'><button disabled={this.props.appMode === 1}>Todo</button></Link>
+                <Link to='/calendar'><button className='awesome-app-unique-btn-999'
+                  disabled={this.props.appMode === 0}>Calendar
+                </button></Link>
+                <Link to='/todo'><button className='awesome-app-unique-btn-999'
+                  disabled={this.props.appMode === 1}>Todo
+                </button></Link>
               </div>
               <Dropdown
                 visible={this.state.dropdown_visible}

@@ -1,11 +1,13 @@
 import React from "react";
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { FaArrowLeft, FaTrash } from 'react-icons/fa';
 
-import { asyncEditEvent, asyncPatchEvent_isDone } from '../../actions/event_actions';
+import { asyncDeleteEvent, asyncEditEvent, asyncPatchEvent_isDone } from '../../actions/event_actions';
 import { asyncFetchSteps, asyncPostStep, asyncPatchStep_isDone, asyncEditStep, asyncDeleteStep, rearrangeReduxSteps, asyncRearrangeSteps } from '../../actions/step_actions';
 import EventDetailsItem from './event_details_item';
 import TodoListIndicator from './todo_list_indicator';
+import EnsureDeletionComp from '../reusables/ensure_deletion';
 
 class EventDetailsComp extends React.Component {
   constructor(props) {
@@ -14,6 +16,8 @@ class EventDetailsComp extends React.Component {
       title: ' ',
       description: '',
       stepTitle: '',
+      askforDelete: false,
+      askforDelete_close: false
     }
   }
 
@@ -42,6 +46,10 @@ class EventDetailsComp extends React.Component {
   };
 
   step_rank_map = {};
+
+  handleEventDelete = async (id) => {
+    await this.props.asyncDeleteEvent(id);
+  }
 
   componentDidMount() {
     this.props.asyncFetchSteps();
@@ -170,6 +178,43 @@ class EventDetailsComp extends React.Component {
           }
         }>Save</button>
         {/* </div> */}
+        <div style={{
+          display: 'flex', flexDirection: 'row', padding: '10px 0px', justifyContent: 'space-between'
+        }}>
+          <button className='awesome-app-unique-btn-999'>
+            <FaArrowLeft style={{ marginBottom: '-2px' }} onClick={() => {
+              this.props.closeEventDetails();
+            }}/>
+          </button>
+          <div style={{ display: 'flex', flexDirection: 'row' }}>
+            {/* <button style={{ marginLeft: '5px' }} className='awesome-app-unique-btn-999'>
+              <FaArrowLeft style={{ marginBottom: '-2px' }} />
+            </button> */}
+            <EnsureDeletionComp
+              visible={this.state.askforDelete}
+              message='Are you sure you want to delete the event?'
+              onClose={() => {
+                this.setState({ askforDelete_close: true, askforDelete: false });
+                setTimeout(() => {
+                  this.setState({ askforDelete_close: false });
+                }, 250);
+              }}
+              onDelete={async () => await this.handleEventDelete(activeEvent._id)}
+              onCancel={() => {
+                this.setState({ askforDelete_close: true });
+                setTimeout(() => {
+                  this.setState({ askforDelete_close: false });
+                }, 250);
+              }}
+            >
+              <button style={{ marginLeft: '5px' }} className='awesome-app-unique-btn-999'>
+                <FaTrash style={{ marginBottom: '-2px' }} onClick={() => {
+                  this.setState({ askforDelete: true });
+                }}/>
+              </button>
+            </EnsureDeletionComp>
+          </div>
+        </div>
       </div>
     );
   }
@@ -183,6 +228,7 @@ const mapStateToProps = ({ steps }, props) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  asyncDeleteEvent: (xyz) => dispatch(asyncDeleteEvent(xyz)),
   asyncEditEvent: (abc, xyz) => dispatch(asyncEditEvent(abc, xyz)),
   asyncFetchSteps: () => dispatch(asyncFetchSteps()),
   asyncPostStep: (abc) => dispatch(asyncPostStep(abc)),

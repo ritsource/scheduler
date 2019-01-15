@@ -4,7 +4,7 @@ import Datepicker from 'awesome-react-datepicker';
 import { Selector, Option } from 'react-dropdown-selector';
 import { GoCheck } from 'react-icons/go';
 import { FaCircle, FaStream, FaTrash, FaEllipsisV } from 'react-icons/fa';
-import { MdDelete } from 'react-icons/md';
+// import { MdDelete } from 'react-icons/md';
 
 import { asyncDeleteEvent, asyncEditEventDate, asyncEditEvent } from '../../actions/event_actions';
 import EnsureDeletionComp from '../reusables/ensure_deletion';
@@ -17,7 +17,8 @@ class CalendarEventViewComp extends Component {
       dFromAsync: false,
       dToAsync: false,
       groupAsync: false,
-      askforDelete: false
+      askforDelete: false,
+      askforDelete_close: false
     };
   }
 
@@ -33,22 +34,33 @@ class CalendarEventViewComp extends Component {
 
   render() {
     const { dFromAsync, dToAsync, groupAsync } = this.state;
-    const { event } = this.props;
+    const { event, toggleEventDetails } = this.props;
     const groupNow = this.props.groups.find(({ _id }) => _id === event._group);
-    console.log(this.props.toggleEventDetails);
+    // console.log(this.props.toggleEventDetails);
 
     return (
       <div className='calendar-event-view-comp-000' onClick={(e) => e.stopPropagation()}>
         <div className='calendar-event-view-tools-box-001'>
           <FaStream
             style={{ marginLeft: '15px' }}
-            onClick={this.props.toggleEventDetails}
+            onClick={() => this.props.animatedClosing(() => toggleEventDetails(event))}
           />
           <EnsureDeletionComp
             visible={this.state.askforDelete}
             message='Are you sure you want to delete the event?'
-            onCancel={() => this.setState({ askforDelete: false })}
-            onDelete={async () => await this.handleEventDelete(event._id)}
+            onClose={() => {
+              this.setState({ askforDelete_close: true, askforDelete: false });
+              setTimeout(() => {
+                this.setState({ askforDelete_close: false });
+              }, 250);
+            }}
+            onDelete={() => this.props.animatedClosing(async () => await this.handleEventDelete(event._id))}
+            onCancel={() => {
+              this.setState({ askforDelete_close: true });
+              setTimeout(() => {
+                this.setState({ askforDelete_close: false });
+              }, 250);
+            }}
           >
             <FaTrash style={{ marginLeft: '15px', marginTop: '3px' }} onClick={() => {
               this.setState({ askforDelete: true });
@@ -78,7 +90,7 @@ class CalendarEventViewComp extends Component {
               });
             }}
           >
-            <button className={`view-dates-box-btn-002 ${dFromAsync && 'view-dates-box-btn-002-async'}`}>
+            <button className={`awesome-app-unique-btn-999 ${dFromAsync && 'view-dates-box-btn-002-async'}`}>
               {new Date(event.date_from).getFormattedDate()}
             </button>
           </Datepicker>
@@ -94,7 +106,7 @@ class CalendarEventViewComp extends Component {
               });
             }}
           >
-            <button className={`view-dates-box-btn-002 ${dToAsync && 'view-dates-box-btn-002-async'}`}>
+            <button className={`awesome-app-unique-btn-999 ${dToAsync && 'view-dates-box-btn-002-async'}`}>
               {new Date(event.date_to).getFormattedDate()}
             </button>
           </Datepicker>
