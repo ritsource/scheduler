@@ -34,6 +34,8 @@ class CalendarEventComp extends Component {
     const { event, visible } = this.props;
     const { startIndex, endIndex } = event;
     const widthExtra = (endIndex - startIndex);
+
+    const { screenX, screenY, windowHeight } = this.state;
     
     return (
       <Dropdown
@@ -52,6 +54,9 @@ class CalendarEventComp extends Component {
           this.setState({ screenX: null, screenY: null, dropdown_visible: false });
         }}
         // preventDefaultClose={false}
+        animation={true}
+        animeType={screenX < 350 ? 'slideRight' : 'slideLeft'}
+        animeDuration={200}
         showArrow={false}
         position={this.returnModalPosition()}
         modalShadow='0px 3px 13px 0px rgba(0,0,0,0.20)'

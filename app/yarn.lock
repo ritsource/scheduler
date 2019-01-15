@@ -6969,6 +6969,14 @@ react-dropdown-modal@^1.1.1:
     react "^16.7.0"
     react-dom "^16.7.0"
 
+react-dropdown-modal@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-dropdown-modal/-/react-dropdown-modal-1.2.0.tgz#5973517ecc4bc4425d2de885b021ed56f7f48f3e"
+  integrity sha512-OMh7+nX2wMZ/+0f/1JmALX56M4KMkkApZ3T+iuiJ7+Dg7xsWkelJRXGAQ7GziBEkB219r8eZld7UTk1FlgGw2Q==
+  dependencies:
+    react "16.7.0"
+    react-dom "16.7.0"
+
 react-dropdown-selector@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-dropdown-selector/-/react-dropdown-selector-1.0.0.tgz#f783dbfd8e98be948c193d6a4f131f3417ff650c"

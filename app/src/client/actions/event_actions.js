@@ -55,7 +55,7 @@ export const asyncEditEventDate = (eventId, eventObj) => async (dispatch, getSta
 
 // DELETE NEW EVENT
 export const asyncDeleteEvent = (eventId) => async (dispatch, getState, api) => {
-  const response = await api.patch(`/api/event/delete/${eventId}`);
+  const response = await api.patch(`/event/delete/${eventId}`);
   dispatch({ type: ASYNC_DELETE_EVENT, eventId: response.data._id });
 
   return new Promise((resolve, reject) => {

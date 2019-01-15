@@ -7,6 +7,7 @@ import { FaCircle, FaStream, FaTrash, FaEllipsisV } from 'react-icons/fa';
 import { MdDelete } from 'react-icons/md';
 
 import { asyncDeleteEvent, asyncEditEventDate, asyncEditEvent } from '../../actions/event_actions';
+import EnsureDeletionComp from '../reusables/ensure_deletion';
 
 class CalendarEventViewComp extends Component {
   constructor(props) {
@@ -16,7 +17,12 @@ class CalendarEventViewComp extends Component {
       dFromAsync: false,
       dToAsync: false,
       groupAsync: false,
+      askforDelete: false
     };
+  }
+
+  handleEventDelete = async (id) => {
+    await this.props.asyncDeleteEvent(id);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -34,7 +40,16 @@ class CalendarEventViewComp extends Component {
       <div className='calendar-event-view-comp-000' onClick={(e) => e.stopPropagation()}>
         <div className='calendar-event-view-tools-box-001'>
           <FaStream style={{ marginLeft: '15px' }}/>
-          <FaTrash style={{ marginLeft: '15px' }}/>
+          <EnsureDeletionComp
+            visible={this.state.askforDelete}
+            message='Are you sure you want to delete the event?'
+            onCancel={() => this.setState({ askforDelete: false })}
+            onDelete={async () => await this.handleEventDelete(event._id)}
+          >
+            <FaTrash style={{ marginLeft: '15px', marginTop: '3px' }} onClick={() => {
+              this.setState({ askforDelete: true });
+            }}/>
+          </EnsureDeletionComp>
           <FaEllipsisV style={{ marginLeft: '15px' }}/>
         </div>
         <div className='calendar-event-view-title-box-001'>

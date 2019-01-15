@@ -1,7 +1,6 @@
 import React from 'react';
 import { FaEllipsisH } from 'react-icons/fa';
 
-import CustomRodalComp from '../reusables/custom_rodal';
 import GreopOptDropdownComp from './group_opt_dropdown';
 
 class TodoListHeader extends React.Component {
