@@ -6,10 +6,18 @@ import { SET_CALENDAR_MONTH_STATE } from '../../actions/_action_types';
 import { handleAppMode } from '../../actions/app_mode_actions';
 import CalendarSidebarComp from '../partials/calendar_sidebar';
 import CalendarContentComp from '../partials/calendar_content';
+import EventDetailsComp from '../partials/event_details';
 
 export class CalendarPage extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      activeEvent: null
+    }
+  }
+
+  toggleEventDetails = (event) => {
+    this.setState({ activeEvent: event });
   }
   
   componentDidMount() {
@@ -30,14 +38,23 @@ export class CalendarPage extends React.Component {
   }
   
   render() {
+    const { activeEvent } = this.state;
+
     return (
       <div className='calendar-page-000'>
         {this.props.auth ? (
           <React.Fragment>
-            <CalendarSidebarComp
-              visible={this.props.sideBar}
+            <CalendarSidebarComp visible={this.props.sideBar}/>
+            <CalendarContentComp
+              staticContext={this.props.staticContext}
+              toggleEventDetails={this.toggleEventDetails}
             />
-            <CalendarContentComp staticContext={this.props.staticContext}/>
+            {activeEvent && (
+              <EventDetailsComp
+                activeEvent={activeEvent}
+                hex_color={activeEvent.hex_color}
+              />
+            )}
           </React.Fragment>
         ) : (
           <Redirect to='/login' />

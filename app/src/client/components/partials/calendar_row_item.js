@@ -65,6 +65,7 @@ const CalendarRowItem = (props) => {
                     <CalendarEventComp
                       key={i}
                       event={event}
+                      toggleEventDetails={props.toggleEventDetails}
                     />
                   )
                 }

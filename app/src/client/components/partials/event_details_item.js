@@ -3,7 +3,7 @@ import { Draggable } from 'react-beautiful-dnd';
 
 import TodoListIndicator from './todo_list_indicator';
 
-class TodoDetailsItem extends React.Component {
+class EventDetailsItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -65,4 +65,4 @@ class TodoDetailsItem extends React.Component {
   }
 }
 
-export default TodoDetailsItem;
+export default EventDetailsItem;

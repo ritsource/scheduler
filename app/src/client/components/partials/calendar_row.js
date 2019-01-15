@@ -33,6 +33,7 @@ const CalendarRowComp = (props) => {
             handleUrlNavigation={handleUrlNavigation} // { handleUrlNavigation } from Props
             miniCalendar={miniCalendar} // { miniCalendar } from Props
             miniCalendarState={miniCalendarState} // { miniCalendarState } from Props
+            toggleEventDetails={props.toggleEventDetails}
           />
         );
       })}

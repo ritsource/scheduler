@@ -35,11 +35,15 @@ class CalendarEventViewComp extends Component {
     const { dFromAsync, dToAsync, groupAsync } = this.state;
     const { event } = this.props;
     const groupNow = this.props.groups.find(({ _id }) => _id === event._group);
+    console.log(this.props.toggleEventDetails);
 
     return (
       <div className='calendar-event-view-comp-000' onClick={(e) => e.stopPropagation()}>
         <div className='calendar-event-view-tools-box-001'>
-          <FaStream style={{ marginLeft: '15px' }}/>
+          <FaStream
+            style={{ marginLeft: '15px' }}
+            onClick={this.props.toggleEventDetails}
+          />
           <EnsureDeletionComp
             visible={this.state.askforDelete}
             message='Are you sure you want to delete the event?'
@@ -61,13 +65,6 @@ class CalendarEventViewComp extends Component {
             onChange={(e) => {
               this.setState({ title: e.target.value });
             }}
-            // onBlur={(e) => {
-            //   if (this.state.title !== this.props.title) {
-            //     console.log('LLLLLLLLLLL');
-            //     e.target.value = this.props.title;
-            //     this.setState({ title: this.props.title });
-            //   }
-            // }}
           />
         </form>
         </div>

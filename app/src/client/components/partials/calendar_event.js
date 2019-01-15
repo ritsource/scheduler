@@ -13,6 +13,7 @@ class CalendarEventComp extends Component {
       // windowHeightDiff: 0,
       windowHeight: null,
       // windowWidth: null
+      dropdown_close: false // For animated close of dropdown
     };
   }
 
@@ -57,12 +58,24 @@ class CalendarEventComp extends Component {
         animation={true}
         animeType={screenX < 350 ? 'slideRight' : 'slideLeft'}
         animeDuration={200}
+        animatedClose={this.state.dropdown_close}
         showArrow={false}
         position={this.returnModalPosition()}
         modalShadow='0px 3px 13px 0px rgba(0,0,0,0.20)'
         modalBorder={false}
         modalContent={() => (
-          <CalendarEventViewComp addEvent={false} event={event}/>
+          <CalendarEventViewComp
+            addEvent={false}
+            event={event}
+            toggleEventDetails={() => {
+              this.setState({ dropdown_close: true });
+              this.props.toggleEventDetails(event);
+              setTimeout(() => {
+                this.setState({ dropdown_visible: false, dropdown_close: false });
+                // this.props.toggleEventDetails(event);
+              }, 300);
+            }}
+          />
         )}
       >
         <div draggable

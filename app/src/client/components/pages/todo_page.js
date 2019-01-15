@@ -7,7 +7,7 @@ import { Redirect } from 'react-router-dom';
 import { handleAppMode } from '../../actions/app_mode_actions';
 import TodoSidebarComp from '../partials/todo_sidebar';
 import TodoListComp from '../partials/todo_list';
-import TodoDetailsComp from '../partials/todo_details';
+import EventDetailsComp from '../partials/event_details';
 
 export class TodoPage extends React.Component {
   constructor(props) {
@@ -69,7 +69,7 @@ export class TodoPage extends React.Component {
               )}
             </div>
             {activeEvent && (
-              <TodoDetailsComp
+              <EventDetailsComp
                 activeEvent={activeEvent}
                 hex_color={activeGroup.hex_color}
               />

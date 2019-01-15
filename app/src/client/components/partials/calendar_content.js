@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createBrowserHistory } from 'history';
 
-import { SET_CALENDAR_MONTH_STATE } from '../../actions/_action_types';
+// import { SET_CALENDAR_MONTH_STATE } from '../../actions/_action_types';
 import CalendarRowComp from './calendar_row';
 
 class CalendarContentComp extends React.Component {
@@ -173,6 +173,7 @@ class CalendarContentComp extends React.Component {
               miniCalendar={this.props.miniCalendar} // If it's Mini-Calendar or Not
               miniCalendarState={this.props.miniCalendarState} // Mini-Calendar State { year } and { month }
               // events={this.props.events || []}
+              toggleEventDetails={this.props.toggleEventDetails}
             />
           );
         })}

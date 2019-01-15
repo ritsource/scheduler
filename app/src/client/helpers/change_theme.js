@@ -9,6 +9,7 @@ const myAppThemes = {
     '--text-color': '#424242',
     '--text-color-light': '#707070',
     '--text-color-light-2': '#b8b8b8',
+    '--modal-mask-color': 'rgba(0, 0, 0, 0.2)',
   },
   // lightMix: {
   //   '': '',
@@ -23,6 +24,7 @@ const myAppThemes = {
     '--text-color': 'white',
     '--text-color-light': 'white',
     '--text-color-light-2': '#707070',
+    '--modal-mask-color': 'rgba(255, 255, 255, 0.1)',
   },
   // darkMix: {
   //   '': '',

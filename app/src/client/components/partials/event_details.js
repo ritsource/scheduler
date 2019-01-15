@@ -4,10 +4,10 @@ import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 import { asyncEditEvent, asyncPatchEvent_isDone } from '../../actions/event_actions';
 import { asyncFetchSteps, asyncPostStep, asyncPatchStep_isDone, asyncEditStep, asyncDeleteStep, rearrangeReduxSteps, asyncRearrangeSteps } from '../../actions/step_actions';
-import TodoDetailsItem from './todo_details_item';
+import EventDetailsItem from './event_details_item';
 import TodoListIndicator from './todo_list_indicator';
 
-class TodoDetailsComp extends React.Component {
+class EventDetailsComp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -106,7 +106,7 @@ class TodoDetailsComp extends React.Component {
                   this.step_rank_map[i] = { _rank: step._rank, _id: step._id };
 
                   return (
-                    <TodoDetailsItem
+                    <EventDetailsItem
                       key={i}
                       index={i}
                       step={step}
@@ -194,4 +194,4 @@ const mapDispatchToProps = (dispatch) => ({
   rearrangeReduxSteps: (abc) => dispatch(rearrangeReduxSteps(abc))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoDetailsComp);
+export default connect(mapStateToProps, mapDispatchToProps)(EventDetailsComp);

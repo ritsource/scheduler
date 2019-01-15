@@ -10,8 +10,8 @@ const EnsureDeletionComp = (props) => {
       showArrow={false}
       arrowPosition={{ right: '0px' }}
       centerPositioning={true}
-      // modalBackground
-      backgroundMaskColor='rgba(1, 1, 1, 0.2)'
+      modalBackground='var(--background-color)'
+      backgroundMaskColor='var(--modal-mask-color)'
       customZIndex={30}
       animation={true}
       animeType='slideDown'
@@ -20,11 +20,13 @@ const EnsureDeletionComp = (props) => {
       modalContent={() => (
         <div className='ensure-deletion-comp-000'>
           <p>{props.message}</p>
-          <button onClick={props.onCancel}>Cancel</button>
-          <button onClick={async () => {
-            await props.onDelete();
-            props.onCancel();
-          }}>Delete</button>
+          <div className='ensure-deletion-btn-div-002'>
+            <button onClick={props.onCancel}>Cancel</button>
+            <button className='ensure-deletion-del-btn-003' onClick={async () => {
+              await props.onDelete();
+              props.onCancel();
+            }}>Delete</button>
+          </div>
         </div>
       )}
     >
