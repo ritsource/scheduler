@@ -1,7 +1,7 @@
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 
-import TodoListIndicator from './todo_list_indicator';
+import TodoListIndicator from '../../partials/todo_list_indicator';
 
 class EventDetailsItem extends React.Component {
   constructor(props) {

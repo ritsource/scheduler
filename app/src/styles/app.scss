@@ -15,8 +15,6 @@
 @import './components/partials/todo_list';
 @import './components/partials/todo_list_item';
 @import './components/partials/todo_list_indicator';
-@import './components/partials/event_details';
-@import './components/partials/event_details_item';
 @import './components/partials/calendar_sidebar';
 @import './components/partials/calendar_sidebar_navigator';
 @import './components/partials/calendar_sidebar_item';
@@ -34,3 +32,5 @@
 
 @import './components/reusable/dropdown.scss';
 @import './components/reusable/ensure_deletion';
+@import './components/reusables/event_details';
+@import './components/reusables/event_details_item';

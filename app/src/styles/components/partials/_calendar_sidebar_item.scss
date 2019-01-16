@@ -17,11 +17,11 @@
       border: 1px solid var(--background-color);
       margin-left: -2px;
       padding: 2px 2px;
-      // background: var(--hover-mint-medium);
-      border-bottom: 1px solid var(--border-color);
+      background: var(---background-color);
+      border-bottom: 1px solid var(--theme-color);
 
       &:disabled {
-        background: var(--background-color);
+        // background: var(--background-color);
         border: 1px solid var(--background-color);
       }
     }

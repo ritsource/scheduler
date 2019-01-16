@@ -88,7 +88,7 @@ class TodoSidebarComp extends React.Component {
             }}
           />
           {this.state.title !== '' && (
-            <button type='submit'>Add</button>
+            <button className='any-list-comp-form-submit-btn-003' type='submit'>Add</button>
           )}
         </form>
       </div>

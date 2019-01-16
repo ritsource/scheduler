@@ -70,7 +70,12 @@ class CalendarEventViewComp extends Component {
           {/* <FaTimes style={{ marginLeft: '15px' }}/> */}
         </div>
         <div className='calendar-event-view-title-box-001'>
-        <form>
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          this.props.animatedClosing(() => {
+            this.props.asyncEditEvent(event._id, { title: this.state.title });
+          })
+        }}>
           <input
             className='awesome-app-transparent-input-999'
             placeholder='Title'
@@ -91,7 +96,10 @@ class CalendarEventViewComp extends Component {
               });
             }}
           >
-            <button className={`awesome-app-unique-btn-999 ${dFromAsync && 'view-dates-box-btn-002-async'}`}>
+            <button className='awesome-app-unique-btn-999' style={dFromAsync ? {
+              transition : 'border 0.3s ease-out',
+              animation: 'asyncButtonText 0.6s infinite',
+            } : {}}>
               {new Date(event.date_from).getFormattedDate()}
             </button>
           </Datepicker>
@@ -107,7 +115,10 @@ class CalendarEventViewComp extends Component {
               });
             }}
           >
-            <button className={`awesome-app-unique-btn-999 ${dToAsync && 'view-dates-box-btn-002-async'}`}>
+            <button className='awesome-app-unique-btn-999' style={dToAsync ? {
+              transition : 'border 0.3s ease-out',
+              animation: 'asyncButtonText 0.6s infinite',
+            } : {}}>
               {new Date(event.date_to).getFormattedDate()}
             </button>
           </Datepicker>
@@ -127,11 +138,12 @@ class CalendarEventViewComp extends Component {
           numOptionsVisible={4}
           selectorBoxShadow='0px 3px 13px 0px rgba(0,0,0,0.20)'
           renderBtn={() => (
-            <div
-              className={`any-dropdown-content-item-999 ${groupAsync && 'view-group-delector-box-002-async'}`}
-            >
+            <div className='any-dropdown-content-item-999'>
               <FaCircle style={groupAsync ? {
-                marginRight: '8px', marginBottom: '-2px'
+                marginRight: '8px',
+                marginBottom: '-2px',
+                transition : 'border 0.3s ease-out',
+                animation: 'asyncButtonText 0.6s infinite',
               } : { color: groupNow.hex_color, marginRight: '8px', marginBottom: '-2px' }}/>
               {groupNow.title}
             </div>

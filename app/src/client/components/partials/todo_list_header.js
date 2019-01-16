@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaEllipsisH } from 'react-icons/fa';
 
-import GreopOptDropdownComp from './group_opt_dropdown';
+import GroupOptDropdownComp from './group_opt_dropdown';
 
 class TodoListHeader extends React.Component {
   constructor(props) {
@@ -57,7 +57,7 @@ class TodoListHeader extends React.Component {
           />
         </form>
 
-        <GreopOptDropdownComp
+        <GroupOptDropdownComp
           { ...this.state }
           { ...this.props }
           group={activeGroup}
@@ -72,6 +72,9 @@ class TodoListHeader extends React.Component {
           setParentState={(obj) => {
             this.setState(obj);
           }}
+          onRenameClick={() => {
+            if (document) document.querySelector('#list-002-header-input-inside-form').focus();
+          }}
         >
           <button className='calendar-sidebar-item-options-btn' onClick={() => {
             this.setState({ dropdown_visible: true });
@@ -80,7 +83,7 @@ class TodoListHeader extends React.Component {
               marginBottom: '-2px'
             }} />
           </button>
-        </GreopOptDropdownComp>
+        </GroupOptDropdownComp>
       </div>
     );
   }

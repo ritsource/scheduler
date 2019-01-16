@@ -2,7 +2,7 @@ import React from 'react';
 import { FaEllipsisV } from 'react-icons/fa';
 
 import TodoListIndicator from './todo_list_indicator';
-import GreopOptDropdownComp from './group_opt_dropdown';
+import GroupOptDropdownComp from './group_opt_dropdown';
 
 class CalendarSidebarItem extends React.Component {
   constructor(props) {
@@ -70,7 +70,7 @@ class CalendarSidebarItem extends React.Component {
           </form>
         </div>
 
-        <GreopOptDropdownComp
+        <GroupOptDropdownComp
           { ...this.state }
           { ...this.props }
           positionObj={{
@@ -84,13 +84,17 @@ class CalendarSidebarItem extends React.Component {
           setParentState={(obj) => {
             this.setState(obj);
           }}
+          onRenameClick={async () => {
+            await this.setState({ dropdown_visible: false, input_disable: false });
+            document.querySelector(`#calendar-sidebar-item-input-inside-form-${group._id}`).focus();
+          }}
         >
           <button className='calendar-sidebar-item-options-btn' onClick={() => {
             this.setState({ dropdown_visible: true });
           }}>
             <FaEllipsisV />
           </button>
-        </GreopOptDropdownComp>
+        </GroupOptDropdownComp>
       </div>
     );
   }

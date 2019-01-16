@@ -6,7 +6,7 @@ import { SET_CALENDAR_MONTH_STATE } from '../../actions/_action_types';
 import { handleAppMode } from '../../actions/app_mode_actions';
 import CalendarSidebarComp from '../partials/calendar_sidebar';
 import CalendarContentComp from '../partials/calendar_content';
-import EventDetailsComp from '../partials/event_details';
+import EventDetailsComp from '../reusables/event_details/event_details';
 
 export class CalendarPage extends React.Component {
   constructor(props) {
@@ -51,7 +51,7 @@ export class CalendarPage extends React.Component {
             />
             {activeEvent && (
               <EventDetailsComp
-                activeEvent={activeEvent}
+                event={activeEvent}
                 hex_color={activeEvent.hex_color}
                 closeEventDetails={() => this.toggleEventDetails(null)}
               />

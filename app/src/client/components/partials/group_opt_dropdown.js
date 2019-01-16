@@ -7,7 +7,7 @@ import { FaEllipsisV } from 'react-icons/fa';
 import CalendarSidebarColorComp from './calendar_sidebar_color';
 import EnsureDeletionComp from '../reusables/ensure_deletion';
 
-class GreopOptDropdownComp extends Component {
+class GroupOptDropdownComp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -38,16 +38,12 @@ class GreopOptDropdownComp extends Component {
         modalBorder={false}
         modalContent={() => (
           <div>
-            <div className='any-dropdown-content-item-999' onClick={async (e) => {
-              e.stopPropagation();
-              await this.props.setParentState({ dropdown_visible: false, input_disable: false });
-              if (document) {             
-                document.querySelector(`#calendar-sidebar-item-input-inside-form-${group._id}`).focus();
-              }
-            }}><MdModeEdit style={{
-              marginRight: '8px',
-              marginBottom: '-2px'
-            }}/>Rename</div>
+            <div className='any-dropdown-content-item-999' onClick={this.props.onRenameClick}>
+              <MdModeEdit style={{
+                marginRight: '8px',
+                marginBottom: '-2px'
+              }}/>Rename
+            </div>
   
             {!group._isPermanent && (
               <EnsureDeletionComp
@@ -119,4 +115,4 @@ class GreopOptDropdownComp extends Component {
   }
 }
 
-export default GreopOptDropdownComp;
+export default GroupOptDropdownComp;
