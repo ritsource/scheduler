@@ -65,7 +65,7 @@ const CalendarRowItem = (props) => {
               {/* const { rowIndex, dateStamp, dateDistMap, dateDistMapInverse, eventDistMap } = props;  */}
               {eventDistMap[itemIndex] && eventDistMap[itemIndex].map((event, i) => {
                 if (event === null) {
-                  return (<div key={i} className='calendar-row-item-empty-event' style={{ background: 'green', opacity: 0.5 }}></div>);
+                  return (<div key={i} className='calendar-row-item-empty-event'></div>);
                 } else if (event.val === false) {
                   // return (<div key={i} className='calendar-row-item-empty-event' style={{ background: 'red', opacity: 0.5 }}></div>);
                   return (

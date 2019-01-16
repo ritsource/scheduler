@@ -86,9 +86,6 @@ class CalendarEventComp extends Component {
               overflowX: 'visible',
               width: `calc(${(widthExtra + 1) * 100}% - 10px - 4px)`,
               background: event.hex_color,
-              // position: 'absolute',
-              // zIndex: 3
-              opacity: 0.5
             }}
             onClick={() => {        
               this.setState({ dropdown_visible: true })
@@ -99,7 +96,7 @@ class CalendarEventComp extends Component {
             </div>
           </div>
         ) : (
-          <div className='calendar-row-item-empty-event' style={{ background: 'red', opacity: 0.5 }}></div>
+          <div className='calendar-row-item-empty-event'></div>
         )}
         
       </Dropdown>
