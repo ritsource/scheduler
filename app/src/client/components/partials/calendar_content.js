@@ -104,7 +104,7 @@ class CalendarContentComp extends React.Component {
           // To ignore the null spaces
           for (let g = 0; g < tempLength; g++) {
             if (Array.isArray(eventDistMap[k])) {
-              if (eventDistMap[k][g] !== false) eventDistMap[k][g] = null;
+              if (eventDistMap[k][g].val !== false) eventDistMap[k][g] = null;
             } else {
               eventDistMap[k] = [ null ];
             }
@@ -122,8 +122,8 @@ class CalendarContentComp extends React.Component {
               : [ tempEvent ];
           } else {
             eventDistMap[k] = Array.isArray(eventDistMap[k])
-              ? [ ...eventDistMap[k], false ]
-              : [ false ];
+              ? [ ...eventDistMap[k], { val: false, refEvent: event } ]
+              : [ { val: false, refEvent: event } ];
           }
         }
       });

@@ -79,21 +79,29 @@ class CalendarEventComp extends Component {
           />
         )}
       >
-        <div draggable
-          className='calendar-event-comp-000'
-          style={{
-            overflowX: 'visible',
-            width: `calc(${(widthExtra + 1) * 100}% - 10px - 4px)`,
-            background: event.hex_color
-          }}
-          onClick={() => {        
-            this.setState({ dropdown_visible: true })
-          }}
-        >
-          <div className='calendar-event-div-over-title-001'>
-            <p>{event.title}</p>
+        {visible ? (
+          <div draggable
+            className='calendar-event-comp-000'
+            style={{
+              overflowX: 'visible',
+              width: `calc(${(widthExtra + 1) * 100}% - 10px - 4px)`,
+              background: event.hex_color,
+              // position: 'absolute',
+              // zIndex: 3
+              opacity: 0.5
+            }}
+            onClick={() => {        
+              this.setState({ dropdown_visible: true })
+            }}
+          >
+            <div className='calendar-event-div-over-title-001'>
+              <p>{event.title}</p>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className='calendar-row-item-empty-event' style={{ background: 'red', opacity: 0.5 }}></div>
+        )}
+        
       </Dropdown>
     );
   }
