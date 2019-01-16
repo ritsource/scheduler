@@ -181,10 +181,13 @@ class EventDetailsComp extends React.Component {
         <div style={{
           display: 'flex', flexDirection: 'row', padding: '10px 0px', justifyContent: 'space-between'
         }}>
-          <button className='awesome-app-unique-btn-999'>
-            <FaArrowLeft style={{ marginBottom: '-2px' }} onClick={() => {
-              this.props.closeEventDetails
-            }}/>
+          <button
+            className='awesome-app-unique-btn-999'
+            onClick={() => {
+              this.props.closeEventDetails();
+            }}
+          >
+            <FaArrowLeft style={{ marginBottom: '-2px' }}/>
           </button>
           <div style={{ display: 'flex', flexDirection: 'row' }}>
             {/* <button style={{ marginLeft: '5px' }} className='awesome-app-unique-btn-999'>
@@ -207,10 +210,14 @@ class EventDetailsComp extends React.Component {
                 }, 300);
               }}
             >
-              <button style={{ marginLeft: '5px' }} className='awesome-app-unique-btn-999'>
-                <FaTrash style={{ marginBottom: '-2px' }} onClick={() => {
+              <button
+                style={{ marginLeft: '5px' }}
+                className='awesome-app-unique-btn-999'
+                onClick={() => {
                   this.setState({ askforDelete: true });
-                }}/>
+                }}
+              >
+                <FaTrash style={{ marginBottom: '-2px' }}/>
               </button>
             </EnsureDeletionComp>
           </div>

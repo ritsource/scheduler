@@ -56,8 +56,8 @@ class GreopOptDropdownComp extends Component {
                 onClose={() => {
                   this.setState({ askforDelete_close: true, askforDelete: false });
                   setTimeout(() => {
-                    this.setState({ askforDelete_close: false });
                     this.props.setParentState({ dropdown_visible: false });
+                    this.setState({ askforDelete_close: false });
                   }, 300);
                 }}
                 onDelete={() => this.props.asyncDeleteGroup(group._id)}

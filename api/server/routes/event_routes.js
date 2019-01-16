@@ -9,7 +9,7 @@ module.exports = (app) => {
       const count = await Event.count({
         _creator: req.user._id,
       });
-      
+
       let { date_from, date_to } = req.body;
 
       if (!date_from && date_to) date_from = req.body.date_to;
@@ -28,7 +28,7 @@ module.exports = (app) => {
       }).save();
       res.send(newEvent);
     } catch (error) {
-      // console.log(error);
+      console.log(error.message);
       res.status(422).send();
     }
   });

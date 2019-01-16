@@ -22,8 +22,8 @@
 
     .ensure-deletion-del-btn-003 {
       color: white;
-      border: 1px solid $theme-orange;
-      background: $theme-orange;
+      border: 1px solid var(--danger-red-color);
+      background: var(--danger-red-color);
       border-radius: 2px;
     }
   }

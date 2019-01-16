@@ -24,7 +24,7 @@
       flex-direction: column;
 
       .login-page-div-error_message {
-        color: $theme-orange;
+        color: var(--danger-red-color);
       }
 
       input {

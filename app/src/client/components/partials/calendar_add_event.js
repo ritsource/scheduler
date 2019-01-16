@@ -13,7 +13,7 @@ class CalendarAddEventComp extends Component {
     super(props);
     this.state = {
       title: props.event.title || '',
-      selectedGroup: props.groups[0] || null
+      selectedGroup: props.visGroups[0] ? props.visGroups[0] : props.groups[0] || null
     };
   }
 
@@ -32,8 +32,9 @@ class CalendarAddEventComp extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    // console.log(nextProps.groups.filter(({ _isOnCalendar }) => _isOnCalendar)[0]);  
     if (this.state.selectedGroup === null && !!nextProps.groups.length) {
-      this.setState({ selectedGroup: nextProps.groups[0] })
+      this.setState({ selectedGroup: nextProps.visGroups[0] ? nextProps.visGroups[0] : nextProps.groups[0] })
     }
   }
 
@@ -63,7 +64,7 @@ class CalendarAddEventComp extends Component {
           <Datepicker uniqueId={'sakcjaskca-1'}
             initDate={new Date(event.date_from)}
             onDateSelect={(timeStamp) => {
-              const { title, date_from, date_to } = this.props;
+              const { title, date_from, date_to } = event;
               this.props.setParentState({ theNewEvent: { title, date_from: timeStamp, date_to } });
             }}
           >
@@ -77,7 +78,7 @@ class CalendarAddEventComp extends Component {
           <Datepicker uniqueId={'sakcjaskca-1'}
             initDate={new Date(event.date_to)}
             onDateSelect={(timeStamp) => {
-              const { title, date_from, date_to } = this.props;
+              const { title, date_from, date_to } = event;
               this.props.setParentState({ theNewEvent: { title, date_from, date_to: timeStamp } });
             }}
           >
@@ -126,12 +127,31 @@ class CalendarAddEventComp extends Component {
             </Selector>
           </div>
         )}
+        <div style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'flex-start',
+          marginTop: '10px'
+        }}>
+          <button
+            className={`awesome-app-unique-btn-999`}
+            onClick={this.handleSubmit}
+            style={{
+              background: 'var(--theme-color)',
+              color: 'white'
+            }}
+          >
+            Save
+          </button>
+        </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ groups }) => ({ groups });
+const mapStateToProps = ({ groups }) => ({
+  groups, visGroups: groups.filter(({ _isOnCalendar }) => _isOnCalendar)
+});
 
 const mapDispatchToProps = (dispatch) => ({
   asyncPostEvent: (xyz) => dispatch(asyncPostEvent(xyz)),

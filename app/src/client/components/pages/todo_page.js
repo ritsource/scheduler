@@ -72,6 +72,11 @@ export class TodoPage extends React.Component {
               <EventDetailsComp
                 activeEvent={activeEvent}
                 hex_color={activeGroup.hex_color}
+                closeEventDetails={() => {
+                  this.setState({ eventId: '' });
+                  const history = createBrowserHistory();
+                  history.push(`/todo?group=${this.state.groupId}`);
+                }}
               />
             )}
           </React.Fragment>
