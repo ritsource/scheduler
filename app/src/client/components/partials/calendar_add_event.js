@@ -6,7 +6,7 @@ import { GoCheck } from 'react-icons/go';
 import { FaCircle } from 'react-icons/fa';
 // import { MdClose } from 'react-icons/md';
 
-import { asyncDeleteEvent, asyncEditEventDate, asyncEditEvent } from '../../actions/event_actions';
+import { asyncPostEvent } from '../../actions/event_actions';
 
 class CalendarAddEventComp extends Component {
   constructor(props) {
@@ -15,6 +15,20 @@ class CalendarAddEventComp extends Component {
       title: props.event.title || '',
       selectedGroup: props.groups[0] || null
     };
+  }
+
+  handleSubmit = () => {
+    if (this.state.title !== '') {
+      this.props.animatedClosing(async () => {
+        await this.props.asyncPostEvent({
+          title: this.state.title,
+          date_from: this.props.event.date_from,
+          date_to: this.props.event.date_to,
+          _group: this.state.selectedGroup._id,
+          hex_color: this.state.selectedGroup.hex_color
+        });
+      });
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -30,8 +44,12 @@ class CalendarAddEventComp extends Component {
     return (
       <div className='calendar-event-view-comp-000' onClick={(e) => e.stopPropagation()}>
         <div className='calendar-event-view-title-box-001'>
-        <form>
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          this.handleSubmit();
+        }}>
           <input
+            autoFocus={true}
             className='awesome-app-transparent-input-999'
             placeholder='Title'
             value={this.state.title}
@@ -72,8 +90,8 @@ class CalendarAddEventComp extends Component {
         {selectedGroup && (
           <div className='calendar-event-view-group-delector-box-001'>
             <Selector
-              onSelect={(id) => {
-                
+              onSelect={(group) => {
+                this.setState({ selectedGroup: group });
               }}
               inputHeight={36}
               optionHeight={36}
@@ -90,7 +108,7 @@ class CalendarAddEventComp extends Component {
               )}
             >
               {this.props.groups.map((group, i) => (
-                <Option key={i} id={group._id}>
+                <Option key={i} id={group}>
                   <div className='any-dropdown-content-item-999' style={{
                     display: 'flex',
                     flexDirection: 'row',
@@ -116,9 +134,7 @@ class CalendarAddEventComp extends Component {
 const mapStateToProps = ({ groups }) => ({ groups });
 
 const mapDispatchToProps = (dispatch) => ({
-  asyncDeleteEvent: (xyz) => dispatch(asyncDeleteEvent(xyz)),
-  asyncEditEventDate: (xyz, abc) => dispatch(asyncEditEventDate(xyz, abc)),
-  asyncEditEvent: (xyz, abc) => dispatch(asyncEditEvent(xyz, abc)),
-})
+  asyncPostEvent: (xyz) => dispatch(asyncPostEvent(xyz)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(CalendarAddEventComp);

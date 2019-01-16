@@ -9,16 +9,16 @@ module.exports = (app) => {
       const count = await Event.count({
         _creator: req.user._id,
       });
+      
+      let { date_from, date_to } = req.body;
 
-      let date_from, date_to;
-      if (!req.body.date_from && req.body.date_to) {
-        date_from = req.body.date_to;
-        date_to = req.body.date_to;
-      } else {
+      if (!date_from && date_to) date_from = req.body.date_to;
+      else if (date_from && !date_to) date_to = req.body.date_from;
+      else if (!date_from && !date_to) {
         date_from = new Date().setHours(0,0,0,0).valueOf();
         date_to = new Date().setHours(0,0,0,0).valueOf();
       }
-            
+
       const newEvent = await new Event({
         ...req.body,
         date_from, 

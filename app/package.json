@@ -54,7 +54,7 @@
     "react-beautiful-dnd": "^10.0.3",
     "react-datepicker": "^2.0.0",
     "react-dom": "16.6.3",
-    "react-dropdown-modal": "^1.2.2",
+    "react-dropdown-modal": "^1.2.3",
     "react-dropdown-selector": "^1.0.0",
     "react-icons": "^3.2.2",
     "react-redux": "5.1.1",
