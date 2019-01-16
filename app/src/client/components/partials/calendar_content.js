@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createBrowserHistory } from 'history';
+import Dropdown from 'react-dropdown-modal';
 
 // import { SET_CALENDAR_MONTH_STATE } from '../../actions/_action_types';
 import CalendarRowComp from './calendar_row';
+import CalendarAddEventComp from './calendar_add_event';
 
 class CalendarContentComp extends React.Component {
   constructor(props) {
@@ -12,8 +14,15 @@ class CalendarContentComp extends React.Component {
       dayOneIndex: 0,
       dateDistMap: {},
       dateDistMapInverse: {},
-      eventDistMap: {}
+      eventDistMap: {},
+      theNewEvent: null,
+      // dropdown_visible: false,
+      dropdown_close: false
     };
+  }
+
+  newEventModalFunc = (eventObj) => {
+    this.setState({ theNewEvent: eventObj });
   }
 
   asyncSetState = (obj) => {
@@ -174,9 +183,43 @@ class CalendarContentComp extends React.Component {
               miniCalendarState={this.props.miniCalendarState} // Mini-Calendar State { year } and { month }
               // events={this.props.events || []}
               toggleEventDetails={this.props.toggleEventDetails}
+              newEventModalFunc={this.newEventModalFunc}
             />
           );
         })}
+        {(this.state.theNewEvent && !this.props.miniCalendar) && (
+          <Dropdown
+            visible={!!this.state.theNewEvent}
+            onClose={() => {
+              this.setState({ theNewEvent: null });
+            }}
+            // preventDefaultClose={false}
+            animation={true}
+            animeType='slideUp'
+            animeDuration={200}
+            animatedClose={this.state.dropdown_close}
+            showArrow={false}
+            centerPositioning={true}
+            modalShadow='0px 3px 13px 0px rgba(0,0,0,0.20)'
+            modalBorder={false}
+            modalContent={() => (
+              <CalendarAddEventComp
+                addEvent={true}
+                setParentState={(obj) => this.setState(obj)}
+                event={this.state.theNewEvent}
+                animatedClosing={async (someFunc) => {
+                  this.setState({ dropdown_close: true });
+                  await someFunc();
+                  setTimeout(() => {
+                    this.setState({ theNewEvent: null, dropdown_close: false });
+                  }, 200);
+                }}
+              />
+            )}
+          >
+            <div style={{ background: 'black', height: '300px', display: 'none' }}></div>
+          </Dropdown>
+        )}
       </div>
     );
   }

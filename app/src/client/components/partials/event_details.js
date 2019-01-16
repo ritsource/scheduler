@@ -183,7 +183,7 @@ class EventDetailsComp extends React.Component {
         }}>
           <button className='awesome-app-unique-btn-999'>
             <FaArrowLeft style={{ marginBottom: '-2px' }} onClick={() => {
-              this.props.closeEventDetails();
+              this.props.closeEventDetails
             }}/>
           </button>
           <div style={{ display: 'flex', flexDirection: 'row' }}>
@@ -197,14 +197,14 @@ class EventDetailsComp extends React.Component {
                 this.setState({ askforDelete_close: true, askforDelete: false });
                 setTimeout(() => {
                   this.setState({ askforDelete_close: false });
-                }, 250);
+                }, 300);
               }}
               onDelete={async () => await this.handleEventDelete(activeEvent._id)}
               onCancel={() => {
                 this.setState({ askforDelete_close: true });
                 setTimeout(() => {
                   this.setState({ askforDelete_close: false });
-                }, 250);
+                }, 300);
               }}
             >
               <button style={{ marginLeft: '5px' }} className='awesome-app-unique-btn-999'>

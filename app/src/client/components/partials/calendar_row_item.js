@@ -24,8 +24,16 @@ const CalendarRowItem = (props) => {
     );
   } else {
     return (
-      <div className='calendar-row-item-000'
+      <div
+        className='calendar-row-item-000'
         style={(props.index === 6) ? {borderRight: '0px solid white'} : {}}
+        onClick={() => props.newEventModalFunc({
+          // date_from: new Date().setHours(0,0,0,0).valueOf(),
+          // date_to: new Date().setHours(0,0,0,0).valueOf(),
+          date_from: dateStamp,
+          date_to: dateStamp,
+          title: ''
+        })}
       >
         <React.Fragment>
           {rowIndex === 0 && (

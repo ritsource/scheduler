@@ -42,6 +42,7 @@ class CalendarEventComp extends Component {
       <Dropdown
         visible={this.state.dropdown_visible}
         onButtonClick={(e) => {
+          e.stopPropagation();
           const windowHeightDiff = window ? (window.outerHeight - window.innerHeight) : 0;
           this.setState({
             screenX: e.screenX,
@@ -72,7 +73,7 @@ class CalendarEventComp extends Component {
               someFunc();
               setTimeout(() => {
                 this.setState({ dropdown_visible: false, dropdown_close: false });
-              }, 300);
+              }, 200);
             }}
             toggleEventDetails={this.props.toggleEventDetails}
           />

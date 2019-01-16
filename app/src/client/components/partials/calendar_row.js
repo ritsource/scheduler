@@ -34,6 +34,7 @@ const CalendarRowComp = (props) => {
             miniCalendar={miniCalendar} // { miniCalendar } from Props
             miniCalendarState={miniCalendarState} // { miniCalendarState } from Props
             toggleEventDetails={props.toggleEventDetails}
+            newEventModalFunc={props.newEventModalFunc}
           />
         );
       })}

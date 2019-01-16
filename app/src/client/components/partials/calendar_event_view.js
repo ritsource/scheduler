@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import Datepicker from 'awesome-react-datepicker';
 import { Selector, Option } from 'react-dropdown-selector';
 import { GoCheck } from 'react-icons/go';
-import { FaCircle, FaStream, FaTrash, FaEllipsisV } from 'react-icons/fa';
-// import { MdDelete } from 'react-icons/md';
+import { FaCircle, FaStream, FaTrash, FaEllipsisV, FaTimes } from 'react-icons/fa';
+// import { MdClose } from 'react-icons/md';
 
 import { asyncDeleteEvent, asyncEditEventDate, asyncEditEvent } from '../../actions/event_actions';
 import EnsureDeletionComp from '../reusables/ensure_deletion';
@@ -52,14 +52,14 @@ class CalendarEventViewComp extends Component {
               this.setState({ askforDelete_close: true, askforDelete: false });
               setTimeout(() => {
                 this.setState({ askforDelete_close: false });
-              }, 250);
+              }, 300);
             }}
             onDelete={() => this.props.animatedClosing(async () => await this.handleEventDelete(event._id))}
             onCancel={() => {
               this.setState({ askforDelete_close: true });
               setTimeout(() => {
                 this.setState({ askforDelete_close: false });
-              }, 250);
+              }, 300);
             }}
           >
             <FaTrash style={{ marginLeft: '15px', marginTop: '3px' }} onClick={() => {
@@ -67,6 +67,7 @@ class CalendarEventViewComp extends Component {
             }}/>
           </EnsureDeletionComp>
           <FaEllipsisV style={{ marginLeft: '15px' }}/>
+          {/* <FaTimes style={{ marginLeft: '15px' }}/> */}
         </div>
         <div className='calendar-event-view-title-box-001'>
         <form>
@@ -122,7 +123,7 @@ class CalendarEventViewComp extends Component {
           }}
           inputHeight={36}
           optionHeight={36}
-          numOptions={5}
+          numOptions={this.props.groups}
           numOptionsVisible={4}
           selectorBoxShadow='0px 3px 13px 0px rgba(0,0,0,0.20)'
           renderBtn={() => (
