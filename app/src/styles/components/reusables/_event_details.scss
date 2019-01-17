@@ -1,10 +1,10 @@
 .todo-details-comp-000 {
   border-left: 1px solid var(--border-color);
-  height: 100%;
+  height: calc(100% - 10px);
+  padding: 10px 20px 0px 20px;
   display: flex;
   flex-direction: column;
   transition: 0.2s;
-  padding: 0px 20px;
   
   form {
     // border: 1px solid red;

@@ -54,11 +54,21 @@ class CalendarContentComp extends React.Component {
 
     if (events) {
       // Filter event's that are only from 3 current months - This, Prev, Next
-      const myEvents = events.filter(({ date_from, date_to }) => {
-        return (
+      const myEvents = events.filter(({ date_from, date_to, title }) => {
+        const x = (
+          // date_from >= dateDistMap[0] && date_to <= dateDistMap[41]
+          // || date_from >= dateDistMap[0] && date_from <= dateDistMap[41]
+          // || date_to >= dateDistMap[0] && date_to <= dateDistMap[41]
           date_from >= dateDistMap[0] && date_to <= dateDistMap[41]
-          || date_to >= dateDistMap[0] && date_to <= dateDistMap[41]
+          || date_from >= dateDistMap[0] && date_from <= dateDistMap[41]
+          || date_from <= dateDistMap[0] && date_to >= dateDistMap[0]
+          // || date_from <= dateDistMap[0] && date_to <= dateDistMap[41]
+          // || date_to >= dateDistMap[0] && date_to <= dateDistMap[41]
         );
+
+        console.log(title, x);
+
+        return x;
       });
   
       // Map over myEvents to build a Event-map
@@ -68,12 +78,17 @@ class CalendarContentComp extends React.Component {
         const eventEnd = new Date(event.date_to).setHours(0,0,0,0).valueOf();
   
         // Event start and end index (index on calendar => 0-to-41)
-        const startIndex = dateDistMapInverse[eventStart];
-        const endIndex = dateDistMapInverse[eventEnd];
+        const startIndex = eventStart < dateDistMap[0]
+          ? 0 : dateDistMapInverse[eventStart];
+        const endIndex = eventEnd > dateDistMap[41]
+          ? 41 : dateDistMapInverse[eventEnd];
         
         // Setting startIndex & endIndex on the event object
         event.startIndex = startIndex;
         event.endIndex = endIndex;
+
+        // console.log(event);
+        
 
         // tempLength => records length of calendar-index (only where startIndex matches)
         let tempLength;

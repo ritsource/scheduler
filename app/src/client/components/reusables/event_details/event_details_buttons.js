@@ -162,7 +162,7 @@ const EventDetailsButtonsComp = (props) => {
         }}
       />
       <button
-        style={{ marginTop: '10px', background: props.hex_color, color: 'white', width: '100%' }}
+        style={{ marginTop: '5px', background: props.hex_color, color: 'white', width: '100%' }}
         className='todo-details-description-button-002'
         onClick={async () => {
           await props.asyncEditEvent(event._id, { description: props.description });

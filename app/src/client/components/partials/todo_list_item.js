@@ -13,7 +13,8 @@ const TodoListItem = (props) => (
         ref={provided.innerRef}
         {...provided.draggableProps}
         {...provided.dragHandleProps}
-        className={`todo-list-item-000 ${props.active && 'todo-list-item-000-active'}`}
+        className={'todo-list-item-000'}
+        style={props.active ? { background: 'var(--hover-mint-medium)' } : {}}
         onClick={() => {
           props.changeEventId(props.event._id);
         }}

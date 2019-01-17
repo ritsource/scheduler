@@ -55,7 +55,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 15px 25px 15px 15px;
+    padding: 15px 15px 15px 15px;
+    // border: 1px solid red;
 
     button {
       color: var(--text-color-light);
@@ -63,7 +64,7 @@
       background: var(--hover-mint-medium);
       border-radius: 2px;
       padding: 6px;
-      margin: 0px 5px;
+      // margin: 0px 5px;
       cursor: pointer;
 
       &:hover {

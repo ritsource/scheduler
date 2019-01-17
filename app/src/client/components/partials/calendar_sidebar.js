@@ -81,7 +81,6 @@ class CalendarSidebarComp extends React.Component {
             }}
           >
             <input
-              style={{ margin: '1px 0px' }}
               name='title'
               autoComplete='off'
               placeholder='+ New Group'
