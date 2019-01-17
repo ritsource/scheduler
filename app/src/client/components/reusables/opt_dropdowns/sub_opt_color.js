@@ -64,7 +64,7 @@ class SubOptColorComp extends Component {
                 try {
                   const ret = await this.props.asyncAddCustomColor(value);
                   this.setState({ submit_error: false });
-                  console.log('POSTED');                  
+                  // console.log('POSTED');                  
                 } catch (error) {
                   this.setState({ submit_error: 'Something went wrong' });
                 }

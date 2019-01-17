@@ -66,8 +66,6 @@ class CalendarContentComp extends React.Component {
           // || date_to >= dateDistMap[0] && date_to <= dateDistMap[41]
         );
 
-        console.log(title, x);
-
         return x;
       });
   

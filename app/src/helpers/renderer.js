@@ -24,11 +24,11 @@ export default (req, store, context) => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="icon" href="favicon.ico">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+        <link rel="stylesheet" href="3ed_party/normalize.min.css">
+        <link href="3ed_party/Lato.css" rel="stylesheet">
+        <link href="3ed_party/Montserrat.css" rel="stylesheet">
         <link rel="stylesheet" href="styles.css">
-        <title>React SSR</title>
+        <title>My Calendar</title>
       </head>
       <body>
         <div id="root">${content}<div>
