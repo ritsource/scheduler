@@ -31,10 +31,6 @@ class App extends Component {
     this.setState({ appReady: true });
   }
 
-  // componentWillMount() {
-  //   props
-  // }
-
   render() {
     return (
       <div>

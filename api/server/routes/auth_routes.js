@@ -20,13 +20,14 @@ module.exports = (app, APP_HOST) => {
       bcrypt.hash(req.body.password, salt, async (err, hash) => {
         if (err) return err;
         const password = hash;
+        const avatar_url = `/avatar_url/${req.body.name[0].toLowerCase().match(/[a-z]/i) ? req.body.name[0].toLowerCase() : 'x'}.png`;
 
         try {
           const newUser = await new User({
             name: req.body.name,
             email: req.body.email,
             password,
-            avatar_url: `/avatar_url/${req.body.name[0].toLowerCase()}.png`
+            avatar_url
           }).save();
 
           await new Group({

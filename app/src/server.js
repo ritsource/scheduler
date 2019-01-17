@@ -31,6 +31,7 @@ app.get('*', (req, res) => {
   Promise.all(promises).then(() => {
     const content = renderer(req, store, context);
     if (context.notFound) res.status(404);
+    if (context.serviceUnavailable) res.status(503);
     res.send(content);
   }).catch((e) => {
     console.log('Catch **');

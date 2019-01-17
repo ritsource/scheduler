@@ -23,6 +23,10 @@ export class CalendarPage extends React.Component {
   componentDidMount() {
     this.props.handleAppMode(0);
   }
+  
+  componentWillUnmount() {
+    this.props.handleAppMode(2);
+  }
 
   componentWillMount() {
     const { staticContext } = this.props;

@@ -5,9 +5,9 @@
 
 @import '../../node_modules/react-dropdown-modal/lib/dropdown.css';
 @import '../../node_modules/awesome-react-datepicker/lib/datepicker.css';
-// @import 'react-dropdown-selector/lib/selector.css';
-// @import '../../../../_projects/react-dropdown-selector/lib/selector.css';
-// @import '../../node_modules/rodal/lib/rodal.css';
+
+@import '../../node_modules/spinkit/scss/spinners/1-rotating-plane';
+@import '../../node_modules/spinkit/scss/spinners/3-wave';
 
 @import './components/partials/header';
 @import './components/partials/todo_sidebar';
@@ -27,6 +27,8 @@
 @import './components/pages/calendar_page';
 @import './components/pages/login_page';
 @import './components/pages/loading_page';
+@import './components/pages/settings_page';
+@import './components/pages/not_found_page';
 
 @import './components/reusables/dropdown.scss';
 @import './components/reusables/ensure_deletion';

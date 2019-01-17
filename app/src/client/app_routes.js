@@ -4,6 +4,7 @@ import HomePage from './components/pages/home_page';
 import LoginPage from './components/pages/login_page';
 import CalendarPage from './components/pages/calendar_page';
 import TodoPage from './components/pages/todo_page';
+import SettingsPage from './components/pages/settings_page';
 import NotFoundPage from './components/pages/not_found_page';
 
 export default [
@@ -15,6 +16,7 @@ export default [
       { ...LoginPage, path: '/login', exact: true },
       { ...CalendarPage, path: '/calendar' },
       { ...TodoPage, path: '/todo' },
+      { ...SettingsPage, path: '/settings' },
       { ...NotFoundPage }
     ]
   }

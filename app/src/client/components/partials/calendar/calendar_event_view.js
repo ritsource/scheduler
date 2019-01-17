@@ -134,7 +134,7 @@ class CalendarEventViewComp extends Component {
           }}
           inputHeight={36}
           optionHeight={36}
-          numOptions={this.props.groups}
+          numOptions={this.props.groups.length}
           numOptionsVisible={4}
           selectorBoxShadow='0px 3px 13px 0px rgba(0,0,0,0.20)'
           renderBtn={() => (
