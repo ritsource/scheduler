@@ -3,16 +3,13 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ReactSVG from 'react-svg';
 import { createBrowserHistory } from 'history';
-import { FaArrowRight, FaSortDown } from 'react-icons/fa';
-import { MdSettings, MdInvertColors } from 'react-icons/md';
-import { GoOrganization } from 'react-icons/go';  
 
 import { month_name_dictionary } from '../../utils/constants';
 import { funcHandleMonth, funcHandleYear } from '../../utils/funcs';
-import changeAppTheme from '../../helpers/change_theme';
 import { SET_CALENDAR_MONTH_STATE } from '../../actions/_action_types';
 import { toggleSideBar } from '../../actions/side_bar_actions';
-import Dropdown from 'react-dropdown-modal';
+
+import HeaderOptDropdownComp from '../reusables/opt_dropdowns/header_opt';
 
 class HeaderComp extends React.Component {
   constructor(props) {
@@ -47,7 +44,6 @@ class HeaderComp extends React.Component {
   }
 
   render() {
-    const myAppTheme = window.localStorage.getItem('myAppTheme');
     return (
       <div className='header-000'>
         <div className='header-001-left-div'>
@@ -96,94 +92,11 @@ class HeaderComp extends React.Component {
                   disabled={this.props.appMode === 1}>Todo
                 </button></Link>
               </div>
-              <Dropdown
-                visible={this.state.dropdown_visible}
-                onButtonClick={() => {
-                  this.setState({ dropdown_visible: true });
-                }}
-                onClose={() => {
-                  this.setState({ dropdown_visible: false });
-                }}
-                showArrow={true}
-                arrowPosition={{ right: '0px' }}
-                position={{
-                  right: '20px',
-                  top: '55px'
-                }}
-                modalBackground='var(--background-color)'
-                modalShadow='0px 3px 13px 0px rgba(0,0,0,0.20)'
-                modalBorder={false}
-                modalContent={() => (
-                  <div>
-                    <div className='any-dropdown-content-item-999'
-                    >Signed in as <span style={{fontWeight: 'bold'}}>
-                      {this.props.auth.name.split(' ')[0]}</span>
-                    </div>
-
-                    {/* <Link to='/about'>
-                      <div className='any-dropdown-content-item-999'><GoOrganization style={{
-                        marginRight: '8px',
-                        marginBottom: '-2px'
-                      }}/>About</div>
-                    </Link> */}
-
-                    <Link to='/settings'>
-                      <div className='any-dropdown-content-item-999'><MdSettings style={{
-                        marginRight: '8px',
-                        marginBottom: '-2px'
-                      }}/>Settings</div>
-                    </Link>
-
-                    <div className='any-dropdown-content-item-999'
-                      onClick={(e) => {
-                        changeAppTheme(myAppTheme === 'darkOnly' ? 'lightOnly' : 'darkOnly')
-                      }}
-                      style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        alignItems: 'center'
-                      }}
-                    ><MdInvertColors style={{
-                      marginRight: '8px',
-                      marginBottom: '-2px'
-                    }}/>
-                      Dark theme
-                      <div style={myAppTheme === 'darkOnly' ? {
-                        background: 'var(--theme-color)',
-                        height: '13px',
-                        width: '13px',
-                        border: '1px solid var(--theme-color)',
-                        marginLeft: '9px',
-                        borderRadius: '50%'
-                      } : {
-                        height: '13px',
-                        width: '13px',
-                        border: '1px solid var(--theme-color)',
-                        marginLeft: '9px',
-                        borderRadius: '50%'
-                      }}></div>
-                    </div>
-
-                    <a href='/auth/logout'>
-                      <div className='any-dropdown-content-item-999'><FaArrowRight style={{
-                        marginRight: '8px',
-                        marginBottom: '-2px'
-                      }}/>Logout</div>
-                    </a>
-                  </div>
-                )}
-              >
-                <div
-                  className='header-002-avatar-div'
-                  onClick={() => this.setState({ options_rodal_visible: true })}
-                >
-                  <img src={this.props.auth.avatar_url}/>
-                  <FaSortDown style={{
-                    marginTop: '5px',
-                    marginLeft: '5px'
-                  }}/>
-                </div>
-              </Dropdown>
+              <HeaderOptDropdownComp
+                { ...this.state }
+                { ...this.props }
+                setParentState={(obj) => this.setState(obj)}
+              />
             </div>
           </React.Fragment>
         )/* : (

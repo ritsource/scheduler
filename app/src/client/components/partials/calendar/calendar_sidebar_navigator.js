@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { month_name_dictionary } from '../../utils/constants';
+import { month_name_dictionary } from '../../../utils/constants';
 
 const CalendarSidebarNavigator = (props) => (
   <div className='calendar-sidebar-navigation-000'>

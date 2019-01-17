@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaEllipsisH } from 'react-icons/fa';
 
-import GroupOptDropdownComp from './group_opt_dropdown';
+import GroupOptDropdownComp from '../../reusables/opt_dropdowns/group_opt';
 
 class TodoListHeader extends React.Component {
   constructor(props) {

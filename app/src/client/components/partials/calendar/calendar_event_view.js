@@ -6,8 +6,8 @@ import { GoCheck } from 'react-icons/go';
 import { FaCircle, FaStream, FaTrash, FaEllipsisV, FaTimes } from 'react-icons/fa';
 // import { MdClose } from 'react-icons/md';
 
-import { asyncDeleteEvent, asyncEditEventDate, asyncEditEvent } from '../../actions/event_actions';
-import EnsureDeletionComp from '../reusables/ensure_deletion';
+import { asyncDeleteEvent, asyncEditEventDate, asyncEditEvent } from '../../../actions/event_actions';
+import EnsureDeletionComp from '../../reusables/ensure_deletion';
 
 class CalendarEventViewComp extends Component {
   constructor(props) {

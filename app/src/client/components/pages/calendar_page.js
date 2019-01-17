@@ -4,8 +4,8 @@ import { Redirect } from 'react-router-dom';
 
 import { SET_CALENDAR_MONTH_STATE } from '../../actions/_action_types';
 import { handleAppMode } from '../../actions/app_mode_actions';
-import CalendarSidebarComp from '../partials/calendar_sidebar';
-import CalendarContentComp from '../partials/calendar_content';
+import CalendarSidebarComp from '../partials/calendar/calendar_sidebar';
+import CalendarContentComp from '../partials/calendar/calendar_content';
 import EventDetailsComp from '../reusables/event_details/event_details';
 
 export class CalendarPage extends React.Component {

@@ -3,9 +3,9 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
-import { builtin_color_list } from '../../utils/constants';
-import { asyncFetchEvents, asyncPostEvent, asyncRearrangeEvents, rearrangeReduxEvents } from '../../actions/event_actions';
-import { asyncEditGroup, asyncDeleteGroup } from '../../actions/group_actions';
+import { builtin_color_list } from '../../../utils/constants';
+import { asyncFetchEvents, asyncPostEvent, asyncRearrangeEvents, rearrangeReduxEvents } from '../../../actions/event_actions';
+import { asyncEditGroup, asyncDeleteGroup } from '../../../actions/group_actions';
 import TodoListItem from './todo_list_item';
 import TodoListForm from './todo_list_form';
 import TodoListHeader from './todo_list_header';

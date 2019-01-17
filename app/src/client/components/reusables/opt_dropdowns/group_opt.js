@@ -4,8 +4,8 @@ import { IoIosBrush } from 'react-icons/io';
 import { MdDelete, MdModeEdit } from 'react-icons/md';
 import { FaEllipsisV } from 'react-icons/fa';
 
-import CalendarSidebarColorComp from './calendar_sidebar_color';
-import EnsureDeletionComp from '../reusables/ensure_deletion';
+import SubOptColorComp from './sub_opt_color';
+import EnsureDeletionComp from '../ensure_deletion';
 
 class GroupOptDropdownComp extends Component {
   constructor(props) {
@@ -91,7 +91,7 @@ class GroupOptDropdownComp extends Component {
               modalBorder={false}
               customZIndex={21}
               modalContent={() => (
-                <CalendarSidebarColorComp
+                <SubOptColorComp
                   color_options={this.props.color_options}
                   changeColorFunc={this.props.changeColorFunc}
                 />

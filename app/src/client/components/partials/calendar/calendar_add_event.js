@@ -6,7 +6,7 @@ import { GoCheck } from 'react-icons/go';
 import { FaCircle } from 'react-icons/fa';
 // import { MdClose } from 'react-icons/md';
 
-import { asyncPostEvent } from '../../actions/event_actions';
+import { asyncPostEvent } from '../../../actions/event_actions';
 
 class CalendarAddEventComp extends Component {
   constructor(props) {

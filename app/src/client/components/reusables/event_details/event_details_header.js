@@ -1,5 +1,5 @@
 import React from 'react';
-import TodoListIndicator from '../../partials/todo_list_indicator';
+import EventDoneIndicator from '../event_done_indicator';
 
 const EventDetailsHeaderComp = (props) => {
   return (
@@ -11,7 +11,7 @@ const EventDetailsHeaderComp = (props) => {
           if (document) document.querySelector('#todo-details-input-inside-form').blur();
         }
       }}>
-        <TodoListIndicator
+        <EventDoneIndicator
           _isDone={props.event._isDone}
           hex_color={props.hex_color}
           patchFunction={() => {

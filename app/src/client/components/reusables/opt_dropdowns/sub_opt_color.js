@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { IoIosBrush } from 'react-icons/io';
 
-import { asyncAddCustomColor } from '../../actions/auth_actions';
+import { asyncAddCustomColor } from '../../../actions/auth_actions';
 
-class CalendarSidebarColorComp extends Component {
+class SubOptColorComp extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -101,4 +101,4 @@ const mapDispatchToProps = (dispatch) => ({
   asyncAddCustomColor: (xyz) => dispatch(asyncAddCustomColor(xyz))
 });
 
-export default connect(null, mapDispatchToProps)(CalendarSidebarColorComp);
+export default connect(null, mapDispatchToProps)(SubOptColorComp);

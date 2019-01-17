@@ -1,7 +1,7 @@
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 
-import TodoListIndicator from '../../partials/todo_list_indicator';
+import EventDoneIndicator from '../event_done_indicator';
 
 class EventDetailsItem extends React.Component {
   constructor(props) {
@@ -29,7 +29,7 @@ class EventDetailsItem extends React.Component {
             {...provided.dragHandleProps}
             className='todo-details-item-comp-000'
           >
-            <TodoListIndicator
+            <EventDoneIndicator
               _isDone={thisStep._isDone}
               hex_color={this.props.hex_color}
               patchFunction={() => {

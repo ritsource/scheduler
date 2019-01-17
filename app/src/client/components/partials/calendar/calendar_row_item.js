@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { month_name_dictionary, day_name_dictionary } from '../../utils/constants';
-import { SET_CALENDAR_MONTH_STATE } from '../../actions/_action_types';
+import { month_name_dictionary, day_name_dictionary } from '../../../utils/constants';
+import { SET_CALENDAR_MONTH_STATE } from '../../../actions/_action_types';
 import CalendarEventComp from './calendar_event';
 
 const CalendarRowItem = (props) => {

@@ -5,8 +5,8 @@ import ReactSVG from 'react-svg';
 import { Redirect } from 'react-router-dom';
 
 import { handleAppMode } from '../../actions/app_mode_actions';
-import TodoSidebarComp from '../partials/todo_sidebar';
-import TodoListComp from '../partials/todo_list';
+import TodoSidebarComp from '../partials/todo/todo_sidebar';
+import TodoListComp from '../partials/todo/todo_list';
 import EventDetailsComp from '../reusables/event_details/event_details';
 
 export class TodoPage extends React.Component {

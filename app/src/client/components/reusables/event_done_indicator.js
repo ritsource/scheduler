@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaCheck } from 'react-icons/fa';
 
-const TodoListIndicator = (props) => (
+const EventDoneIndicator = (props) => (
   <div
     className={`todo-list-indicator-000 ${props._isDone && 'indicator-_isDone'}`}
     style={props._isDone ? {
@@ -25,4 +25,4 @@ const TodoListIndicator = (props) => (
   </div>
 );
 
-export default TodoListIndicator;
+export default EventDoneIndicator;

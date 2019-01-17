@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { funcHandleYear, funcHandleMonth } from '../../utils/funcs';
-import { builtin_color_list } from '../../utils/constants';
+import { funcHandleYear, funcHandleMonth } from '../../../utils/funcs';
+import { builtin_color_list } from '../../../utils/constants';
 
-import { asyncFetchGroups, asyncPostGroup, asyncEditGroup, asyncDeleteGroup } from '../../actions/group_actions';
+import { asyncFetchGroups, asyncPostGroup, asyncEditGroup, asyncDeleteGroup } from '../../../actions/group_actions';
 import CalendarContentComp from './calendar_content';
 import CalendarSidebarNavigator from './calendar_sidebar_navigator';
 import CalendarSidebarItem from './calendar_sidebar_item';

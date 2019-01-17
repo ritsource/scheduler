@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
 import { Draggable } from 'react-beautiful-dnd';
 
-import { asyncPatchEvent_isDone } from '../../actions/event_actions';
-import TodoListIndicator from './todo_list_indicator';
+import { asyncPatchEvent_isDone } from '../../../actions/event_actions';
+import EventDoneIndicator from '../../reusables/event_done_indicator';
 
 const TodoListItem = (props) => (
   <Draggable draggableId={props.event._id} index={props.index}>
@@ -20,7 +20,7 @@ const TodoListItem = (props) => (
           props.changeEventId(props.event._id);
         }}
       >
-        <TodoListIndicator
+        <EventDoneIndicator
           _isDone={props.event._isDone}
           hex_color={props.hex_color}
           patchFunction={() => {

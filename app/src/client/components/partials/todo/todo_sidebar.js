@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
-import { asyncFetchGroups, asyncPostGroup, asyncRearrangeGroups, rearrangeReduxGroups } from '../../actions/group_actions';
+import { asyncFetchGroups, asyncPostGroup, asyncRearrangeGroups, rearrangeReduxGroups } from '../../../actions/group_actions';
 import TodoSidebarItem from './todo_sidebar_item';
 
 class TodoSidebarComp extends React.Component {

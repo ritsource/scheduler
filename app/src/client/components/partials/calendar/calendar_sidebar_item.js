@@ -1,8 +1,8 @@
 import React from 'react';
 import { FaEllipsisV } from 'react-icons/fa';
 
-import TodoListIndicator from './todo_list_indicator';
-import GroupOptDropdownComp from './group_opt_dropdown';
+import EventDoneIndicator from '../../reusables/event_done_indicator';
+import GroupOptDropdownComp from '../../reusables/opt_dropdowns/group_opt';
 
 class CalendarSidebarItem extends React.Component {
   constructor(props) {
@@ -41,7 +41,7 @@ class CalendarSidebarItem extends React.Component {
     return (
       <div className='calendar-sidebar-item-000'>
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-          <TodoListIndicator
+          <EventDoneIndicator
             _isDone={group._isOnCalendar}
             hex_color={group.hex_color}
             patchFunction={async () => {
