@@ -4,10 +4,15 @@ import Datepicker from 'awesome-react-datepicker';
 import { Selector, Option } from 'react-dropdown-selector';
 import { GoCheck } from 'react-icons/go';
 import { FaCircle, FaStream, FaTrash, FaEllipsisV, FaTimes } from 'react-icons/fa';
-// import { MdClose } from 'react-icons/md';
+import Dropdown from 'react-dropdown-modal';
+import { IoIosBrush } from 'react-icons/io';
+import { MdDelete, MdModeEdit } from 'react-icons/md';
+
+import { builtin_color_list } from '../../../utils/constants';
 
 import { asyncDeleteEvent, asyncEditEventDate, asyncEditEvent } from '../../../actions/event_actions';
 import EnsureDeletionComp from '../../reusables/ensure_deletion';
+import SubOptColorComp from '../../reusables/opt_dropdowns/sub_opt_color'
 
 class CalendarEventViewComp extends Component {
   constructor(props) {
@@ -18,7 +23,12 @@ class CalendarEventViewComp extends Component {
       dToAsync: false,
       groupAsync: false,
       askforDelete: false,
-      askforDelete_close: false
+      askforDelete_close: false,
+      color_panel: {
+        screenX: null,
+        screenY: null,
+        visible: false
+      }
     };
   }
 
@@ -33,7 +43,7 @@ class CalendarEventViewComp extends Component {
   }
 
   render() {
-    const { dFromAsync, dToAsync, groupAsync } = this.state;
+    const { dFromAsync, dToAsync, groupAsync, color_panel } = this.state;
     const { event, toggleEventDetails } = this.props;
     const groupNow = this.props.groups.find(({ _id }) => _id === event._group);
     // console.log(this.props.toggleEventDetails);
@@ -66,8 +76,44 @@ class CalendarEventViewComp extends Component {
               this.setState({ askforDelete: true });
             }}/>
           </EnsureDeletionComp>
-          <FaEllipsisV style={{ marginLeft: '15px' }}/>
-          {/* <FaTimes style={{ marginLeft: '15px' }}/> */}
+          
+
+          <Dropdown
+            visible={color_panel.visible}
+            onClose={() => {
+              const tempState = { screenX: null, screenY: null, visible: false };
+              this.setState({ color_panel: tempState });
+            }}
+            showArrow={false}
+            position={{
+              left: `calc(${color_panel.screenX}px - 8px)`,
+              bottom: `calc(100vh - ${color_panel.screenY + 8}px)`
+            }}
+            modalBackground='var(--background-color)'
+            modalShadow='0px 3px 13px 0px rgba(0,0,0,0.20)'
+            modalBorder={false}
+            customZIndex={21}
+            modalContent={() => (
+              <SubOptColorComp
+                color_options={[ ...builtin_color_list, ...this.props.auth.custom_colors]}
+                changeColorFunc={async (color) => {
+                  await this.props.asyncEditEvent(event._id, { hex_color: color });
+                }}
+              />
+            )}
+          >
+            <FaCircle
+              onClick={(e) => {
+                e.stopPropagation();
+                const tempState = { screenX: e.screenX, screenY: e.screenY, visible: true };
+                this.setState({ color_panel: tempState });
+              }}
+              style={{ marginLeft: '15px', marginTop: '3px', color: event.hex_color }}
+            />
+          </Dropdown>
+
+
+
         </div>
         <div className='calendar-event-view-title-box-001'>
         <form onSubmit={(e) => {
@@ -172,7 +218,7 @@ class CalendarEventViewComp extends Component {
   }
 }
 
-const mapStateToProps = ({ groups }) => ({ groups });
+const mapStateToProps = ({ groups, auth }) => ({ groups, auth });
 
 const mapDispatchToProps = (dispatch) => ({
   asyncDeleteEvent: (xyz) => dispatch(asyncDeleteEvent(xyz)),

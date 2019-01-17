@@ -76,10 +76,6 @@ class GroupOptDropdownComp extends Component {
     
             <Dropdown
               visible={this.props.color_panel.visible}
-              // onButtonClick={(e) => {
-              //   const tempState = { screenX: e.screenX, screenY: e.screenY, visible: true };
-              //   this.props.setParentState({ color_panel: tempState });
-              // }}
               onClose={() => {
                 const tempState = { screenX: null, screenY: null, visible: false };
                 this.props.setParentState({ color_panel: tempState });
