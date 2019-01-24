@@ -11,11 +11,8 @@ import stepReducer from '../client/reducers/step_reducer';
 import calendarMonthReducer from '../client/reducers/calendar_month_reducer';
 
 export default (req) => {
-  const host = req.get('host');
-  // console.log('host', host);
-  
   const axiosInstance = axios.create({
-    baseURL: `http://${host}/api`,
+    baseURL: `http://localhost:3000/api`,
     headers: { cookie: req.get('cookie') || '' }
   });
 
