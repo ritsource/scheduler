@@ -12,8 +12,8 @@ const app = express();
 
 app.use(helmet());
 
-app.use(proxy('/api', { target: 'http://localhost:5000', changeOrigin: true }));
-app.use(proxy('/auth', { target: 'http://localhost:5000', changeOrigin: true }));
+app.use(proxy('/api', { target: 'http://server:5000', changeOrigin: true }));
+app.use(proxy('/auth', { target: 'http://server:5000', changeOrigin: true }));
 
 app.use(express.static('public'));
 

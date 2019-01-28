@@ -6,7 +6,7 @@ const User = mongoose.model('User');
 const Group = mongoose.model('Group');
 const requireAuth = require('../middlewares/require_auth');
 
-module.exports = (app, APP_HOST) => {
+module.exports = (app) => {
   app.post('/auth/register', async (req, res) => {
     const oldUser = await User.findOne({
       email: req.body.email,
@@ -62,8 +62,8 @@ module.exports = (app, APP_HOST) => {
   app.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/login' }),
     (req, res) => {
-      // res.redirect('/');
-      res.status(301).redirect(APP_HOST);
+      res.redirect('/');
+      // res.status(301).redirect(APP_HOST);
     });
 
   app.get('/auth/facebook',
@@ -72,14 +72,14 @@ module.exports = (app, APP_HOST) => {
   app.get('/auth/facebook/callback',
     passport.authenticate('facebook', { failureRedirect: '/login' }),
     function(req, res) {
-      // res.redirect('/');
-      res.status(301).redirect(APP_HOST);
+      res.redirect('/');
+      // res.status(301).redirect(APP_HOST);
     });
 
   app.get('/auth/logout', (req, res) => {
     req.logout();
-    // res.redirect('/');
-    res.status(301).redirect(APP_HOST);
+    res.redirect('/');
+    // res.status(301).redirect(APP_HOST);
   });
 
   app.get('/api/current_user', (req, res) => {

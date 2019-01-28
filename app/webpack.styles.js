@@ -4,6 +4,7 @@ const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = {
+  mode: 'development',
   entry: './src/styles/app.scss',
   output: {
     path: path.resolve(__dirname, 'public')

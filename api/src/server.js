@@ -1,5 +1,5 @@
 if (!process.env.NODE_ENV) process.env.NODE_ENV = 'development';
-const APP_HOST = process.env.APP_HOST || 'http://localhost:3000';
+// const APP_HOST = process.env.APP_HOST || 'http://localhost:3000';
 
 const express = require('express');
 const cors = require('cors');
@@ -30,14 +30,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-require('./routes/auth_routes')(app, APP_HOST);
+require('./routes/auth_routes')(app);
 require('./routes/event_routes')(app);
 require('./routes/group_routes')(app);
 require('./routes/step_routes')(app);
 
 app.get('/', (req, res) => {
   res.send({ name: 'Ritwik' });
-  // res.status(301).redirect(APP_HOST);
 });
 
 const PORT = process.env.PORT || 5000;
