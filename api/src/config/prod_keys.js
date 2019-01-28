@@ -4,5 +4,7 @@ module.exports = {
   google_client_secret: process.env.GOOGLE_CLIENT_SECRET,
   facebook_app_id: process.env.FACEBOOK_APP_ID,
   facebook_app_secret: process.env.FACEBOOK_APP_SECRET,
-  cookie_key: process.env.COOKIE_KEY
+  cookie_key: process.env.COOKIE_KEY,
+  redisHost: process.env.REDIS_HOST,
+  redisPort: process.env.REDIS_PORT,
 };
