@@ -9,7 +9,7 @@ module.exports = (passport) => {
   passport.use(new FacebookStrategy({
     clientID: keys.facebook_app_id,
     clientSecret: keys.facebook_app_secret,
-    callbackURL: '/auth/facebook/callback',
+    callbackURL: `${process.env.AUTH_REDIRECT_URL_BASE}/auth/facebook/callback`,
     profileFields: ['id', 'displayName', 'emails', 'photos'],
     proxy: true
   },

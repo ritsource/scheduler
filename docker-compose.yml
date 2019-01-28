@@ -1,5 +1,11 @@
 version: '3'
 services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: dev.Dockerfile
+    ports:
+      - '4001:80'
   client:
     build:
       context: ./app
@@ -18,3 +24,5 @@ services:
       - ./api:/app
     ports:
       - '5000:5000'
+    environment:
+      - AUTH_REDIRECT_URL_BASE=http://localhost:4001

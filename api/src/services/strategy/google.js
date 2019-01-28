@@ -9,7 +9,7 @@ module.exports = (passport) => {
   passport.use(new GoogleStrategy({
       clientID: keys.google_client_id,
       clientSecret: keys.google_client_secret,
-      callbackURL: '/auth/google/callback',
+      callbackURL: `${process.env.AUTH_REDIRECT_URL_BASE}/auth/google/callback`,
       // passReqToCallback: true,
       proxy: true
     },
