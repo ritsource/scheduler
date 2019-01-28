@@ -12,7 +12,7 @@ import calendarMonthReducer from '../client/reducers/calendar_month_reducer';
 
 export default (req) => {
   const axiosInstance = axios.create({
-    baseURL: `http://localhost:3000/api`,
+    baseURL: `http://server:5000/api`,
     headers: { cookie: req.get('cookie') || '' }
   });
 

@@ -1,6 +1,6 @@
 import "@babel/polyfill";
 import express from 'express';
-import proxy from 'http-proxy-middleware';
+// import proxy from 'http-proxy-middleware';
 import helmet from 'helmet';
 import { matchRoutes } from 'react-router-config';
 
@@ -12,8 +12,8 @@ const app = express();
 
 app.use(helmet());
 
-app.use(proxy('/api', { target: 'http://server:5000', changeOrigin: true }));
-app.use(proxy('/auth', { target: 'http://server:5000', changeOrigin: true }));
+// app.use(proxy('/api', { target: 'http://server:5000', changeOrigin: true }));
+// app.use(proxy('/auth', { target: 'http://server:5000', changeOrigin: true }));
 
 app.use(express.static('public'));
 

@@ -3,6 +3,7 @@ import axios from 'axios';
 import ReactSVG from 'react-svg';
 import { connect } from 'react-redux';
 import { FaGoogle, FaFacebookF } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 import { ASYNC_FETCH_USER } from '../../actions/_action_types';
 import { handleAppMode } from '../../actions/app_mode_actions';
@@ -97,7 +98,10 @@ class LoginPage extends React.Component {
                   this.setState({ password: e.target.value });
                 }}/>
                 {this.state.error_message && (
-                  <p className='login-page-div-error_message'>{this.state.error_message}</p>
+                  <React.Fragment>
+                    <p className='login-page-div-error_message'>{this.state.error_message}</p>
+                    <p><span className='the-hover-blue-text'><Link to='/forgot'>Forgot password?</Link></span></p>
+                  </React.Fragment>
                 )}
                 <div>
                   <button name='Login' type='submit'>Login</button>
