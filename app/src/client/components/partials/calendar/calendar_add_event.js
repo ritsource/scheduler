@@ -68,7 +68,7 @@ class CalendarAddEventComp extends Component {
               this.props.setParentState({ theNewEvent: { title, date_from: timeStamp, date_to } });
             }}
           >
-            <button className={`awesome-app-unique-btn-999`}>
+            <button name='Change Date-from' className={`awesome-app-unique-btn-999`}>
               {new Date(event.date_from).getFormattedDate()}
             </button>
           </Datepicker>
@@ -82,7 +82,7 @@ class CalendarAddEventComp extends Component {
               this.props.setParentState({ theNewEvent: { title, date_from, date_to: timeStamp } });
             }}
           >
-            <button className={`awesome-app-unique-btn-999`}>
+            <button name='Change Date-to' className={`awesome-app-unique-btn-999`}>
               {new Date(event.date_to).getFormattedDate()}
             </button>
           </Datepicker>
@@ -133,7 +133,7 @@ class CalendarAddEventComp extends Component {
           justifyContent: 'flex-start',
           marginTop: '10px'
         }}>
-          <button
+          <button name='Add a new Event'
             className={`awesome-app-unique-btn-999`}
             onClick={this.handleSubmit}
             style={{

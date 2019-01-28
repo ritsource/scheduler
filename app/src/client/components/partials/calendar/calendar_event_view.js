@@ -51,10 +51,12 @@ class CalendarEventViewComp extends Component {
     return (
       <div className='calendar-event-view-comp-000' onClick={(e) => e.stopPropagation()}>
         <div className='calendar-event-view-tools-box-001'>
-          <FaStream
-            style={{ marginLeft: '15px' }}
-            onClick={() => this.props.animatedClosing(() => toggleEventDetails(event))}
-          />
+          <div title='View Event'>
+            <FaStream  
+              style={{ marginLeft: '15px' }}
+              onClick={() => this.props.animatedClosing(() => toggleEventDetails(event))}
+            />
+          </div>
           <EnsureDeletionComp
             visible={this.state.askforDelete}
             message='Are you sure you want to delete the event?'
@@ -72,9 +74,11 @@ class CalendarEventViewComp extends Component {
               }, 300);
             }}
           >
-            <FaTrash style={{ marginLeft: '15px', marginTop: '3px' }} onClick={() => {
-              this.setState({ askforDelete: true });
-            }}/>
+            <div title='Delete Event'>
+              <FaTrash style={{ marginLeft: '15px', marginTop: '3px' }} onClick={() => {
+                this.setState({ askforDelete: true });
+              }}/>
+            </div>
           </EnsureDeletionComp>
           
 
@@ -102,19 +106,19 @@ class CalendarEventViewComp extends Component {
               />
             )}
           >
-            <FaCircle
-              onClick={(e) => {
-                e.stopPropagation();
-                const tempState = { screenX: e.screenX, screenY: e.screenY, visible: true };
-                this.setState({ color_panel: tempState });
-              }}
-              style={{ marginLeft: '15px', marginTop: '3px', color: event.hex_color }}
-            />
+            <div title='Change Color'>
+              <FaCircle
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const tempState = { screenX: e.screenX, screenY: e.screenY, visible: true };
+                  this.setState({ color_panel: tempState });
+                }}
+                style={{ marginLeft: '15px', marginTop: '3px', color: event.hex_color }}
+              />
+            </div>
           </Dropdown>
-
-
-
         </div>
+        
         <div className='calendar-event-view-title-box-001'>
         <form onSubmit={(e) => {
           e.preventDefault();
@@ -142,7 +146,7 @@ class CalendarEventViewComp extends Component {
               });
             }}
           >
-            <button className='awesome-app-unique-btn-999' style={dFromAsync ? {
+            <button name='Change Date-from' className='awesome-app-unique-btn-999' style={dFromAsync ? {
               transition : 'border 0.3s ease-out',
               animation: 'asyncButtonText 0.6s infinite',
             } : {}}>
@@ -161,7 +165,7 @@ class CalendarEventViewComp extends Component {
               });
             }}
           >
-            <button className='awesome-app-unique-btn-999' style={dToAsync ? {
+            <button name='Change Date-to' className='awesome-app-unique-btn-999' style={dToAsync ? {
               transition : 'border 0.3s ease-out',
               animation: 'asyncButtonText 0.6s infinite',
             } : {}}>

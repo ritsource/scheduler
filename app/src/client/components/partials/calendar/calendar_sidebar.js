@@ -90,7 +90,10 @@ class CalendarSidebarComp extends React.Component {
               }}
             />
             {this.state.newGroupTitle !== '' && (
-              <button className='any-list-comp-form-submit-btn-003' type='submit'>Add</button>
+              <button name='Add New Item'
+                className='any-list-comp-form-submit-btn-003'
+                type='submit'
+              >Add</button>
             )}
           </form>
         </div>

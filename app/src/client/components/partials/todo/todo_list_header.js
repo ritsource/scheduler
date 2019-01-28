@@ -76,12 +76,10 @@ class TodoListHeader extends React.Component {
             if (document) document.querySelector('#list-002-header-input-inside-form').focus();
           }}
         >
-          <button className='calendar-sidebar-item-options-btn'
+          <button name='View Group Options'
+            className='calendar-sidebar-item-options-btn'
             onClick={() => {
               this.setState({ dropdown_visible: true });
-            }}
-            style={{
-              // marginRight: '-10px'
             }}
           >
             <FaEllipsisH style={{

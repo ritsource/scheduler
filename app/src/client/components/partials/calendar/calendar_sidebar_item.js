@@ -89,7 +89,7 @@ class CalendarSidebarItem extends React.Component {
             document.querySelector(`#calendar-sidebar-item-input-inside-form-${group._id}`).focus();
           }}
         >
-          <button className='calendar-sidebar-item-options-btn' onClick={() => {
+          <button name='More Options' className='calendar-sidebar-item-options-btn' onClick={() => {
             this.setState({ dropdown_visible: true });
           }}>
             <FaEllipsisV />

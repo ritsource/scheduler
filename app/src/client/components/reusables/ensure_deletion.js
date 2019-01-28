@@ -22,8 +22,10 @@ const EnsureDeletionComp = (props) => {
         <div className='ensure-deletion-comp-000'>
           <p>{props.message}</p>
           <div className='ensure-deletion-btn-div-002'>
-            <button onClick={props.onCancel}>Cancel</button>
-            <button className='ensure-deletion-del-btn-003' onClick={async () => {
+            <button name='Cancel Deletion' onClick={props.onCancel}>Cancel</button>
+            <button name='Delete it'
+              className='ensure-deletion-del-btn-003'
+              onClick={async () => {
               props.onCancel();
               await props.onDelete();
             }}>Delete</button>

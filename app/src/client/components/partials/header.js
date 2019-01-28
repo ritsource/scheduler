@@ -58,12 +58,12 @@ class HeaderComp extends React.Component {
           <React.Fragment>
             {(this.props.appMode === 0) && (
               <div className='header-001-calendar-nav'>
-                <button
+                <button name='Navigate to Today'
                   className='awesome-app-unique-btn-999'
                   onClick={this.navigateToNow}
                 >Today</button>
 
-                <button
+                <button name='Navigate to Previous Month'
                   style={{ marginRight: '0px' }}
                   className='header-002-nav-btn'
                   onClick={() => {
@@ -71,7 +71,7 @@ class HeaderComp extends React.Component {
                   }}
                 >{'<'}</button>
 
-                <button
+                <button name='Navigate to Next Month'
                   className='header-002-nav-btn'
                   style={{ marginLeft: '0px' }}
                   onClick={() => {
@@ -85,12 +85,16 @@ class HeaderComp extends React.Component {
 
             <div className='header-001-right-div'>
               <div className='header-002-app-mode-div'>
-                <Link to='/calendar'><button className='awesome-app-unique-btn-999'
-                  disabled={this.props.appMode === 0}>Calendar
-                </button></Link>
-                <Link to='/todo'><button className='awesome-app-unique-btn-999'
-                  disabled={this.props.appMode === 1}>Todo
-                </button></Link>
+                <Link to='/calendar'>
+                  <button name='Chnage to Calendar Mode' className='awesome-app-unique-btn-999'
+                    disabled={this.props.appMode === 0}>Calendar
+                  </button>
+                </Link>
+                <Link to='/todo'>
+                  <button name='Chnage to Todo Mode' className='awesome-app-unique-btn-999'
+                    disabled={this.props.appMode === 1}>Todo
+                  </button>
+                </Link>
               </div>
               <HeaderOptDropdownComp
                 { ...this.state }

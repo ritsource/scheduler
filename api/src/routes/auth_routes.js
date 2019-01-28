@@ -63,7 +63,6 @@ module.exports = (app) => {
     passport.authenticate('google', { failureRedirect: '/login' }),
     (req, res) => {
       res.redirect('/');
-      // res.status(301).redirect(APP_HOST);
     });
 
   app.get('/auth/facebook',
@@ -73,13 +72,11 @@ module.exports = (app) => {
     passport.authenticate('facebook', { failureRedirect: '/login' }),
     function(req, res) {
       res.redirect('/');
-      // res.status(301).redirect(APP_HOST);
     });
 
   app.get('/auth/logout', (req, res) => {
     req.logout();
     res.redirect('/');
-    // res.status(301).redirect(APP_HOST);
   });
 
   app.get('/api/current_user', (req, res) => {

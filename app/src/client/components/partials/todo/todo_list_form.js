@@ -32,7 +32,10 @@ class TodoListForm extends Component {
           }}
         />
         {this.state.title !== '' && (
-          <button className='any-list-comp-form-submit-btn-003' type='submit'>Add</button>
+          <button name='Add a new Event'
+            className='any-list-comp-form-submit-btn-003'
+            type='submit'
+          >Add</button>
         )}
       </form>
     );

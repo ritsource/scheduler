@@ -82,7 +82,7 @@ class LoginPage extends React.Component {
                   <p className='login-page-div-error_message'>{this.state.error_message}</p>
                 )}
                 <div>
-                  <button type='submit'>Register</button>
+                  <button name='Register Account' type='submit'>Register</button>
                   <p>or <span className='the-hover-blue-text' onClick={() => {
                     this.setState({ register_mode: false, error_message: false })
                   }}>just Login??</span></p>
@@ -100,7 +100,7 @@ class LoginPage extends React.Component {
                   <p className='login-page-div-error_message'>{this.state.error_message}</p>
                 )}
                 <div>
-                  <button type='submit'>Login</button>
+                  <button name='Login' type='submit'>Login</button>
                   <p>or <span className='the-hover-blue-text' onClick={() => {
                     this.setState({ register_mode: true, error_message: false })
                   }}>Create new account??</span></p>
@@ -109,7 +109,7 @@ class LoginPage extends React.Component {
             )}
             <div className='login-page-oauth-div-002'>
               <a href='/auth/google'>
-                <button className='login-page-buttons-002-google'>
+                <button name='Signin with Google' className='login-page-buttons-002-google'>
                   <FaGoogle style={{
                     fontSize: '13px',
                     marginRight: '10px'
@@ -118,7 +118,7 @@ class LoginPage extends React.Component {
                 </button>
               </a>
               <a href='/auth/facebook'>
-                <button className='login-page-buttons-002-facebook'>
+                <button name='Signin with Facebook' className='login-page-buttons-002-facebook'>
                   <FaFacebookF style={{
                     fontSize: '13px',
                     marginRight: '10px'

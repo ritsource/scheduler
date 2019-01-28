@@ -139,7 +139,7 @@ class EventDetailsComp extends React.Component {
               onChange={(e) => { this.setState({ stepTitle: e.target.value }) }}
             ></input>
             {this.state.stepTitle && (
-              <button className='any-list-comp-form-submit-btn-003' type='submit'>Add</button>
+              <button name='Add Step' className='any-list-comp-form-submit-btn-003' type='submit'>Add</button>
             )}
           </form>
         {/* </div> */}

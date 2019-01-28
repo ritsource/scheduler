@@ -6,14 +6,14 @@ const CalendarSidebarNavigator = (props) => (
   <div className='calendar-sidebar-navigation-000'>
     <p>{month_name_dictionary[props.miniCalendarState.month]}&nbsp;{props.miniCalendarState.year}</p>
     <div>
-      <button
+      <button name='Navigate to Previous Month' 
         style={{ marginRight: '2px' }}
         className='sidebar-navigation-001-nav-btn'
         onClick={() => {
           props.handleNavigation(false);
         }}
       >{'<'}</button>
-      <button
+      <button name='Navigate to Next Month'
         className='sidebar-navigation-001-nav-btn'
         style={{ marginLeft: '2px' }}
         onClick={() => {

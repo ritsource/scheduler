@@ -17,4 +17,10 @@ export const day_name_dictionary = [
   'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'
 ];
 
-export const builtin_color_list = ['#f03434', '#59abe3', '#8c14fc', '#2ecc71', '#f7ca18'];
+export const builtin_color_list = [
+  '#f03434', // Redish
+  '#4286f4', // Blueish
+  '#f7ca18', // Yellowish
+  '#ff9b17', // Orangish
+  '#00b16a' // Greenish
+];

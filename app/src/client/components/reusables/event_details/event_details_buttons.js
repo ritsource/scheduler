@@ -72,7 +72,7 @@ const EventDetailsButtonsComp = (props) => {
             });
           }}
         >
-          <button className='awesome-app-unique-btn-999' style={dFromAsync ? {
+          <button name='Change Date-from' className='awesome-app-unique-btn-999' style={dFromAsync ? {
             transition : 'border 0.3s ease-out',
             animation: 'asyncButtonText 0.6s infinite',
             flexGrow: 1,
@@ -92,7 +92,7 @@ const EventDetailsButtonsComp = (props) => {
             });
           }}
         >
-          <button className='awesome-app-unique-btn-999' style={dToAsync ? {
+          <button name='Change Date-to' className='awesome-app-unique-btn-999' style={dToAsync ? {
             transition : 'border 0.3s ease-out',
             animation: 'asyncButtonText 0.6s infinite',
             flexGrow: 1,
@@ -106,7 +106,7 @@ const EventDetailsButtonsComp = (props) => {
       <div style={{
         display: 'flex', flexDirection: 'row', padding: '0px', justifyContent: 'space-between'
       }}>
-        <button
+        <button name='Close Event Details'
           className='awesome-app-unique-btn-999'
           onClick={() => {
             props.closeEventDetails();
@@ -132,7 +132,7 @@ const EventDetailsButtonsComp = (props) => {
               }, 300);
             }}
           >
-            <button
+            <button name='Delete Event'
               style={{ marginLeft: '10px' }}
               className='awesome-app-unique-btn-999'
               onClick={() => {
@@ -161,7 +161,7 @@ const EventDetailsButtonsComp = (props) => {
           props.setParentState({ description: e.target.value })
         }}
       />
-      <button
+      <button name='Add Description'
         style={{ marginTop: '5px', background: props.hex_color, color: 'white', width: '100%' }}
         className='todo-details-description-button-002'
         onClick={async () => {
