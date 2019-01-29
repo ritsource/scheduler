@@ -148,6 +148,7 @@ class EventDetailsComp extends React.Component {
             { ...this.state }
             { ...this.props }
             setParentState={(obj) => this.setState(obj)}
+            handleEventDelete={this.handleEventDelete}
           />
       </div>
     );

@@ -94,6 +94,9 @@ class ResetPasswordPage extends React.Component {
             )}
             <div>
               <button name='Submit Password' type='submit'>Submit</button>
+              {this.state.loading_anime && (
+                <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+              )}
             </div>
           </form>
         </div>

@@ -124,7 +124,10 @@ const EventDetailsButtonsComp = (props) => {
                 props.setParentState({ askforDelete_close: false });
               }, 300);
             }}
-            onDelete={async () => await this.handleEventDelete(event._id)}
+            onDelete={async () => {
+              await props.handleEventDelete(event._id);
+              props.closeEventDetails();
+            }}
             onCancel={() => {
               props.setParentState({ askforDelete_close: true });
               setTimeout(() => {

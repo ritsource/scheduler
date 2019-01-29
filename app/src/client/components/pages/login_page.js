@@ -16,12 +16,15 @@ class LoginPage extends React.Component {
       email: '',
       password: '',
       register_mode: false,
-      error_message: false
+      error_message: false,
+      loading_anime: false
     };
   }
 
   registerUser = async (e) => {
     e.preventDefault();
+    this.setState({ loading_anime: true });
+
     try {
       const response = await axios.post('/auth/register', {
         name: this.state.name,
@@ -29,16 +32,18 @@ class LoginPage extends React.Component {
         password: this.state.password,
       });
       
-      this.setState({ register_mode: false });
+      this.setState({ loading_anime: false, register_mode: false });
     } catch (error) {
       if (error.response.status === 409) {    
-        return this.setState({ error_message: error.response.data.message })
+        return this.setState({ loading_anime: false, error_message: error.response.data.message })
       }
     }
   }
 
   loginUser = async (e) => {
     e.preventDefault();
+    this.setState({ loading_anime: true });
+
     const response = await axios.post('/auth/local', {
       email: this.state.email,
       password: this.state.password,
@@ -48,7 +53,7 @@ class LoginPage extends React.Component {
       // this.props.setAuthState(response.data);
       window.location.replace('/');
     } else if (response.data === '') {
-      this.setState({ error_message: 'Incorrect email or password' })
+      this.setState({ loading_anime: false, error_message: 'Incorrect email or password' })
     }
 
   }
@@ -84,9 +89,13 @@ class LoginPage extends React.Component {
                 )}
                 <div>
                   <button name='Register Account' type='submit'>Register</button>
-                  <p>or <span className='the-hover-blue-text' onClick={() => {
-                    this.setState({ register_mode: false, error_message: false })
-                  }}>just Login??</span></p>
+                  {this.state.loading_anime ? (
+                    <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+                  ) : (
+                    <p>or <span className='the-hover-blue-text' onClick={() => {
+                      this.setState({ register_mode: false, error_message: false })
+                    }}>just Login??</span></p>
+                  )}
                 </div>
               </form>
             ) : (
@@ -105,14 +114,18 @@ class LoginPage extends React.Component {
                 )}
                 <div>
                   <button name='Login' type='submit'>Login</button>
-                  <p>or <span className='the-hover-blue-text' onClick={() => {
-                    this.setState({ register_mode: true, error_message: false })
-                  }}>Create new account??</span></p>
+                  {this.state.loading_anime ? (
+                    <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+                  ) : (
+                    <p>or <span className='the-hover-blue-text' onClick={() => {
+                      this.setState({ register_mode: true, error_message: false })
+                    }}>Create new account??</span></p>
+                  )}
                 </div>
               </form>
             )}
             <div className='login-page-oauth-div-002'>
-              <a href='/auth/google'>
+              <a href='/auth/google' onClick={() => this.setState({ loading_anime: true })}>
                 <button name='Signin with Google' className='login-page-buttons-002-google'>
                   <FaGoogle style={{
                     fontSize: '13px',
@@ -121,7 +134,7 @@ class LoginPage extends React.Component {
                   Google
                 </button>
               </a>
-              <a href='/auth/facebook'>
+              <a href='/auth/facebook' onClick={() => this.setState({ loading_anime: true })}>
                 <button name='Signin with Facebook' className='login-page-buttons-002-facebook'>
                   <FaFacebookF style={{
                     fontSize: '13px',
