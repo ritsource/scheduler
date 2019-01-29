@@ -12,6 +12,7 @@ module.exports = async (req, res, next) => {
   });
 
   if (!theUser) {
+    console.log('User not found');
     return res.status(422).send({ message: 'User not found.' });
   }
 
@@ -20,6 +21,6 @@ module.exports = async (req, res, next) => {
 
   const userToken = jwt.sign(tokenObj, secret, { expiresIn: '15m' });
 
-  req.body.link = `${process.env.AUTH_REDIRECT_URL_BASE}/forgot?token=${userToken}`;
+  req.body.link = `${process.env.AUTH_REDIRECT_URL_BASE}/reset_password?token=${userToken}`;
   next();
 }

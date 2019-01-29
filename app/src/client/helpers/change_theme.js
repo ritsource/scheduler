@@ -1,7 +1,7 @@
 const myAppThemes = {
   lightOnly: {
     '--danger-red-color': '#f03434',
-    // '--safe-green-color': '#20b133',
+    '--safe-green-color': '#019031',
     '--background-color': 'white',
     '--border-color': '#d8d8d8',
     '--hover-mint-light': '#f3f3f3',
@@ -18,7 +18,7 @@ const myAppThemes = {
   // },
   darkOnly: {
     '--danger-red-color': '#f03434',
-    // '--safe-green-color': '#20b133',
+    '--safe-green-color': '#019031',
     '--background-color': '#151a1d',
     '--border-color': '#292f33',
     '--hover-mint-light': '#1c2225',

@@ -100,7 +100,7 @@ class LoginPage extends React.Component {
                 {this.state.error_message && (
                   <React.Fragment>
                     <p className='login-page-div-error_message'>{this.state.error_message}</p>
-                    <p><span className='the-hover-blue-text'><Link to='/forgot'>Forgot password?</Link></span></p>
+                    <p><span className='the-hover-blue-text'><Link to='/forgot_password'>Forgot password?</Link></span></p>
                   </React.Fragment>
                 )}
                 <div>

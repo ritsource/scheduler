@@ -13,8 +13,7 @@ module.exports = (app) => {
     try {
       res.status(200).send({ message: 'Email has been sent.' });
     } catch (error) {
-      // console.log(error);
-      res.status(422).send({ message: 'Something went wrong.' });
+      res.status(500).send({ message: 'Something went wrong.' });
     }
   });
 
