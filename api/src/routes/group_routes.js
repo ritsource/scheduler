@@ -1,11 +1,13 @@
 const requireAuth = require('../middlewares/require_auth');
+const clearCache = require('../middlewares/clear_cache');
+const { groupHashKey } = require('../constants/hash_keys');
 const group_color_list = require('../constants/colors');
 
 const mongoose = require('mongoose');
 const Group = mongoose.model('Group');
 
 module.exports = (app) => {
-  app.post('/api/group/new', requireAuth, async (req, res) => {
+  app.post('/api/group/new', requireAuth, clearCache(groupHashKey), async (req, res) => {
     try {
       const hex_color = group_color_list[Math.floor(Math.random() * 5)];
 
@@ -32,7 +34,8 @@ module.exports = (app) => {
       const allGroups = await Group.find({
         _creator: req.user._id,
         _isDeleted: false
-      });
+      }).cache({ key: req.user.id + groupHashKey });
+
       res.send(allGroups);
     } catch (error) {
       // console.log(error);
@@ -54,7 +57,7 @@ module.exports = (app) => {
     }
   });
 
-  app.put('/api/group/edit/:groupId', requireAuth, async (req, res) => {
+  app.put('/api/group/edit/:groupId', requireAuth, clearCache(groupHashKey), async (req, res) => {
     try {
       const newGroup = await Group.findOneAndUpdate(
         { _id: req.params.groupId, _creator: req.user._id },
@@ -68,7 +71,7 @@ module.exports = (app) => {
     }
   });
 
-  app.patch('/api/group/delete/:groupId', requireAuth, async (req, res) => {
+  app.patch('/api/group/delete/:groupId', requireAuth, clearCache(groupHashKey), async (req, res) => {
     try {
       const delGroup = await Group.findOneAndUpdate(
         {
@@ -86,7 +89,7 @@ module.exports = (app) => {
     }
   });
 
-  app.put('/api/group/rearrange', requireAuth, async (req, res) => {
+  app.put('/api/group/rearrange', requireAuth, clearCache(groupHashKey), async (req, res) => {
     const { focusedGroup, fromRank, toRank, movedGroups } = req.body;
     // console.log({ focusedGroup, fromRank, toRank, movedGroups });
 

@@ -1,10 +1,12 @@
 const requireAuth = require('../middlewares/require_auth');
+const clearCache = require('../middlewares/clear_cache');
+const { eventHashKey } = require('../constants/hash_keys');
 
 const mongoose = require('mongoose');
 const Event = mongoose.model('Event');
 
 module.exports = (app) => {
-  app.post('/api/event/new', requireAuth, async (req, res) => {
+  app.post('/api/event/new', requireAuth, clearCache(eventHashKey), async (req, res) => {
     try {
       const count = await Event.count({
         _creator: req.user._id,
@@ -38,7 +40,8 @@ module.exports = (app) => {
       const allEvent = await Event.find({
         _creator: req.user._id,
         _isDeleted: false
-      });
+      }).cache({ key: req.user.id + eventHashKey });
+
       res.send(allEvent);
     } catch (error) {
       // console.log(error);
@@ -73,7 +76,7 @@ module.exports = (app) => {
     }
   });
 
-  app.patch('/api/event/done/:eventId', requireAuth, async (req, res) => {
+  app.patch('/api/event/done/:eventId', requireAuth, clearCache(eventHashKey), async (req, res) => {
     try {
       const newEvent = await Event.findOneAndUpdate(
         { _id: req.params.eventId, _creator: req.user._id },
@@ -87,7 +90,7 @@ module.exports = (app) => {
     }
   });
 
-  app.patch('/api/event/undo/:eventId', requireAuth, async (req, res) => {
+  app.patch('/api/event/undo/:eventId', requireAuth, clearCache(eventHashKey), async (req, res) => {
     try {
       const newEvent = await Event.findOneAndUpdate(
         { _id: req.params.eventId, _creator: req.user._id },
@@ -101,7 +104,7 @@ module.exports = (app) => {
     }
   });
 
-  app.put('/api/event/edit/:eventId', requireAuth, async (req, res) => {
+  app.put('/api/event/edit/:eventId', requireAuth, clearCache(eventHashKey), async (req, res) => {
     try {
       const newEvent = await Event.findOneAndUpdate(
         { _id: req.params.eventId, _creator: req.user._id },
@@ -115,7 +118,7 @@ module.exports = (app) => {
     }
   });
 
-  app.put('/api/event/edit_date/:eventId', requireAuth, async (req, res) => {
+  app.put('/api/event/edit_date/:eventId', requireAuth, clearCache(eventHashKey), async (req, res) => {
     try {
       let date_from, date_to;
       const oldEvent = await Event.findOne({ _id: req.params.eventId, _creator: req.user._id });
@@ -143,7 +146,7 @@ module.exports = (app) => {
     }
   });
 
-  app.patch('/api/event/delete/:eventId', requireAuth, async (req, res) => {
+  app.patch('/api/event/delete/:eventId', requireAuth, clearCache(eventHashKey), async (req, res) => {
     try {
       const delEvent = await Event.findOneAndUpdate(
         { _id: req.params.eventId, _creator: req.user._id },

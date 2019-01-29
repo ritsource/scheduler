@@ -1,10 +1,12 @@
 const requireAuth = require('../middlewares/require_auth');
+const clearCache = require('../middlewares/clear_cache');
+const { stepHashKey } = require('../constants/hash_keys');
 
 const mongoose = require('mongoose');
 const Step = mongoose.model('Step');
 
 module.exports = (app) => {
-  app.post('/api/step/new', requireAuth, async (req, res) => {
+  app.post('/api/step/new', requireAuth, clearCache(stepHashKey), async (req, res) => {
     try {
       const count = await Step.count({
         _creator: req.user._id,
@@ -24,7 +26,10 @@ module.exports = (app) => {
 
   app.get('/api/step/all', requireAuth, async (req, res) => {
     try {
-      const allStep = await Step.find({ _creator: req.user._id, _isDeleted: false });
+      const allStep = await Step.find({
+        _creator: req.user._id, _isDeleted: false
+      }).cache({ key: req.user.id + stepHashKey });
+      
       res.send(allStep);
     } catch (error) {
       // console.log(error);
@@ -46,7 +51,7 @@ module.exports = (app) => {
     }
   });
 
-  app.patch('/api/step/done/:stepId', requireAuth, async (req, res) => {
+  app.patch('/api/step/done/:stepId', requireAuth, clearCache(stepHashKey), async (req, res) => {
     try {
       const newStep = await Step.findOneAndUpdate(
         { _id: req.params.stepId, _creator: req.user._id, _isDeleted: false },
@@ -60,7 +65,7 @@ module.exports = (app) => {
     }
   });
 
-  app.patch('/api/step/undo/:stepId', requireAuth, async (req, res) => {
+  app.patch('/api/step/undo/:stepId', requireAuth, clearCache(stepHashKey), async (req, res) => {
     try {
       const newStep = await Step.findOneAndUpdate(
         { _id: req.params.stepId, _creator: req.user._id, _isDeleted: false },
@@ -74,7 +79,7 @@ module.exports = (app) => {
     }
   });
 
-  app.put('/api/step/edit/:stepId', requireAuth, async (req, res) => {
+  app.put('/api/step/edit/:stepId', requireAuth, clearCache(stepHashKey), async (req, res) => {
     try {
       const newStep = await Step.findOneAndUpdate(
         { _id: req.params.stepId, _creator: req.user._id, _isDeleted: false },
@@ -88,7 +93,7 @@ module.exports = (app) => {
     }
   });
 
-  app.patch('/api/step/delete/:stepId', requireAuth, async (req, res) => {
+  app.patch('/api/step/delete/:stepId', requireAuth, clearCache(stepHashKey), async (req, res) => {
     try {
       const delStep = await Step.findOneAndUpdate(
         { _id: req.params.stepId, _creator: req.user._id },
@@ -102,7 +107,7 @@ module.exports = (app) => {
     }
   });
 
-  app.put('/api/step/rearrange', requireAuth, async (req, res) => {
+  app.put('/api/step/rearrange', requireAuth, clearCache(stepHashKey), async (req, res) => {
     const { focusedStep, fromRank, toRank, movedSteps } = req.body;
     // console.log({ focusedStep, fromRank, toRank, movedSteps });
     

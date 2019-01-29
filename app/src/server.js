@@ -32,7 +32,6 @@ app.get('*', (req, res) => {
   }).catch((e) => {
     console.log('Catch **');
     console.log('Catch **', e.message);
-    
   });
 });
 

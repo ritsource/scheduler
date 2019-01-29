@@ -8,8 +8,7 @@ import EnsureDeletionComp from '../ensure_deletion';
 
 const EventDetailsButtonsComp = (props) => {
   const { event, toggleEventDetails, dFromAsync, dToAsync, groupAsync } = props;
-  // console.log(groupAsync);
-  
+    
   const groupNow = props.groups.find(({ _id }) => _id === event._group);
 
   return (
@@ -176,4 +175,4 @@ const EventDetailsButtonsComp = (props) => {
   );
 }
 
-export default EventDetailsButtonsComp;
+export default EventDetailsButtonsComp;2021
