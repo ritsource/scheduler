@@ -1,28 +1,49 @@
-const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
 const sendEmail = require('../services/nodemailer');
+const generateUserToken = require('../middlewares/gen_email_token');
 const keys = require('../config/keys');
-const outputTemp = require('../templates/mailer_v1');
+
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
 
 module.exports = (app) => {
-  // app.get('/api/forgot_password/:emailToken', (req, res) => {    
-  //   try {
-      
-  //   } catch (error) {
-      
-  //   }
-  // });
-
-  app.post('/api/request_a_mail', sendEmail, (req, res) => {
+  app.post('/api/request_a_mail', generateUserToken, sendEmail, (req, res) => {
     try {
-      console.log('Su');      
+      res.status(200).send({ message: 'Email has been sent.' });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      res.status(422).send({ message: 'Something went wrong.' });
     }
   });
 
-  // app.post('/api/password_reset/:token', () => {
-  //   // reset_email_key
-  // });
+  app.post('/api/password_reset', (req, res) => {
+    // try {
+      const { email, _id } = jwt.verify(req.body.token, keys.email_token_key);
+    // } catch (error) {
+    //   res.status(504).send({ message: 'Your token has expired.' });
+    // }
+
+    bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.hash(req.body.password, salt, async (err, hash) => {
+        if (err) return err;
+        const password = hash;
+  
+        try {
+          const newUser = await User.findOneAndUpdate(
+            { email, _id },
+            { password: password },
+            { new: true }
+          );
+          
+          newUser.password = null;
+          res.send(newUser);
+        } catch (error) {
+          // console.log(error.message);        
+          res.status(422).send();
+        }
+      });
+    });
+  });
 }
