@@ -119,11 +119,10 @@ class CalendarContentComp extends React.Component {
         for (let k = (startIndex + 1); k <= endIndex; k++) {
           // To ignore the null spaces
           for (let g = 0; g < tempLength; g++) {
-            console.log('eventDistMap[k]', eventDistMap[k], k);
-            
             if (Array.isArray(eventDistMap[k]) && eventDistMap[k][g]) {
-              // if (!eventDistMap[k][g]) eventDistMap[k][g] = { val: null };
-              if (eventDistMap[k][g].val !== false) eventDistMap[k][g] = { val: null };
+              if (k % 7 !== 0 && eventDistMap[k][g].val !== false) {
+                eventDistMap[k][g] = { val: null };
+              }
             } else {
               eventDistMap[k] = [ { val: null } ];
             }
@@ -131,7 +130,7 @@ class CalendarContentComp extends React.Component {
 
           // If finds all { false } on the loop, concat { false }
           // But if Calendar-index is start of row add rest of the same event to it
-          if (k % 7 === 0) {            
+          if (k % 7 === 0) {
             const tempEvent = { ...event };
             tempEvent.startIndex = k;
             tempEvent.endIndex = endIndex;
@@ -139,8 +138,9 @@ class CalendarContentComp extends React.Component {
             if (Array.isArray(eventDistMap[k])) {
               eventDistMap[k][tempLength] = { val: tempEvent };
             } else {
-              eventDistMap[k] = [ { val: tempEvent } ];
+              eventDistMap[k] = [ { val: { ...tempEvent } } ];              
             }
+            
           } else {
             if (Array.isArray(eventDistMap[k])) {
               eventDistMap[k][tempLength] = { val: false, refEvent: event };

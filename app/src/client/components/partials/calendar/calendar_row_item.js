@@ -77,6 +77,8 @@ const CalendarRowItem = (props) => {
                     />
                   );
                 } else if (event.val) {
+                  // console.log('itemIndex', itemIndex);
+
                   return (
                     <CalendarEventComp
                       visible={true}

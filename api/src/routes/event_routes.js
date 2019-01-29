@@ -44,7 +44,7 @@ module.exports = (app) => {
         _isDeleted: false
       }).cache({ key: req.user.id + eventHashKey });
       
-      console.log('allEvent', allEvent[8]);      
+      // console.log('allEvent', allEvent[8]);   
 
       res.send(allEvent);
     } catch (error) {
