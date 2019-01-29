@@ -32,8 +32,8 @@ mongoose.Query.prototype.exec = async function() {
   const cacheValue = await client.hget(this.hashKey, key);
 
   if (cacheValue) {
-    console.log('GETTING', this.hashKey);
     const doc = JSON.parse(cacheValue);
+    // console.log('******* GETTING', this.hashKey, doc);
 
     return Array.isArray(doc)
       ? doc.map(d => new this.model(d))
@@ -43,13 +43,13 @@ mongoose.Query.prototype.exec = async function() {
   const result = await exec.apply(this, arguments);
 
   client.hset(this.hashKey, key, JSON.stringify(result), 'EX', 10);
-  console.log('SETTING', this.hashKey);
+  // console.log('******* SETTING', this.hashKey, result);
 
   return result;
 };
 
 const clearHash = (hashKey) => {
-  console.log('Clear - ', hashKey);
+  // console.log('******* CLEARING', hashKey);
   client.del(JSON.stringify(hashKey));
 };
 

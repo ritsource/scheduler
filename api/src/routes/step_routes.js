@@ -8,7 +8,7 @@ const Step = mongoose.model('Step');
 module.exports = (app) => {
   app.post('/api/step/new', requireAuth, clearCache(stepHashKey), async (req, res) => {
     try {
-      const count = await Step.count({
+      const count = await Step.countDocuments({
         _creator: req.user._id,
       });
 

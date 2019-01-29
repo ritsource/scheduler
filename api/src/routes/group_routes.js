@@ -11,7 +11,7 @@ module.exports = (app) => {
     try {
       const hex_color = group_color_list[Math.floor(Math.random() * 5)];
 
-      const count = await Group.count({
+      const count = await Group.countDocuments({
         _creator: req.user._id,
       });
 

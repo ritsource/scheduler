@@ -86,40 +86,46 @@ class CalendarContentComp extends React.Component {
         event.endIndex = endIndex;
 
         // console.log(event);
-        
 
         // tempLength => records length of calendar-index (only where startIndex matches)
         let tempLength;
         if (Array.isArray(eventDistMap[startIndex])) {
-          tempLength = eventDistMap[startIndex].length;
+          // tempLength = eventDistMap[startIndex].length;
 
           // setDone => saves from adding two same eventObj
           let setDone = false;
           // loop over elements of calendar-index (only where startIndex matches)
           for (let f = 0; f < eventDistMap[startIndex].length; f++) {
             // if some spot is { null } it sets the new event there
-            if (eventDistMap[startIndex][f] === null) {
-              eventDistMap[startIndex][f] = event;
+            if (eventDistMap[startIndex][f].val === null) {
+              eventDistMap[startIndex][f] = { val: event };
+              tempLength = f;
               setDone = true;
               break;
             }
           }
           // if no { null } element then concat the eventObj 
-          if (!setDone) eventDistMap[startIndex] = [ ...eventDistMap[startIndex], event ];
+          if (!setDone) {
+            tempLength = eventDistMap[startIndex].length;
+            eventDistMap[startIndex] = [ ...eventDistMap[startIndex], { val: event } ];
+          }
         } else {
           // If the value on eventDistMap is not an array
           tempLength = 0;
-          eventDistMap[startIndex] = [ event ];
+          eventDistMap[startIndex] = [ { val: event } ];
         }
   
         // For loop that iretates between { startIndex + 1 } and { endIndex } & sets the value to { false }
         for (let k = (startIndex + 1); k <= endIndex; k++) {
           // To ignore the null spaces
           for (let g = 0; g < tempLength; g++) {
-            if (Array.isArray(eventDistMap[k])) {
-              if (eventDistMap[k][g].val !== false) eventDistMap[k][g] = null;
+            console.log('eventDistMap[k]', eventDistMap[k], k);
+            
+            if (Array.isArray(eventDistMap[k]) && eventDistMap[k][g]) {
+              // if (!eventDistMap[k][g]) eventDistMap[k][g] = { val: null };
+              if (eventDistMap[k][g].val !== false) eventDistMap[k][g] = { val: null };
             } else {
-              eventDistMap[k] = [ null ];
+              eventDistMap[k] = [ { val: null } ];
             }
           }
 
@@ -129,14 +135,18 @@ class CalendarContentComp extends React.Component {
             const tempEvent = { ...event };
             tempEvent.startIndex = k;
             tempEvent.endIndex = endIndex;
-
-            eventDistMap[k] = Array.isArray(eventDistMap[k])
-              ? [ ...eventDistMap[k], tempEvent ]
-              : [ tempEvent ];
+            
+            if (Array.isArray(eventDistMap[k])) {
+              eventDistMap[k][tempLength] = { val: tempEvent };
+            } else {
+              eventDistMap[k] = [ { val: tempEvent } ];
+            }
           } else {
-            eventDistMap[k] = Array.isArray(eventDistMap[k])
-              ? [ ...eventDistMap[k], { val: false, refEvent: event } ]
-              : [ { val: false, refEvent: event } ];
+            if (Array.isArray(eventDistMap[k])) {
+              eventDistMap[k][tempLength] = { val: false, refEvent: event };
+            } else {
+              eventDistMap[k] = [ { val: false, refEvent: event } ];
+            }
           }
         }
       });
