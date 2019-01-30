@@ -8,18 +8,26 @@ import groups from '../../__data__/groups';
 import TodoPage from '../../../src/client/components/pages/todo_page';
 import configureStore from '../../../src/helpers/configure_store';
 
-test('Snapshot for TodoPage Component', () => {
-  const wrapper = shallow(
-    <Provider store={configureStore({ get: jest.fn(() => {}) })}>
+let wrapper, handleAppMode, setReduxCalendar;
+
+beforeEach(() => {
+  handleAppMode = jest.fn();
+  setReduxCalendar = jest.fn();
+
+  wrapper = shallow(
+    <Provider store={configureStore({ get: jest.fn() })}>
       <TodoPage.component
         auth={{}}
         sideBar={true}
-        handleAppMode={jest.fn(() =>  {})}
-        setReduxCalendar={jest.fn(() =>  {})}
+        handleAppMode={handleAppMode}
+        setReduxCalendar={setReduxCalendar}
         groups={groups}
         events={events}
       />
     </Provider>
   );
+});
+
+test('Snapshot for TodoPage Component', () => {
   expect(wrapper).toMatchSnapshot();
 });
