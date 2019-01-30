@@ -52,6 +52,7 @@ class CalendarSidebarComp extends React.Component {
           handleNavigation={this.handleNavigation}
           navigateToNow={this.navigateToNow}
         />
+        
         <CalendarContentComp miniCalendarState={this.state} miniCalendar={true}/>
 
         <div className='any-list-comp-container-999'>
@@ -72,10 +73,13 @@ class CalendarSidebarComp extends React.Component {
           </div>
           <form
             style={{ bottom: '0px' }}
+            id='calendar-sidebar-add-group-form-x1'
             className='any-list-comp-bottom-form-999'
             onSubmit={async (e) => {
-              e.preventDefault();
-              if (this.state.newGroupTitle !== '') await this.props.asyncPostGroup({ title: this.state.newGroupTitle });
+              e.preventDefault();              
+              if (this.state.newGroupTitle !== '') {
+                await this.props.asyncPostGroup({ title: this.state.newGroupTitle });
+              };
               this.setState({ newGroupTitle: '' });
               scrollToBottom('.calendar-sidebar-001-the-list');
             }}
@@ -90,7 +94,8 @@ class CalendarSidebarComp extends React.Component {
               }}
             />
             {this.state.newGroupTitle !== '' && (
-              <button name='Add New Item'
+              <button
+                name='Add New Item'
                 className='any-list-comp-form-submit-btn-003'
                 type='submit'
               >Add</button>

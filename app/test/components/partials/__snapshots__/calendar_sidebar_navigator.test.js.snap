@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot for CalendarSidebarNavigator Component 1`] = `
+<div
+  className="calendar-sidebar-navigation-000"
+>
+  <p>
+    January
+     
+    2019
+  </p>
+  <div>
+    <button
+      className="sidebar-navigation-001-nav-btn"
+      name="Navigate to Previous Month"
+      onClick={[Function]}
+      style={
+        Object {
+          "marginRight": "2px",
+        }
+      }
+    >
+      &lt;
+    </button>
+    <button
+      className="sidebar-navigation-001-nav-btn"
+      name="Navigate to Next Month"
+      onClick={[Function]}
+      style={
+        Object {
+          "marginLeft": "2px",
+        }
+      }
+    >
+      &gt;
+    </button>
+  </div>
+</div>
+`;

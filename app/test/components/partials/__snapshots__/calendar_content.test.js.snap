@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot for CalendarContentComp Component 1`] = `
+<Connect(CalendarContentComp)
+  miniCalendar={false}
+  month={0}
+  toggleEventDetails={[MockFunction]}
+  year={2019}
+/>
+`;

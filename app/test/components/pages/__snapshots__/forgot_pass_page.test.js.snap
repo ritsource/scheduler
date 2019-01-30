@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Snapshot for LoginPage Component 1`] = `
+exports[`Snapshot for ForgotPasswordPage Component 1`] = `
 <Connect(ForgotPasswordPage)
   handleAppMode={[MockFunction]}
 />

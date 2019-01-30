@@ -6,6 +6,7 @@ import Dropdown from 'react-dropdown-modal';
 // import { SET_CALENDAR_MONTH_STATE } from '../../actions/_action_types';
 import CalendarRowComp from './calendar_row';
 import CalendarAddEventComp from './calendar_add_event';
+import { log } from 'util';
 
 class CalendarContentComp extends React.Component {
   constructor(props) {
@@ -172,6 +173,7 @@ class CalendarContentComp extends React.Component {
   
   async componentWillMount() {    
     await this.updateStateDistributionMaps(this.props);
+    // console.log(this.state.dateDistMap);    
   }
 
   render() {
