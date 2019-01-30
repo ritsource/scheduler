@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { createBrowserHistory } from 'history';
-import ReactSVG from 'react-svg';
+// import ReactSVG from 'react-svg';
 import { Redirect } from 'react-router-dom';
 
 import { handleAppMode } from '../../actions/app_mode_actions';
@@ -9,83 +9,82 @@ import TodoSidebarComp from '../partials/todo/todo_sidebar';
 import TodoListComp from '../partials/todo/todo_list';
 import EventDetailsComp from '../reusables/event_details/event_details';
 
-export class TodoPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      groupId: '',
-      eventId: ''
+export const TodoPage = (props) => {
+  const [ groupId, setGroupId ] = useState('');
+  const [ eventId, setEventId ] = useState('');
+
+  useEffect(() => {
+    props.handleAppMode(1);
+
+    if (!!window) {
+      const urlParams = new URLSearchParams(window.location.search);
+      setGroupId(urlParams.get('group') || '');
+      setEventId(urlParams.get('event') || '');
+
+      if (!urlParams.get('group') && props.groups[0]) {
+        setGroupId(props.groups[0]._id);
+      }
     }
-  }
-
-  changeGroupId = (groupId) => {
-    this.setState({ groupId, eventId: '' });
-    const history = createBrowserHistory();
-    history.push(`/todo?group=${groupId}`);    
-  }
-
-  changeEventId = (eventId) => {
-    this.setState({ eventId });
-    const history = createBrowserHistory();
-    history.push(`/todo?group=${this.state.groupId}&event=${eventId}`);
-  }
-
-  componentDidMount() {
-    const urlParams = new URLSearchParams(window.location.search);
-    this.setState({
-      groupId: urlParams.get('group') || '',
-      eventId: urlParams.get('event') || '',
-    });
     
-    this.props.handleAppMode(1);
+    return () => props.handleAppMode(2);
+  }, []);
 
-    if (!urlParams.get('group') && this.props.groups[0]) {
-      this.setState({ groupId: this.props.groups[0]._id });
-    }
+  const changeGroupId = (id) => {
+    setGroupId(id);
+    setEventId('');
+    const history = createBrowserHistory();
+    history.push(`/todo?group=${id}`);    
   }
-  
-  render() {
-    const activeGroup = this.props.groups.find(({ _id }) => (_id === this.state.groupId));
-    const activeEvent = this.props.events.find(({ _id }) => (_id === this.state.eventId));
 
-    return (
-      <div className='todo-page-000'>
-        {this.props.auth ? (
-          <React.Fragment>
-            <TodoSidebarComp
-              changeGroupId={this.changeGroupId}
-              active_groupId={this.state.groupId}
-              visible={this.props.sideBar}
-            />
-            <div className='todo-page-001-content'>
-              {!this.state.groupId ? (
-                <h2><ReactSVG src='/logo.svg'/>Loading...</h2>
-              ) : (
-                <TodoListComp
-                  active_groupId={this.state.groupId}
-                  activeGroup={activeGroup}
-                  changeEventId={this.changeEventId}
-                />
-              )}
-            </div>
-            {activeEvent && (
-              <EventDetailsComp
-                event={activeEvent}
-                hex_color={activeGroup.hex_color}
-                closeEventDetails={() => {
-                  this.setState({ eventId: '' });
-                  const history = createBrowserHistory();
-                  history.push(`/todo?group=${this.state.groupId}`);
-                }}
+  const changeEventId = (id) => {
+    // setGroupId('');
+    setEventId(id);
+    const history = createBrowserHistory();
+    history.push(`/todo?group=${groupId}&event=${id}`);
+  }
+
+  const activeGroup = props.groups.find(({ _id }) => (_id === groupId));
+  const activeEvent = props.events.find(({ _id }) => (_id === eventId));
+
+  return (
+    <div className='todo-page-000'>
+      {props.auth ? (
+        <React.Fragment>
+          <TodoSidebarComp
+            changeGroupId={changeGroupId}
+            active_groupId={groupId}
+            visible={props.sideBar}
+          />
+          <div className='todo-page-001-content'>
+            {!groupId ? (
+              // <h2><ReactSVG src='/logo.svg'/>Loading...</h2>
+              <h2>Loading...</h2>
+            ) : (
+              <TodoListComp
+                active_groupId={groupId}
+                activeGroup={activeGroup}
+                changeEventId={changeEventId}
               />
             )}
-          </React.Fragment>
-        ) : (
-          <Redirect to='/login' />
-        )}
-      </div>
-    );
-  }
+          </div>
+          {activeEvent && (
+            <EventDetailsComp
+              event={activeEvent}
+              hex_color={activeGroup.hex_color}
+              closeEventDetails={() => {
+                setEventId('');
+                const history = createBrowserHistory();
+                history.push(`/todo?group=${groupId}`);
+              }}
+            />
+          )}
+        </React.Fragment>
+      ) : (
+        <Redirect to='/login' />
+      )}
+    </div>
+  );
+
 }
 
 const mapStateToProps = ({ auth, groups, events, sideBar }) => ({ auth, groups, events, sideBar });

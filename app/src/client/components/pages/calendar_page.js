@@ -1,72 +1,47 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import { SET_CALENDAR_MONTH_STATE } from '../../actions/_action_types';
 import { handleAppMode } from '../../actions/app_mode_actions';
+
 import CalendarSidebarComp from '../partials/calendar/calendar_sidebar';
 import CalendarContentComp from '../partials/calendar/calendar_content';
 import EventDetailsComp from '../reusables/event_details/event_details';
 
-export class CalendarPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activeEvent: null
-    }
-  }
+export const CalendarPage = (props) => {
+  const [ activeEvent, setActiveEvent ] = useState(null);
 
-  toggleEventDetails = (event) => {
-    this.setState({ activeEvent: event });
-  }
-  
-  componentDidMount() {
-    this.props.handleAppMode(0);
-  }
-  
-  componentWillUnmount() {
-    this.props.handleAppMode(2);
-  }
+  useEffect(() => {
+    props.handleAppMode(0);
+    return () => props.handleAppMode(2);
+  }, []);
 
-  componentWillMount() {
-    const { staticContext } = this.props;
-    if (staticContext) {
-      this.props.setReduxCalendar({ year: staticContext.year, month: staticContext.month });
-    } else if (window) {
-      const urlParams = new URLSearchParams(window.location.search);
-      this.props.setReduxCalendar({
-        year: parseInt(urlParams.get('year')) || new Date().getFullYear(),
-        month: parseInt(urlParams.get('month')) || new Date().getMonth(),
-      });
-    }
-  }
-  
-  render() {
-    const { activeEvent } = this.state;
+  const toggleEventDetails = (event) => setActiveEvent(event);
 
-    return (
-      <div className='calendar-page-000'>
-        {this.props.auth ? (
-          <React.Fragment>
-            <CalendarSidebarComp visible={this.props.sideBar}/>
-            <CalendarContentComp
-              staticContext={this.props.staticContext}
-              toggleEventDetails={this.toggleEventDetails}
+  return (
+    <div className='calendar-page-000'>
+      {props.auth ? (
+        <React.Fragment>
+          <CalendarSidebarComp visible={props.sideBar}/>
+          <CalendarContentComp
+            staticContext={props.staticContext}
+            toggleEventDetails={toggleEventDetails}
+          />
+          {activeEvent && (
+            <EventDetailsComp
+              event={activeEvent}
+              hex_color={activeEvent.hex_color}
+              closeEventDetails={() => toggleEventDetails(null)}
             />
-            {activeEvent && (
-              <EventDetailsComp
-                event={activeEvent}
-                hex_color={activeEvent.hex_color}
-                closeEventDetails={() => this.toggleEventDetails(null)}
-              />
-            )}
-          </React.Fragment>
-        ) : (
-          <Redirect to='/login' />
-        )}
-      </div>
-    );
-  }
+          )}
+        </React.Fragment>
+      ) : (
+        <Redirect to='/login' />
+      )}
+    </div>
+  );
+
 }
 
 const mapStateToProps = ({ auth, groups, events, sideBar }) => ({ auth, groups, events, sideBar });

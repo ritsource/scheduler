@@ -173,7 +173,7 @@ class CalendarContentComp extends React.Component {
   
   async componentWillMount() {    
     await this.updateStateDistributionMaps(this.props);
-    // console.log(this.state.dateDistMap);    
+    console.log(this.state.eventDistMap);  
   }
 
   render() {
