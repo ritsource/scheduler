@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import axios from 'axios'
 
 import { builtin_color_list } from '../../../utils/constants';
 import { asyncFetchEvents, asyncPostEvent, asyncRearrangeEvents, rearrangeReduxEvents } from '../../../actions/event_actions';
@@ -16,6 +15,7 @@ export const TodoListComp = (props) => {
   const [ loading_anime, setLoadingAnime ] = useState(false);
 
   useEffect(() => {
+    props.asyncFetchEvents();
     if (!_.isEqual(events, props.events)) setEvents(props.events);
   });
 
@@ -63,7 +63,7 @@ export const TodoListComp = (props) => {
               
               color_options={[ ...builtin_color_list, ...props.auth.custom_colors]}
               changeColorFunc={async (color) => {
-                await props.asyncEditGroup(group._id, { hex_color: color });
+                await props.asyncEditGroup(props.activeGroup._id, { hex_color: color });
               }}
             />
 

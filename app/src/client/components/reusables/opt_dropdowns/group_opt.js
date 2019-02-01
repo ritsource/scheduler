@@ -12,24 +12,26 @@ class GroupOptDropdownComp extends Component {
     super(props);
     this.state = {
       askforDelete: false,
-      askforDelete_close: false
+      askforDelete_close: false,
+      color_panel: {
+        visible: false,
+        screenX: null,
+        screenY: null,
+      }
     }
   }
 
   render() {
     const { group } = this.props;
-    const { screenX, screenY, windowHeightDiff, color_panel } = this.props;
+    const { screenX, screenY, windowHeightDiff } = this.props;
   
     return (
       <Dropdown
         visible={this.props.dropdown_visible}
-        onButtonClick={(e) => {
-          const windowHeightDiff = window ? (window.outerHeight - window.innerHeight) : 0;
-          this.props.setParentState({ screenX: e.screenX, screenY: e.screenY, dropdown_visible: true, windowHeightDiff });
-        }}pro
-        onClose={() => {
-          this.props.setParentState({ screenX: null, screenY: null, dropdown_visible: false });
+        onButtonClick={(e) => {          
+          this.props.showDropdown(e.screenX, e.screenY, window ? (window.outerHeight - window.innerHeight) : 0);
         }}
+        onClose={this.props.hideDropdown}
         preventDefaultClose={false}
         showArrow={false}
         arrowPosition={{ right: '0px' }}
@@ -52,7 +54,7 @@ class GroupOptDropdownComp extends Component {
                 onClose={() => {
                   this.setState({ askforDelete_close: true, askforDelete: false });
                   setTimeout(() => {
-                    this.props.setParentState({ dropdown_visible: false });
+                    this.props.hideDropdown();
                     this.setState({ askforDelete_close: false });
                   }, 300);
                 }}
@@ -75,13 +77,21 @@ class GroupOptDropdownComp extends Component {
             )}
     
             <Dropdown
-              visible={this.props.color_panel.visible}
+              visible={this.state.color_panel.visible}
+              onButtonClick={(e) => {
+                e.stopPropagation();
+                const tempState = { screenX: e.screenX, screenY: e.screenY, visible: true };
+                this.setState({ color_panel: tempState });
+              }}
               onClose={() => {
-                const tempState = { screenX: null, screenY: null, visible: false };
-                this.props.setParentState({ color_panel: tempState });
+                this.setState({ color_panel: { screenX: null, screenY: null, visible: false } });
               }}
               showArrow={false}
-              position={this.props.subPositionObj}
+              position={{
+                left: (this.state.color_panel.screenX - 185 + 8),
+                bottom: `calc(100vh - ${this.state.color_panel.screenY - this.props.windowHeightDiff + 8}px)`
+                // top: this.state.color_panel.screenY - this.props.windowHeightDiff + 8
+              }}
               modalBackground='var(--background-color)'
               modalShadow='0px 3px 13px 0px rgba(0,0,0,0.20)'
               modalBorder={false}
@@ -94,9 +104,9 @@ class GroupOptDropdownComp extends Component {
               )}
             >
               <div className='any-dropdown-content-item-999' onClick={(e) => {
-                e.stopPropagation();
-                const tempState = { screenX: e.screenX, screenY: e.screenY, visible: true };
-                this.props.setParentState({ color_panel: tempState });
+                // e.stopPropagation();
+                // const tempState = { screenX: e.screenX, screenY: e.screenY, visible: true };
+                // this.setState({ color_panel: tempState });
               }}>
                 <IoIosBrush style={{ marginRight: '8px', marginBottom: '-2px' }}/>
                 Color

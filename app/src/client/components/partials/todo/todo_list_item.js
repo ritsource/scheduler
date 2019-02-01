@@ -30,7 +30,7 @@ const TodoListItem = (props) => (
         <p>
           <span style={props.event._isDone ? {
             textDecoration: 'line-through'
-          } : {}}>{props.event.title + ' - ' + props.event._rank}</span><br/>
+          } : {}}>{props.event.title}</span><br/>
           <span style={{
             color: 'var(--text-color-light-3)',
             fontSize: '12px'
