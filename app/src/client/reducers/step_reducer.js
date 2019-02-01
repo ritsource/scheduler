@@ -27,9 +27,9 @@ export default (state = [], action) => {
       return sortByRank([ ...state.filter(({_id}) => _id !== action._id) ]);
 
     case REARRANGE_REDUX_STEPS:
-      const { fromIndex, toIndex } = action;
-      // console.log({ fromIndex, toIndex });      
+      const { fromIndex, toIndex } = action;  
       const temp = state[toIndex]._rank;
+
       const newArr = state.map((step, i) => {
         if (fromIndex < toIndex) {
           if (i > fromIndex && i <= toIndex) {

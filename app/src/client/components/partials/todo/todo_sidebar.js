@@ -22,8 +22,6 @@ export const TodoSidebarComp = (props) => {
     const fromIndex = result.source.index;
     const toIndex = result.destination.index;
 
-    props.rearrangeReduxGroups({ fromIndex, toIndex });
-
     const movedGroups = (fromIndex < toIndex)
       ? tempGroup.slice(fromIndex + 1, toIndex + 1).map(({ _id }) => _id)
       : tempGroup.slice(toIndex, fromIndex).map(({ _id }) => _id);
@@ -33,6 +31,12 @@ export const TodoSidebarComp = (props) => {
       fromRank: tempGroup[fromIndex]._rank,
       toRank: tempGroup[toIndex]._rank,
       movedGroups: movedGroups
+    });
+
+    // props.rearrangeReduxGroups({ fromIndex, toIndex });
+    props.rearrangeReduxGroups({
+      fromRank: tempGroup[fromIndex]._rank,
+      toRank: tempGroup[toIndex]._rank,
     });
   }
 

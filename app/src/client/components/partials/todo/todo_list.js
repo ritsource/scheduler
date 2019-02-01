@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import axios from 'axios'
 
 import { builtin_color_list } from '../../../utils/constants';
 import { asyncFetchEvents, asyncPostEvent, asyncRearrangeEvents, rearrangeReduxEvents } from '../../../actions/event_actions';
@@ -12,6 +13,7 @@ import TodoListHeader from './todo_list_header';
 
 export const TodoListComp = (props) => {
   const [ events, setEvents ] = useState(props.events);
+  const [ loading_anime, setLoadingAnime ] = useState(false);
 
   useEffect(() => {
     if (!_.isEqual(events, props.events)) setEvents(props.events);
@@ -19,6 +21,8 @@ export const TodoListComp = (props) => {
 
   const onDragEnd = (result) => {
     if (result.source.index === result.destination.index) return;
+
+    setLoadingAnime(true);
 
     const tempEvents = [ ...events ];
 
@@ -34,9 +38,14 @@ export const TodoListComp = (props) => {
       fromRank: tempEvents[fromIndex]._rank,
       toRank: tempEvents[toIndex]._rank,
       movedEvents: movedEvents
+    }).then(() => {
+      setLoadingAnime(false);
     });
 
-    props.rearrangeReduxEvents({ fromIndex, toIndex });
+    props.rearrangeReduxEvents({
+      fromRank: tempEvents[fromIndex]._rank,
+      toRank: tempEvents[toIndex]._rank,
+    });
   };
 
   return (
@@ -50,6 +59,7 @@ export const TodoListComp = (props) => {
               activeGroup={props.activeGroup}
               asyncEditGroup={props.asyncEditGroup}
               asyncDeleteGroup={props.asyncDeleteGroup}
+              loading_anime={loading_anime}
               
               color_options={[ ...builtin_color_list, ...props.auth.custom_colors]}
               changeColorFunc={async (color) => {
@@ -98,8 +108,7 @@ const mapStateToProps = ({ events, auth }, props) => ({
   auth,
   events: events.filter(({ _group }) => {
     return _group === props.active_groupId;
-  })
-  // }).sort((a, b) => a._rank > b._rank ? 1 : -1)
+  }).sort((a, b) => a._rank > b._rank ? 1 : -1)
 });
 
 const mapDispatchToProps = (dispatch) => ({

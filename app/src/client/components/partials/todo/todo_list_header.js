@@ -26,11 +26,7 @@ class TodoListHeader extends React.Component {
       this.setState({ title: activeGroup.title });
     }
   }
-
-  // componentWillMount() {
-  //   if (this.props.title) this.setState({ title: this.props.title });
-  // }
-
+  
   render() {
     const activeGroup = this.props.activeGroup;
     const { screenX, screenY, windowHeightDiff, color_panel } = this.state;
@@ -56,6 +52,15 @@ class TodoListHeader extends React.Component {
             }}
           />
         </form>
+
+        {this.props.loading_anime && (
+          <div style={{
+            // border: '1px solid red',
+            paddingRight: '32px',
+            marginRight: '5px',
+            marginTop: '-13px',
+          }}><div className="lds-ring"><div></div><div></div><div></div><div></div></div></div>
+        )}
 
         <GroupOptDropdownComp
           { ...this.state }

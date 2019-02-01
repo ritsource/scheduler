@@ -80,11 +80,10 @@ export const asyncPatchEvent_isDone = (eventId, bool) => async (dispatch, getSta
 
 
 // ASYNC_REARRANGE_EVENTS
-export const rearrangeReduxEvents = ({ fromIndex, toIndex, movedIndex }) => ({
+export const rearrangeReduxEvents = ({ fromRank, toRank }) => ({
   type: REARRANGE_REDUX_EVENTS,
-  fromIndex,
-  toIndex,
-  movedIndex
+  fromRank,
+  toRank
 });
 
 export const asyncRearrangeEvents = ({ focusedEvent, fromRank, toRank, movedEvents }) => {

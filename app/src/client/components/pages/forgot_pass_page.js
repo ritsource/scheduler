@@ -9,7 +9,7 @@ const ForgotPasswordPage = (props) => {
   const [ email, setEmail ] = useState('');
   const [ normal_message, setNormalMessage ] = useState('');
   const [ error_message, setErrorMessage ] = useState('');
-  const [ loading_anime, setLoadingAnime ] = useState('');
+  const [ loading_anime, setLoadingAnime ] = useState(false);
 
   useEffect(() => {
     props.handleAppMode(2);

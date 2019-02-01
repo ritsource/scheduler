@@ -16,40 +16,44 @@ export default (state = [], action) => {
       return action.events;
 
     case ASYNC_POST_EVENT:
-      return sortByRank([ ...state, action.event ]);
+      return [ ...state, action.event ];
 
     case ASYNC_EDIT_EVENT:
-      return sortByRank([ ...state.filter(({_id}) => _id !== action.event._id), action.event ]);
+      return [ ...state.filter(({_id}) => _id !== action.event._id), action.event ];
 
     case ASYNC_DELETE_EVENT:
-      return sortByRank([ ...state.filter(({_id}) => _id !== action.eventId) ]);
+      return [ ...state.filter(({_id}) => _id !== action.eventId) ];
 
     case ASYNC_PATCH_EVENT_ISDONE:
-      return sortByRank([ ...state.filter(({_id}) => _id !== action.event._id), action.event ]);
+      return [ ...state.filter(({_id}) => _id !== action.event._id), action.event ];
 
     case REARRANGE_REDUX_EVENTS:
-      const { fromIndex, toIndex } = action;
-      // console.log({ fromIndex, toIndex }, 2);
-      const temp = state[toIndex]._rank;
-      const newArr = state.map((event, i) => {
-        if (fromIndex < toIndex) {
-          if (i > fromIndex && i <= toIndex) {
+      const { fromRank, toRank } = action;
+      
+      const tempRank = state[toRank]._rank;
+
+      const newArr = state.map((event) => {
+        const rank = event._rank;
+
+        if (fromRank < toRank) {
+          if (rank > fromRank && rank <= toRank) {
             event._rank = (event._rank - 1); 
           }
         } else {
-          if (i >= toIndex && i < fromIndex) {
+          if (rank >= toRank && rank < fromRank) {
             event._rank = (event._rank + 1);
           }
         }
+        
         return event;
       });
-      newArr[fromIndex]._rank = temp;
-      // console.log('_rank', newArr.map(({ _rank }) => _rank));
-      // console.log('title', newArr.map(({ title }) => parseInt(title)));
-      return sortByRank(newArr);
+
+      newArr[fromRank]._rank = tempRank;
+      
+      return newArr;
 
     case ASYNC_REARRANGE_EVENTS:
-      return sortByRank(action.events);
+      return action.events;
       
     default:
       return state;

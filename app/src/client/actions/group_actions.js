@@ -52,11 +52,8 @@ export const asyncDeleteGroup = (groupId) => async (dispatch, getState, api) => 
 }
 
 // REARRANGE_REDUX_GROUPS
-export const rearrangeReduxGroups = ({ fromIndex, toIndex, movedIndex }) => ({
-  type: REARRANGE_REDUX_GROUPS,
-  fromIndex,
-  toIndex,
-  movedIndex
+export const rearrangeReduxGroups = ({ fromRank, toRank }) => ({
+  type: REARRANGE_REDUX_GROUPS, fromRank, toRank
 });
 
 // ASYNC_REARRANGE_GROUPS

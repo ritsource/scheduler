@@ -14,7 +14,7 @@ export const LoginPage = (props) => {
   const [ password, setPassword ] = useState('');
   const [ register_mode, setRegisterMode ] = useState('');
   const [ error_message, setErrorMessage ] = useState('');
-  const [ loading_anime, setLoadingAnime ] = useState('');
+  const [ loading_anime, setLoadingAnime ] = useState(false);
 
   useEffect(() => {
     props.handleAppMode(2);
