@@ -164,10 +164,12 @@ module.exports = (app) => {
     }
   });
 
-  app.put('/api/event/rearrange', requireAuth, async (req, res) => {
+  app.put('/api/event/rearrange', requireAuth, clearCache(eventHashKey), async (req, res) => {
     const { focusedEvent, fromRank, toRank, movedEvents } = req.body;
+    console.log('API ******** =>', { focusedEvent, fromRank, toRank, movedEvents });
 
     try {
+      // find
       await Event.updateMany(
         { _id: { $in: [ ...movedEvents ] }, _creator: req.user._id },
         { $inc: { _rank: (fromRank > toRank) ? 1 : -1 } },

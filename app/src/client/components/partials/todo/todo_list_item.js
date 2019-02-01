@@ -22,12 +22,20 @@ const TodoListItem = (props) => (
       >
         <EventDoneIndicator
           _isDone={props.event._isDone}
-          hex_color={props.hex_color}
+          hex_color={props.activeGroup.hex_color}
           patchFunction={() => {
             props.asyncPatchEvent_isDone(props.event._id, !props.event._isDone);
           }}
         />
-        <p style={props.event._isDone ? { textDecoration: 'line-through' } : {}}>{props.event.title}</p>
+        <p>
+          <span style={props.event._isDone ? {
+            textDecoration: 'line-through'
+          } : {}}>{props.event.title + ' - ' + props.event._rank}</span><br/>
+          <span style={{
+            color: 'var(--text-color-light-3)',
+            fontSize: '12px'
+          }}>{props.activeGroup.title}</span>
+        </p>
       </div>
     )}
   </Draggable>

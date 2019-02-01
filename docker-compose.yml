@@ -13,8 +13,6 @@ services:
     volumes:
       - /app/node_modules
       - ./app:/app
-    ports:
-      - '3000:3000'
   redis:
     image: 'redis:5.0.3-alpine'
   server:
@@ -24,7 +22,5 @@ services:
     volumes:
       - /app/node_modules
       - ./api:/app
-    ports:
-      - '5000:5000'
     environment:
       - AUTH_REDIRECT_URL_BASE=http://localhost:4001

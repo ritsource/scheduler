@@ -5,23 +5,17 @@ const EventDoneIndicator = (props) => (
   <div
     className={`todo-list-indicator-000 ${props._isDone && 'indicator-_isDone'}`}
     style={props._isDone ? {
-      background: props.hex_color,
       color: 'var(--background-color)',
+      background: props.hex_color,
       border: `1px solid ${props.hex_color}`
     } : {
-      color: props.hex_color,
-      background: 'var(--background-color)',
+      color: 'rgba(0, 0, 0, 0)',
+      background: 'rgba(0, 0, 0, 0)',
       border: `1px solid ${props.hex_color}`
     }}
     onClick={props.patchFunction}
   >
-    {props._isDone ? (
-      <FaCheck />
-    ) : (
-      <FaCheck style={props.hide_tick_on_false  ? {
-        color: 'var(--background-color)'
-      } : {}}/>
-    )}
+    <FaCheck />
   </div>
 );
 

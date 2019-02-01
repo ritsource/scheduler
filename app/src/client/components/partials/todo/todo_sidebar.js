@@ -1,102 +1,89 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import _ from 'lodash';
 
 import { asyncFetchGroups, asyncPostGroup, asyncRearrangeGroups, rearrangeReduxGroups } from '../../../actions/group_actions';
 import TodoSidebarItem from './todo_sidebar_item';
 
-class TodoSidebarComp extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state =  {
-      title: ''
-    }
-  }
+export const TodoSidebarComp = (props) => {
+  const [ title, setTitle ] = useState('');
+  const [ groups, setGroups ] = useState(props.groups);
 
-  onDragEnd = (result) => {
+  useEffect(() => {
+    if (!_.isEqual(groups, props.groups)) setGroups(props.groups);
+  });
+
+  const onDragEnd = (result) => {
     if (result.source.index === result.destination.index) return;
 
-    this.props.rearrangeReduxGroups({
-      fromIndex: result.source.index,
-      toIndex: result.destination.index
-    });
+    const tempGroup = [ ...groups ];
 
-    const movedGroups = (result.source.index < result.destination.index)
-      ? Object.values(this.group_rank_map)
-        .slice(result.source.index + 1, result.destination.index + 1)
-        .map(({ _id }) => _id)
-      : Object.values(this.group_rank_map)
-        .slice(result.destination.index, result.source.index)
-        .map(({ _id }) => _id);
+    const fromIndex = result.source.index;
+    const toIndex = result.destination.index;
 
-    this.props.asyncRearrangeGroups({
+    props.rearrangeReduxGroups({ fromIndex, toIndex });
+
+    const movedGroups = (fromIndex < toIndex)
+      ? tempGroup.slice(fromIndex + 1, toIndex + 1).map(({ _id }) => _id)
+      : tempGroup.slice(toIndex, fromIndex).map(({ _id }) => _id);
+
+    props.asyncRearrangeGroups({
       focusedGroup: result.draggableId,
-      fromRank: this.group_rank_map[result.source.index]._rank,
-      toRank: this.group_rank_map[result.destination.index]._rank,
+      fromRank: tempGroup[fromIndex]._rank,
+      toRank: tempGroup[toIndex]._rank,
       movedGroups: movedGroups
     });
   }
 
-  group_rank_map = {}
-
-  componentDidMount() {
-    this.props.asyncFetchGroups();
-  }
-
-  render() {
-    return (
-      <div className={`todo-sidebar-000 ${!this.props.visible ? 'sidebar-slided-right' : 'sidebar-slided-left'}`}>
-        <DragDropContext onDragEnd={this.onDragEnd} >
-          <Droppable droppableId='droppableId-sidebar' type='GROUP_DND'>
-            {(provided) => (
-              <div
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-                className='todo-sidebar-001-the-list'
-              >
-                {this.props.groups.map((group, i) => {
-                  this.group_rank_map[i] = { _rank: group._rank, _id: group._id };
-
-                  return (
-                    <TodoSidebarItem
-                      key={i}
-                      index={i}
-                      group={group}
-                      active={group._id === this.props.active_groupId}
-                      changeGroupId={this.props.changeGroupId}
-                    />
-                  );
-                })}
-              </div>
-            )}
-          </Droppable>
-        </DragDropContext>
-
-        <form style={{ bottom: '0px' }} className='any-list-comp-bottom-form-999' onSubmit={async (e) => {
-          e.preventDefault();
-          await this.props.asyncPostGroup({ title: this.state.title });
-          this.setState({ title: '' });
-          scrollToBottom('.todo-sidebar-001-the-list');
-        }}>
-          <input
-            name='title'
-            autoComplete='off'
-            placeholder='+ New Group'
-            value={this.state.title}
-            onChange={(e) => {
-              this.setState({ title: e.target.value });
-            }}
-          />
-          {this.state.title !== '' && (
-            <button name='Add a new Group'
-              className='any-list-comp-form-submit-btn-003'
-              type='submit'
-            >Add</button>
+  return (
+    <div className={`todo-sidebar-000 ${!props.visible ? 'sidebar-slided-right' : 'sidebar-slided-left'}`}>
+      <DragDropContext onDragEnd={onDragEnd} >
+        <Droppable droppableId='droppableId-sidebar' type='GROUP_DND'>
+          {(provided) => (
+            <div
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              className='todo-sidebar-001-the-list'
+            >
+              {groups.map((group, i) => {
+                return (
+                  <TodoSidebarItem
+                    key={i}
+                    index={i}
+                    group={group}
+                    active={group._id === props.active_groupId}
+                    changeGroupId={props.changeGroupId}
+                  />
+                );
+              })}
+            </div>
           )}
-        </form>
-      </div>
-    );
-  }
+        </Droppable>
+      </DragDropContext>
+
+      <form style={{ bottom: '0px' }} className='any-list-comp-bottom-form-999' onSubmit={async (e) => {
+        e.preventDefault();
+        await props.asyncPostGroup({ title: title });
+        setTitle('');
+        scrollToBottom('.todo-sidebar-001-the-list');
+      }}>
+        <input
+          name='title'
+          autoComplete='off'
+          placeholder='+ New Group'
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        {title !== '' && (
+          <button name='Add a new Group'
+            className='any-list-comp-form-submit-btn-003'
+            type='submit'
+          >Add</button>
+        )}
+      </form>
+    </div>
+  );
 }
 
 const mapStateToProps = ({ groups }) => ({

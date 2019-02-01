@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
@@ -10,101 +10,88 @@ import TodoListItem from './todo_list_item';
 import TodoListForm from './todo_list_form';
 import TodoListHeader from './todo_list_header';
 
-class TodoListComp extends React.Component {
-  onDragEnd = (result) => {
+export const TodoListComp = (props) => {
+  const [ events, setEvents ] = useState(props.events);
+
+  useEffect(() => {
+    if (!_.isEqual(events, props.events)) setEvents(props.events);
+  });
+
+  const onDragEnd = (result) => {
     if (result.source.index === result.destination.index) return;
 
-    this.props.rearrangeReduxEvents({
-      fromIndex: result.source.index,
-      toIndex: result.destination.index
-    });
+    const tempEvents = [ ...events ];
 
-    const movedEvents = (result.source.index < result.destination.index)
-      ? Object.values(this.event_rank_map)
-        .slice(result.source.index + 1, result.destination.index + 1)
-        .map(({ _id }) => _id)
-      : Object.values(this.event_rank_map)
-        .slice(result.destination.index, result.source.index)
-        .map(({ _id }) => _id);
+    const fromIndex = result.source.index;
+    const toIndex = result.destination.index;
 
-    this.props.asyncRearrangeEvents({
+    const movedEvents = (fromIndex < toIndex)
+      ? tempEvents.slice(fromIndex + 1, toIndex + 1).map(({ _id }) => _id)
+      : tempEvents.slice(toIndex, fromIndex).map(({ _id }) => _id);
+    
+    props.asyncRearrangeEvents({
       focusedEvent: result.draggableId,
-      fromRank: this.event_rank_map[result.source.index]._rank,
-      toRank: this.event_rank_map[result.destination.index]._rank,
+      fromRank: tempEvents[fromIndex]._rank,
+      toRank: tempEvents[toIndex]._rank,
       movedEvents: movedEvents
     });
+
+    props.rearrangeReduxEvents({ fromIndex, toIndex });
   };
 
-  event_rank_map = {};
-
-  componentDidMount() {
-    this.props.asyncFetchEvents();
-  }
-
-  render() {
-    return (
-      <div className='todo-list-000'>
-        {!this.props.activeGroup ? (
-          <Redirect to='/todo' />
-        ) : (
-          <React.Fragment>
-            <div className='any-list-comp-container-999'>
-              <TodoListHeader
-                activeGroup={this.props.activeGroup}
-                asyncEditGroup={this.props.asyncEditGroup}
-                asyncDeleteGroup={this.props.asyncDeleteGroup}
-                
-                color_options={[ ...builtin_color_list, ...this.props.auth.custom_colors]}
-                changeColorFunc={async (color) => {
-                  await this.props.asyncEditGroup(group._id, { hex_color: color });
-                }}
-              />
-
-              <DragDropContext onDragEnd={this.onDragEnd}>
-                <Droppable droppableId={this.props.active_groupId} type='EVENT_DND'>
-                  {(provided) => (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.droppableProps}
-                      id='the-event-list-inside-container'
-                      className='any-list-comp-the-list-999'
-                    >
-                      {this.props.events.map((event, i) => {
-                        this.event_rank_map[i] = { _rank: event._rank, _id: event._id };
-
-                        return (
-                          <TodoListItem
-                            key={i}
-                            index={i}
-                            event={event}
-                            changeEventId={this.props.changeEventId}
-                            hex_color={this.props.activeGroup.hex_color}
-                          />
-                        );
-                      })}
-                      {provided.placeholder}
-                    </div>
-                  )}
-                </Droppable>
-              </DragDropContext>
-            </div>
-
-            <TodoListForm
-              // title={this.state.title}
-              // active_groupId={this.props.active_groupId}
-              activeGroup={this.props.activeGroup}
-              // hex_color={this.props.activeGroup.hex_color}
-              // events={this.props.events}
-              asyncPostEvent={this.props.asyncPostEvent}
-              // setParentState={(abc) => {
-              //   this.setState(abc);
-              // }}
+  return (
+    <div className='todo-list-000'>
+      {!props.activeGroup ? (
+        <Redirect to='/todo' />
+      ) : (
+        <React.Fragment>
+          <div className='any-list-comp-container-999'>
+            <TodoListHeader
+              activeGroup={props.activeGroup}
+              asyncEditGroup={props.asyncEditGroup}
+              asyncDeleteGroup={props.asyncDeleteGroup}
+              
+              color_options={[ ...builtin_color_list, ...props.auth.custom_colors]}
+              changeColorFunc={async (color) => {
+                await props.asyncEditGroup(group._id, { hex_color: color });
+              }}
             />
-          </React.Fragment>
-        )}
-      </div>
-    );
-  }
+
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Droppable droppableId={props.active_groupId} type='EVENT_DND'>
+                {(provided) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                    id='the-event-list-inside-container'
+                    className='any-list-comp-the-list-999'
+                  >
+                    {events.map((event, i) => {
+                      return (
+                        <TodoListItem
+                          key={i}
+                          index={i}
+                          event={event}
+                          changeEventId={props.changeEventId}
+                          activeGroup={props.activeGroup}
+                        />
+                      );
+                    })}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
+          </div>
+
+          <TodoListForm
+            activeGroup={props.activeGroup}
+            asyncPostEvent={props.asyncPostEvent}
+          />
+        </React.Fragment>
+      )}
+    </div>
+  );
 }
 
 const mapStateToProps = ({ events, auth }, props) => ({

@@ -11,6 +11,7 @@
   background-size: 200% 100%;
   background-position: right bottom;
   transition: all 0.2s ease;
+  // border-bottom: 1px solid var(--border-color);
 
   &:hover {
     background-position: left bottom;

@@ -29,7 +29,7 @@ export default (state = [], action) => {
 
     case REARRANGE_REDUX_EVENTS:
       const { fromIndex, toIndex } = action;
-      // console.log({ fromIndex, toIndex });      
+      // console.log({ fromIndex, toIndex }, 2);
       const temp = state[toIndex]._rank;
       const newArr = state.map((event, i) => {
         if (fromIndex < toIndex) {
