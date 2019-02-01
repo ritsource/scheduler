@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaArrowLeft, FaTrash, FaCircle } from 'react-icons/fa';
 import { GoCheck } from 'react-icons/go';
 import Datepicker from 'awesome-react-datepicker';
@@ -7,17 +7,27 @@ import { Selector, Option } from 'react-dropdown-selector';
 import EnsureDeletionComp from '../ensure_deletion';
 
 const EventDetailsButtonsComp = (props) => {
-  const { event, toggleEventDetails, dFromAsync, dToAsync, groupAsync } = props;
-    
+  const [ description, setDescription ] = useState('');
+  const [ dFromAsync, setDFromAsync ] = useState(false);
+  const [ dToAsync, setDToAsync ] = useState(false);
+  const [ groupAsync, setGroupAsync ] = useState(false);
+  const [ askforDelete, setAskforDelete ] = useState(false);
+  const [ askforDelete_close, setAskforDelete_close ] = useState(false);
+
+  const { event } = props;
   const groupNow = props.groups.find(({ _id }) => _id === event._group);
+
+  useEffect(() => {
+    if (event && event.description !== description) setDescription(event.description);
+  }, []);
 
   return (
     <div style={{ padding: '10px 0px' }}>
       <Selector
         onSelect={(id) => {
-          props.setParentState({ groupAsync: true });
+          setGroupAsync(true);
           props.asyncEditEvent(event._id, { _group: id }).then(() => {
-            props.setParentState({ groupAsync: false });
+            setGroupAsync(false);
           });
         }}
         inputHeight={36}
@@ -65,9 +75,9 @@ const EventDetailsButtonsComp = (props) => {
         <Datepicker
           initDate={new Date(event.date_from)}
           onDateSelect={(timeStamp) => {
-            props.setParentState({ dFromAsync: true });
+            setDFromAsync(true);
             props.asyncEditEventDate(event._id, { date_from: timeStamp }).then(() => {
-              props.setParentState({ dFromAsync: false });
+              setDFromAsync(false);
             });
           }}
         >
@@ -85,9 +95,9 @@ const EventDetailsButtonsComp = (props) => {
         <Datepicker
           initDate={new Date(event.date_to)}
           onDateSelect={(timeStamp) => {
-            props.setParentState({ dToAsync: true });
+            setDToAsync(true);
             props.asyncEditEventDate(event._id, { date_to: timeStamp }).then(() => {
-              props.setParentState({ dToAsync: false });
+              setDToAsync(false);
             });
           }}
         >
@@ -115,12 +125,13 @@ const EventDetailsButtonsComp = (props) => {
         </button>
         <div style={{ display: 'flex', flexDirection: 'row' }}>
           <EnsureDeletionComp
-            visible={props.askforDelete}
+            visible={askforDelete}
             message='Are you sure you want to delete the event?'
             onClose={() => {
-              props.setParentState({ askforDelete_close: true, askforDelete: false });
+              setAskforDelete_close(true);
+              setAskforDelete(false);
               setTimeout(() => {
-                props.setParentState({ askforDelete_close: false });
+                setAskforDelete_close(false);
               }, 300);
             }}
             onDelete={async () => {
@@ -128,9 +139,9 @@ const EventDetailsButtonsComp = (props) => {
               props.closeEventDetails();
             }}
             onCancel={() => {
-              props.setParentState({ askforDelete_close: true });
+              setAskforDelete_close(true);
               setTimeout(() => {
-                props.setParentState({ askforDelete_close: false });
+                setAskforDelete_close(false);
               }, 300);
             }}
           >
@@ -138,7 +149,8 @@ const EventDetailsButtonsComp = (props) => {
               style={{ marginLeft: '10px' }}
               className='awesome-app-unique-btn-999'
               onClick={() => {
-                props.setParentState({ askforDelete: true });
+                // props.setParentState({ askforDelete: true });
+                setAskforDelete(true);
               }}
             >
               <FaTrash style={{ marginBottom: '-2px' }}/>
@@ -159,9 +171,7 @@ const EventDetailsButtonsComp = (props) => {
         id='todo-details-textarea-for-description'
         placeholder='Add description..'
         value={props.description}
-        onChange={(e) => {
-          props.setParentState({ description: e.target.value })
-        }}
+        onChange={(e) => setDescription(e.target.value)}
       />
       <button name='Add Description'
         style={{ marginTop: '5px', background: props.hex_color, color: 'white', width: '100%' }}
@@ -175,4 +185,4 @@ const EventDetailsButtonsComp = (props) => {
   );
 }
 
-export default EventDetailsButtonsComp;2021
+export default EventDetailsButtonsComp;

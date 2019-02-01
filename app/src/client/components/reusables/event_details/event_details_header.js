@@ -1,24 +1,29 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import EventDoneIndicator from '../event_done_indicator';
 
 const EventDetailsHeaderComp = (props) => {
+  const [ title, setTitle ] = useState(props.event.title || ' ');
+
+  const { event } = props;
+
+  useEffect(() => {
+    if (event && event.title !== title) setTitle(event.title);
+  }, []);
+
   return (
-  <div style={{ padding: '0px 0px', /*border: '1px solid red' */}}>
+    <div style={{ padding: '0px 0px', /*border: '1px solid red' */}}>
       <form onSubmit={async (e) => {   
         e.preventDefault();
-        if (props.title !== '') {
-          await props.asyncEditEvent(props.event._id, { title: props.title });
+        if (title !== '') {
+          await props.asyncEditEvent(event._id, { title });
           if (document) document.querySelector('#todo-details-input-inside-form').blur();
         }
       }}>
         <EventDoneIndicator
-          _isDone={props.event._isDone}
+          _isDone={event._isDone}
           hex_color={props.hex_color}
           patchFunction={() => {
-            props.asyncPatchEvent_isDone(
-              props.event._id,
-              !props.event._isDone
-            );
+            props.asyncPatchEvent_isDone(event._id, !event._isDone);
           }}
         />
         <input
@@ -26,10 +31,8 @@ const EventDetailsHeaderComp = (props) => {
           name='listname'
           autoComplete='off'
           className='awesome-app-transparent-input-999'
-          value={props.title}
-          onChange={(e) => {
-            props.setParentState({ title: e.target.value });
-          }}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
         />
       </form>
     </div>

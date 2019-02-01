@@ -55,12 +55,12 @@ export const asyncPatchStep_isDone = (stepId, bool) => async (dispatch, getState
 }
 
 // REARRANGE_REDUX_STEPS
-export const rearrangeReduxSteps = ({ fromIndex, toIndex, movedIndex }) => ({
-  type: REARRANGE_REDUX_STEPS,
-  fromIndex,
-  toIndex,
-  movedIndex
-});
+export const rearrangeReduxSteps = ({ fromRank, toRank }) => {
+  // console.log({ fromRank, toRank });  
+  return ({
+    type: REARRANGE_REDUX_STEPS, fromRank, toRank
+  });
+}
 
 // ASYNC_REARRANGE_STEPS
 export const asyncRearrangeSteps = ({ focusedStep, fromRank, toRank, movedSteps }) => {
