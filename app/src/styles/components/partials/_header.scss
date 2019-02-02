@@ -8,8 +8,12 @@
   justify-content: space-between;
   align-items: center;
 
-  .header-unauth-button-row-001 > a {
-    margin-left: 20px;
+  .header-unauth-button-row-001 {
+    margin-right: 20px;
+    
+    a {
+      margin-left: 20px;
+    }
   }
 
   button {

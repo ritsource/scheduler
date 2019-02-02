@@ -15,10 +15,10 @@ export const AboutPage = (props) => {
     <div className='about-page-000'>
       <div className='about-page-001-info-div' style={{ marginTop: '-40px' }}>
         <div style={{ width: '70%', marginLeft: '30%' }}>
-          <h1><ReactSVG src='/calendar.svg'/>Schedular</h1>
+          <h1 className='my-theme-gradient-text'><ReactSVG src='/calendar.svg'/>Schedular</h1>
           <p>{intro_paragraph}</p>
           <div style={{ marginTop: '10px', display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-            <Link to='/login'><button>Sign in</button></Link>
+            <Link to='/login'><button className='my-theme-gradient-btn'>Sign in</button></Link>
             <p style={{ marginLeft: '10px' }} className='the-hover-blue-text'>
               <a target='_blank' href='https://github.com/ritwik310/my-calendar'>view on Github!</a>
             </p>

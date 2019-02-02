@@ -51,6 +51,16 @@ button {
   }
 }
 
+.my-theme-gradient-btn {
+  background: linear-gradient(to bottom right, var(--theme-color-light), var(--theme-color)) !important;
+}
+
+.my-theme-gradient-text {
+  background: linear-gradient(to bottom right, var(--theme-color-light), var(--theme-color)) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 5px;
