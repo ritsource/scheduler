@@ -43,7 +43,7 @@ const ForgotPasswordPage = (props) => {
   return (
     <div className='login-page-000'>
       <div className='login-page--svg-div-001'>
-        <ReactSVG src='/undraw_security.svg'/>
+        <ReactSVG src='/blueish/undraw_authentication.svg'/>
       </div>
       <div className='login-page-div-001'>
         <h3>Forgot Password</h3>

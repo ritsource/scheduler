@@ -40,7 +40,7 @@ export const LoginPage = (props) => {
 
     const response = await axios.post('/auth/local', { email, password });
 
-    if (response.data) window.location.replace('/');
+    if (response.data) return window.location.replace('/calendar');
     else if (response.data === '') setErrorMessage('Incorrect email or password');
 
     setLoadingAnime(false);
@@ -49,7 +49,7 @@ export const LoginPage = (props) => {
   return (
     <div className='login-page-000'>
       <div className='login-page--svg-div-001'>
-        <ReactSVG src='/undraw_events.svg'/>
+        <ReactSVG src='/blueish/undraw_events.svg'/>
       </div>
       <div className='login-page-div-001'>
         <h3>{register_mode ? 'Create Account' : 'Just Login'}</h3>

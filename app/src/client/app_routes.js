@@ -1,5 +1,5 @@
 import App from './app';
-import LandingPage from './components/pages/landing_page';
+import AboutPage from './components/pages/about_page';
 import HomePage from './components/pages/home_page';
 import LoginPage from './components/pages/login_page';
 import ForgotPasswordPage from './components/pages/forgot_pass_page';
@@ -13,7 +13,7 @@ export default [
   {
     ...App,
     routes: [
-      { ...LandingPage, path: '/about', exact: true },
+      { ...AboutPage, path: '/about', exact: true },
       { ...HomePage, path: '/', exact: true },
       { ...LoginPage, path: '/login', exact: true },
       { ...ForgotPasswordPage, path: '/forgot_password', exact: true },

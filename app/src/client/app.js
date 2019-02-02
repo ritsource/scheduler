@@ -36,7 +36,9 @@ class App extends Component {
       <div>
         {this.state.appReady ? (
           <React.Fragment>
-            <HeaderComp appMode={this.props.appMode || 0} auth={this.props.auth}/>
+            {this.props.appMode !== 3 && (
+              <HeaderComp appMode={this.props.appMode || 0} auth={this.props.auth}/>
+            )}
             <div>{renderRoutes(this.props.route.routes)}</div>
           </React.Fragment>
         ) : (

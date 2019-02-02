@@ -35,13 +35,6 @@ const HeaderOptDropdownComp = (props) => {
             {props.auth.name.split(' ')[0]}</span>
           </div>
 
-          {/* <Link to='/about'>
-            <div className='any-dropdown-content-item-999'><GoOrganization style={{
-              marginRight: '8px',
-              marginBottom: '-2px'
-            }}/>About</div>
-          </Link> */}
-
           <Link to='/settings'>
             <div className='any-dropdown-content-item-999'><MdSettings style={{
               marginRight: '8px',
@@ -78,6 +71,13 @@ const HeaderOptDropdownComp = (props) => {
               borderRadius: '50%'
             }}></div>
           </div>
+
+          <Link to='/about'>
+            <div className='any-dropdown-content-item-999'><GoOrganization style={{
+              marginRight: '8px',
+              marginBottom: '-2px'
+            }}/>About</div>
+          </Link>
 
           <a href='/auth/logout'>
             <div className='any-dropdown-content-item-999'><FaArrowRight style={{

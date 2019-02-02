@@ -50,11 +50,11 @@ class HeaderComp extends React.Component {
           <div className='header-002-hamburger-div' onClick={this.props.toggleSideBar}>
             <div></div><div></div><div></div>
           </div>
-          {/* <Link to='/'><h2><ReactSVG src='/logo.svg'/>My Calendar</h2></Link> */}
-          <Link to='/'><h2>My Calendar</h2></Link>
+          <Link to='/'><h2><ReactSVG src='/calendar.svg'/>Schedular</h2></Link>
+          {/* <Link to='/'><h2>My Calendar</h2></Link> */}
         </div>
 
-        {this.props.auth && (
+        {this.props.auth ? (
           <React.Fragment>
             {(this.props.appMode === 0) && (
               <div className='header-001-calendar-nav'>
@@ -103,17 +103,18 @@ class HeaderComp extends React.Component {
               />
             </div>
           </React.Fragment>
-        )/* : (
+        ) : (
           <div className='header-unauth-button-row-001'>
-            <Link className='the-hover-blue-text' to='/login'>Login</Link>
-            <Link className='the-hover-blue-text' to='/about'>About</Link>
+            {/* <Link className='the-hover-blue-text' to='/login'>Login</Link> */}
+            {/* <Link className='the-hover-blue-text' to='/about'>About</Link> */}
+            <a className='the-hover-blue-text' href='/about'>About</a>
             <a
               target='_blank'
               className='the-hover-blue-text'
               href='https://github.com/ritwik310/my-calendar'
             >Github</a>
           </div>
-        )*/}
+        )}
       </div>
     );
   }
