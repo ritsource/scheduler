@@ -127,13 +127,13 @@ export const LoginPage = (props) => {
           </form>
         )}
         <div className='login-page-oauth-div-002'>
-          <a href='/auth/google' onClick={() => setLoadingAnime(true)}>
+          <a id='login-page-google-oauth-ancor' href='/auth/google' onClick={() => setLoadingAnime(true)}>
             <button name='Signin with Google' className='login-page-buttons-002-google'>
               <FaGoogle style={{ fontSize: '13px', marginRight: '10px' }} />
               Google
             </button>
           </a>
-          <a href='/auth/facebook' onClick={() => setLoadingAnime(true)}>
+          <a id='login-page-facebook-oauth-ancor' href='/auth/facebook' onClick={() => setLoadingAnime(true)}>
             <button name='Signin with Facebook' className='login-page-buttons-002-facebook'>
               <FaFacebookF style={{ fontSize: '13px', marginRight: '10px' }} />
               Facebook
