@@ -65,7 +65,7 @@ class CalendarSidebarComp extends React.Component {
                 asyncEditGroup={this.props.asyncEditGroup}
                 asyncDeleteGroup={this.props.asyncDeleteGroup}
                 color_options={[ ...builtin_color_list, ...this.props.auth.custom_colors]}
-                changeColorFunc={async (color) => {
+                changeColorFunc={async (color) => {             
                   await this.props.asyncEditGroup(group._id, { hex_color: color });
                 }}
               />
@@ -107,7 +107,10 @@ class CalendarSidebarComp extends React.Component {
   }
 }
 
-const mapStateToProps = ({ groups, auth }) => ({ groups, auth });
+const mapStateToProps = ({ groups, auth }) => ({
+  auth,
+  groups: groups.sort((a, b) => a._rank > b._rank ? 1 : -1)
+});
 
 const mapDispatchToProps = (dispatch) => ({
   asyncFetchGroups: () => dispatch(asyncFetchGroups()),

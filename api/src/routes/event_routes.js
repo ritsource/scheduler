@@ -7,8 +7,6 @@ const Event = mongoose.model('Event');
 
 module.exports = (app) => {
   app.post('/api/event/new', requireAuth, clearCache(eventHashKey), async (req, res) => {
-    console.log('RUN');
-    
     try {
       const count = await Event.countDocuments({
         _creator: req.user._id,

@@ -4,6 +4,6 @@ module.exports = {
     '#4286f4', // Blueish
     '#f7ca18', // Yellowish
     '#ff9b17', // Orangish
-    '#00b16a' // Greenish
+    '#00bc60' // Greenish
   ],
 };

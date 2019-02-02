@@ -1,10 +1,12 @@
 const requireAuth = require('../middlewares/require_auth');
 const clearCache = require('../middlewares/clear_cache');
 const { groupHashKey } = require('../constants/hash_keys');
-const group_color_list = require('../constants/colors');
+const { group_color_list } = require('../constants/colors');
 
 const mongoose = require('mongoose');
 const Group = mongoose.model('Group');
+
+// console.log('FF', group_color_list[Math.floor(Math.random() * 5)]);
 
 module.exports = (app) => {
   app.post('/api/group/new', requireAuth, clearCache(groupHashKey), async (req, res) => {

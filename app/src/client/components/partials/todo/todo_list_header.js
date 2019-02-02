@@ -71,6 +71,7 @@ export const TodoListHeader = (props) => {
         onRenameClick={() => {
           if (document) document.querySelector('#list-002-header-input-inside-form').focus();
         }}
+        hex_color={props.activeGroup.hex_color}
       >
         <button name='View Group Options'
           className='calendar-sidebar-item-options-btn'
