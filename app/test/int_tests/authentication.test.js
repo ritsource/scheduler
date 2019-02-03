@@ -1,7 +1,6 @@
 import puppeteer from 'puppeteer';
-import safeBuffer from 'safe-buffer';
-import Keygrip from 'keygrip';
-import keys from '../../../api/src/config/keys';
+import sessionFactory from './factories/session_factory';
+import userFactory from './factories/user_factory';
 
 let browser, page;
 
@@ -29,19 +28,23 @@ test('Facebook-login button throws into oauth flow', async () => {
   expect(url).toMatch(/facebook\.com/);
 });
 
-test('Performing login', async () => {
-  const userId = '5c5614b28531750027ca93be';
+test('Performing login', async (done) => {
+  const user = await userFactory();
 
-  const Buffer = safeBuffer.Buffer;
-  const sessionObj = { passport: { user: userId } };
-  const sessionStr = Buffer.from(JSON.stringify(sessionObj)).toString('base64');
+  if (!user) {
+    done.fail(new Error('I want my test to fail'))
+  }
 
-  const keygrip = new Keygrip([ keys.cookie_key ]);
+  const { session, signature } = await sessionFactory(user);
 
-  const signature = keygrip.sign('session=' + sessionStr);
-
-  await page.setCookie({ name: 'session', value: sessionStr });
+  await page.setCookie({ name: 'session', value: session });
   await page.setCookie({ name: 'session.sig', value: signature });
 
   await page.goto('localhost:4001');
-}, 30000);
+  await page.waitFor('.header-001-right-div');
+
+  const myBool = await page.$eval('.header-001-right-div', el => el.innerHTML);
+  expect(myBool).toBeTruthy();
+  done();
+
+}, 20000);

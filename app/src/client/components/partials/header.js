@@ -108,8 +108,6 @@ class HeaderComp extends React.Component {
           </React.Fragment>
         ) : (
           <div className='header-unauth-button-row-001'>
-            {/* <Link className='the-hover-blue-text' to='/login'>Login</Link> */}
-            {/* <Link className='the-hover-blue-text' to='/about'>About</Link> */}
             <a className='the-hover-blue-text' href='/about'>About</a>
             <a
               target='_blank'

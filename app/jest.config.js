@@ -5,5 +5,5 @@ module.exports = {
   },
   "modulePathIgnorePatterns": ["<rootDir>/src/"],
   "snapshotSerializers": ["enzyme-to-json/serializer"],
-  "setupTestFrameworkScriptFile": "<rootDir>/setupEnzyme.js",
+  "setupTestFrameworkScriptFile": "<rootDir>/setupJest.js",
 }
