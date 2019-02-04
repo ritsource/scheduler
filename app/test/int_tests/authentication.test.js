@@ -1,17 +1,14 @@
-import puppeteer from 'puppeteer';
-import sessionFactory from './factories/session_factory';
-import userFactory from './factories/user_factory';
+import Page from './helpers/page';
 
-let browser, page;
+let page;
 
 beforeEach(async () => {
-  browser = await puppeteer.launch({ headless: false });
-  page = await browser.newPage();
+  page = await Page.build();
   await page.goto('localhost:4001');
 });
 
 afterEach(async () => {
-  await browser.close();
+  await page.close();
 });
 
 test('Google-login button throws into oauth flow', async () => {
@@ -28,23 +25,9 @@ test('Facebook-login button throws into oauth flow', async () => {
   expect(url).toMatch(/facebook\.com/);
 });
 
-test('Performing login', async (done) => {
-  const user = await userFactory();
+test('Performing login', async () => {
+  await page.login();
 
-  if (!user) {
-    done.fail(new Error('I want my test to fail'))
-  }
-
-  const { session, signature } = await sessionFactory(user);
-
-  await page.setCookie({ name: 'session', value: session });
-  await page.setCookie({ name: 'session.sig', value: signature });
-
-  await page.goto('localhost:4001');
-  await page.waitFor('.header-001-right-div');
-
-  const myBool = await page.$eval('.header-001-right-div', el => el.innerHTML);
+  const myBool = await page.getInnerHtml('.header-001-right-div');
   expect(myBool).toBeTruthy();
-  done();
-
 }, 20000);

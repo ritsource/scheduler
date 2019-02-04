@@ -15,7 +15,7 @@ export const TodoListComp = (props) => {
   const [ loading_anime, setLoadingAnime ] = useState(false);
 
   useEffect(() => {
-    props.asyncFetchEvents();
+    // props.asyncFetchEvents();
     if (!_.isEqual(events, props.events)) setEvents(props.events);
   });
 
