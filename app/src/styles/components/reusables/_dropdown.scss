@@ -26,7 +26,7 @@
   transition : border 0.3s ease-out;
 
   &:focus {
-    border-bottom: 1px solid var(--theme-color);
+    border-bottom: 1px solid var(--theme-color-middle);
   }
 }
 

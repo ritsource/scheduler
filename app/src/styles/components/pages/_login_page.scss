@@ -35,9 +35,10 @@
         color: var(--text-color);
         padding: 8px 14px;
         border: 1px solid var(--border-color);
+        border-radius: 2px;
 
         &:focus {
-          border: 1px solid var(--theme-color);
+          border: 1px solid var(--theme-color-middle);
         }
       }
 
@@ -50,9 +51,10 @@
           color: white;
           border: 0px solid var(--background-color);
           padding: 8px 14px;
-          background: var(--theme-color);
+          background: var(--theme-color-middle);
           cursor: pointer;
           margin-right: 10px;
+          border-radius: 2px;
         }
 
         span {
@@ -71,6 +73,7 @@
         padding: 8px 20px;
         cursor: pointer;
         width: calc(100% - 5px);
+        border-radius: 2px;
     
         display: flex;
         align-items: center;

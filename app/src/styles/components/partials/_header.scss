@@ -21,8 +21,8 @@
 
     &:disabled {
       color: white;
-      border: 1px solid var(--theme-color);
-      background: var(--theme-color);
+      border: 1px solid var(--theme-color-middle);
+      background: var(--theme-color-middle);
       cursor: default;
     }
   }
@@ -84,7 +84,7 @@
     }
 
     h2 {
-      color: var(--theme-color);
+      color: var(--theme-color-middle);
       display: flex;
       align-items: center;
 

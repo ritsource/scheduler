@@ -39,7 +39,7 @@ button {
   cursor: pointer;
 
   &:hover {
-    color: var(--theme-color);
+    color: var(--theme-color-middle);
     text-decoration: underline;
   }
 }
@@ -85,8 +85,8 @@ button {
 //   background: #d4d4d4;
 // }
 // ::-moz-scrollbar-thumb {
-//   background: var(--theme-color);
+//   background: var(--theme-color-middle);
 // }
 // ::-moz-scrollbar-thumb:hover {
-//   background: var(--theme-color);
+//   background: var(--theme-color-middle);
 // }

@@ -21,7 +21,7 @@
   // background: rgba(255, 255, 255, 0);
 
   .any-list-comp-form-submit-btn-003 {
-    color: var(--theme-color);
+    color: var(--theme-color-middle);
     background: var(--background-color);
     border: 0px solid var(--background-color);
   }
@@ -38,7 +38,7 @@
     }
 
     &::placeholder {
-      color: var(--theme-color);
+      color: var(--theme-color-middle);
       opacity: 1;
     }
   }

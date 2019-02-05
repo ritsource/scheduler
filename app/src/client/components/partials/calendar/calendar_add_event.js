@@ -137,7 +137,7 @@ class CalendarAddEventComp extends Component {
             className={`awesome-app-unique-btn-999`}
             onClick={this.handleSubmit}
             style={{
-              background: 'var(--theme-color)',
+              background: 'var(--theme-color-middle)',
               color: 'white'
             }}
           >

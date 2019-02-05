@@ -57,16 +57,16 @@ const HeaderOptDropdownComp = (props) => {
           }}/>
             Dark theme
             <div style={myAppTheme === 'darkOnly' ? {
-              background: 'var(--theme-color)',
+              background: 'var(--theme-color-middle)',
               height: '13px',
               width: '13px',
-              border: '1px solid var(--theme-color)',
+              border: '1px solid var(--theme-color-middle)',
               marginLeft: '9px',
               borderRadius: '50%'
             } : {
               height: '13px',
               width: '13px',
-              border: '1px solid var(--theme-color)',
+              border: '1px solid var(--theme-color-middle)',
               marginLeft: '9px',
               borderRadius: '50%'
             }}></div>

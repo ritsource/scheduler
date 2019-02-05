@@ -21,12 +21,12 @@
 
   button {
     // margin-top: 10px;
-    background: var(--theme-color);
+    background: var(--theme-color-middle);
     color: white;
     font-size: 16px;
     padding: 10px 14px;
     border-radius: 4px;
-    border: 0px solid var(--theme-color);
+    border: 0px solid var(--theme-color-middle);
     cursor: pointer;
   }
 
@@ -35,7 +35,7 @@
   }
 
   h1 {
-    color: var(--theme-color);
+    color: var(--theme-color-middle);
     display: flex;
     align-items: center;
     padding: 10px 0px;

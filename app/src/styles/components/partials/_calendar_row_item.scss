@@ -32,10 +32,10 @@
 }
 
 .calendar-row-item-mini-active-date {
-  background: var(--theme-color);
+  background: var(--theme-color-middle);
 
   &:hover {
-    background: var(--theme-color) !important;
+    background: var(--theme-color-middle) !important;
   }
 
   p {
@@ -60,7 +60,7 @@
 
   .calendar-row-item-p-002 {
     margin-right: 10px;
-    color: var(--theme-color);
+    color: var(--theme-color-middle);
     // color: var(--text-color-light);
     font-weight: bold;
     font-size: 10px;
