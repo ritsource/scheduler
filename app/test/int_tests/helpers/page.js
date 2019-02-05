@@ -37,6 +37,10 @@ class CustomPage {
   async getInnerText(selector) {
     return this.page.$eval(selector, el => el.innerText);
   }
+
+  async getValueOfInput(selector) {
+    return await this.page.$eval(selector, el => el.value);
+  }
 }
 
 export default CustomPage;

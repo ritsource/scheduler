@@ -56,7 +56,10 @@ class CalendarSidebarComp extends React.Component {
         <CalendarContentComp miniCalendarState={this.state} miniCalendar={true}/>
 
         <div className='any-list-comp-container-999'>
-          <div style={{ height: 'calc(100% - 7px)' }} className='calendar-sidebar-001-the-list any-list-comp-the-list-999'>
+          <div
+            style={{ height: 'calc(100% - 7px)' }}
+            className='calendar-sidebar-001-the-list any-list-comp-the-list-999'
+          >
             {this.props.groups.map((group, i) => (
               <CalendarSidebarItem
                 key={i}
@@ -85,6 +88,7 @@ class CalendarSidebarComp extends React.Component {
             }}
           >
             <input
+              id='calendar-sidebar-add-group-input-x1'
               name='title'
               autoComplete='off'
               placeholder='+ New Group'

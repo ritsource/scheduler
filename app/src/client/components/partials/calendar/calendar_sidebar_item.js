@@ -44,6 +44,7 @@ export const CalendarSidebarItem = (props) => {
         }}>
           <input
             id={`calendar-sidebar-item-input-inside-form-${group._id}`}
+            className='calendar-sidebar-item-input-003'
             disabled={input_disable}
             name='title'
             autoComplete='off'
@@ -87,7 +88,9 @@ export const CalendarSidebarItem = (props) => {
         <button name='More Options' className='calendar-sidebar-item-options-btn' onClick={() => {
           setDropdownVis(true);
         }}>
-          <FaEllipsisV />
+          <FaEllipsisV
+            className='calendar-sidebar-item-ellipsis-vertical'
+          />
         </button>
       </GroupOptDropdownComp>
     </div>

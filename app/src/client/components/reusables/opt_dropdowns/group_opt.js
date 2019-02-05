@@ -33,7 +33,11 @@ export const GroupOptDropdownComp = (props) => {
       modalBorder={false}
       modalContent={() => (
         <div>
-          <div className='any-dropdown-content-item-999' onClick={props.onRenameClick}>
+          <div
+            id='group-options-dropdown-rename-switch'
+            className='any-dropdown-content-item-999'
+            onClick={props.onRenameClick}
+          >
             <MdModeEdit style={{
               marginRight: '8px',
               marginBottom: '-2px'
