@@ -170,15 +170,15 @@ const EventDetailsButtonsComp = (props) => {
         style={{ marginTop: '10px' }}
         id='todo-details-textarea-for-description'
         placeholder='Add description..'
-        value={props.description}
+        value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
       <button name='Add Description'
         style={{ marginTop: '5px', background: props.hex_color, color: 'white', width: '100%' }}
         className='todo-details-description-button-002'
         onClick={async () => {
-          await props.asyncEditEvent(event._id, { description: props.description });
-          if (document) document.querySelector('#todo-details-textarea-for-description').blur();
+          await props.asyncEditEvent(event._id, { description: description });
+          document.querySelector('#todo-details-textarea-for-description').blur();
         }
       }>Save</button>
     </div>

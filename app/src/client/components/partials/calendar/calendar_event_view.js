@@ -103,6 +103,7 @@ class CalendarEventViewComp extends Component {
                 changeColorFunc={async (color) => {
                   await this.props.asyncEditEvent(event._id, { hex_color: color });
                 }}
+                animatedClosing={this.props.animatedClosing}
               />
             )}
           >

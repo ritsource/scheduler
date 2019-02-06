@@ -26,7 +26,7 @@ export const SubOptColorComp = (props) => {
               <FaCheckCircle
                 key={i}
                 style={{ color: hexVal, margin: '0px 4px 10px 4px', cursor: 'pointer' }}
-                onClick={() => props.changeColorFunc(hexVal)}
+                onClick={() => props.animatedClosing(() => props.changeColorFunc(hexVal))}
               />
             );
           } else {
@@ -34,7 +34,7 @@ export const SubOptColorComp = (props) => {
               <FaCircle
                 key={i}
                 style={{ color: hexVal, margin: '0px 4px 10px 4px', cursor: 'pointer' }}
-                onClick={() => props.changeColorFunc(hexVal)}
+                onClick={() => props.animatedClosing(() => props.changeColorFunc(hexVal))}
               />
             );
           }
