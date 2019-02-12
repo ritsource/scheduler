@@ -4,4 +4,8 @@
   display: flex;
   flex-direction: column;
   transition: 0.3s;
+
+  .any-list-comp-container-999 {
+    height: calc(100% - 221px - 31px) !important;
+  }
 }
