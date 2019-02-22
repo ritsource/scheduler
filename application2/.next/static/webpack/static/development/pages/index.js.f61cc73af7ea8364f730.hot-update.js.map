@@ -1,0 +1,1 @@
+{"version":3,"file":"static/webpack/static/development/pages/index.js.f61cc73af7ea8364f730.hot-update.js","sources":["webpack:///./pages/index.js"],"sourcesContent":["import '../src/styles/app.scss';\n\nexport default () => <div>Home Page</div>;\n"],"mappings":";;;;;;;;;;;;;;;;;AAAA;AAEA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;;;;A","sourceRoot":""}

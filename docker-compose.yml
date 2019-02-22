@@ -5,7 +5,7 @@ services:
   nginx:
     build:
       context: ./nginx
-      dockerfile: dev.Dockerfile
+      dockerfile: Dockerfile
     ports:
       - '4001:80'
   application:
@@ -24,10 +24,10 @@ services:
       - ./api_server:/app
     environment:
       - AUTH_REDIRECT_URL_BASE=http://localhost:4001
-  gql_server:
-    build:
-      context: ./gql_server
-      dockerfile: dev.Dockerfile
-    volumes:
-      - /app/node_modules
-      - ./gql_server:/app
+  # gql_server:
+  #   build:
+  #     context: ./gql_server
+  #     dockerfile: dev.Dockerfile
+  #   volumes:
+  #     - /app/node_modules
+  #     - ./gql_server:/app
