@@ -11,22 +11,22 @@ import stepReducer from '../client/reducers/step_reducer';
 import calendarMonthReducer from '../client/reducers/calendar_month_reducer';
 
 export default (req) => {
-  const axiosInstance = axios.create({
-    baseURL: `http://server:5000/api`,
-    headers: { cookie: req.get('cookie') || '' }
-  });
+	const axiosInstance = axios.create({
+		baseURL: `http://api_server:5000/api`,
+		headers: { cookie: req.get('cookie') || '' }
+	});
 
-  return createStore(
-    combineReducers({
-      auth: authReducer,
-      appMode: appModeReducer,
-      sideBar: sideBarReducer,
-      groups: groupReducer,
-      events: eventReducer,
-      steps: stepReducer,
-      calendarMonth: calendarMonthReducer
-    }),
-    {},
-    applyMiddleware(thunk.withExtraArgument(axiosInstance))
-  );
+	return createStore(
+		combineReducers({
+			auth: authReducer,
+			appMode: appModeReducer,
+			sideBar: sideBarReducer,
+			groups: groupReducer,
+			events: eventReducer,
+			steps: stepReducer,
+			calendarMonth: calendarMonthReducer
+		}),
+		{},
+		applyMiddleware(thunk.withExtraArgument(axiosInstance))
+	);
 };

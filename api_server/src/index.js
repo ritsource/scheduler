@@ -1,5 +1,4 @@
 if (!process.env.NODE_ENV) process.env.NODE_ENV = 'development';
-// const APP_HOST = process.env.APP_HOST || 'http://localhost:3000';
 
 const express = require('express');
 const cors = require('cors');
@@ -21,10 +20,12 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use(cookieSession({
-  maxAge: 30 * 24 * 60 * 60 * 1000,
-  keys: [keys.cookie_key]
-}));
+app.use(
+	cookieSession({
+		maxAge: 30 * 24 * 60 * 60 * 1000,
+		keys: [ keys.cookie_key ]
+	})
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -37,8 +38,8 @@ require('./routes/step_routes')(app);
 require('./routes/password_routes')(app);
 
 app.get('/', (req, res) => {
-  res.send({ name: 'Ritwik' });
+	res.send({ name: 'Ritwik' });
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server is up, PORT=${PORT} NODE_ENV=${process.env.NODE_ENV}..`));
+app.listen(PORT, () => console.log(`API-Server is up, PORT=${PORT} NODE_ENV=${process.env.NODE_ENV}..`));

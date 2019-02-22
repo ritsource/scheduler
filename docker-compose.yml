@@ -1,26 +1,33 @@
 version: '3'
 services:
+  redis:
+    image: 'redis:5.0.3-alpine'
   nginx:
     build:
       context: ./nginx
       dockerfile: dev.Dockerfile
     ports:
       - '4001:80'
-  client:
+  application:
     build:
-      context: ./app
+      context: ./application
       dockerfile: dev.Dockerfile
     volumes:
       - /app/node_modules
-      - ./app:/app
-  redis:
-    image: 'redis:5.0.3-alpine'
-  server:
+      - ./application:/app
+  api_server:
     build:
-      context: ./api
+      context: ./api_server
       dockerfile: dev.Dockerfile
     volumes:
       - /app/node_modules
-      - ./api:/app
+      - ./api_server:/app
     environment:
       - AUTH_REDIRECT_URL_BASE=http://localhost:4001
+  gql_server:
+    build:
+      context: ./gql_server
+      dockerfile: dev.Dockerfile
+    volumes:
+      - /app/node_modules
+      - ./gql_server:/app
