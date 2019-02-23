@@ -1,6 +1,6 @@
 FROM node:10.15.0-alpine
 
-WORKDIR /app
+WORKDIR /anotherapp
 
 COPY ./package.json ./
 RUN yarn install

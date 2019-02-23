@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
 
-const CreadentialsForm = ({ pageName, errorMsg }) => {
+const CreadentialsForm = ({ pageName, errorMsg, onFormSubmit, setProgressBar }) => {
 	const [ name, setName ] = useState('');
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
@@ -13,7 +13,12 @@ const CreadentialsForm = ({ pageName, errorMsg }) => {
 				{pageName === 'signup' ? 'Create a new Account' : 'Login to Schedular'}
 			</h2>
 			{errorMsg && <p style={{ width: '100%', margin: '0px', color: 'var(--danger-red-color)' }}>{errorMsg}</p>}
-			<form onSubmit={(e) => e.preventDefault()}>
+			<form
+				onSubmit={(e) => {
+					e.preventDefault();
+					onFormSubmit({ name, email, password });
+				}}
+			>
 				{pageName === 'signup' && (
 					<input
 						placeholder="Name"
@@ -61,19 +66,21 @@ const CreadentialsForm = ({ pageName, errorMsg }) => {
 					<p style={{ margin: '10px' }}>
 						Already have an account -{' '}
 						<Link href="/login">
-							<a>Lust Login</a>
+							<a onClick={setProgressBar}>Lust Login</a>
 						</Link>
 					</p>
 				) : (
 					<p style={{ margin: '10px' }}>
 						or maybe -{' '}
 						<Link href="/signup">
-							<a>Create a new Account?</a>
+							<a onClick={setProgressBar}>Create a new Account?</a>
 						</Link>
 					</p>
 				)}
 
 				<button
+					onClick={setProgressBar}
+					type="button"
 					style={{ background: '#dd4b39', width: '100%', margin: '5px 0px' }}
 					className="Theme-Btn-First-99"
 				>
@@ -82,6 +89,8 @@ const CreadentialsForm = ({ pageName, errorMsg }) => {
 				</button>
 
 				<button
+					onClick={setProgressBar}
+					type="button"
 					style={{ background: '#3b5998', width: '100%', margin: '5px 0px' }}
 					className="Theme-Btn-First-99"
 				>

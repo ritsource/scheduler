@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { GoMarkGithub, GoStar, GoRepoForked } from 'react-icons/go';
 
-import AboutHeader from '../src/components/Header/AboutHeader';
+import AboutHeader from '../components/Header/AboutHeader';
 
 export default () => {
 	return (
