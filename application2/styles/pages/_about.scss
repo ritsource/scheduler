@@ -1,0 +1,68 @@
+.About-p-00 {
+	height: 100vh;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+
+	animation: PageFadeIn 600ms linear;
+	animation-iteration-count: 1;
+
+	.About-Content-01 {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+
+		animation: AboutPageContentSlideUp 600ms linear 0ms;
+		animation-iteration-count: 1;
+
+		h1 {
+			margin-top: -50px;
+			font-size: 40px;
+			font-weight: bold;
+			word-spacing: 3px;
+		}
+
+		.About-Subheading-02 {
+			font-size: 16px;
+			color: var(--text-color-light);
+		}
+
+		p {
+			margin: 5px;
+			a {
+				color: var(--theme-color-middle);
+			}
+		}
+
+		.About-Side-Git-Btns-Container-02 {
+			right: 10px;
+			bottom: 40px;
+			position: absolute;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-end;
+		}
+	}
+}
+
+@keyframes PageFadeIn {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes AboutPageContentSlideUp {
+	0% {
+		padding-top: 100px;
+	}
+
+	100% {
+		padding-top: 0px;
+	}
+}

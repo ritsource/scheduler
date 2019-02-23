@@ -7,9 +7,21 @@ body {
 	background: var(--background-color);
 }
 
-* {
-	// color: chocolate;
-	color: var(--theme-color);
+.Flex-Class-Row-Start,
+.Flex-Class-Row-End,
+.Flex-Class-Row-Center {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.Flex-Class-Row-Start {
+	justify-content: flex-start;
+}
+.Flex-Class-Row-End {
+	justify-content: flex-end;
+}
+.Flex-Class-Row-Center {
+	justify-content: center;
 }
 
 a {

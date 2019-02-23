@@ -21,8 +21,21 @@ body {
   font-family: 'Lato', sans-serif;
   background: var(--background-color); }
 
-* {
-  color: var(--theme-color); }
+.Flex-Class-Row-Start,
+.Flex-Class-Row-End,
+.Flex-Class-Row-Center {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+
+.Flex-Class-Row-Start {
+  justify-content: flex-start; }
+
+.Flex-Class-Row-End {
+  justify-content: flex-end; }
+
+.Flex-Class-Row-Center {
+  justify-content: center; }
 
 a {
   color: inherit;
@@ -49,6 +62,171 @@ p {
 button:focus {
   outline: none; }
 
-.Header-c-00 {
-  border: 1px solid red; }
+.Theme-Btn-First-99,
+.Theme-Btn-White-99,
+.Theme-Btn-Black-99 {
+  padding: 10px 20px;
+  border: 0px solid white;
+  border-radius: 4px;
+  cursor: pointer; }
+
+.Theme-Btn-First-99 {
+  color: white;
+  background: var(--theme-color-middle); }
+
+.Theme-Btn-White-99 {
+  color: var(--text-color);
+  background: var(--background-color); }
+
+.Theme-Btn-Black-99 {
+  color: var(--background-color);
+  background: var(--text-color); }
+
+.Theme-Input-99 {
+  color: var(--text-color);
+  background: var(--background-color);
+  border: 1px solid var(--text-color-light-3);
+  padding: 10px;
+  border-radius: 4px; }
+  .Theme-Input-99:focus {
+    border: 1px solid var(--theme-color); }
+
+.Theme-Btn-Shadow-99 {
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2); }
+  .Theme-Btn-Shadow-99:hover {
+    -webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2); }
+
+.About-p-00 {
+  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  animation: PageFadeIn 600ms linear;
+  animation-iteration-count: 1; }
+  .About-p-00 .About-Content-01 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    animation: AboutPageContentSlideUp 600ms linear 0ms;
+    animation-iteration-count: 1; }
+    .About-p-00 .About-Content-01 h1 {
+      margin-top: -50px;
+      font-size: 40px;
+      font-weight: bold;
+      word-spacing: 3px; }
+    .About-p-00 .About-Content-01 .About-Subheading-02 {
+      font-size: 16px;
+      color: var(--text-color-light); }
+    .About-p-00 .About-Content-01 p {
+      margin: 5px; }
+      .About-p-00 .About-Content-01 p a {
+        color: var(--theme-color-middle); }
+    .About-p-00 .About-Content-01 .About-Side-Git-Btns-Container-02 {
+      right: 10px;
+      bottom: 40px;
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end; }
+
+@keyframes PageFadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@keyframes AboutPageContentSlideUp {
+  0% {
+    padding-top: 100px; }
+  100% {
+    padding-top: 0px; } }
+
+.AboutHeader-c-00 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: calc(100% - 140px);
+  height: 70px;
+  padding: 0px 70px; }
+  .AboutHeader-c-00 .AboutHeader-Links-Container-01 {
+    display: flex;
+    flex-direction: row;
+    align-items: center; }
+    .AboutHeader-c-00 .AboutHeader-Links-Container-01 p {
+      color: var(--text-color-light-2);
+      margin-left: 20px;
+      font-size: 12px;
+      cursor: pointer; }
+      .AboutHeader-c-00 .AboutHeader-Links-Container-01 p:hover {
+        color: var(--text-color); }
+    .AboutHeader-c-00 .AboutHeader-Links-Container-01 .AboutHeader-Links-Active {
+      color: var(--text-color); }
+  .AboutHeader-c-00 .AboutHeader-Left-Div-01 {
+    display: flex;
+    flex-direction: row;
+    align-items: center; }
+    .AboutHeader-c-00 .AboutHeader-Left-Div-01 h2 {
+      color: var(--theme-color-middle);
+      align-items: center;
+      display: flex;
+      flex-direction: row; }
+
+.CreadentialsForm-c-00 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 250px; }
+  .CreadentialsForm-c-00 form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 5px 0px; }
+    .CreadentialsForm-c-00 form input {
+      margin: 5px 0px;
+      width: calc(100% - 20px); }
+
+.CustomProgressBar-c-00 {
+  position: fixed;
+  background: var(--theme-color);
+  height: 1px;
+  width: 95%;
+  z-index: 20;
+  -webkit-box-shadow: 0px 0px 3px 0px var(--theme-color);
+  -moz-box-shadow: 0px 0px 3px 0px var(--theme-color);
+  box-shadow: 0px 0px 3px 0px var(--theme-color);
+  animation: ProgressBarLoading 20000ms linear;
+  animation-iteration-count: 1; }
+
+@keyframes ProgressBarLoading {
+  0% {
+    width: 0%; }
+  10% {
+    width: 30%; }
+  20% {
+    width: 50%; }
+  30% {
+    width: 65%; }
+  40% {
+    width: 75%; }
+  50% {
+    width: 80%; }
+  60% {
+    width: 85%; }
+  70% {
+    width: 90%; }
+  80% {
+    width: 95%; }
+  90% {
+    width: 95%; }
+  100% {
+    width: 95%; } }
 

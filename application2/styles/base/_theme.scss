@@ -1,0 +1,46 @@
+.Theme-Btn-First-99,
+.Theme-Btn-White-99,
+.Theme-Btn-Black-99 {
+	padding: 10px 20px;
+	border: 0px solid white;
+	border-radius: 4px;
+	cursor: pointer;
+}
+.Theme-Btn-First-99 {
+	color: white;
+	background: var(--theme-color-middle);
+}
+
+.Theme-Btn-White-99 {
+	color: var(--text-color);
+	background: var(--background-color);
+}
+
+.Theme-Btn-Black-99 {
+	color: var(--background-color);
+	background: var(--text-color);
+}
+
+.Theme-Input-99 {
+	color: var(--text-color);
+	background: var(--background-color);
+	border: 1px solid var(--text-color-light-3);
+	padding: 10px;
+	border-radius: 4px;
+
+	&:focus {
+		border: 1px solid var(--theme-color);
+	}
+}
+
+.Theme-Btn-Shadow-99 {
+	-webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.20);
+	-moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.20);
+	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.20);
+
+	&:hover {
+		-webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.20);
+		-moz-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.20);
+		box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.20);
+	}
+}
