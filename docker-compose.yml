@@ -8,13 +8,20 @@ services:
       dockerfile: Dockerfile
     ports:
       - '4001:80'
-  application:
+  # application:
+  #   build:
+  #     context: ./application
+  #     dockerfile: dev.Dockerfile
+  #   volumes:
+  #     - /app/node_modules
+  #     - ./application:/app
+  application2:
     build:
-      context: ./application
+      context: ./application2
       dockerfile: dev.Dockerfile
     volumes:
       - /app/node_modules
-      - ./application:/app
+      - ./application2:/app
   api_server:
     build:
       context: ./api_server

@@ -4,15 +4,28 @@
 	"main": "index.js",
 	"license": "MIT",
 	"scripts": {
-		"dev": "next",
-		"build": "next build",
+		"dev:next": "next",
+		"prod:next": "next build",
+		"dev:build-styles": "webpack --watch",
+		"prod:build-styles": "webpack",
+		"dev": "npm-run-all --parallel dev:*",
+		"build": "npm-run-all --parallel prod:*",
 		"start": "next start"
 	},
 	"dependencies": {
 		"@zeit/next-sass": "^1.0.1",
+		"css-loader": "^2.1.0",
+		"mini-css-extract-plugin": "^0.5.0",
 		"next": "^8.0.3",
 		"node-sass": "^4.11.0",
+		"npm-run-all": "^4.1.5",
+		"optimize-css-assets-webpack-plugin": "^5.0.1",
 		"react": "^16.8.3",
-		"react-dom": "^16.8.3"
+		"react-dom": "^16.8.3",
+		"react-svg": "^7.2.7",
+		"sass-loader": "^7.1.0",
+		"uglifyjs-webpack-plugin": "^2.1.1",
+		"webpack": "^4.29.5",
+		"webpack-cli": "^3.2.3"
 	}
 }
