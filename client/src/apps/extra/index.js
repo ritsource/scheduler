@@ -30,6 +30,8 @@ window.scrollToBottom = (selector) => {
 	_selector.scrollTop = _scrollHeight;
 };
 
+window.__isClient__ = true;
+
 ReactDOM.hydrate(
 	<Provider store={store}>
 		<BrowserRouter>

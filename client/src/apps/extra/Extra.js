@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { renderRoutes } from 'react-router-config';
 import { connect } from 'react-redux';
 
 import Header1 from './components/Header1';
 
+let __isNode__ = false;
+if (typeof process === 'object') {
+	if (typeof process.versions === 'object') {
+		if (typeof process.versions.node !== 'undefined') {
+			__isNode__ = true;
+		}
+	}
+}
+
 const Extra = (props) => {
+	// const [ pathName, setpathName ] = useState(undefined);
+
+	// useEffecr
+
+	const pathName = props.staticContext
+		? props.staticContext.pathName
+		: !__isNode__ && window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
+
 	return (
 		<div className="Extra-a-00">
-			<Header1 pageName="about" />
+			<Header1 pathName={pathName} />
 			<div>{renderRoutes(props.route.routes)}</div>
 		</div>
 	);
