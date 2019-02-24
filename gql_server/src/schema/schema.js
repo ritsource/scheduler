@@ -1,9 +1,6 @@
-// const { buildSchema } = require('graphql');
-const { gql } = require('apollo-server');
+const { buildSchema } = require('graphql');
 
-// module.exports = buildSchema()
-
-const typeDefs = gql`
+module.exports = buildSchema(`
 	type Event {
 		title: String!
 		description: String!
@@ -13,10 +10,10 @@ const typeDefs = gql`
 		notification: Boolean!
 		_group: Group!
 		_creator: User!
-		# _steps
+		_steps: [Step!]!
 		_isDeleted: Boolean!
 		_isDone: Boolean!
-		_rank: Number!
+		_rank: Int!
 	}
 
 	type Group {
@@ -24,7 +21,7 @@ const typeDefs = gql`
 		hex_color: String!
 		_creator: User!
 		_isDeleted: Boolean!
-		_rank: Number!
+		_rank: Int!
 		_isPermanent: Boolean!
 		_isOnCalendar: Boolean!
 	}
@@ -33,7 +30,7 @@ const typeDefs = gql`
 		title: String!
 		_event: Event!
 		_creator: User!
-		_rank: Number!
+		_rank: Int!
 		_isDone: Boolean!
 		_isDeleted: Boolean!
 	}
@@ -65,4 +62,4 @@ const typeDefs = gql`
 		query: RootQuery
 		mutation: RootMutation
 	}
-`;
+`);

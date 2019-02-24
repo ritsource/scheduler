@@ -5,6 +5,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const graphqlHTTP = require('express-graphql');
 
+const schema = require('./schema/schema');
+
 const app = express();
 
 // Middlewares
@@ -14,7 +16,7 @@ app.use(bodyParser.json());
 app.use(
 	'/graphql',
 	graphqlHTTP({
-		// schema,
+		schema,
 		// rootValue: resolvers,
 		graphiql: true
 	})
