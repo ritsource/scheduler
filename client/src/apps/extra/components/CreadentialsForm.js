@@ -70,23 +70,27 @@ const CreadentialsForm = ({ pathName, errorMsg, onFormSubmit }) => {
 					</p>
 				)}
 
-				<button
-					type="button"
-					style={{ background: '#dd4b39', width: '100%', margin: '5px 0px' }}
-					className="Theme-Btn-First-99"
-				>
-					<FaGoogle style={{ fontSize: '16px', margin: 'auto 10px -3px auto' }} />
-					Signin with Google
-				</button>
+				<a href="/auth/google">
+					<button
+						type="button"
+						style={{ background: '#dd4b39', width: '100%', margin: '5px 0px' }}
+						className="Theme-Btn-First-99"
+					>
+						<FaGoogle style={{ fontSize: '16px', margin: 'auto 10px -3px auto' }} />
+						Signin with Google
+					</button>
+				</a>
 
-				<button
-					type="button"
-					style={{ background: '#3b5998', width: '100%', margin: '5px 0px' }}
-					className="Theme-Btn-First-99"
-				>
-					<FaFacebookF style={{ fontSize: '16px', margin: 'auto 10px -3px auto' }} />
-					Signin with Facebook
-				</button>
+				<a href="/auth/google">
+					<button
+						type="button"
+						style={{ background: '#3b5998', width: '100%', margin: '5px 0px' }}
+						className="Theme-Btn-First-99"
+					>
+						<FaFacebookF style={{ fontSize: '16px', margin: 'auto 10px -3px auto' }} />
+						Signin with Facebook
+					</button>
+				</a>
 			</form>
 
 			<p>

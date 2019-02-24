@@ -2,21 +2,20 @@ import '@babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import { renderRoutes } from 'react-router-config';
 import axios from 'axios';
 
-import reducers from './reducers/index';
-import ExtraRouter from './ExtraRouter';
+import TodoRouter from './TodoRouter';
 
 const axiosInstance = axios.create({
 	baseURL: '/api'
 });
 
 export const store = createStore(
-	reducers,
+	combineReducers({}),
 	window.INITIAL_STATE,
 	applyMiddleware(thunk.withExtraArgument(axiosInstance))
 );
@@ -36,7 +35,7 @@ window.__isClient__ = true;
 ReactDOM.hydrate(
 	<Provider store={store}>
 		<BrowserRouter>
-			<div>{renderRoutes(ExtraRouter)}</div>
+			<div>{renderRoutes(TodoRouter)}</div>
 		</BrowserRouter>
 	</Provider>,
 	document.querySelector('#root')

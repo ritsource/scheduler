@@ -191,10 +191,10 @@ button:focus {
     display: flex;
     flex-direction: row;
     align-items: center; }
-    .Header1-c-00 .Header1-Left-Div-01 .Header2-hamburger-div-01,
-    .Header1-c-00 .Header2-Left-Div-01 .Header2-hamburger-div-01,
-    .Header2-c-00 .Header1-Left-Div-01 .Header2-hamburger-div-01,
-    .Header2-c-00 .Header2-Left-Div-01 .Header2-hamburger-div-01 {
+    .Header1-c-00 .Header1-Left-Div-01 .Header2-Hamburger-Div-02,
+    .Header1-c-00 .Header2-Left-Div-01 .Header2-Hamburger-Div-02,
+    .Header2-c-00 .Header1-Left-Div-01 .Header2-Hamburger-Div-02,
+    .Header2-c-00 .Header2-Left-Div-01 .Header2-Hamburger-Div-02 {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -206,16 +206,16 @@ button:focus {
       border: 1px solid var(--background-color);
       background: var(--background-color);
       cursor: pointer; }
-      .Header1-c-00 .Header1-Left-Div-01 .Header2-hamburger-div-01:hover,
-      .Header1-c-00 .Header2-Left-Div-01 .Header2-hamburger-div-01:hover,
-      .Header2-c-00 .Header1-Left-Div-01 .Header2-hamburger-div-01:hover,
-      .Header2-c-00 .Header2-Left-Div-01 .Header2-hamburger-div-01:hover {
+      .Header1-c-00 .Header1-Left-Div-01 .Header2-Hamburger-Div-02:hover,
+      .Header1-c-00 .Header2-Left-Div-01 .Header2-Hamburger-Div-02:hover,
+      .Header2-c-00 .Header1-Left-Div-01 .Header2-Hamburger-Div-02:hover,
+      .Header2-c-00 .Header2-Left-Div-01 .Header2-Hamburger-Div-02:hover {
         border: 1px solid var(--hover-mint-medium);
         background: var(--hover-mint-medium); }
-    .Header1-c-00 .Header1-Left-Div-01 .Header2-hamburger-div-01 > div,
-    .Header1-c-00 .Header2-Left-Div-01 .Header2-hamburger-div-01 > div,
-    .Header2-c-00 .Header1-Left-Div-01 .Header2-hamburger-div-01 > div,
-    .Header2-c-00 .Header2-Left-Div-01 .Header2-hamburger-div-01 > div {
+    .Header1-c-00 .Header1-Left-Div-01 .Header2-Hamburger-Div-02 > div,
+    .Header1-c-00 .Header2-Left-Div-01 .Header2-Hamburger-Div-02 > div,
+    .Header2-c-00 .Header1-Left-Div-01 .Header2-Hamburger-Div-02 > div,
+    .Header2-c-00 .Header2-Left-Div-01 .Header2-Hamburger-Div-02 > div {
       background: var(--text-color);
       height: 3px;
       width: 20px;

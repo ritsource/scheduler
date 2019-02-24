@@ -20,8 +20,8 @@ services:
       context: ./client
       dockerfile: dev.Dockerfile
     volumes:
-      - /anotherapp/node_modules
-      - ./client:/anotherapp
+      - /app/node_modules
+      - ./client:/app
   api_server:
     build:
       context: ./api_server

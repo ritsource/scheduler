@@ -2,9 +2,6 @@ import '@babel/polyfill';
 import express from 'express';
 import axios from 'axios';
 // import helmet from 'helmet';
-import { matchRoutes } from 'react-router-config';
-
-import renderer from './renderer';
 
 const app = express();
 
@@ -18,30 +15,35 @@ const checkAuth = async (req, res, next) => {
 			...req.body,
 			headers: { cookie: req.get('cookie') || '' }
 		});
-		req._isAuth = true;
-		next();
+
+		if (response.data) {
+			req._isAuth = true;
+			next();
+		} else {
+			throw new Error('Not Authenticated');
+		}
 	} catch (error) {
 		req._isAuth = false;
 		next();
-		// res.redirect('/about');
 	}
 };
 
-// Extra Routes
-import ExtraRouter from './apps/extra/ExtraRouter';
-import configExtraStore from './apps/extra/configStore';
-
-const getExtraContent = (req) => {
-	const store = configExtraStore(req);
-	const context = { pathName: req.path.replace(/^\/([^\/]*).*$/, '$1') };
-	const jsfile = 'extra.js';
-
-	return renderer(req, ExtraRouter, store, context, jsfile);
-};
+import { getExtraContent, getTodoContent } from './render_handler';
 
 app.get([ '/about', '/login', '/signup', '/forget-password', '/reset-password' ], (req, res) => {
 	const html = getExtraContent(req);
 	res.send(html);
+});
+
+app.get('/todo', checkAuth, (req, res) => {
+	console.log('req._isAuth', req._isAuth);
+
+	if (req._isAuth) {
+		const html = getExtraContent(req);
+		res.status(404).send(html);
+	} else {
+		res.redirect('/about');
+	}
 });
 
 app.get('*', checkAuth, (req, res) => {

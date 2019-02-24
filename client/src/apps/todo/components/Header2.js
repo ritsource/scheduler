@@ -1,22 +1,20 @@
 import React from 'react';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import ReactSVG from 'react-svg';
 
-import CalendarNavigator from './CalendarNavigator';
-
-const AppHeader = ({ pageName }) => {
+const Header2 = ({ pathName }) => {
 	return (
-		<div className="AppHeader-c-00">
-			<div className="AppHeader-Left-Div-01">
-				<div className="AppHeader-hamburger-div-01" onClick={() => {}}>
+		<div className="Header2-c-00">
+			<div className="Header2-Left-Div-01">
+				<div className="Header2-Hamburger-Div-02" onClick={() => {}}>
 					<div />
 					<div />
 					<div />
 				</div>
-				<Link href="/">
+				<Link to="/">
 					<h2 className="Theme-gradient-text">
 						<ReactSVG
-							src="/static/calendar.svg"
+							src="/calendar.svg"
 							svgStyle={{
 								height: '25px',
 								marginTop: '3px',
@@ -28,10 +26,9 @@ const AppHeader = ({ pageName }) => {
 					</h2>
 				</Link>
 			</div>
-
-			<CalendarNavigator />
+			<div className="Header2-Links-Container-01" />
 		</div>
 	);
 };
 
-export default AppHeader;
+export default Header2;
