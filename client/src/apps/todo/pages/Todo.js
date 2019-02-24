@@ -9,15 +9,50 @@ import TodoSidebarComp from '../partials/todo/todo_sidebar';
 import TodoListComp from '../partials/todo/todo_list';
 import EventDetailsComp from '../reusables/event_details/event_details';
 
+// Checking if Environment is Node.js or Browser
+let __isNode__ = false;
+if (typeof process === 'object') {
+	if (typeof process.versions === 'object') {
+		if (typeof process.versions.node !== 'undefined') {
+			__isNode__ = true;
+		}
+	}
+}
+
 const TodoPage = (props) => {
-	const [ groupId, setGroupId ] = useState('');
-	const [ eventId, setEventId ] = useState('');
+	// Getting 'req' from staticContext
+	const { staticRouter, groups, events } = props;
+	const req = staticContext ? staticContext.req : undefined;
 
+	// To Find Query Str in the client
+	const urlParams = new URLSearchParams(window.location.search);
+
+	// Returns Page Initial Group-Id
+	const initGroupId = (req, groups) => {
+		const hasGroups = groups && groups.length > 0;
+		if (__isNode__ && req) {
+			return req.query.group || hasGroups ? groups[0]._id.toString() : '';
+		} else {
+			return urlParams.get('group') || hasGroups ? groups[0]._id.toString() : '';
+		}
+	};
+
+	// Returns Page Initial Event-Id
+	const initEventId = (req) => {
+		if (__isNode__ && req) {
+			return req.query.event || '';
+		} else {
+			return urlParams.get('event') || '';
+		}
+	};
+
+	// Component States
+	const [ groupId, setGroupId ] = useState(initGroupId(req, groups));
+	const [ eventId, setEventId ] = useState(initEventId(req));
+
+	// Lifecycle
 	useEffect(() => {
-		props.handleAppMode(1);
-
-		if (!!window) {
-			const urlParams = new URLSearchParams(window.location.search);
+		if (!__isNode__) {
 			setGroupId(urlParams.get('group') || '');
 			setEventId(urlParams.get('event') || '');
 
@@ -26,7 +61,7 @@ const TodoPage = (props) => {
 			}
 		}
 
-		return () => props.handleAppMode(2);
+		return () => {};
 	}, []);
 
 	const changeGroupId = (id) => {
@@ -82,6 +117,10 @@ const TodoPage = (props) => {
 	);
 };
 
+// const loadData = () => {
+
+// }
+
 const mapStateToProps = ({ auth, groups, events, sideBar }) => ({ auth, groups, events, sideBar });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -91,6 +130,6 @@ const mapDispatchToProps = (dispatch) => ({
 export default {
 	component: connect(mapStateToProps, mapDispatchToProps)(TodoPage),
 	loadData: function(store) {
-		return store.dispatch(handleAppMode(1));
+		// return store.dispatch(handleAppMode(1));
 	}
 };

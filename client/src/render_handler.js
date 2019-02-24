@@ -5,7 +5,7 @@ import configExtraStore from './apps/extra/configStore';
 
 export const getExtraContent = (req) => {
 	const store = configExtraStore(req);
-	const context = { pathName: req.path.replace(/^\/([^\/]*).*$/, '$1') };
+	const context = { req };
 	const jsfile = 'extra.js';
 
 	return renderer(req, ExtraRouter, store, context, jsfile);
@@ -16,7 +16,7 @@ import configTodoStore from './apps/todo/configStore';
 
 export const getTodoContent = (req) => {
 	const store = configTodoStore(req);
-	const context = { pathName: req.path.replace(/^\/([^\/]*).*$/, '$1') };
+	const context = { req };
 	const jsfile = 'todo.js';
 
 	return renderer(req, TodoRouter, store, context, jsfile);

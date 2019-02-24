@@ -39,7 +39,7 @@ app.get('/todo', checkAuth, (req, res) => {
 	console.log('req._isAuth', req._isAuth);
 
 	if (req._isAuth) {
-		const html = getExtraContent(req);
+		const html = getTodoContent(req);
 		res.status(404).send(html);
 	} else {
 		res.redirect('/about');

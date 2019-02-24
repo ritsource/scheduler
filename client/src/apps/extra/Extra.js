@@ -14,12 +14,8 @@ if (typeof process === 'object') {
 }
 
 const Extra = (props) => {
-	// const [ pathName, setpathName ] = useState(undefined);
-
-	// useEffecr
-
 	const pathName = props.staticContext
-		? props.staticContext.pathName
+		? props.staticContext.req.path.replace(/^\/([^\/]*).*$/, '$1')
 		: !__isNode__ && window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
 
 	return (
