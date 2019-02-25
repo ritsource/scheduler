@@ -15,7 +15,6 @@ module.exports = buildSchema(`
 		_isDeleted: Boolean!
 		_isDone: Boolean!
 		_rank: Int!
-		_steps: [Step!]!
 	}
 
 	type Group {
@@ -54,7 +53,7 @@ module.exports = buildSchema(`
 	type RootQuery {
 		currentUser: User
 
-		readAllEvents() : [Event!]!
+		readAllEvents : [Event!]!
 		readEventById(eventId: ID!) : Event!
 		readEventsByTime(from: Float, to: Float) : [Event!]!
 		readEventsByGroup(groupId: ID!) : [Event!]!

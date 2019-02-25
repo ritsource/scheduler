@@ -16,7 +16,7 @@ require('./auth/passport'); // Passport
 
 const keys = require('./config/keys');
 const schema = require('./schema/schema');
-const resolvers = require('./reslovers/index');
+const resolvers = require('./reslovers/resolvers');
 
 // App init
 const app = express();
