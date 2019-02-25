@@ -32,7 +32,6 @@ module.exports = buildSchema(`
 	type Step {
 		_id: ID!
 		title: String!
-	#		_event: Event!
 		_creator: User!
 		_rank: Int!
 		_isDone: Boolean!
@@ -70,7 +69,7 @@ module.exports = buildSchema(`
 		loginUser(email: String! password: String!): User!
 		logout: User
 
-		createEvent(title: String! description: String date_from: Float, date_from: Float) : Event!
+		createEvent(title: String! description: String date_from: Float, date_to: Float) : Event!
 		editEventToDone(eventId: ID!) : Event!
 		editEventToNotDone(eventId: ID!) : Event!
 		editEventById(eventId: ID! title: String description: String _group: ID notification: Boolean hex_color: String) : Event!
@@ -79,7 +78,7 @@ module.exports = buildSchema(`
 		rearrangeEvents(focusedEvent: ID!, fromRank: Int!, toRank: Int!, movedEvents: [ID!]!) : [Event!]!
 
 		createGroup(title: String! hex_color: String) : Group!
-		editGroupToVisible(groupID: ID!) : Group!
+		editGroupToVisible(groupId: ID!) : Group!
 		editGroupToInvisible(groupId: ID!) : Group!
 		editGroupById(groupId: ID! title: String hex_color: String) : Group!
 		deleteGroup(groupId: ID!) : Group!
