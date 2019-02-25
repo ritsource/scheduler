@@ -70,7 +70,7 @@ const CreadentialsForm = ({ pathName, errorMsg, onFormSubmit }) => {
 					</p>
 				)}
 
-				<a href="/auth/google">
+				<a href="/auth/google" style={{ width: '100%' }}>
 					<button
 						type="button"
 						style={{ background: '#dd4b39', width: '100%', margin: '5px 0px' }}
@@ -81,7 +81,7 @@ const CreadentialsForm = ({ pathName, errorMsg, onFormSubmit }) => {
 					</button>
 				</a>
 
-				<a href="/auth/google">
+				<a href="/auth/google" style={{ width: '100%' }}>
 					<button
 						type="button"
 						style={{ background: '#3b5998', width: '100%', margin: '5px 0px' }}

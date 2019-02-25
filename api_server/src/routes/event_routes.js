@@ -178,7 +178,7 @@ module.exports = (app) => {
 
 	app.put('/api/event/rearrange', requireAuth, clearCache(eventHashKey), async (req, res) => {
 		const { focusedEvent, fromRank, toRank, movedEvents } = req.body;
-		console.log('API ******** =>', { focusedEvent, fromRank, toRank, movedEvents });
+		// console.log('API ******** =>', { focusedEvent, fromRank, toRank, movedEvents });
 
 		try {
 			// find

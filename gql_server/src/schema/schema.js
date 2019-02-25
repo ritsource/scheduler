@@ -15,6 +15,7 @@ module.exports = buildSchema(`
 		_isDeleted: Boolean!
 		_isDone: Boolean!
 		_rank: Int!
+		_steps: [Step!]!
 	}
 
 	type Group {
@@ -26,12 +27,13 @@ module.exports = buildSchema(`
 		_rank: Int!
 		_isPermanent: Boolean!
 		_isOnCalendar: Boolean!
+		_events: [Event!]!
 	}
 
 	type Step {
 		_id: ID!
 		title: String!
-		_event: Event!
+	#		_event: Event!
 		_creator: User!
 		_rank: Int!
 		_isDone: Boolean!
@@ -51,18 +53,44 @@ module.exports = buildSchema(`
 
 	type RootQuery {
 		currentUser: User
-		eventsByGroup(groupId: ID!): [Event!]!
-		eventsBytime(startStamp: Float!, endStamp: Float!): [Event!]!
-		eventsAll(userId: ID!): [Event!]!
-		groupsAll(userId: ID!): [Group!]!
-		stepsByEvent(eventId: ID!): [Step!]
-		stepsAll(userId: ID!): [Step!]
+
+		readAllEvents() : [Event!]!
+		readEventById(eventId: ID!) : Event!
+		readEventsByTime(from: Float, to: Float) : [Event!]!
+		readEventsByGroup(groupId: ID!) : [Event!]!
+	
+		readAllGroups : [Group!]!
+		readGroupById(groupId: ID!) : Group!
+
+		readAllSteps : [Step!]!
+		readStepsByEvent(eventId: ID!) : [Step!]!
 	}
 
 	type RootMutation {
 		registerUser(name: String! email: String! password: String!): User!
 		loginUser(email: String! password: String!): User!
 		logout: User
+
+		createEvent(title: String! description: String date_from: Float, date_from: Float) : Event!
+		editEventToDone(eventId: ID!) : Event!
+		editEventToNotDone(eventId: ID!) : Event!
+		editEventById(eventId: ID! title: String description: String _group: ID notification: Boolean hex_color: String) : Event!
+		editEventDates(eventId: ID! date_from: Float, date_from: Float) : Event!
+		deleteEvent(eventId: ID!) : Event!
+		rearrangeEvents(focusedEvent: ID!, fromRank: Int!, toRank: Int!, movedEvents: [ID!]!) : [Event!]!
+
+		createGroup(title: String! hex_color: String) : Group!
+		editGroupToVisible(groupID: ID!) : Group!
+		editGroupToInvisible(groupId: ID!) : Group!
+		editGroupById(groupId: ID! title: String hex_color: String) : Group!
+		deleteGroup(groupId: ID!) : Group!
+		rearrangeGroups(focusedGroup: ID! fromRank: Int! toRank: Int! movedGroups: [ID!]!) : [Group!]!
+
+		createStep(title: String! _event: ID!) : Step!
+		editStepToDone(stepId: ID!) : Step!
+		editStepToNotDone(stepId: ID!) : Step!
+		deleteStep(stepId: ID!) : Step!
+		rearrangeSteps(focusedStep: ID! fromRank: Int! toRank: Int! movedSteps: [ID!]!) : [Step!]!
 	}
 
 	schema {
