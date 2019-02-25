@@ -2,6 +2,7 @@ const { buildSchema } = require('graphql');
 
 module.exports = buildSchema(`
 	type Event {
+		_id: ID!
 		title: String!
 		description: String!
 		hex_color: String!
@@ -17,6 +18,7 @@ module.exports = buildSchema(`
 	}
 
 	type Group {
+		_id: ID!
 		title: String!
 		hex_color: String!
 		_creator: User!
@@ -27,6 +29,7 @@ module.exports = buildSchema(`
 	}
 
 	type Step {
+		_id: ID!
 		title: String!
 		_event: Event!
 		_creator: User!
@@ -36,6 +39,7 @@ module.exports = buildSchema(`
 	}
 
 	type User {
+		_id: ID!
 		googleId: String
 		facebookId: String
 		password: String
@@ -46,6 +50,7 @@ module.exports = buildSchema(`
 	}
 
 	type RootQuery {
+		currentUser: User
 		eventsByGroup(groupId: ID!): [Event!]!
 		eventsBytime(startStamp: Float!, endStamp: Float!): [Event!]!
 		eventsAll(userId: ID!): [Event!]!
@@ -55,7 +60,9 @@ module.exports = buildSchema(`
 	}
 
 	type RootMutation {
-		dummyMutation(x: String!): Event!
+		registerUser(name: String! email: String! password: String!): User!
+		loginUser(email: String! password: String!): User!
+		logout: User
 	}
 
 	schema {
