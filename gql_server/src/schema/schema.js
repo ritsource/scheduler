@@ -53,15 +53,18 @@ module.exports = buildSchema(`
 		currentUser: User
 
 		readAllEvents: [Event!]!
-		readEventById(eventId: ID!) : Event!
-		readEventsByTime(from: Float, to: Float) : [Event!]!
-		readEventsByGroup(groupId: ID!) : [Event!]!
+		readEventById(eventId: ID!): Event!
+		readEventsByTime(from: Float, to: Float): [Event!]!
+		readEventsByGroup(groupId: ID!): [Event!]!
 	
 		readAllGroups: [Group!]!
-		readGroupById(groupId: ID!) : Group!
+		readGroupById(groupId: ID!): Group!
 
 		readAllSteps: [Step!]!
-		readStepsByEvent(eventId: ID!) : [Step!]!
+		readStepsByEvent(eventId: ID!): [Step!]!
+
+		satReadAllGroups: [Group!]!
+		satReadGroupsOnCalendar: [Group!]!
 	}
 
 	type RootMutation {
@@ -69,26 +72,28 @@ module.exports = buildSchema(`
 		loginUser(email: String! password: String!): User!
 		logout: User
 
-		createEvent(title: String! description: String date_from: Float, date_to: Float) : Event!
-		editEventToDone(eventId: ID!) : Event!
-		editEventToNotDone(eventId: ID!) : Event!
-		editEventById(eventId: ID! title: String description: String _group: ID notification: Boolean hex_color: String) : Event!
-		editEventDates(eventId: ID! date_from: Float, date_from: Float) : Event!
-		deleteEvent(eventId: ID!) : Event!
-		rearrangeEvents(focusedEvent: ID!, fromRank: Int!, toRank: Int!, movedEvents: [ID!]!) : [Event!]!
+		createEvent(title: String! description: String date_from: Float, date_to: Float): Event!
+		editEventToDone(eventId: ID!): Event!
+		editEventToNotDone(eventId: ID!): Event!
+		editEventById(eventId: ID! title: String description: String _group: ID notification: Boolean hex_color: String): Event!
+		editEventDates(eventId: ID! date_from: Float, date_from: Float): Event!
+		deleteEvent(eventId: ID!): Event!
+		rearrangeEvents(focusedEvent: ID!, fromRank: Int!, toRank: Int!, movedEvents: [ID!]!): [Event!]!
 
-		createGroup(title: String! hex_color: String) : Group!
-		editGroupToVisible(groupId: ID!) : Group!
-		editGroupToInvisible(groupId: ID!) : Group!
-		editGroupById(groupId: ID! title: String hex_color: String) : Group!
-		deleteGroup(groupId: ID!) : Group!
-		rearrangeGroups(focusedGroup: ID! fromRank: Int! toRank: Int! movedGroups: [ID!]!) : [Group!]!
+		createGroup(title: String! hex_color: String): Group!
+		editGroupToVisible(groupId: ID!): Group!
+		editGroupToInvisible(groupId: ID!): Group!
+		editGroupById(groupId: ID! title: String hex_color: String): Group!
+		deleteGroup(groupId: ID!): Group!
+		rearrangeGroups(focusedGroup: ID! fromRank: Int! toRank: Int! movedGroups: [ID!]!): [Group!]!
 
-		createStep(title: String! _event: ID!) : Step!
-		editStepToDone(stepId: ID!) : Step!
-		editStepToNotDone(stepId: ID!) : Step!
-		deleteStep(stepId: ID!) : Step!
-		rearrangeSteps(focusedStep: ID! fromRank: Int! toRank: Int! movedSteps: [ID!]!) : [Step!]!
+		createStep(title: String! _event: ID!): Step!
+		editStepToDone(stepId: ID!): Step!
+		editStepToNotDone(stepId: ID!): Step!
+		deleteStep(stepId: ID!): Step!
+		rearrangeSteps(focusedStep: ID! fromRank: Int! toRank: Int! movedSteps: [ID!]!): [Step!]!
+
+		satEditGroupToVisible(groupId: ID!): Group!
 	}
 
 	schema {

@@ -41,6 +41,22 @@ module.exports = {
 		}
 	},
 
+	readGroupsOnCalendar: async ({}, req) => {
+		requireAuth(req);
+
+		try {
+			const allGroups = await Group.find({
+				_creator: req.user._id,
+				_isOnCalendar: true,
+				_isDeleted: false
+			});
+
+			return allGroups;
+		} catch (error) {
+			throw new Error('Unable to query groups');
+		}
+	},
+
 	createGroup: async ({ title }, req) => {
 		requireAuth(req);
 
