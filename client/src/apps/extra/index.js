@@ -11,14 +11,18 @@ import axios from 'axios';
 import reducers from './reducers/index';
 import ExtraRouter from './ExtraRouter';
 
-const axiosInstance = axios.create({
-	baseURL: '/api'
+const axiosGraphQL = axios.create({
+	baseURL: '/graphql'
 });
+
+if (!!window) {
+	window.axios = axios;
+}
 
 export const store = createStore(
 	reducers,
 	window.INITIAL_STATE,
-	applyMiddleware(thunk.withExtraArgument(axiosInstance))
+	applyMiddleware(thunk.withExtraArgument(axiosGraphQL))
 );
 
 window.showStateDev = () => {

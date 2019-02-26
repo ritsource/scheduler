@@ -1,12 +1,16 @@
 import Todo from './Todo';
 
-import TodoPage from './Todo';
+import TodoPage from './pages/Todo';
 import NotFoundPage from '../_common/pages/NotFound';
 
 const TodoRouter = [
 	{
 		...Todo,
-		routes: [ { ...TodoPage, path: '/todo', exact: true }, { ...NotFoundPage } ]
+		routes: [
+			{ ...NotFoundPage, path: '/', exact: true },
+			{ ...TodoPage, path: '/todo', exact: true },
+			{ ...NotFoundPage }
+		]
 	}
 ];
 

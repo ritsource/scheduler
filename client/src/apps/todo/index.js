@@ -10,14 +10,14 @@ import axios from 'axios';
 
 import TodoRouter from './TodoRouter';
 
-const axiosInstance = axios.create({
-	baseURL: '/api'
+const axiosGraphQL = axios.create({
+	baseURL: '/graphql'
 });
 
 export const store = createStore(
 	combineReducers({}),
 	window.INITIAL_STATE,
-	applyMiddleware(thunk.withExtraArgument(axiosInstance))
+	applyMiddleware(thunk.withExtraArgument(axiosGraphQL))
 );
 
 window.showStateDev = () => {

@@ -5,10 +5,10 @@ import axios from 'axios';
 // import reducers from './reducers/index';
 
 export default (req) => {
-	const axiosInstance = axios.create({
-		baseURL: `http://api_server:5000`,
+	const axiosGraphQL = axios.create({
+		baseURL: `http://api_server:5000/graphql`,
 		headers: { cookie: req.get('cookie') || '' }
 	});
 
-	return createStore(combineReducers({}), {}, applyMiddleware(thunk.withExtraArgument(axiosInstance)));
+	return createStore(combineReducers({}), {}, applyMiddleware(thunk.withExtraArgument(axiosGraphQL)));
 };

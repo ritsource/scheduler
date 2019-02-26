@@ -4,10 +4,10 @@ import { createBrowserHistory } from 'history';
 // import ReactSVG from 'react-svg';
 import { Redirect } from 'react-router-dom';
 
-import { handleAppMode } from '../../actions/app_mode_actions';
-import TodoSidebarComp from '../partials/todo/todo_sidebar';
-import TodoListComp from '../partials/todo/todo_list';
-import EventDetailsComp from '../reusables/event_details/event_details';
+// import { handleAppMode } from '../../actions/app_mode_actions';
+// import TodoSidebarComp from '../partials/todo/todo_sidebar';
+// import TodoListComp from '../partials/todo/todo_list';
+// import EventDetailsComp from '../reusables/event_details/event_details';
 
 // Checking if Environment is Node.js or Browser
 let __isNode__ = false;
