@@ -52,15 +52,15 @@ module.exports = buildSchema(`
 	type RootQuery {
 		currentUser: User
 
-		readAllEvents : [Event!]!
+		readAllEvents: [Event!]!
 		readEventById(eventId: ID!) : Event!
 		readEventsByTime(from: Float, to: Float) : [Event!]!
 		readEventsByGroup(groupId: ID!) : [Event!]!
 	
-		readAllGroups : [Group!]!
+		readAllGroups: [Group!]!
 		readGroupById(groupId: ID!) : Group!
 
-		readAllSteps : [Step!]!
+		readAllSteps: [Step!]!
 		readStepsByEvent(eventId: ID!) : [Step!]!
 	}
 

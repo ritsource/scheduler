@@ -27,13 +27,13 @@ module.exports = {
 		requireAuth(req);
 
 		try {
-			const allEvents = await Event.find({
+			const theEvent = await Event.findOne({
 				_id: eventId,
 				_creator: req.user._id,
 				_isDeleted: false
 			});
 
-			return allEvents;
+			return theEvent;
 		} catch (error) {
 			throw new Error('Unable to query events');
 		}
@@ -182,7 +182,7 @@ module.exports = {
 		}
 	},
 
-	deleteGroup: async ({ eventId }, req) => {
+	deleteEvent: async ({ eventId }, req) => {
 		requireAuth(req);
 
 		try {

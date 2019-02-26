@@ -29,7 +29,7 @@ module.exports = {
 		requireAuth(req);
 
 		try {
-			const theGroup = await Group.find({
+			const theGroup = await Group.findOne({
 				_id: groupId,
 				_creator: req.user._id,
 				_isDeleted: false
