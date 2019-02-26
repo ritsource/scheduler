@@ -1,3 +1,4 @@
+import { matchRoutes } from 'react-router-config';
 import renderer from './renderer';
 
 import ExtraRouter from './apps/extra/ExtraRouter';
@@ -19,7 +20,20 @@ export const getTodoContent = (req) => {
 	const context = { req };
 	const jsfile = 'todo.js';
 
-	return renderer(req, TodoRouter, store, context, jsfile);
+	console.log('LOL 1');
+
+	const promises = matchRoutes(TodoRouter, req.path).map(({ route }) => {
+		console.log('LOL 2');
+		return route.loadData ? route.loadData(store, context) : null;
+	});
+
+	console.log('LOL 3');
+
+	const html = renderer(req, TodoRouter, store, context, jsfile);
+
+	console.log('LOL 4');
+
+	return { promises, html };
 };
 
 // export const getExtraContent = (req) => {

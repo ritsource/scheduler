@@ -20,8 +20,26 @@ module.exports = {
 	}, // Reading Events By Group
 
 	readAllGroups: async (args, req) => {
-		return await readAllGroups(args, req);
+		const groups = await readAllGroups(args, req);
+
+		const satGroups = groups.map((group) => ({
+			...group._doc,
+			_events: readEventsByGroup.bind(this, { groupId: group._doc._id }, req)
+		}));
+
+		return satGroups;
 	}, // Read all Groups
+
+	readGroupsOnCalendar: async (args, req) => {
+		const groups = await readGroupsOnCalendar(args, req);
+
+		const satGroups = groups.map((group) => ({
+			...group._doc,
+			_events: readEventsByGroup.bind(this, { groupId: group._doc._id }, req)
+		}));
+
+		return satGroups;
+	}, // Read all Groups active on Calendar
 
 	readGroupById: async (args, req) => {
 		return await readGroupById(args, req);

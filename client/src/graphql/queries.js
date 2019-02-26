@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 
-export const FETCH_SATURATED_GROUPS = gql`
+export const FETCH_ALL_GROUPS = gql`
 	query satReadAllGroups {
 		satReadAllGroups {
 			_id

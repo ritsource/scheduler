@@ -57,7 +57,10 @@ module.exports = {
 	}, // Edit a SIngle Group
 
 	editGroupToVisible: async (args, req) => {
-		return await editGroupToVisible(args, req);
+		const group = await editGroupToVisible(args, req);
+		group._events = readEventsByGroup.bind(this, { groupId: group._doc._id }, req);
+
+		return group;
 	}, // to _onCalendar true
 
 	editGroupToInvisible: async (args, req) => {

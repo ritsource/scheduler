@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 const NotFoundPage = ({ staticContext }) => {
 	if (staticContext) {
 		staticContext.notFound = true;
-		console.log('LLLLLLLLLL*****************============================');
 	}
 
 	return (

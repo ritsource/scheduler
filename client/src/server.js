@@ -2,8 +2,11 @@ import '@babel/polyfill';
 import express from 'express';
 import axios from 'axios';
 // import helmet from 'helmet';
+import proxy from 'http-proxy-middleware';
 
 const app = express();
+
+app.use('/graphql', proxy({ target: 'http://api_server:5000/graphql', changeOrigin: true }));
 
 // app.use(helmet());
 
@@ -36,11 +39,20 @@ app.get([ '/about', '/login', '/signup', '/forget-password', '/reset-password' ]
 });
 
 app.get('/todo', checkAuth, (req, res) => {
-	console.log('req._isAuth', req._isAuth);
-
 	if (req._isAuth) {
-		const html = getTodoContent(req);
-		res.status(404).send(html);
+		const { promises, html } = getTodoContent(req);
+
+		Promise.all(promises)
+			.then((x) => {
+				console.log('LOL 5');
+				res.send(html);
+			})
+			.catch((error) => {
+				console.log('LOL 6');
+				console.log('error', error.message);
+
+				res.send(error);
+			});
 	} else {
 		res.redirect('/about');
 	}

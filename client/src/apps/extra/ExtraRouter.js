@@ -9,6 +9,7 @@ import NotFoundPage from '../_common/pages/NotFound';
 const ExtraRouter = [
 	{
 		...Extra,
+		path: '/',
 		routes: [
 			// { ...HomePage, path: '/', exact: true },
 			{ ...AboutPage, path: '/about', exact: true },

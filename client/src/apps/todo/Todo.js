@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { renderRoutes } from 'react-router-config';
-import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import Header2 from './components/Header2';
 
@@ -20,14 +20,23 @@ const Todo = (props) => {
 
 	return (
 		<div className="Todo-a-00">
-			<Header2 pathName={pathName} />
-			<div>{renderRoutes(props.route.routes)}</div>
+			{/* {props.auth ? ( */}
+			<React.Fragment>
+				<Header2 pathName={pathName} />
+				<div>{renderRoutes(props.route.routes)}</div>
+			</React.Fragment>
+			{/* ) : (
+				<Redirect to="/login" />
+			)} */}
 		</div>
 	);
 };
 
 export default {
-	component: Todo
+	component: Todo,
+	loadData: function(store) {
+		// return store.dispatch();
+	}
 };
 
 Date.prototype.getFormattedDate = function() {
