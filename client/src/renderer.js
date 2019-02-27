@@ -1,17 +1,17 @@
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { StaticRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import { ApolloProvider } from 'react-apollo';
 import { renderRoutes } from 'react-router-config';
 import serialize from 'serialize-javascript';
 
-export default (req, router, store, context, jsfile) => {
+export default (req, router, client, context, jsfile) => {
 	const content = renderToString(
-		<Provider store={store}>
+		<ApolloProvider client={client}>
 			<StaticRouter location={req.path} context={context}>
 				<div>{renderRoutes(router)}</div>
 			</StaticRouter>
-		</Provider>
+		</ApolloProvider>
 	);
 
 	return `
@@ -31,7 +31,7 @@ export default (req, router, store, context, jsfile) => {
       <body>
         <div id="root">${content}<div>
       </body>
-      <script>window.INITIAL_STATE = ${serialize(store.getState())}</script>
+      <script>window.__APOLLO_STATE__ = ${JSON.stringify(serialize(client.extract()))}</script>
       <script src="${jsfile}"></script>
     </html>
   `;

@@ -1,6 +1,6 @@
 import Todo from './Todo';
 
-import TodoPage from './pages/Todo';
+import TodoPage from './pages/TodoPage';
 import NotFoundPage from '../_common/pages/NotFound';
 
 const TodoRouter = [

@@ -1,4 +1,5 @@
 import '@babel/polyfill';
+import 'cross-fetch/polyfill';
 import express from 'express';
 import axios from 'axios';
 // import helmet from 'helmet';
@@ -6,7 +7,7 @@ import proxy from 'http-proxy-middleware';
 
 const app = express();
 
-app.use('/graphql', proxy({ target: 'http://api_server:5000/graphql', changeOrigin: true }));
+// app.use('/graphql', proxy({ target: 'http://api_server:5000/graphql', changeOrigin: true }));
 
 // app.use(helmet());
 
