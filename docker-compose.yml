@@ -5,16 +5,18 @@ services:
   nginx:
     build:
       context: ./nginx
-      dockerfile: dev.Dockerfile
+      dockerfile: Dockerfile
     ports:
       - '4001:80'
-  application:
+  client:
     build:
-      context: ./application
+      context: ./client
       dockerfile: dev.Dockerfile
     volumes:
       - /app/node_modules
-      - ./application:/app
+      - /app/build
+      - /app/public
+      - ./client:/app
   api_server:
     build:
       context: ./api_server

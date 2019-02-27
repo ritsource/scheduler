@@ -10,18 +10,18 @@ import SettingsPage from './components/pages/settings_page';
 import NotFoundPage from './components/pages/not_found_page';
 
 export default [
-  {
-    ...App,
-    routes: [
-      { ...AboutPage, path: '/about', exact: true },
-      { ...HomePage, path: '/', exact: true },
-      { ...LoginPage, path: '/login', exact: true },
-      { ...ForgotPasswordPage, path: '/forgot_password', exact: true },
-      { ...ResetPasswordPage, path: '/reset_password', exact: true },
-      { ...CalendarPage, path: '/calendar' },
-      { ...TodoPage, path: '/todo' },
-      { ...SettingsPage, path: '/settings' },
-      { ...NotFoundPage }
-    ]
-  }
+	{
+		...App,
+		routes: [
+			{ ...AboutPage, path: '/about', exact: true },
+			{ ...HomePage, path: '/', exact: true },
+			{ ...LoginPage, path: '/login', exact: true },
+			{ ...ForgotPasswordPage, path: '/forgot_password', exact: true },
+			{ ...ResetPasswordPage, path: '/reset_password', exact: true },
+			{ ...CalendarPage, path: '/calendar' },
+			{ ...TodoPage, path: '/todo' },
+			{ ...SettingsPage, path: '/settings' },
+			{ ...NotFoundPage }
+		]
+	}
 ];

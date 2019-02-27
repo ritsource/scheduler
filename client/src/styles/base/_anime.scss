@@ -1,0 +1,23 @@
+@keyframes Page-Fade-In {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes About-Page-Content-Slide-Up {
+	0% {
+		opacity: 0;
+		padding-top: 100px;
+		height: calc(100vh - 170px);
+	}
+
+	100% {
+		opacity: 1;
+		padding-top: 0px;
+		height: calc(100vh - 70px);
+	}
+}

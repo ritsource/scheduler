@@ -1,0 +1,50 @@
+.CustomProgressBar-c-00 {
+	position: fixed;
+	background: var(--theme-color);
+	height: 1px;
+	width: 95%;
+	z-index: 20;
+
+	-webkit-box-shadow: 0px 0px 3px 0px var(--theme-color);
+	-moz-box-shadow: 0px 0px 3px 0px var(--theme-color);
+	box-shadow: 0px 0px 3px 0px var(--theme-color);
+
+	animation: ProgressBarLoading 20000ms linear;
+	animation-iteration-count: 1;
+}
+
+@keyframes ProgressBarLoading {
+	0% {
+		width: 0%;
+	}
+	10% {
+		width: 30%;
+	}
+	20% {
+		width: 50%;
+	}
+	30% {
+		width: 65%;
+	}
+	40% {
+		width: 75%;
+	}
+	50% {
+		width: 80%;
+	}
+	60% {
+		width: 85%;
+	}
+	70% {
+		width: 90%;
+	}
+	80% {
+		width: 95%;
+	}
+	90% {
+		width: 95%;
+	}
+	100% {
+		width: 95%;
+	}
+}
