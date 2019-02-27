@@ -14,8 +14,6 @@ services:
       dockerfile: dev.Dockerfile
     volumes:
       - /app/node_modules
-      - /app/build
-      - /app/public
       - ./client:/app
   api_server:
     build:

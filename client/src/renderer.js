@@ -5,12 +5,16 @@ import { ApolloProvider } from 'react-apollo';
 import { renderRoutes } from 'react-router-config';
 import serialize from 'serialize-javascript';
 
+import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
+
 export default (req, router, client, context, jsfile) => {
 	const content = renderToString(
 		<ApolloProvider client={client}>
-			<StaticRouter location={req.path} context={context}>
-				<div>{renderRoutes(router)}</div>
-			</StaticRouter>
+			<ApolloHooksProvider client={client}>
+				<StaticRouter location={req.path} context={context}>
+					<div>{renderRoutes(router)}</div>
+				</StaticRouter>
+			</ApolloHooksProvider>
 		</ApolloProvider>
 	);
 
@@ -31,8 +35,14 @@ export default (req, router, client, context, jsfile) => {
       <body>
         <div id="root">${content}<div>
       </body>
-      <script>window.__APOLLO_STATE__ = ${JSON.stringify(serialize(client.extract()))}</script>
+      <script>window.__APOLLO_STATE__ = ${JSON.stringify(client.extract())}</script>
       <script src="${jsfile}"></script>
     </html>
   `;
 };
+
+// serialize
+
+{
+	/* <script>window.__APOLLO_STATE__ = ${JSON.stringify(serialize(client.extract())).replace(/</g, '\\u003c')}</script> */
+}

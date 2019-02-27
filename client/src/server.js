@@ -13,14 +13,30 @@ const app = express();
 
 app.use(express.static('public'));
 
-const checkAuth = async (req, res, next) => {
+export const checkAuth = async (req, res, next) => {
 	try {
-		const response = await axios.get('http://api_server:5000/api/current_user', {
-			...req.body,
-			headers: { cookie: req.get('cookie') || '' }
+		const response = await axios({
+			url: 'http://gql_server:5000/graphql',
+			method: 'post',
+			headers: { cookie: req.get('cookie') || '' },
+			data: {
+				query: `
+					query currentUser {
+						currentUser {
+							_id
+							googleId
+							facebookId
+							email
+							name
+							avatar_url
+							custom_colors
+						}
+					}
+				`
+			}
 		});
 
-		if (response.data) {
+		if (response.data.data.currentUser) {
 			req._isAuth = true;
 			next();
 		} else {
@@ -39,25 +55,9 @@ app.get([ '/about', '/login', '/signup', '/forget-password', '/reset-password' ]
 	res.send(html);
 });
 
-app.get('/todo', checkAuth, (req, res) => {
-	if (req._isAuth) {
-		const { promises, html } = getTodoContent(req);
+import todoRoute from './routes/todo_route';
 
-		Promise.all(promises)
-			.then((x) => {
-				console.log('LOL 5');
-				res.send(html);
-			})
-			.catch((error) => {
-				console.log('LOL 6');
-				console.log('error', error.message);
-
-				res.send(error);
-			});
-	} else {
-		res.redirect('/about');
-	}
-});
+todoRoute(app);
 
 app.get('*', checkAuth, (req, res) => {
 	if (req._isAuth && false) {

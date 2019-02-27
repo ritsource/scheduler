@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ApolloConsumer } from 'react-apollo';
 import { renderRoutes } from 'react-router-config';
 import { Redirect } from 'react-router-dom';
+import { Query } from 'react-apollo';
 
 import Header2 from './components/Header2';
 
@@ -42,16 +43,26 @@ const Todo = (props) => {
 		: !__isNode__ && window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
 
 	return (
-		<div className="Todo-a-00">
-			{!props.auth ? (
-				<React.Fragment>
-					<Header2 pathName={pathName} />
-					<div>{renderRoutes(props.route.routes)}</div>
-				</React.Fragment>
-			) : (
-				<Redirect to="/login" />
-			)}
-		</div>
+		<Query query={FETCH_CURRENT_USER}>
+			{({ data, loading, error }) => {
+				console.log('data-data-data-data', data.currentUser);
+
+				// if (data) {
+				return (
+					<div className="Todo-a-00">
+						{data.currentUser ? (
+							<React.Fragment>
+								<Header2 pathName={pathName} />
+								<div>{renderRoutes(props.route.routes)}</div>
+							</React.Fragment>
+						) : (
+							<Redirect to="/login" />
+						)}
+					</div>
+				);
+				// }
+			}}
+		</Query>
 	);
 };
 

@@ -20,6 +20,21 @@ if (__isNode__) {
 	cache = new InMemoryCache().restore(window.__APOLLO_STATE__);
 }
 
+// if (!__isNode__) {
+// 	// cache.writeData({
+// 	// 	data: {
+// 	// 		todos: [],
+// 	// 		visibilityFilter: 'SHOW_ALL',
+// 	// 		networkStatus: {
+// 	// 			__typename: 'NetworkStatus',
+// 	// 			isConnected: false,
+// 	// 		},
+// 	// 	},
+// 	// });
+
+// 	console.log(window.__APOLLO_STATE__);
+// }
+
 const link = new HttpLink({
 	// uri: __isNode__ ? 'http://localhost:4000/' : '/graphql'
 	uri: '/graphql'

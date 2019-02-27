@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
 
 import client from '../../graphql/apollo-for-client';
 import TodoRouter from './TodoRouter';
@@ -18,9 +19,11 @@ window.__isClient__ = true;
 
 ReactDOM.hydrate(
 	<ApolloProvider client={client}>
-		<BrowserRouter>
-			<div>{renderRoutes(TodoRouter)}</div>
-		</BrowserRouter>
+		<ApolloHooksProvider client={client}>
+			<BrowserRouter>
+				<div>{renderRoutes(TodoRouter)}</div>
+			</BrowserRouter>
+		</ApolloHooksProvider>
 	</ApolloProvider>,
 	document.querySelector('#root')
 );

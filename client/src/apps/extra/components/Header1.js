@@ -33,6 +33,9 @@ const Header1 = ({ pathName }) => {
 				<Link to="/contact">
 					<p className={`${pathName === 'contact' && 'Header1-Links-Active'}`}>CONTACT</p>
 				</Link>
+				<Link to="/todo">
+					<p className={`${pathName === 'todo' && 'Header1-Links-Active'}`}>TODO</p>
+				</Link>
 			</div>
 		</div>
 	);
