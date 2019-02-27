@@ -1,2 +1,5 @@
 node_modules/
 build/
+public/todo.js
+public/extra.js
+public/calendar.js
