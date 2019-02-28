@@ -152,6 +152,13 @@ button:focus {
     flex-direction: column;
     align-items: flex-end; }
 
+.TodoComp-c-00 {
+  border-top: 1px solid var(--border-color);
+  height: calc(100vh - 70px - 1px);
+  width: 100vw;
+  display: flex;
+  flex-direction: row; }
+
 .Header2-c-00 {
   width: calc(100% - 60px);
   height: 70px;
@@ -281,4 +288,58 @@ button:focus {
     width: 95%; }
   100% {
     width: 95%; } }
+
+.TodoSidebar-c-00 {
+  border-right: 1px solid var(--border-color);
+  width: 250px !important;
+  transition: 0.3s;
+  height: 100%;
+  display: flex;
+  flex-direction: column; }
+  .TodoSidebar-c-00 .TodoSidebar-The-List-01 {
+    padding: 4px 0px;
+    height: calc(100% - 8px);
+    max-height: 100%;
+    overflow: auto; }
+
+.TodoSidebar-c-00-Hidden {
+  min-width: 0px !important;
+  width: 0px !important;
+  transition: 0.3s; }
+
+.TodoSidebarItem-c-00 {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 4px 19px; }
+  .TodoSidebarItem-c-00 p {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-top: 2px;
+    cursor: default; }
+  .TodoSidebarItem-c-00 .TodoSidebarItem-Hamburger-Div-01 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    padding: 10px 12px;
+    margin-right: 10px;
+    border: 1px solid var(--background-color);
+    background: var(--background-color); }
+    .TodoSidebarItem-c-00 .TodoSidebarItem-Hamburger-Div-01:hover {
+      border: 1px solid var(--hover-mint-medium);
+      background: var(--hover-mint-medium); }
+  .TodoSidebarItem-c-00 .TodoSidebarItem-Hamburger-Div-01 > div {
+    height: 3px;
+    width: 15px;
+    margin: 1.5px 0px; }
+
+.TodoSidebarItem-c-00-Active {
+  background: var(--hover-mint-medium); }
+  .TodoSidebarItem-c-00-Active .TodoSidebarItem-Hamburger-Div-01 {
+    border: 1px solid var(--hover-mint-medium) !important;
+    background: var(--hover-mint-medium) !important; }
 

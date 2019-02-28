@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
-import { ApolloConsumer } from 'react-apollo';
 
 import ProgressbarContext from '../../_common/contexts/ProgressbarContext';
 
@@ -12,8 +11,6 @@ const CreadentialsForm = ({ pathName, errorMsg, onFormSubmit }, context) => {
 	const [ name, setName ] = useState('');
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
-
-	console.log('client', client);
 
 	const loginUser = async () => {
 		await client.mutate({
@@ -141,9 +138,5 @@ const CreadentialsForm = ({ pathName, errorMsg, onFormSubmit }, context) => {
 		</ProgressbarContext.Consumer>
 	);
 };
-
-// export default (props) => (
-// 	<ApolloConsumer>{(client) => <CreadentialsForm {...props} client={client} />}</ApolloConsumer>
-// );
 
 export default CreadentialsForm;

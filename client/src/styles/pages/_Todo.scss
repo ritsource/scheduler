@@ -1,0 +1,8 @@
+.TodoComp-c-00 {
+	border-top: 1px solid var(--border-color);
+	height: calc(100vh - 70px - 1px); // 1px for border
+	width: 100vw;
+
+	display: flex;
+	flex-direction: row;
+}

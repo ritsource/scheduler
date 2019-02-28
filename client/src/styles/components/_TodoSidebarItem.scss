@@ -1,0 +1,51 @@
+.TodoSidebarItem-c-00 {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	padding: 4px 19px;
+	// cursor: pointer;
+
+	p {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		padding-top: 2px;
+		cursor: default;
+	}
+
+	.TodoSidebarItem-Hamburger-Div-01 {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+
+		border-radius: 50%;
+		padding: 10px 12px;
+		margin-right: 10px;
+		border: 1px solid var(--background-color);
+		background: var(--background-color);
+
+		&:hover {
+			border: 1px solid var(--hover-mint-medium);
+			background: var(--hover-mint-medium);
+		}
+	}
+
+	.TodoSidebarItem-Hamburger-Div-01 > div {
+		// background: var(--text-color-middle);
+		// background: var(--theme-color-middle);
+		height: 3px;
+		width: 15px;
+		margin: 1.5px 0px;
+	}
+}
+
+.TodoSidebarItem-c-00-Active {
+	background: var(--hover-mint-medium);
+
+	.TodoSidebarItem-Hamburger-Div-01 {
+		border: 1px solid var(--hover-mint-medium) !important;
+		background: var(--hover-mint-medium) !important;
+	}
+}

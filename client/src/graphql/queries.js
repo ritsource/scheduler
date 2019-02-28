@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const FETCH_ALL_GROUPS = gql`
-	query satReadAllGroups {
-		satReadAllGroups {
+	query readAllGroups {
+		readAllGroups {
 			_id
 			title
 			hex_color

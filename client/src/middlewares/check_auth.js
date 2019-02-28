@@ -1,8 +1,6 @@
 import axios from 'axios';
 
 export default async (req, res, next) => {
-	console.log(req.get('cookie'));
-
 	try {
 		const response = await axios({
 			url: 'http://server:5000/graphql',
@@ -24,8 +22,6 @@ export default async (req, res, next) => {
 				`
 			}
 		});
-
-		console.log(response.data.data.currentUser);
 
 		if (response.data.data.currentUser) {
 			req._isAuth = true;
