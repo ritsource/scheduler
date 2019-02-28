@@ -7,7 +7,7 @@ import { Query } from 'react-apollo';
 import Header2 from './components/Header2';
 
 import { FETCH_CURRENT_USER } from '../../graphql/queries';
-import client from '../../graphql/apollo-for-client';
+// import client from '../../graphql/apollo-for-client';
 
 let __isNode__ = false;
 if (typeof process === 'object') {
@@ -19,25 +19,6 @@ if (typeof process === 'object') {
 }
 
 const Todo = (props) => {
-	const [ auth, setAuth ] = useState(null);
-
-	const fetchUser = () => {
-		return client.query({
-			query: FETCH_CURRENT_USER
-		});
-	};
-
-	useEffect(() => {
-		fetchUser()
-			.then((result) => {
-				const { data, loading } = result;
-				setAuth(data);
-			})
-			.catch(() => {});
-
-		return () => {};
-	}, []);
-
 	const pathName = props.staticContext
 		? props.staticContext.pathName
 		: !__isNode__ && window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');

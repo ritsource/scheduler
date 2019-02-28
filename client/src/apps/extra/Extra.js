@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { renderRoutes } from 'react-router-config';
 
+import { ProgressbarProvider } from '../_common/contexts/ProgressbarContext';
 import Header1 from './components/Header1';
 
 let __isNode__ = false;
@@ -18,10 +19,12 @@ const Extra = (props) => {
 		: !__isNode__ && window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
 
 	return (
-		<div className="Extra-a-00">
-			<Header1 pathName={pathName} />
-			<div>{renderRoutes(props.route.routes)}</div>
-		</div>
+		<ProgressbarProvider>
+			<div className="Extra-a-00">
+				<Header1 pathName={pathName} />
+				<div>{renderRoutes(props.route.routes)}</div>
+			</div>
+		</ProgressbarProvider>
 	);
 };
 
