@@ -1,0 +1,24 @@
+.ItemSubmitForm-c-00 {
+	width: calc(100% - 40px);
+	padding: 0px 20px;
+
+	input {
+		padding: 15px 10px;
+		width: calc(100% - 20px);
+
+		color: var(--text-color);
+		border: 0px solid var(--background-color);
+		background: var(--background-color);
+
+		&:focus {
+			outline: none;
+		}
+
+		&::placeholder {
+			color: var(--theme-color-middle);
+			opacity: 1;
+			font-weight: bold;
+			font-size: 15px;
+		}
+	}
+}

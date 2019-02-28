@@ -62,6 +62,22 @@ p {
 button:focus {
   outline: none; }
 
+/* width */
+::-webkit-scrollbar {
+  width: 5px; }
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #dddddd; }
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #c0c0c0; }
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #c0c0c0; }
+
 .Theme-Btn-First-99,
 .Theme-Btn-White-99,
 .Theme-Btn-Black-99 {
@@ -297,8 +313,8 @@ button:focus {
   display: flex;
   flex-direction: column; }
   .TodoSidebar-c-00 .TodoSidebar-The-List-01 {
-    padding: 4px 0px;
-    height: calc(100% - 8px);
+    padding: 4px 0px 0px 0px;
+    height: calc(100% - 4px);
     max-height: 100%;
     overflow: auto; }
 
@@ -342,4 +358,21 @@ button:focus {
   .TodoSidebarItem-c-00-Active .TodoSidebarItem-Hamburger-Div-01 {
     border: 1px solid var(--hover-mint-medium) !important;
     background: var(--hover-mint-medium) !important; }
+
+.ItemSubmitForm-c-00 {
+  width: calc(100% - 40px);
+  padding: 0px 20px; }
+  .ItemSubmitForm-c-00 input {
+    padding: 15px 10px;
+    width: calc(100% - 20px);
+    color: var(--text-color);
+    border: 0px solid var(--background-color);
+    background: var(--background-color); }
+    .ItemSubmitForm-c-00 input:focus {
+      outline: none; }
+    .ItemSubmitForm-c-00 input::placeholder {
+      color: var(--theme-color-middle);
+      opacity: 1;
+      font-weight: bold;
+      font-size: 15px; }
 

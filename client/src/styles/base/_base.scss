@@ -60,3 +60,20 @@ button {
 		outline: none;
 	}
 }
+
+/* width */
+::-webkit-scrollbar {
+	width: 5px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+	background: $background-grey-2;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: $background-grey-3;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: $background-grey-3;
+}

@@ -1,16 +1,29 @@
 import React, { useState } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import { ApolloConsumer } from 'react-apollo';
 
 import TodoSidebarItem from './TodoSidebarItem';
+import ItemSubmitForm from '../../_common/components/ItemSubmitForm';
+
+import { ADD_NEW_GROUP } from '../../../graphql/mutations';
 
 const TodoSidebar = (props) => {
-	const { groups, changeGroupId } = props;
-
-	// Title of new Group Input
-	// const [ title, setTitle ] = useState('');
+	const { groups, changeGroupId, client } = props;
 
 	// Handeler for adding new group
-	const addNewGroup = (title) => {};
+	const onGroupSubmit = (title) => {
+		// ADD_NEW_GROUP
+		client
+			.mutate({
+				mutation: ADD_NEW_GROUP,
+				variables: { title },
+				refetchQueries: [ 'readAllGroups' ],
+				awaitRefetchQueries: true
+			})
+			.then(() => {
+				scrollToBottom('.TodoSidebar-The-List-01');
+			});
+	};
 
 	// Dnd handeler
 	const onDragEnd = (result) => {};
@@ -30,9 +43,9 @@ const TodoSidebar = (props) => {
 					)}
 				</Droppable>
 			</DragDropContext>
-			<p>TodoSidebar</p>
+			<ItemSubmitForm placeholder="+ New Group" onSubmit={onGroupSubmit} />
 		</div>
 	);
 };
 
-export default TodoSidebar;
+export default (props) => <ApolloConsumer>{(client) => <TodoSidebar {...props} client={client} />}</ApolloConsumer>;
