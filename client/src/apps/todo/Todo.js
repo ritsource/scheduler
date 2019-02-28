@@ -45,22 +45,12 @@ const Todo = (props) => {
 	return (
 		<Query query={FETCH_CURRENT_USER}>
 			{({ data, loading, error }) => {
-				console.log('data-data-data-data', data.currentUser);
-
-				// if (data) {
 				return (
 					<div className="Todo-a-00">
-						{data.currentUser ? (
-							<React.Fragment>
-								<Header2 pathName={pathName} />
-								<div>{renderRoutes(props.route.routes)}</div>
-							</React.Fragment>
-						) : (
-							<Redirect to="/login" />
-						)}
+						<Header2 pathName={pathName} />
+						{data.currentUser ? <div>{renderRoutes(props.route.routes)}</div> : <Redirect to="/login" />}
 					</div>
 				);
-				// }
 			}}
 		</Query>
 	);

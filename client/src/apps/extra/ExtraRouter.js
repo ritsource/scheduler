@@ -6,12 +6,20 @@ import SignupPage from './pages/Signup';
 
 import NotFoundPage from '../_common/pages/NotFound';
 
+import React from 'react';
+import { Redirect } from 'react-router-dom';
+const Home = () => (
+	<div>
+		<Redirect to="/about" />
+	</div>
+);
+
 const ExtraRouter = [
 	{
 		...Extra,
 		path: '/',
 		routes: [
-			// { ...HomePage, path: '/', exact: true },
+			{ component: Home, path: '/', exact: true },
 			{ ...AboutPage, path: '/about', exact: true },
 			{ ...LoginPage, path: '/login', exact: true },
 			{ ...SignupPage, path: '/signup', exact: true },

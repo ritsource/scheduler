@@ -1,16 +1,15 @@
 import { matchRoutes } from 'react-router-config';
-import { getDataFromTree } from 'react-apollo';
+// import { getDataFromTree } from 'react-apollo';
 
-import TodoRouter from '../apps/todo/TodoRouter';
-
+import checkAuth from '../middlewares/check_auth';
 import renderer from '../renderer';
 import getApolloClient from '../graphql/apollo-for-server';
 
-import { checkAuth } from '../server';
+import TodoRouter from '../apps/todo/TodoRouter';
 
 export default (app) => {
 	app.get('/todo', checkAuth, (req, res) => {
-		console.log('req._isAuth', req._isAuth);
+		// console.log('req._isAuth', req._isAuth);
 
 		if (req._isAuth) {
 			const context = { req };
@@ -28,7 +27,6 @@ export default (app) => {
 					res.send(html);
 				})
 				.catch((error) => {
-					console.log('LOL 6');
 					console.log('error', error.message);
 
 					res.send(error);

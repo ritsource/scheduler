@@ -5,16 +5,12 @@ import { ApolloProvider } from 'react-apollo';
 import { renderRoutes } from 'react-router-config';
 import serialize from 'serialize-javascript';
 
-import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
-
 export default (req, router, client, context, jsfile) => {
 	const content = renderToString(
 		<ApolloProvider client={client}>
-			<ApolloHooksProvider client={client}>
-				<StaticRouter location={req.path} context={context}>
-					<div>{renderRoutes(router)}</div>
-				</StaticRouter>
-			</ApolloHooksProvider>
+			<StaticRouter location={req.path} context={context}>
+				<div>{renderRoutes(router)}</div>
+			</StaticRouter>
 		</ApolloProvider>
 	);
 

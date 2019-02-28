@@ -1,11 +1,31 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
+import { ApolloConsumer } from 'react-apollo';
+
+import client from '../../../graphql/apollo-for-client';
+import { LOGIN_USER, REGISTER_USER } from '../../../graphql/mutations';
 
 const CreadentialsForm = ({ pathName, errorMsg, onFormSubmit }) => {
 	const [ name, setName ] = useState('');
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
+
+	console.log('client', client);
+
+	const loginUser = async () => {
+		await client.mutate({
+			mutation: LOGIN_USER,
+			variables: { email, password }
+		});
+	};
+
+	const registerUser = async () => {
+		await client.mutate({
+			mutation: REGISTER_USER,
+			variables: { name, email, password }
+		});
+	};
 
 	return (
 		<div className="CreadentialsForm-c-00">
@@ -14,9 +34,13 @@ const CreadentialsForm = ({ pathName, errorMsg, onFormSubmit }) => {
 			</h2>
 			{errorMsg && <p style={{ width: '100%', margin: '0px', color: 'var(--danger-red-color)' }}>{errorMsg}</p>}
 			<form
-				onSubmit={(e) => {
+				onSubmit={async (e) => {
 					e.preventDefault();
-					onFormSubmit({ name, email, password });
+					if (pathName === 'signup') {
+						await registerUser();
+					} else {
+						await loginUser();
+					}
 				}}
 			>
 				{pathName === 'signup' && (
@@ -81,7 +105,7 @@ const CreadentialsForm = ({ pathName, errorMsg, onFormSubmit }) => {
 					</button>
 				</a>
 
-				<a href="/auth/google" style={{ width: '100%' }}>
+				<a href="/auth/facebook" style={{ width: '100%' }}>
 					<button
 						type="button"
 						style={{ background: '#3b5998', width: '100%', margin: '5px 0px' }}
@@ -102,5 +126,9 @@ const CreadentialsForm = ({ pathName, errorMsg, onFormSubmit }) => {
 		</div>
 	);
 };
+
+// export default (props) => (
+// 	<ApolloConsumer>{(client) => <CreadentialsForm {...props} client={client} />}</ApolloConsumer>
+// );
 
 export default CreadentialsForm;

@@ -4,6 +4,8 @@ import { createBrowserHistory } from 'history';
 // import ReactSVG from 'react-svg';
 import { Redirect } from 'react-router-dom';
 
+import { FETCH_ALL_GROUPS } from '../../../graphql/queries';
+
 let __isNode__ = false;
 if (typeof process === 'object') {
 	if (typeof process.versions === 'object') {
@@ -15,7 +17,6 @@ if (typeof process === 'object') {
 
 const TodoPage = (props) => {
 	// Getting 'req' from staticContext
-
 	// const { staticContext, groups, events } = props;
 	// const req = __isNode__ && staticContext ? staticContext.req : undefined;
 
@@ -41,7 +42,7 @@ const TodoPage = (props) => {
 	// 	}
 	// };
 
-	// Component States
+	// // Component States
 	// const [ groupId, setGroupId ] = useState(initGroupId(req, groups));
 	// const [ eventId, setEventId ] = useState(initEventId(req));
 
@@ -73,10 +74,23 @@ const TodoPage = (props) => {
 	// 	history.push(`/todo?group=${groupId}&event=${id}`);
 	// };
 
-	// const activeGroup = props.groups.find(({ _id }) => _id === groupId);
-	// const activeEvent = props.events.find(({ _id }) => _id === eventId);
+	return <div>Todo!</div>;
 
-	return <div>Todo</div>;
+	return (
+		<Query query={FETCH_ALL_GROUPS}>
+			{({ data, loading, error }) => {
+				// const activeGroup = props.groups.find(({ _id }) => _id === groupId);
+				// const activeEvent = props.events.find(({ _id }) => _id === eventId);
+
+				return (
+					<div className="Todo-a-00">
+						<Header2 pathName={pathName} />
+						{data.currentUser ? <div>{renderRoutes(props.route.routes)}</div> : <Redirect to="/login" />}
+					</div>
+				);
+			}}
+		</Query>
+	);
 
 	return (
 		<div className="todo-page-000">
