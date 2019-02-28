@@ -1,0 +1,30 @@
+.SubOptionColor-P-01 {
+	padding: 0px 15px;
+	max-width: 156px;
+	background: var(--background-color) !important;
+	font-size: 18px;
+}
+
+.SubOptionColor-Form-01 {
+	// border: 1px solid red;
+	display: flex;
+	flex-direction: row;
+	width: calc(100% - 40px);
+	margin: 10px 20px;
+	// background: var(--background-color);
+
+	input {
+		// color: var(--text-color);
+		// background: var(--background-color);
+		flex-flow: 1;
+		width: 100%;
+	}
+}
+
+.SubOptionColor-Error-Msg-01 {
+	color: var(--danger-red-color);
+	padding: 0px 20px;
+	width: calc(100% - 40px);
+	margin-bottom: 10px;
+	margin-top: -5px;
+}

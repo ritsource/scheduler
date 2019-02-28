@@ -4,6 +4,9 @@
 @import './base/anime';
 @import './base/App';
 
+@import '../../node_modules/react-dropdown-modal/lib/dropdown.css';
+// @import '../../node_modules/awesome-react-datepicker/lib/datepicker.css';
+
 @import './pages/About';
 @import './pages/Todo';
 // @import './pages/Todo';
@@ -19,10 +22,10 @@
 @import './components/TodoSidebar';
 @import './components/TodoSidebarItem';
 @import './components/ItemSubmitForm';
-// @import './components/TodoSidebar';
-// @import './components/TodoSidebar';
-// @import './components/TodoSidebar';
-// @import './components/TodoSidebar';
+@import './components/EventList';
+@import './components/EventListHeader';
+@import './components/SubOptionColor';
+@import './components/EnsureDeletion';
 // @import './components/TodoSidebar';
 // @import './components/TodoSidebar';
 // @import './components/TodoSidebar';

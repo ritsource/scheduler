@@ -1,3 +1,4 @@
+@keyframes fadeIn{0%{opacity:0}to{opacity:1}}@keyframes fadeIn_rev{0%{opacity:1}to{opacity:0}}@keyframes slideDown{0%{opacity:0;background-color:transparent}50%{opacity:1}to{opacity:1}}@keyframes slideDown_rev{0%{opacity:1}to{opacity:0}}@keyframes slideDown_child{0%{margin-top:-200px}70%{margin-top:20px}to{margin-top:0}}@keyframes slideDown_child_rev{0%{margin-top:0}to{margin-top:-240px}}@keyframes slideUp{0%{opacity:0;background-color:transparent}50%{opacity:1}to{opacity:1}}@keyframes slideUp_rev{0%{opacity:1}to{opacity:0}}@keyframes slideUp_child{0%{margin-top:200px}70%{margin-top:-20px}to{margin-top:0}}@keyframes slideUp_child_rev{0%{margin-top:0}to{margin-top:240px}}@keyframes slideRight{0%{opacity:0;background-color:transparent}50%{opacity:1}to{opacity:1}}@keyframes slideRight_rev{0%{opacity:1}to{opacity:0}}@keyframes slideRight_child{0%{margin-left:-200px}70%{margin-left:20px}to{margin-left:0}}@keyframes slideRight_child_rev{0%{margin-left:0}to{margin-left:-240px}}@keyframes slideLeft{0%{opacity:0;background-color:transparent}50%{opacity:1}to{opacity:1}}@keyframes slideLeft_rev{0%{opacity:1}to{opacity:0}}@keyframes slideLeft_child{0%{margin-left:200px}70%{margin-left:-20px}to{margin-left:0}}@keyframes slideLeft_child_rev{0%{margin-left:0}to{margin-left:240px}}.gib-r-drpd-m-_ModalMask{height:100vh;width:100vw;display:flex;position:fixed;top:0;bottom:0;left:0;right:0}.gib-r-drpd-m-_ModalMask-m-centered{display:flex;align-items:center;justify-content:center}.gib-r-drpd-m-_Modal{position:absolute;top:auto;bottom:auto;right:auto;left:auto;animation-iteration-count:1}.gib-r-drpd-m-_ModalArrow{width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:7px solid #fff;margin-top:-7px}.gib-r-drpd-m-_ModalContent{display:flex;flex-direction:column}.gib-r-drpd-m-_ModalContent_btn_001{color:#606060;padding:6px 14px;background:#fff;font-size:13px;border:0 solid #fff;border-top:1px solid #e2e2e2;cursor:pointer}.gib-r-drpd-m-_ModalContent_btn_001 :focus{outline:none}.gib-r-drpd-m-_ModalContent_btn_001 :hover{background:#f9f9f9}
 :root {
   --danger-red-color: #f03434;
   --safe-green-color: #019031;
@@ -13,7 +14,7 @@
   --text-color-light: #707070;
   --text-color-light-2: #b8b8b8;
   --text-color-light-3: #707070;
-  --modal-mask-color: rgba(0; 0; 0; 0.3); }
+  --modal-mask-color: rgba(0, 0, 0, 0.3); }
 
 body {
   color: var(--text-color);
@@ -78,15 +79,17 @@ button:focus {
 ::-webkit-scrollbar-thumb:hover {
   background: #c0c0c0; }
 
-.Theme-Btn-First-99,
+.Theme-Btn-Normal-99,
 .Theme-Btn-White-99,
-.Theme-Btn-Black-99 {
+.Theme-Btn-Black-99,
+.Theme-Btn-Red-99,
+.Theme-Btn-Grey-99 {
   padding: 10px 20px;
   border: 0px solid white;
   border-radius: 4px;
   cursor: pointer; }
 
-.Theme-Btn-First-99 {
+.Theme-Btn-Normal-99 {
   color: white;
   background: var(--theme-color-middle); }
 
@@ -98,14 +101,13 @@ button:focus {
   color: var(--background-color);
   background: var(--text-color); }
 
-.Theme-Input-99 {
+.Theme-Btn-Red-99 {
+  color: var(--background-color);
+  background: var(--danger-red-color); }
+
+.Theme-Btn-Grey-99 {
   color: var(--text-color);
-  background: var(--background-color);
-  border: 1px solid var(--text-color-light-3);
-  padding: 10px;
-  border-radius: 4px; }
-  .Theme-Input-99:focus {
-    border: 1px solid var(--theme-color); }
+  background: var(--hover-mint-medium); }
 
 .Theme-Btn-Shadow-99 {
   -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
@@ -115,6 +117,57 @@ button:focus {
     -webkit-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
     box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2); }
+
+.Theme-Btn-Type2-Red-99,
+.Theme-Btn-Type2-Grey-99 {
+  border-radius: 2px;
+  padding: 6px;
+  cursor: pointer; }
+
+.Theme-Btn-Type2-Red-99 {
+  color: white;
+  border: 1px solid var(--danger-red-color);
+  background: var(--danger-red-color);
+  font-weight: bold; }
+
+.Theme-Btn-Type2-Grey-99 {
+  color: var(--text-color);
+  border: 1px solid var(--hover-mint-medium);
+  background: var(--hover-mint-medium); }
+
+.Theme-Input-99 {
+  color: var(--text-color);
+  background: var(--background-color);
+  border: 1px solid var(--text-color-light-3);
+  padding: 10px;
+  border-radius: 4px; }
+  .Theme-Input-99:focus {
+    border: 1px solid var(--theme-color); }
+
+.Theme-Input-Underline-OnFoucs-99 {
+  color: var(--text-color);
+  width: 100%;
+  border: 0px solid var(--border-color);
+  border-bottom: 1px solid var(--background-color);
+  background: var(--background-color);
+  transition: border 0.3s ease-out; }
+  .Theme-Input-Underline-OnFoucs-99:focus {
+    border-bottom: 1px solid var(--theme-color-middle); }
+
+.Theme-Dropdown-Content-Item-99 {
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  color: var(--text-color);
+  padding: 10px 20px;
+  cursor: pointer;
+  word-spacing: 2px;
+  background: var(--background-color);
+  background: linear-gradient(to right, var(--hover-mint-medium) 50%, var(--background-color) 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all 0.2s ease; }
+  .Theme-Dropdown-Content-Item-99:hover {
+    background-position: left bottom; }
 
 @keyframes Page-Fade-In {
   0% {
@@ -375,4 +428,54 @@ button:focus {
       opacity: 1;
       font-weight: bold;
       font-size: 15px; }
+
+.EventList-c-00 {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column; }
+
+.EventListHeader-c-00 {
+  width: calc(100% - 40px);
+  padding: 10px 20px; }
+  .EventListHeader-c-00 .EventListHeader-Form-01 {
+    width: 100%; }
+    .EventListHeader-c-00 .EventListHeader-Form-01 input {
+      font-size: 22px;
+      padding: 5px 0px; }
+
+.SubOptionColor-P-01 {
+  padding: 0px 15px;
+  max-width: 156px;
+  background: var(--background-color) !important;
+  font-size: 18px; }
+
+.SubOptionColor-Form-01 {
+  display: flex;
+  flex-direction: row;
+  width: calc(100% - 40px);
+  margin: 10px 20px; }
+  .SubOptionColor-Form-01 input {
+    flex-flow: 1;
+    width: 100%; }
+
+.SubOptionColor-Error-Msg-01 {
+  color: var(--danger-red-color);
+  padding: 0px 20px;
+  width: calc(100% - 40px);
+  margin-bottom: 10px;
+  margin-top: -5px; }
+
+.EnsureDeletion-c-00 {
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Lato', sans-serif;
+  font-size: 15px;
+  font-weight: normal; }
+  .EnsureDeletion-c-00 .EnsureDeletion-Btn-Container-01 {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end; }
+    .EnsureDeletion-c-00 .EnsureDeletion-Btn-Container-01 button {
+      margin: 10px 0px 0px 10px; }
 

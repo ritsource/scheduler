@@ -4,6 +4,7 @@ import { createBrowserHistory } from 'history';
 import { Redirect } from 'react-router-dom';
 
 import TodoSidebar from '../components/TodoSidebar';
+import EventList from '../components/EventList';
 
 let __isNode__ = false;
 if (typeof process === 'object') {
@@ -98,8 +99,9 @@ const TodoComp = (props) => {
 						history.push(`/todo?group=${groupId}`);
 					}}
         /> */}
-			<div>Rest</div>
-			)}
+			{/* <div>Rest</div> */}
+			<EventList events={activeGroup._events} activeGroup={activeGroup} />
+			{/* <EventList active_groupId={groupId} activeGroup={activeGroup} changeEventId={changeEventId} /> */}
 		</div>
 	);
 };

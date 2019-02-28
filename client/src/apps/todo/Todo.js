@@ -9,6 +9,8 @@ import Header2 from './components/Header2';
 import { FETCH_CURRENT_USER } from '../../graphql/queries';
 // import client from '../../graphql/apollo-for-client';
 
+export const AuthContext = React.createContext({ auth: null });
+
 let __isNode__ = false;
 if (typeof process === 'object') {
 	if (typeof process.versions === 'object') {
@@ -27,10 +29,16 @@ const Todo = (props) => {
 		<Query query={FETCH_CURRENT_USER}>
 			{({ data, loading, error }) => {
 				return (
-					<div className="Todo-a-00">
-						<Header2 pathName={pathName} />
-						{data.currentUser ? <div>{renderRoutes(props.route.routes)}</div> : <Redirect to="/login" />}
-					</div>
+					<AuthContext.Provider value={{ auth: data.currentUser }}>
+						<div className="Todo-a-00">
+							<Header2 pathName={pathName} />
+							{data.currentUser ? (
+								<div>{renderRoutes(props.route.routes)}</div>
+							) : (
+								<Redirect to="/login" />
+							)}
+						</div>
+					</AuthContext.Provider>
 				);
 			}}
 		</Query>

@@ -18,7 +18,7 @@ const AboutPage = () => {
 			</p>
 			<div>
 				<Link to="/login">
-					<button style={{ margin: '10px 5px' }} className="Theme-Btn-First-99 Theme-Btn-Shadow-99">
+					<button style={{ margin: '10px 5px' }} className="Theme-Btn-Normal-99 Theme-Btn-Shadow-99">
 						Sign In
 					</button>
 				</Link>

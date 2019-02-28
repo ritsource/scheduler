@@ -88,7 +88,7 @@ const CreadentialsForm = ({ pathName, errorMsg, onFormSubmit }, context) => {
 								// style={{ margin: '5px 0px', width: '100%' }}
 								type="submit"
 								style={{ margin: '5px 0px' }}
-								className="Theme-Btn-First-99"
+								className="Theme-Btn-Normal-99"
 							>
 								{pathName === 'signup' ? <span>Sign&nbsp;In</span> : <span>Log&nbsp;In </span>}
 							</button>
@@ -108,7 +108,7 @@ const CreadentialsForm = ({ pathName, errorMsg, onFormSubmit }, context) => {
 							<button
 								type="button"
 								style={{ background: '#dd4b39', width: '100%', margin: '5px 0px' }}
-								className="Theme-Btn-First-99"
+								className="Theme-Btn-Normal-99"
 							>
 								<FaGoogle style={{ fontSize: '16px', margin: 'auto 10px -3px auto' }} />
 								Signin with Google
@@ -119,7 +119,7 @@ const CreadentialsForm = ({ pathName, errorMsg, onFormSubmit }, context) => {
 							<button
 								type="button"
 								style={{ background: '#3b5998', width: '100%', margin: '5px 0px' }}
-								className="Theme-Btn-First-99"
+								className="Theme-Btn-Normal-99"
 							>
 								<FaFacebookF style={{ fontSize: '16px', margin: 'auto 10px -3px auto' }} />
 								Signin with Facebook
