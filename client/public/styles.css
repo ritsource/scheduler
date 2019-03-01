@@ -436,12 +436,17 @@ button:focus {
 
 .EventListHeader-c-00 {
   width: calc(100% - 40px);
-  padding: 10px 20px; }
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; }
   .EventListHeader-c-00 .EventListHeader-Form-01 {
     width: 100%; }
     .EventListHeader-c-00 .EventListHeader-Form-01 input {
       font-size: 22px;
-      padding: 5px 0px; }
+      padding: 5px 0px;
+      width: calc(100% - 20px); }
 
 .SubOptionColor-P-01 {
   padding: 0px 15px;

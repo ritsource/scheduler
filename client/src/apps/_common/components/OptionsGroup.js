@@ -67,27 +67,23 @@ const OptionsGroup = (props) => {
 								props.calendar_sidebar_item ? (
 									{
 										left: `calc(${colorPanelState.screenX}px - 8px)`,
-										bottom: `calc(100vh - ${colorPanelState.screenY -
-											props.windowHeightDiff +
-											8}px)`
+										bottom: `calc(100vh - ${colorPanelState.screenY - props.winHeightDiffer + 8}px)`
 									}
 								) : (
 									{
 										left: colorPanelState.screenX - 185 + 8,
-										bottom: `calc(100vh - ${colorPanelState.screenY -
-											props.windowHeightDiff +
-											8}px)`
+										bottom: `calc(100vh - ${colorPanelState.screenY - props.winHeightDiffer + 8}px)`
 									}
 								)
 							}
-							preventDefaultClose={true}
+							// preventDefaultClose={true}
 							modalBackground="var(--background-color)"
 							modalShadow="0px 3px 13px 0px rgba(0,0,0,0.20)"
 							modalBorder={false}
 							customZIndex={21}
 							modalContent={() => <SubOptionColor hex_color={group.hex_color} />}
 						>
-							<div className="Theme-Dropdown-Content-Item-99" onClick={(e) => {}}>
+							<div className="Theme-Dropdown-Content-Item-99">
 								<IoIosBrush style={{ marginRight: '8px', marginBottom: '-2px' }} />
 								Color
 							</div>

@@ -64,8 +64,8 @@ const EventListHeader = (props) => {
 				onRenameClick={() => document.querySelector('#EventListHeader-Input-xx').focus()}
 				// hex_color={activeGroup.hex_color}
 			>
-				<button onClick={() => setDropdown(true)}>
-					<FaEllipsisH style={{ marginBottom: '-2px' }} />
+				<button className="Theme-Btn-Type2-Grey-99" onClick={() => setDropdown(true)}>
+					<FaEllipsisH style={{ marginBottom: '-2px', fontSize: '18px', color: 'var(--text-color-light)' }} />
 				</button>
 			</OptionsGroup>
 		</div>

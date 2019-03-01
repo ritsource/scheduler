@@ -7,6 +7,8 @@ import ItemSubmitForm from '../../_common/components/ItemSubmitForm';
 
 import { ADD_NEW_GROUP } from '../../../graphql/mutations';
 
+import SidebarContext from '../../_common/contexts/SidebarContext';
+
 const TodoSidebar = (props) => {
 	const { groups, changeGroupId, client } = props;
 
@@ -29,22 +31,35 @@ const TodoSidebar = (props) => {
 	const onDragEnd = (result) => {};
 
 	return (
-		<div className="TodoSidebar-c-00">
-			<DragDropContext onDragEnd={onDragEnd}>
-				<Droppable droppableId="droppableId-sidebar" type="GROUP_DND">
-					{(provided) => (
-						<div ref={provided.innerRef} {...provided.droppableProps} className="TodoSidebar-The-List-01">
-							{groups.map((group, i) => {
-								return (
-									<TodoSidebarItem key={i} index={i} group={group} changeGroupId={changeGroupId} />
-								);
-							})}
-						</div>
-					)}
-				</Droppable>
-			</DragDropContext>
-			<ItemSubmitForm placeholder="+ New Group" onSubmit={onGroupSubmit} />
-		</div>
+		<SidebarContext.Consumer>
+			{(context) => (
+				<div className={`TodoSidebar-c-00 ${context.sidebar && 'TodoSidebar-c-00-Hidden'}`}>
+					<DragDropContext onDragEnd={onDragEnd}>
+						<Droppable droppableId="droppableId-sidebar" type="GROUP_DND">
+							{(provided) => (
+								<div
+									className="TodoSidebar-The-List-01"
+									ref={provided.innerRef}
+									{...provided.droppableProps}
+								>
+									{groups.map((group, i) => {
+										return (
+											<TodoSidebarItem
+												key={i}
+												index={i}
+												group={group}
+												changeGroupId={changeGroupId}
+											/>
+										);
+									})}
+								</div>
+							)}
+						</Droppable>
+					</DragDropContext>
+					<ItemSubmitForm placeholder="+ New Group" onSubmit={onGroupSubmit} />
+				</div>
+			)}
+		</SidebarContext.Consumer>
 	);
 };
 

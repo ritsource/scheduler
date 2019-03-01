@@ -76,7 +76,7 @@ const TodoComp = (props) => {
 		history.push(`/todo?group=${groupId}&event=${id}`);
 	};
 
-	const activeGroup = groups.find(({ _id }) => _id === groupId);
+	const activeGroup = groups.find(({ _id }) => _id === groupId) || groups[0];
 
 	return (
 		<div className="TodoComp-c-00">
