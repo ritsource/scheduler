@@ -116,10 +116,14 @@ module.exports = {
 	editGroupById: async ({ groupId, title, hex_color }, req) => {
 		requireAuth(req);
 
+		let editables = {};
+		if (title) editables.title = title;
+		if (hex_color) editables.hex_color = hex_color;
+
 		try {
 			const newGroup = await Group.findOneAndUpdate(
 				{ _id: groupId, _creator: req.user._id },
-				{ title, hex_color },
+				{ ...editables },
 				{ new: true }
 			);
 

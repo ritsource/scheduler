@@ -8,6 +8,7 @@ export const FETCH_ALL_GROUPS = gql`
 			hex_color
 			_rank
 			# _isOnCalendar
+			_isPermanent
 			_events {
 				_id
 				title

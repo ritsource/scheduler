@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaEllipsisH } from 'react-icons/fa';
+import { ApolloConsumer } from 'react-apollo';
 
 import { builtin_color_list } from '../../../utils/constants';
 import OptionsGroup from '../../_common/components/OptionsGroup';
 
+import { EDIT_GROUP_BY_ID, DELETE_GROUP } from '../../../graphql/mutations';
+
 const EventListHeader = (props) => {
-	const { activeGroup } = props;
+	const { activeGroup, client } = props;
 
 	const [ title, setTitle ] = useState(activeGroup.title);
 	const [ dropdown, setDropdown ] = useState(false);
@@ -13,9 +16,32 @@ const EventListHeader = (props) => {
 	const [ screenY, setScreenY ] = useState(null);
 	const [ winHeightDiffer, setWinHeightDiffer ] = useState(0);
 
-	const handleGroupRename = () => {};
+	useEffect(
+		() => {
+			setTitle(activeGroup.title);
+		},
+		[ activeGroup ]
+	);
 
-	const handleGroupDelete = () => {};
+	const handleGroupRename = async () => {
+		if (title.length > 0) {
+			await client.mutate({
+				mutation: EDIT_GROUP_BY_ID,
+				variables: { groupId: activeGroup._id, title, hex_color: activeGroup.hex_color },
+				refetchQueries: [ 'readAllGroups' ],
+				awaitRefetchQueries: true
+			});
+			document.querySelector('#EventListHeader-Input-xx').blur();
+		}
+	};
+
+	const handleGroupDelete = async () => {
+		await client.mutate({
+			mutation: DELETE_GROUP,
+			variables: { groupId: activeGroup._id },
+			refetchQueries: [ 'readAllGroups' ]
+		});
+	};
 
 	const showDropdown = (x, y, whd) => {
 		setWinHeightDiffer(whd);
@@ -72,4 +98,4 @@ const EventListHeader = (props) => {
 	);
 };
 
-export default EventListHeader;
+export default (props) => <ApolloConsumer>{(client) => <EventListHeader {...props} client={client} />}</ApolloConsumer>;

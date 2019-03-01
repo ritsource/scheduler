@@ -81,7 +81,15 @@ const OptionsGroup = (props) => {
 							modalShadow="0px 3px 13px 0px rgba(0,0,0,0.20)"
 							modalBorder={false}
 							customZIndex={21}
-							modalContent={() => <SubOptionColor hex_color={group.hex_color} />}
+							modalContent={() => (
+								<SubOptionColor
+									group={group}
+									closeThatShit={() => {
+										setColorPanelState({ screenX: null, screenY: null, visible: false });
+										hideDropdown();
+									}}
+								/>
+							)}
 						>
 							<div className="Theme-Dropdown-Content-Item-99">
 								<IoIosBrush style={{ marginRight: '8px', marginBottom: '-2px' }} />

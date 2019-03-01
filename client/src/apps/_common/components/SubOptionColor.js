@@ -1,14 +1,30 @@
 import React, { useState } from 'react';
 import { IoIosBrush } from 'react-icons/io';
 import { FaCircle, FaCheckCircle } from 'react-icons/fa';
+import { ApolloConsumer } from 'react-apollo';
 
 import { builtin_color_list } from '../../../utils/constants';
 import { AuthContext as TodoAuthContext } from '../../todo/Todo';
 
+import { EDIT_GROUP_BY_ID } from '../../../graphql/mutations';
+
 const SubOptionColor = (props) => {
+	const { group, client } = props;
+
 	const [ newColorHex, setNewColorHex ] = useState('#d4e1f4');
 	const [ inputVis, setInputVis ] = useState(true);
 	const [ submit_error, setSubmitError ] = useState(false);
+
+	const handleColorChange = async (hex_color) => {
+		props.closeThatShit();
+
+		await client.mutate({
+			mutation: EDIT_GROUP_BY_ID,
+			variables: { groupId: group._id, hex_color },
+			refetchQueries: [ 'readAllGroups' ],
+			awaitRefetchQueries: true
+		});
+	};
 
 	const addCustomColor = () => {};
 
@@ -26,12 +42,12 @@ const SubOptionColor = (props) => {
 
 						<p className="SubOptionColor-P-01">
 							{[ ...builtin_color_list, ...context.auth.custom_colors ].map((hexVal, i) => {
-								if (hexVal === props.hex_color) {
+								if (hexVal === group.hex_color) {
 									return (
 										<FaCheckCircle
 											key={i}
 											style={{ color: hexVal, margin: '0px 4px 10px 4px', cursor: 'pointer' }}
-											onClick={() => props.animatedClosing(() => props.changeColorFunc(hexVal))}
+											onClick={() => handleColorChange(hexVal)}
 										/>
 									);
 								} else {
@@ -39,7 +55,7 @@ const SubOptionColor = (props) => {
 										<FaCircle
 											key={i}
 											style={{ color: hexVal, margin: '0px 4px 10px 4px', cursor: 'pointer' }}
-											onClick={() => props.animatedClosing(() => props.changeColorFunc(hexVal))}
+											onClick={() => handleColorChange(hexVal)}
 										/>
 									);
 								}
@@ -92,4 +108,4 @@ const SubOptionColor = (props) => {
 	);
 };
 
-export default SubOptionColor;
+export default (props) => <ApolloConsumer>{(client) => <SubOptionColor {...props} client={client} />}</ApolloConsumer>;

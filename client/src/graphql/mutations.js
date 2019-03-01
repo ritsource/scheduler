@@ -32,3 +32,22 @@ export const ADD_NEW_GROUP = gql`
 		}
 	}
 `;
+
+export const EDIT_GROUP_BY_ID = gql`
+	mutation editGroupById($groupId: ID!, $title: String, $hex_color: String) {
+		editGroupById(groupId: $groupId, title: $title, hex_color: $hex_color) {
+			_id
+			title
+		}
+	}
+`;
+
+export const DELETE_GROUP = gql`
+	mutation deleteGroup($groupId: ID!) {
+		deleteGroup(groupId: $groupId) {
+			_id
+		}
+	}
+`;
+
+//
