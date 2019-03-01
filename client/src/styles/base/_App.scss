@@ -3,7 +3,10 @@
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
+}
 
+.Extra-a-00,
+.Todo-a-00 {
 	animation: Page-Fade-In 600ms linear;
 	animation-iteration-count: 1;
 }

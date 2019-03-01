@@ -14,7 +14,10 @@ const EventDoneIndicator = (props) => {
 					{ color: 'rgba(0, 0, 0, 0)', background: 'rgba(0, 0, 0, 0)', border: `1px solid ${hex_color}` }
 				)
 			}
-			onClick={patchFunction}
+			onClick={(e) => {
+				e.stopPropagation();
+				patchFunction();
+			}}
 		>
 			<FaCheck style={{ fontSize: '10px' }} />
 		</div>

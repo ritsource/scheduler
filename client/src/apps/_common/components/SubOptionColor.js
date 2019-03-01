@@ -35,7 +35,7 @@ const SubOptionColor = (props) => {
 
 				return (
 					<div onClick={(e) => e.stopPropagation()} style={{ background: 'var(--background-color)' }}>
-						<div className="Theme-Dropdown-Content-Item-99">
+						<div className="Theme-Dropdown-Content-Item-99 Theme-Slide-Background-onHover-99">
 							<IoIosBrush style={{ marginRight: '8px', marginBottom: '-2px' }} />
 							Color
 						</div>

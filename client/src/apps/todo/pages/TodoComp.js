@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 
 import TodoSidebar from '../components/TodoSidebar';
 import EventList from '../components/EventList';
+import EventDetails from '../../_common/components/EventDetails';
 
 let __isNode__ = false;
 if (typeof process === 'object') {
@@ -70,6 +71,7 @@ const TodoComp = (props) => {
 	// );
 
 	const activeGroup = groups.find(({ _id }) => _id === groupId) || groups[0];
+	const activeEvent = activeGroup && eventId ? activeGroup._events.find(({ _id }) => _id === eventId) : undefined;
 
 	// Changing Route and State
 	const changeGroupId = (id) => {
@@ -90,30 +92,12 @@ const TodoComp = (props) => {
 	return (
 		<div className="TodoComp-c-00">
 			<TodoSidebar groups={groups} activeGroupId={groupId} changeGroupId={changeGroupId} />
-			{/* <div className="todo-page-001-content">
-				{!groupId ? (
-					// <h2><ReactSVG src='/logo.svg'/>Loading...</h2>
-					<h2>Loading...</h2>
-				) : (
-					<TodoListComp active_groupId={groupId} activeGroup={activeGroup} changeEventId={changeEventId} />
-				)}
-			</div>
-			{activeEvent && (
-				<EventDetailsComp
-					event={activeEvent}
-					hex_color={activeGroup.hex_color}
-					closeEventDetails={() => {
-						setEventId('');
-						const history = createBrowserHistory();
-						history.push(`/todo?group=${groupId}`);
-					}}
-        /> */}
-			{/* <div>Rest</div> */}
+
 			{activeGroup && (
 				<EventList events={activeGroup._events} activeGroup={activeGroup} changeEventId={changeEventId} />
 			)}
 
-			{/* <EventList active_groupId={groupId} activeGroup={activeGroup} changeEventId={changeEventId} /> */}
+			{activeEvent && <EventDetails event={activeEvent} />}
 		</div>
 	);
 };

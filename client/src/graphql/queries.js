@@ -26,12 +26,12 @@ export const FETCH_ALL_GROUPS = gql`
 `;
 
 export const FETCH_STEPS_BY_EVENT = gql`
-	query readStepsByEvent($eventId: String!) {
+	query readStepsByEvent($eventId: ID!) {
 		readStepsByEvent(eventId: $eventId) {
-			# _id
+			_id
 			title
-			_rank
 			_isDone
+			_rank
 		}
 	}
 `;

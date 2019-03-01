@@ -7,16 +7,6 @@
 	align-items: center;
 	cursor: pointer !important;
 
-	background: var(--background-color);
-	background: linear-gradient(to right, var(--hover-mint-medium) 50%, var(--background-color) 50%);
-	background-size: 200% 100%;
-	background-position: right bottom;
-	transition: all 0.2s ease;
-
-	&:hover {
-		background-position: left bottom;
-	}
-
 	.EventDoneIndicator-c-00 {
 		margin-left: 20px;
 	}

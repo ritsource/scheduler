@@ -16,7 +16,7 @@ const EventListItem = (props) => {
 					ref={provided.innerRef}
 					{...provided.draggableProps}
 					{...provided.dragHandleProps}
-					className="EventListItem-c-00"
+					className="EventListItem-c-00 Theme-Slide-Background-onHover-99"
 					onClick={() => changeEventId(event._id)}
 				>
 					<EventDoneIndicator

@@ -26,7 +26,10 @@ const OptionsGroup = (props) => {
 			modalContent={() => {
 				return (
 					<div>
-						<div className="Theme-Dropdown-Content-Item-99" onClick={onRenameClick}>
+						<div
+							className="Theme-Dropdown-Content-Item-99 Theme-Slide-Background-onHover-99"
+							onClick={onRenameClick}
+						>
 							<MdModeEdit style={{ marginRight: '8px', marginBottom: '-2px' }} />Rename
 						</div>
 
@@ -42,7 +45,7 @@ const OptionsGroup = (props) => {
 								onCancel={() => setAskforDelete(true)}
 							>
 								<div
-									className="Theme-Dropdown-Content-Item-99"
+									className="Theme-Dropdown-Content-Item-99 Theme-Slide-Background-onHover-99"
 									onClick={(e) => {
 										e.stopPropagation();
 										setAskforDelete(true);
@@ -91,7 +94,7 @@ const OptionsGroup = (props) => {
 								/>
 							)}
 						>
-							<div className="Theme-Dropdown-Content-Item-99">
+							<div className="Theme-Dropdown-Content-Item-99 Theme-Slide-Background-onHover-99">
 								<IoIosBrush style={{ marginRight: '8px', marginBottom: '-2px' }} />
 								Color
 							</div>

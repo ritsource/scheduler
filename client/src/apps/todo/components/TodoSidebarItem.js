@@ -10,7 +10,9 @@ const TodoSidebarItem = (props) => {
 				<div
 					ref={provided.innerRef}
 					{...provided.draggableProps}
-					className={`TodoSidebarItem-c-00 ${active && 'TodoSidebarItem-c-00-Active'}`}
+					className={`TodoSidebarItem-c-00 Theme-Slide-Background-onHover-99 ${active &&
+						'TodoSidebarItem-c-00-Active'}`}
+					// style={index === 0 ? { paddingTop: '8px' } : {}}
 					onClick={() => {
 						changeGroupId(group._id);
 					}}

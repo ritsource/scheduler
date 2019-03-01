@@ -160,13 +160,15 @@ button:focus {
   color: var(--text-color);
   padding: 10px 20px;
   cursor: pointer;
-  word-spacing: 2px;
+  word-spacing: 2px; }
+
+.Theme-Slide-Background-onHover-99 {
   background: var(--background-color);
   background: linear-gradient(to right, var(--hover-mint-medium) 50%, var(--background-color) 50%);
   background-size: 200% 100%;
   background-position: right bottom;
   transition: all 0.2s ease; }
-  .Theme-Dropdown-Content-Item-99:hover {
+  .Theme-Slide-Background-onHover-99:hover {
     background-position: left bottom; }
 
 @keyframes Page-Fade-In {
@@ -189,7 +191,10 @@ button:focus {
   height: 100vh;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; }
+
+.Extra-a-00,
+.Todo-a-00 {
   animation: Page-Fade-In 600ms linear;
   animation-iteration-count: 1; }
 
@@ -366,7 +371,7 @@ button:focus {
   display: flex;
   flex-direction: column; }
   .TodoSidebar-c-00 .TodoSidebar-The-List-01 {
-    padding: 4px 0px 0px 0px;
+    padding: 0px;
     height: calc(100% - 4px);
     max-height: calc(100% - 4px);
     overflow: auto; }
@@ -381,7 +386,8 @@ button:focus {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  padding: 4px 19px; }
+  padding: 4px 19px;
+  cursor: pointer !important; }
   .TodoSidebarItem-c-00 p {
     white-space: nowrap;
     overflow: hidden;
@@ -396,11 +402,11 @@ button:focus {
     border-radius: 50%;
     padding: 10px 12px;
     margin-right: 10px;
-    border: 1px solid var(--background-color);
-    background: var(--background-color); }
+    border: 1px solid rgba(0, 0, 0, 0);
+    background: rgba(0, 0, 0, 0); }
     .TodoSidebarItem-c-00 .TodoSidebarItem-Hamburger-Div-01:hover {
-      border: 1px solid var(--hover-mint-medium);
-      background: var(--hover-mint-medium); }
+      border: 1px solid var(--background-color);
+      background: var(--background-color); }
   .TodoSidebarItem-c-00 .TodoSidebarItem-Hamburger-Div-01 > div {
     height: 3px;
     width: 15px;
@@ -498,14 +504,7 @@ button:focus {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  cursor: pointer !important;
-  background: var(--background-color);
-  background: linear-gradient(to right, var(--hover-mint-medium) 50%, var(--background-color) 50%);
-  background-size: 200% 100%;
-  background-position: right bottom;
-  transition: all 0.2s ease; }
-  .EventListItem-c-00:hover {
-    background-position: left bottom; }
+  cursor: pointer !important; }
   .EventListItem-c-00 .EventDoneIndicator-c-00 {
     margin-left: 20px; }
   .EventListItem-c-00 p {
