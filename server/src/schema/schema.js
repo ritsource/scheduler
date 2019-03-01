@@ -89,6 +89,7 @@ module.exports = buildSchema(`
 		rearrangeGroups(focusedGroup: ID! fromRank: Int! toRank: Int! movedGroups: [ID!]!): [Group!]!
 
 		createStep(title: String! _event: ID!): Step!
+		editStepById(stepId: ID! title: String!): Step!
 		editStepToDone(stepId: ID!): Step!
 		editStepToNotDone(stepId: ID!): Step!
 		deleteStep(stepId: ID!): Step!

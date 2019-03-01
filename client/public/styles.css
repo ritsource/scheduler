@@ -448,8 +448,8 @@ button:focus {
     bottom: 0px; }
 
 .EventListHeader-c-00 {
-  width: calc(100% - 40px);
-  padding: 15px 20px 10px 20px;
+  width: calc(100% - 58px);
+  padding: 20px 29px 10px 29px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -506,7 +506,7 @@ button:focus {
   align-items: center;
   cursor: pointer !important; }
   .EventListItem-c-00 .EventDoneIndicator-c-00 {
-    margin-left: 20px; }
+    margin-left: 29px; }
   .EventListItem-c-00 p {
     margin: 0px;
     padding: 10px 15px;
@@ -518,7 +518,63 @@ button:focus {
   width: 14px;
   height: 14px;
   border-radius: 2px;
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center; }
+
+.EventDetails-c-00 {
+  border-left: 1px solid var(--border-color);
+  height: calc(100% - 10px);
+  padding: 10px 20px 0px 20px;
+  display: flex;
+  flex-direction: column;
+  transition: 0.2s;
+  width: 300px;
+  overflow: hidden; }
+  .EventDetails-c-00 .EventDetailsHeader-c-00 {
+    padding-bottom: 5px; }
+    .EventDetails-c-00 .EventDetailsHeader-c-00 form {
+      display: flex;
+      flex-direction: row;
+      align-items: center; }
+      .EventDetails-c-00 .EventDetailsHeader-c-00 form input {
+        font-size: 20px;
+        padding: 5px 0px;
+        margin-left: 15px;
+        width: calc(100% - 20px); }
+  .EventDetails-c-00 .EventDetails-The-List-01 {
+    max-height: 100%;
+    overflow: auto;
+    width: calc(100% + 20px); }
+  .EventDetails-c-00 .ItemSubmitForm-c-00 {
+    padding: 0px; }
+    .EventDetails-c-00 .ItemSubmitForm-c-00 input {
+      padding: 15px 0px; }
+
+.EventDetailsItem-c-00 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between; }
+  .EventDetailsItem-c-00 .EventDoneIndicator-c-00 {
+    width: 10px;
+    height: 10px; }
+  .EventDetailsItem-c-00 form {
+    width: calc(100% - 20px);
+    padding: 5px 10px;
+    flex-grow: 1; }
+    .EventDetailsItem-c-00 form input {
+      width: calc(100% - 10px);
+      margin: 0px;
+      padding: 5px 0px; }
+  .EventDetailsItem-c-00 .EventDetailsItem-Delete-Btn-01 {
+    font-size: 16px;
+    color: var(--danger-red-color);
+    opacity: 0;
+    right: 0;
+    cursor: pointer;
+    margin-right: 20px; }
+  .EventDetailsItem-c-00:hover .EventDetailsItem-Delete-Btn-01 {
+    opacity: 1; }
 

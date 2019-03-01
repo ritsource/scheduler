@@ -4,9 +4,19 @@ import { ApolloConsumer, Query } from 'react-apollo';
 import StepStoreContext from '../contexts/StepStoreContext';
 import EventDetailsHeader from '../components/EventDetailsHeader';
 import ItemSubmitForm from './ItemSubmitForm';
+import EventDetailsItem from './EventDetailsItem';
 
 import { FETCH_STEPS_BY_EVENT } from '../../../graphql/queries';
-import { EDIT_EVENT_BY_ID, EDIT_EVENT_TO_DONE, EDIT_EVENT_TO_NOT_DONE, ADD_NEW_STEP } from '../../../graphql/mutations';
+import {
+	EDIT_EVENT_BY_ID,
+	EDIT_EVENT_TO_DONE,
+	EDIT_EVENT_TO_NOT_DONE,
+	ADD_NEW_STEP,
+	EDIT_STEP_BY_ID,
+	DELETE_STEP,
+	EDIT_STEP_TO_DONE,
+	EDIT_STEP_TO_NOT_DONE
+} from '../../../graphql/mutations';
 
 const EventDetails = (props) => {
 	const { event, client, pathName, hex_color } = props;
@@ -24,20 +34,6 @@ const EventDetails = (props) => {
 	// Handle Event Delete
 	const handleEventDelete = () => {};
 
-	// Handle New Step Submit
-	const onStepSubmit = async (title) => {
-		client
-			.mutate({
-				mutation: ADD_NEW_STEP,
-				variables: { title, _event: event._id },
-				refetchQueries: [ 'readStepsByEvent' ],
-				awaitRefetchQueries: true
-			})
-			.then(() => {
-				scrollToBottom('.EventDetails-The-List-01');
-			});
-	};
-
 	// Handle Event Edit
 	const handleEventEdit = async ({ title, description }) => {
 		await client.mutate({
@@ -54,6 +50,45 @@ const EventDetails = (props) => {
 			mutation: boolean ? EDIT_EVENT_TO_DONE : EDIT_EVENT_TO_NOT_DONE,
 			variables: { eventId },
 			refetchQueries: [ 'readAllGroups' ]
+		});
+	};
+
+	// Handle New Step Submit
+	const onStepSubmit = (title) => {
+		client
+			.mutate({
+				mutation: ADD_NEW_STEP,
+				variables: { title, _event: event._id },
+				refetchQueries: [ 'readStepsByEvent' ],
+				awaitRefetchQueries: true
+			})
+			.then(() => {
+				scrollToBottom('.EventDetails-The-List-01');
+			});
+	};
+
+	// Handle Event Edit
+	const handleStepEdit = async ({ stepId, title }) => {
+		await client.mutate({
+			mutation: EDIT_STEP_BY_ID,
+			variables: { stepId, title },
+			refetchQueries: [ 'readStepsByEvent' ]
+		});
+	};
+
+	const handleStepDelete = async (stepId) => {
+		await client.mutate({
+			mutation: DELETE_STEP,
+			variables: { stepId },
+			refetchQueries: [ 'readStepsByEvent' ]
+		});
+	};
+
+	const stepDoneHandeler = async (stepId, boolean) => {
+		await client.mutate({
+			mutation: boolean ? EDIT_STEP_TO_DONE : EDIT_STEP_TO_NOT_DONE,
+			variables: { stepId },
+			refetchQueries: [ 'readStepsByEvent' ]
 		});
 	};
 
@@ -78,8 +113,17 @@ const EventDetails = (props) => {
 								return (
 									<div className="EventDetails-The-List-01">
 										{Object.values(context.steps).map((step, i) => {
-											if (step._event === event._id) {
-												return <p key={i}>{step.title}</p>;
+											if (step && step._event === event._id) {
+												return (
+													<EventDetailsItem
+														key={i}
+														step={step}
+														hex_color={hex_color}
+														handleStepEdit={handleStepEdit}
+														handleStepDelete={handleStepDelete}
+														stepDoneHandeler={stepDoneHandeler}
+													/>
+												);
 											}
 										})}
 									</div>

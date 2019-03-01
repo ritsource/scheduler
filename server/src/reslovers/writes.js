@@ -15,7 +15,14 @@ const {
 	deleteGroup,
 	rearrangeGroups
 } = require('../crud/group_funcs');
-const { createStep, editStepToDone, editStepToNotDone, deleteStep, rearrangeSteps } = require('../crud/step_funcs');
+const {
+	createStep,
+	editStepById,
+	editStepToDone,
+	editStepToNotDone,
+	deleteStep,
+	rearrangeSteps
+} = require('../crud/step_funcs');
 
 module.exports = {
 	// EVENT RESOLVERS
@@ -79,6 +86,10 @@ module.exports = {
 	createStep: async (args, req) => {
 		return await createStep(args, req);
 	}, // Craete a new STep
+
+	editStepById: async (args, req) => {
+		return await editStepById(args, req);
+	}, // editStepById
 
 	editStepToDone: async (args, req) => {
 		return await editStepToDone(args, req);

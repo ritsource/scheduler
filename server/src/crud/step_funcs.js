@@ -60,6 +60,22 @@ module.exports = {
 		}
 	},
 
+	editStepById: async ({ stepId, title }, req) => {
+		requireAuth(req);
+
+		try {
+			const newStep = await Step.findOneAndUpdate(
+				{ _id: stepId, _creator: req.user._id, _isDeleted: false },
+				{ title },
+				{ new: true }
+			);
+
+			return newStep;
+		} catch (error) {
+			throw new Error('Unable to edit step');
+		}
+	},
+
 	editStepToDone: async ({ stepId }, req) => {
 		requireAuth(req);
 
@@ -97,7 +113,7 @@ module.exports = {
 
 		try {
 			const delStep = await Step.findOneAndUpdate(
-				{ _id: req.params.stepId, _creator: req.user._id },
+				{ _id: stepId, _creator: req.user._id },
 				{ _isDeleted: true },
 				{ new: true }
 			);

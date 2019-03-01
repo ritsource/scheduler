@@ -104,4 +104,37 @@ export const ADD_NEW_STEP = gql`
 	}
 `;
 
+export const EDIT_STEP_BY_ID = gql`
+	mutation createStep($title: String!, $stepId: ID!) {
+		editStepById(stepId: $stepId, title: $title) {
+			title
+		}
+	}
+`;
+
+export const DELETE_STEP = gql`
+	mutation deleteStep($stepId: ID!) {
+		deleteStep(stepId: $stepId) {
+			title
+			_isDeleted
+		}
+	}
+`;
+
+export const EDIT_STEP_TO_DONE = gql`
+	mutation editStepToDone($stepId: ID!) {
+		editStepToDone(stepId: $stepId) {
+			_isDone
+		}
+	}
+`;
+
+export const EDIT_STEP_TO_NOT_DONE = gql`
+	mutation editStepToNotDone($stepId: ID!) {
+		editStepToNotDone(stepId: $stepId) {
+			_isDone
+		}
+	}
+`;
+
 //
