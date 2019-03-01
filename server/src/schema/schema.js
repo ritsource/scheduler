@@ -72,7 +72,7 @@ module.exports = buildSchema(`
 		loginUser(email: String! password: String!): User!
 		logout: User
 
-		createEvent(title: String! description: String date_from: Float, date_to: Float): Event!
+		createEvent(title: String! _group: ID! description: String date_from: Float, date_to: Float): Event!
 		editEventToDone(eventId: ID!): Event!
 		editEventToNotDone(eventId: ID!): Event!
 		editEventById(eventId: ID! title: String description: String _group: ID notification: Boolean hex_color: String): Event!

@@ -45,7 +45,6 @@ const TodoComp = (props) => {
 	// Component States
 	const [ groupId, setGroupId ] = useState(initGroupId(req, groups));
 	const [ eventId, setEventId ] = useState(initEventId(req));
-	const [ activeGroup, setActiveGroup ] = useState(groups[0]);
 
 	// Lifecycle
 	useEffect(() => {
@@ -62,13 +61,15 @@ const TodoComp = (props) => {
 	}, []);
 
 	// Handleing Active Group
-	useEffect(
-		() => {
-			setActiveGroup(groups.find(({ _id }) => _id === groupId));
-			return () => {};
-		},
-		[ groupId ]
-	);
+	// useEffect(
+	// 	() => {
+	// 		setActiveGroup(groups.find(({ _id }) => _id === groupId) || groups[0]);
+	// 		return () => {};
+	// 	},
+	// 	[ groupId ]
+	// );
+
+	const activeGroup = groups.find(({ _id }) => _id === groupId) || groups[0];
 
 	// Changing Route and State
 	const changeGroupId = (id) => {
@@ -108,7 +109,9 @@ const TodoComp = (props) => {
 					}}
         /> */}
 			{/* <div>Rest</div> */}
-			{activeGroup && <EventList events={activeGroup._events} activeGroup={activeGroup} />}
+			{activeGroup && (
+				<EventList events={activeGroup._events} activeGroup={activeGroup} changeEventId={changeEventId} />
+			)}
 
 			{/* <EventList active_groupId={groupId} activeGroup={activeGroup} changeEventId={changeEventId} /> */}
 		</div>

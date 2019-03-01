@@ -36,6 +36,7 @@
 		"babel-loader": "8.0.5",
 		"cross-fetch": "3.0.1",
 		"css-loader": "2.1.0",
+		"dateformat": "^3.0.3",
 		"express": "4.16.4",
 		"graphql": "14.1.1",
 		"graphql-tag": "2.10.1",

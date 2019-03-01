@@ -50,4 +50,28 @@ export const DELETE_GROUP = gql`
 	}
 `;
 
+export const ADD_NEW_EVENT = gql`
+	mutation createEvent($title: String!, $groupId: ID!) {
+		createEvent(title: $title, _group: $groupId) {
+			_id
+		}
+	}
+`;
+
+export const EDIT_EVENT_TO_DONE = gql`
+	mutation editEventToDone($eventId: ID!) {
+		editEventToDone(eventId: $eventId) {
+			_id
+		}
+	}
+`;
+
+export const EDIT_EVENT_TO_NOT_DONE = gql`
+	mutation editEventToNotDone($eventId: ID!) {
+		editEventToNotDone(eventId: $eventId) {
+			_id
+		}
+	}
+`;
+
 //

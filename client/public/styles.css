@@ -368,7 +368,7 @@ button:focus {
   .TodoSidebar-c-00 .TodoSidebar-The-List-01 {
     padding: 4px 0px 0px 0px;
     height: calc(100% - 4px);
-    max-height: 100%;
+    max-height: calc(100% - 4px);
     overflow: auto; }
 
 .TodoSidebar-c-00-Hidden {
@@ -433,10 +433,17 @@ button:focus {
   flex-grow: 1;
   display: flex;
   flex-direction: column; }
+  .EventList-c-00 .EventList-The-List-01 {
+    height: 100%;
+    max-height: 100%;
+    overflow: auto;
+    flex-grow: 1; }
+  .EventList-c-00 .ItemSubmitForm-c-00 {
+    bottom: 0px; }
 
 .EventListHeader-c-00 {
   width: calc(100% - 40px);
-  padding: 10px 20px;
+  padding: 15px 20px 10px 20px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -483,4 +490,36 @@ button:focus {
     justify-content: flex-end; }
     .EnsureDeletion-c-00 .EnsureDeletion-Btn-Container-01 button {
       margin: 10px 0px 0px 10px; }
+
+.EventListItem-c-00 {
+  width: calc(100% - 0px);
+  margin: 3px 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer !important;
+  background: var(--background-color);
+  background: linear-gradient(to right, var(--hover-mint-medium) 50%, var(--background-color) 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all 0.2s ease; }
+  .EventListItem-c-00:hover {
+    background-position: left bottom; }
+  .EventListItem-c-00 .EventDoneIndicator-c-00 {
+    margin-left: 20px; }
+  .EventListItem-c-00 p {
+    margin: 0px;
+    padding: 10px 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; }
+
+.EventDoneIndicator-c-00 {
+  width: 14px;
+  height: 14px;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
 

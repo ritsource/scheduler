@@ -72,7 +72,7 @@ module.exports = {
 		}
 	},
 
-	createEvent: async ({ title, description, date_from, date_to }, req) => {
+	createEvent: async ({ title, description, date_from, date_to, _group }, req) => {
 		requireAuth(req);
 
 		try {
@@ -92,6 +92,7 @@ module.exports = {
 				description,
 				date_from,
 				date_to,
+				_group,
 				_rank: count,
 				_creator: req.user._id
 			}).save();
