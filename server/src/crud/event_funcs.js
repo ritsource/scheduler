@@ -138,10 +138,18 @@ module.exports = {
 	editEventById: async ({ eventId, title, description, _group, notification, hex_color }, req) => {
 		requireAuth(req);
 
+		let editable = {};
+
+		if (title) editable.title = title;
+		if (description) editable.description = description;
+		if (_group) editable._group = _group;
+		if (notification) editable.notification = notification;
+		if (hex_color) editable.hex_color = hex_color;
+
 		try {
 			const newEvent = await Event.findOneAndUpdate(
 				{ _id: eventId, _creator: req.user._id },
-				{ title, description, _group, notification, hex_color },
+				{ ...editable },
 				{ new: true }
 			);
 

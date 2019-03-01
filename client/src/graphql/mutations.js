@@ -74,4 +74,34 @@ export const EDIT_EVENT_TO_NOT_DONE = gql`
 	}
 `;
 
+export const EDIT_EVENT_BY_ID = gql`
+	mutation editEventById(
+		$eventId: ID!
+		$title: String
+		$description: String
+		$_group: ID
+		$notification: Boolean
+		$hex_color: String
+	) {
+		editEventById(
+			eventId: $eventId
+			title: $title
+			description: $description
+			_group: $_group
+			notification: $notification
+			hex_color: $hex_color
+		) {
+			_id
+		}
+	}
+`;
+
+export const ADD_NEW_STEP = gql`
+	mutation createStep($title: String!, $_event: ID!) {
+		createStep(title: $title, _event: $_event) {
+			title
+		}
+	}
+`;
+
 //

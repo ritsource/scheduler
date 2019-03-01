@@ -97,7 +97,7 @@ const TodoComp = (props) => {
 				<EventList events={activeGroup._events} activeGroup={activeGroup} changeEventId={changeEventId} />
 			)}
 
-			{activeEvent && <EventDetails event={activeEvent} />}
+			{activeEvent && <EventDetails event={activeEvent} pathName="todo" hex_color={activeGroup.hex_color} />}
 		</div>
 	);
 };

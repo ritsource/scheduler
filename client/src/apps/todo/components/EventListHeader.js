@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { FaEllipsisH } from 'react-icons/fa';
 import { ApolloConsumer } from 'react-apollo';
 
-import { builtin_color_list } from '../../../utils/constants';
 import OptionsGroup from '../../_common/components/OptionsGroup';
 
 import { EDIT_GROUP_BY_ID, DELETE_GROUP } from '../../../graphql/mutations';

@@ -32,6 +32,7 @@ export const FETCH_STEPS_BY_EVENT = gql`
 			title
 			_isDone
 			_rank
+			_event
 		}
 	}
 `;

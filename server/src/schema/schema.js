@@ -36,6 +36,7 @@ module.exports = buildSchema(`
 		_rank: Int!
 		_isDone: Boolean!
 		_isDeleted: Boolean!
+		_event: ID!
 	}
 
 	type User {
