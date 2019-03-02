@@ -51,11 +51,19 @@
 // .Theme-Btn-Type2-Normal-99,
 // .Theme-Btn-Type2-White-99,
 // .Theme-Btn-Type2-Black-99,
+.Theme-Btn-Type2-Normal-99,
 .Theme-Btn-Type2-Red-99,
 .Theme-Btn-Type2-Grey-99 {
 	border-radius: 2px;
 	padding: 6px;
 	cursor: pointer;
+}
+
+.Theme-Btn-Type2-Normal-99 {
+	color: white;
+	border: 1px solid var(--theme-color-middle);
+	background: var(--theme-color-middle);
+	font-weight: bold;
 }
 
 .Theme-Btn-Type2-Red-99 {

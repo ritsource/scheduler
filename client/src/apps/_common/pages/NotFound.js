@@ -12,7 +12,7 @@ const NotFoundPage = ({ staticContext }) => {
 			<p className="About-Subheading-01">This Page doesn't Exist</p>
 
 			<p>
-				<strong>Go back to</strong> <Link to="/about">Home</Link>
+				<strong>Go back to</strong> <Link to="/">Home</Link>
 			</p>
 		</div>
 	);

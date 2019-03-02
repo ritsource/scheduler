@@ -120,11 +120,18 @@ button:focus {
     -moz-box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2);
     box-shadow: 0px 0px 15px 0px rgba(0, 0, 0, 0.2); }
 
+.Theme-Btn-Type2-Normal-99,
 .Theme-Btn-Type2-Red-99,
 .Theme-Btn-Type2-Grey-99 {
   border-radius: 2px;
   padding: 6px;
   cursor: pointer; }
+
+.Theme-Btn-Type2-Normal-99 {
+  color: white;
+  border: 1px solid var(--theme-color-middle);
+  background: var(--theme-color-middle);
+  font-weight: bold; }
 
 .Theme-Btn-Type2-Red-99 {
   color: white;
@@ -255,6 +262,19 @@ button:focus {
   width: calc(100% - 60px);
   height: 70px;
   padding: 0px 30px; }
+  .Header2-c-00 .Header2-Right-Div-01 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center; }
+    .Header2-c-00 .Header2-Right-Div-01 .Header-Avatar-Siv-02 {
+      margin-left: 20px;
+      display: flex;
+      flex-direction: row;
+      cursor: pointer; }
+      .Header2-c-00 .Header2-Right-Div-01 .Header-Avatar-Siv-02 img {
+        height: 30px;
+        border-radius: 4px; }
 
 .Header1-c-00 {
   width: calc(100% - 150px);
@@ -265,7 +285,8 @@ button:focus {
 .Header2-c-00 {
   display: flex;
   flex-direction: row;
-  justify-content: space-between; }
+  justify-content: space-between;
+  align-items: center; }
   .Header1-c-00 .Header1-Links-Container-01,
   .Header2-c-00 .Header1-Links-Container-01 {
     display: flex;
