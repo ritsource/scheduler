@@ -90,7 +90,7 @@ const EventListHeader = (props) => {
 				// hex_color={activeGroup.hex_color}
 			>
 				<button className="Theme-Btn-Type2-Grey-99" onClick={() => setDropdown(true)}>
-					<FaEllipsisH style={{ marginBottom: '-2px', fontSize: '18px', color: 'var(--text-color-light)' }} />
+					<FaEllipsisH style={{ marginBottom: '-2px', fontSize: '16px', color: 'var(--text-color-light)' }} />
 				</button>
 			</OptionsGroup>
 		</div>

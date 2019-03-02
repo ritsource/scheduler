@@ -96,6 +96,24 @@ export const EDIT_EVENT_BY_ID = gql`
 	}
 `;
 
+export const EDIT_EVENT_DATES = gql`
+	mutation editEventDates($eventId: ID!, $date_from: Float, $date_to: Float) {
+		editEventDates(eventId: $eventId, date_from: $date_from, date_to: $date_to) {
+			_id
+			date_to
+		}
+	}
+`;
+
+export const DELETE_EVENT = gql`
+	mutation deleteEvent($eventId: ID!) {
+		deleteEvent(eventId: $eventId) {
+			_id
+			_isDeleted
+		}
+	}
+`;
+
 export const ADD_NEW_STEP = gql`
 	mutation createStep($title: String!, $_event: ID!) {
 		createStep(title: $title, _event: $_event) {

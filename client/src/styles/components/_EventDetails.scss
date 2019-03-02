@@ -1,7 +1,7 @@
 .EventDetails-c-00 {
 	border-left: 1px solid var(--border-color);
-	height: calc(100% - 10px);
-	padding: 10px 20px 0px 20px;
+	height: calc(100% - 40px);
+	padding: 20px 30px;
 	display: flex;
 	flex-direction: column;
 	transition: 0.2s;
@@ -33,7 +33,7 @@
 		max-height: 100%;
 		overflow: auto;
 		// flex-grow: 1;
-		width: calc(100% + 20px);
+		width: calc(100% + 30px);
 	}
 
 	.ItemSubmitForm-c-00 {

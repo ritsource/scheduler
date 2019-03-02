@@ -5,7 +5,8 @@
 @import './base/App';
 
 @import '../../node_modules/react-dropdown-modal/lib/dropdown.css';
-// @import '../../node_modules/awesome-react-datepicker/lib/datepicker.css';
+@import '../../node_modules/react-dropdown-selector/lib/selector.css';
+@import '../../node_modules/awesome-react-datepicker/lib/datepicker.css';
 
 @import './pages/About';
 @import './pages/Todo';
@@ -30,7 +31,7 @@
 @import './components/EventDoneIndicator';
 @import './components/EventDetails';
 @import './components/EventDetailsItem';
-// @import './components/TodoSidebar';
+@import './components/EventDetailsBtns';
 // @import './components/TodoSidebar';
 // @import './components/TodoSidebar';
 // @import './components/TodoSidebar';

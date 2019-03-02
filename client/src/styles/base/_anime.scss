@@ -21,3 +21,31 @@
 		height: calc(100vh - 70px);
 	}
 }
+
+@keyframes Async-Button-Border {
+	0% {
+		border: 1px solid var(--hover-mint-medium);
+	}
+
+	50% {
+		border: 1px solid var(--theme-color-middle);
+	}
+
+	100% {
+		border: 1px solid var(--hover-mint-medium);
+	}
+}
+
+@keyframes Async-Button-Text {
+	0% {
+		color: var(--text-color-light);
+	}
+
+	50% {
+		color: var(--theme-color-middle);
+	}
+
+	100% {
+		color: var(--text-color-light);
+	}
+}

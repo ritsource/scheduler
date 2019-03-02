@@ -1222,7 +1222,7 @@ atob@^2.1.1:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-awesome-react-datepicker@2.0.1:
+awesome-react-datepicker@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/awesome-react-datepicker/-/awesome-react-datepicker-2.0.1.tgz#7600baafc8cd3da3b031740628d7ed457dc3f0e3"
   integrity sha512-KP/s6vc9SZ/jANOEWgqTVq1v/8WpG3oxy0PVLVAYwLdnwgJ6GaS1WF3tIk21gkQsntWLhQFu2W8uRQfeGMYNrA==
@@ -5974,7 +5974,7 @@ react-dropdown-modal@1.2.5:
     react "16.7.0"
     react-dom "16.7.0"
 
-react-dropdown-selector@1.0.0:
+react-dropdown-selector@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-dropdown-selector/-/react-dropdown-selector-1.0.0.tgz#f783dbfd8e98be948c193d6a4f131f3417ff650c"
   integrity sha512-/2M5wtrNZ1JoPPq272v0exEodT3eIOy+8O5kUtvX3BZEZo9dReb/Zc2Y7QnNC13ZW1CHc9ORSBwd53KlkqmHZA==

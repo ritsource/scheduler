@@ -12,7 +12,7 @@ export const FETCH_ALL_GROUPS = gql`
 			_events {
 				_id
 				title
-				# description
+				description
 				hex_color
 				date_from
 				date_to
@@ -20,6 +20,7 @@ export const FETCH_ALL_GROUPS = gql`
 				# _isDeleted
 				_isDone
 				_rank
+				_group
 			}
 		}
 	}

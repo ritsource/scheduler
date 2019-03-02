@@ -9,7 +9,7 @@ module.exports = buildSchema(`
 		date_from: Float!
 		date_to: Float!
 		notification: Boolean!
-		_group: Group!
+		_group: String!
 		_creator: User!
 		_steps: [Step!]!
 		_isDeleted: Boolean!
@@ -77,7 +77,7 @@ module.exports = buildSchema(`
 		editEventToDone(eventId: ID!): Event!
 		editEventToNotDone(eventId: ID!): Event!
 		editEventById(eventId: ID! title: String description: String _group: ID notification: Boolean hex_color: String): Event!
-		editEventDates(eventId: ID! date_from: Float, date_from: Float): Event!
+		editEventDates(eventId: ID! date_from: Float, date_to: Float): Event!
 		deleteEvent(eventId: ID!): Event!
 		rearrangeEvents(focusedEvent: ID!, fromRank: Int!, toRank: Int!, movedEvents: [ID!]!): [Event!]!
 

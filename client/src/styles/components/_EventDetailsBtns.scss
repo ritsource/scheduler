@@ -1,0 +1,48 @@
+.EventDetailsBtns-c-00 {
+	.EventDetailsBtns-Datepicker-Container-01 {
+		display: flex;
+		flex-direction: row;
+		width: 100%;
+		padding: 10px 0px;
+	}
+
+	.EventDetailsBtns-More-Btns-Container-01 {
+		display: flex;
+		flex-direction: row;
+		padding: 0px;
+		// justify-content: space-between;
+		justify-content: flex-start;
+	}
+
+	.EventDetailsBtns-Textarea-01 {
+		color: var(--text-color);
+		border: 1px solid var(--border-color);
+		padding: 6px;
+		min-height: 70px;
+		// max-height: 70px;
+		min-width: calc(100% - 14px);
+		// max-width: calc(100% - 13px);
+		background: var(--background-color);
+
+		&:focus {
+			border: 1px solid var(--text-color-light);
+		}
+	}
+
+	.EventDetailsBtns-Desc-Submit-Btn-01 {
+		width: 100%;
+		margin: 5px 0px 0px 0px;
+		padding: 6px 10px;
+		border: 0px solid var(--border-color);
+		cursor: pointer;
+	}
+
+	.EventDetailsBtns-Selected-01 {
+		padding: 10px 0px;
+		transition: all 0.2s ease;
+
+		&:hover {
+			padding: 10px 20px;
+		}
+	}
+}

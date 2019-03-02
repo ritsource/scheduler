@@ -66,6 +66,8 @@ module.exports = {
 				_isDeleted: false
 			});
 
+			// console.log(allEvents);
+
 			return allEvents;
 		} catch (error) {
 			throw new Error('Unable to query events');
@@ -165,7 +167,8 @@ module.exports = {
 		const { eventId } = body;
 
 		let date_from, date_to;
-		const oldEvent = await Event.findOne({ _id: req.params.eventId, _creator: req.user._id });
+		const oldEvent = await Event.findOne({ _id: eventId, _creator: req.user._id });
+
 		if (body.date_from && body.date_from !== oldEvent.date_from) {
 			date_from = body.date_from;
 			date_to = oldEvent.date_to + (body.date_from - oldEvent.date_from);

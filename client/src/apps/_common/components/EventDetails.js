@@ -5,12 +5,15 @@ import StepStoreContext from '../contexts/StepStoreContext';
 import EventDetailsHeader from '../components/EventDetailsHeader';
 import ItemSubmitForm from './ItemSubmitForm';
 import EventDetailsItem from './EventDetailsItem';
+import EventDetailsBtns from './EventDetailsBtns';
 
 import { FETCH_STEPS_BY_EVENT } from '../../../graphql/queries';
 import {
 	EDIT_EVENT_BY_ID,
+	EDIT_EVENT_DATES,
 	EDIT_EVENT_TO_DONE,
 	EDIT_EVENT_TO_NOT_DONE,
+	DELETE_EVENT,
 	ADD_NEW_STEP,
 	EDIT_STEP_BY_ID,
 	DELETE_STEP,
@@ -19,7 +22,7 @@ import {
 } from '../../../graphql/mutations';
 
 const EventDetails = (props) => {
-	const { event, client, pathName, hex_color } = props;
+	const { event, groups, client, pathName, hex_color, closeEventDetails } = props;
 
 	// Grnerate Steps Obj
 	const genContextObj = (prevObj, array = []) => {
@@ -32,13 +35,28 @@ const EventDetails = (props) => {
 	};
 
 	// Handle Event Delete
-	const handleEventDelete = () => {};
+	const handleEventDelete = async () => {
+		await client.mutate({
+			mutation: DELETE_EVENT,
+			variables: { eventId: event._id },
+			refetchQueries: [ 'readAllGroups' ]
+		});
+	};
 
 	// Handle Event Edit
-	const handleEventEdit = async ({ title, description }) => {
+	const handleEventEdit = async ({ title, description, _group }) => {
 		await client.mutate({
 			mutation: EDIT_EVENT_BY_ID,
-			variables: { eventId: event._id, title, description },
+			variables: { eventId: event._id, title, description, _group },
+			refetchQueries: [ 'readAllGroups' ],
+			awaitRefetchQueries: true
+		});
+	};
+
+	const handleEventDateEdit = async ({ date_from, date_to }) => {
+		await client.mutate({
+			mutation: EDIT_EVENT_DATES,
+			variables: { eventId: event._id, date_from, date_to },
 			refetchQueries: [ 'readAllGroups' ],
 			awaitRefetchQueries: true
 		});
@@ -132,6 +150,16 @@ const EventDetails = (props) => {
 						</Query>
 
 						<ItemSubmitForm placeholder="+ Add Step" onSubmit={onStepSubmit} />
+
+						<EventDetailsBtns
+							event={event}
+							groups={groups}
+							hex_color={hex_color}
+							handleEventEdit={handleEventEdit}
+							handleEventDateEdit={handleEventDateEdit}
+							handleEventDelete={handleEventDelete}
+							closeEventDetails={closeEventDetails}
+						/>
 					</div>
 				);
 			}}
