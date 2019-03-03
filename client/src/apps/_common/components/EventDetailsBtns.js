@@ -87,7 +87,7 @@ const EventDetailsBtns = (props) => {
 			<div className="EventDetailsBtns-Datepicker-Container-01">
 				<Datepicker
 					initDate={new Date(event.date_from)}
-					themeColor="var(--theme-color)"
+					themeColor="var(--theme-color-middle)"
 					borderColor="1px solid var(--border-color)"
 					borderRadius="2px"
 					onDateSelect={async (timeStamp) => {
@@ -118,7 +118,7 @@ const EventDetailsBtns = (props) => {
 				<p style={{ margin: '5px' }}>to</p>
 
 				<Datepicker
-					themeColor="var(--theme-color)"
+					themeColor="var(--theme-color-middle)"
 					initDate={new Date(event.date_to)}
 					onDateSelect={async (timeStamp) => {
 						setDToAsync(true);

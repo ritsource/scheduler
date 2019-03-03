@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import dateFormat from 'dateformat';
 
@@ -8,6 +8,13 @@ const EventListItem = (props) => {
 	const { index, event, activeGroup, eventDoneHandeler, changeEventId } = props;
 
 	const [ isDone, setIsDone ] = useState(event._isDone);
+
+	useEffect(
+		() => {
+			setIsDone(event._isDone);
+		},
+		[ event._isDone ]
+	);
 
 	return (
 		<Draggable draggableId={event._id} index={index}>

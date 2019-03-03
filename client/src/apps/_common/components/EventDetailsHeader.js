@@ -11,8 +11,9 @@ const EventDetailsHeader = (props) => {
 	useEffect(
 		() => {
 			if (event.title !== title) setTitle(event.title);
+			setIsDone(event._isDone);
 		},
-		[ event.title ]
+		[ event.title, event._isDone ]
 	);
 
 	return (
