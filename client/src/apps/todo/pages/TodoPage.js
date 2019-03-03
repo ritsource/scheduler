@@ -9,8 +9,6 @@ const TodoPage = (props, staticContext) => {
 	return (
 		<Query query={FETCH_ALL_GROUPS}>
 			{({ data, loading, error }) => {
-				console.log('data', data);
-
 				return (
 					<React.Fragment>
 						{data.readAllGroups ? (

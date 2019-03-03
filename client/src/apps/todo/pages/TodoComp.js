@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { createBrowserHistory } from 'history';
-// import ReactSVG from 'react-svg';
-import { Redirect } from 'react-router-dom';
 
 import TodoSidebar from '../components/TodoSidebar';
 import EventList from '../components/EventList';
