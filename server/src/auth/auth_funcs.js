@@ -33,7 +33,7 @@ const registerUser = async ({ name, email, password, req }) => {
 		name,
 		email,
 		password,
-		avatar_url: `/avatar_url/${name.match(/^[a-zA-Z]{1}/) ? name.split('')[0] : 'a'}.png`
+		avatar_url: `/avatar_url/${name.match(/^[a-zA-Z]{1}/) ? name.split('')[0].toLowerCase() : 'a'}.png`
 	}).save();
 
 	await new Group({

@@ -5,12 +5,23 @@ import ReactSVG from 'react-svg';
 import ProgressbarContext from '../../_common/contexts/ProgressbarContext';
 import CustomProgressBar from '../../_common/components/CustomProgressBar';
 
+let __isNode__ = false;
+if (typeof process === 'object') {
+	if (typeof process.versions === 'object') {
+		if (typeof process.versions.node !== 'undefined') {
+			__isNode__ = true;
+		}
+	}
+}
+
 const Header1 = ({ pathName }) => {
 	return (
 		<ProgressbarContext.Consumer>
 			{(context) => (
 				<React.Fragment>
-					{context.progressBar && <CustomProgressBar />}
+					<CustomProgressBar />
+					{context.progressBar && <CustomProgressBar force={true} />}
+					{/* {(() => console.log('context.progressBar', context.progressBar))()} */}
 
 					<div className="Header1-c-00">
 						<div className="Header1-Left-Div-01">

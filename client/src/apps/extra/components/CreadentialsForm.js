@@ -7,20 +7,21 @@ import ProgressbarContext from '../../_common/contexts/ProgressbarContext';
 import client from '../../../graphql/apollo-for-client';
 import { LOGIN_USER, REGISTER_USER } from '../../../graphql/mutations';
 
-const CreadentialsForm = ({ pathName, errorMsg, onFormSubmit }, context) => {
+const CreadentialsForm = ({ pathName }, context) => {
 	const [ name, setName ] = useState('');
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
+	const [ errorMsg, setErrorMag ] = useState(false);
 
 	const loginUser = async () => {
-		await client.mutate({
+		return await client.mutate({
 			mutation: LOGIN_USER,
 			variables: { email, password }
 		});
 	};
 
 	const registerUser = async () => {
-		await client.mutate({
+		return await client.mutate({
 			mutation: REGISTER_USER,
 			variables: { name, email, password }
 		});
@@ -39,14 +40,27 @@ const CreadentialsForm = ({ pathName, errorMsg, onFormSubmit }, context) => {
 					<form
 						onSubmit={async (e) => {
 							e.preventDefault();
+
 							if (pathName === 'signup') {
 								context.setProgressBar(true);
-								await registerUser();
-								window.location.href = '/todo';
+								setErrorMag(false);
+								try {
+									await registerUser();
+									window.location.href = '/todo';
+								} catch (error) {
+									context.setProgressBar(false);
+									setErrorMag('Something went wrong. Try later.');
+								}
 							} else {
 								context.setProgressBar(true);
-								await loginUser();
-								window.location.href = '/todo';
+								setErrorMag(false);
+								try {
+									await loginUser();
+									window.location.href = '/todo';
+								} catch (error) {
+									context.setProgressBar(false);
+									setErrorMag('Invalid email or password');
+								}
 							}
 						}}
 					>
