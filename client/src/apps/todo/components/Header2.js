@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import SidebarContext from '../../_common/contexts/SidebarContext';
 import ProgressbarContext from '../../_common/contexts/ProgressbarContext';
-import { AuthContext } from '../Todo';
+import AuthContext from '../../_common/contexts/AuthContext';
 
 import HeaderLogo from '../../_common/components/HeaderLogo';
 import HeaderAppBtns from '../../_common/components/HeaderAppBtns';
@@ -37,7 +37,7 @@ const Header2 = ({ pathName }) => {
 								{/* <div className="Header2-Links-Container-01" /> */}
 								<AuthContext.Consumer>
 									{(authContext) => {
-										return <HeaderAppBtns auth={authContext.auth} pathName="todo" />;
+										return <HeaderAppBtns auth={authContext.auth} pathName={pathName} />;
 									}}
 								</AuthContext.Consumer>
 							</div>

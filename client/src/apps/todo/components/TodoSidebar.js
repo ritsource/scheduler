@@ -23,7 +23,7 @@ const TodoSidebar = (props) => {
 				awaitRefetchQueries: true
 			})
 			.then(() => {
-				scrollToBottom('.TodoSidebar-The-List-01');
+				scrollToBottom('.Sidebar-The-List-01');
 			});
 	};
 
@@ -33,12 +33,12 @@ const TodoSidebar = (props) => {
 	return (
 		<SidebarContext.Consumer>
 			{(context) => (
-				<div className={`TodoSidebar-c-00 ${context.sidebar && 'TodoSidebar-c-00-Hidden'}`}>
+				<div className={`Sidebar-c-00 ${context.sidebar && 'Sidebar-c-00-Hidden'}`}>
 					<DragDropContext onDragEnd={onDragEnd}>
 						<Droppable droppableId="droppableId-sidebar" type="GROUP_DND">
 							{(provided) => (
 								<div
-									className="TodoSidebar-The-List-01"
+									className="Sidebar-The-List-01"
 									ref={provided.innerRef}
 									{...provided.droppableProps}
 								>

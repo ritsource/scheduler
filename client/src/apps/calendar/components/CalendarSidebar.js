@@ -5,10 +5,11 @@ import { funcHandleYear, funcHandleMonth } from '../../../utils/funcs';
 
 import CalendarContent from './CalendarContent';
 import CalendarSidebarItem from './CalendarSidebarItem';
+import CalendarSidebarNavigator from './CalendarSidebarNavigator';
 import ItemSubmitForm from '../../_common/components/ItemSubmitForm';
 import SidebarContext from '../../_common/contexts/SidebarContext';
 
-import { ADD_NEW_GROUP } from '../../../graphql/mutations';
+import { ADD_NEW_GROUP, EDIT_GROUP_BY_ID, DELETE_GROUP } from '../../../graphql/mutations';
 
 let __isNode__ = false;
 if (typeof process === 'object') {
@@ -25,7 +26,7 @@ const CalendarSidebar = (props) => {
 
 	const urlParams = !__isNode__ ? new URLSearchParams(window.location.search) : { get: () => undefined };
 
-	const getParam = (paramKey) => (__isNode__ && req ? req.query[paramKey] : urlParams.get(paramKey));
+	const getParam = (paramKey) => parseInt(__isNode__ && req ? req.query[paramKey] : urlParams.get(paramKey));
 
 	const [ year, setYear ] = useState(getParam('year') || new Date().getFullYear());
 	const [ month, setMonth ] = useState(getParam('month') || new Date().getMonth());
@@ -45,6 +46,26 @@ const CalendarSidebar = (props) => {
 		setMonth(new Date().getMonth());
 	};
 
+	const handleGroupRename = async ({ groupId, title, hex_color }) => {
+		if (title.length > 0) {
+			await client.mutate({
+				mutation: EDIT_GROUP_BY_ID,
+				variables: { groupId, title, hex_color },
+				refetchQueries: [ 'readAllGroups' ],
+				awaitRefetchQueries: true
+			});
+			document.querySelector(`#CalendarSidebarItem-Input-xx-${groupId}`).blur();
+		}
+	};
+
+	const handleGroupDelete = async (groupId) => {
+		await client.mutate({
+			mutation: DELETE_GROUP,
+			variables: { groupId },
+			refetchQueries: [ 'readAllGroups' ]
+		});
+	};
+
 	// Handeler for adding new group
 	const onGroupSubmit = (title) => {
 		// ADD_NEW_GROUP
@@ -56,21 +77,40 @@ const CalendarSidebar = (props) => {
 				awaitRefetchQueries: true
 			})
 			.then(() => {
-				scrollToBottom('.TodoSidebar-The-List-01');
+				scrollToBottom('.Sidebar-The-List-01');
 			});
 	};
 
 	return (
 		<SidebarContext.Consumer>
 			{(context) => (
-				<div className={`TodoSidebar-c-00 ${context.sidebar && 'TodoSidebar-c-00-Hidden'}`}>
+				<div className={`Sidebar-c-00 ${context.sidebar && 'Sidebar-c-00-Hidden'}`}>
+					<CalendarSidebarNavigator month={month} handleNavigation={handleNavigation} />
 					<CalendarContent miniCalendarState={{ year, month }} miniCalendar={true} />
-					<p>**</p>
 
-					<div className="TodoSidebar-The-List-01">
+					<p
+						style={{
+							margin: '15px 29px 10px 29px',
+							color: 'var(--theme-color-middle)',
+							fontSize: '18px',
+							fontWeight: 'bold'
+						}}
+					>
+						Groups
+					</p>
+
+					<div className="Sidebar-The-List-01">
 						{groups.map((group, i) => {
-							// return <CalendarSidebarItem key={i} index={i} group={group} />;
-							return <p key={i}>{group.title}</p>;
+							return (
+								<CalendarSidebarItem
+									key={i}
+									index={i}
+									group={group}
+									handleGroupRename={handleGroupRename}
+									handleGroupDelete={handleGroupDelete}
+								/>
+							);
+							// return <p key={i}>{group.title}</p>;
 						})}
 					</div>
 					<ItemSubmitForm placeholder="+ New Group" onSubmit={onGroupSubmit} />

@@ -1,0 +1,56 @@
+.Sidebar-c-00 {
+	border-right: 1px solid var(--border-color);
+	width: 250px !important;
+	transition: 0.3s;
+
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+
+	.Sidebar-The-List-01 {
+		padding: 0px;
+		height: calc(100% - 4px);
+		max-height: calc(100% - 4px);
+		overflow: auto;
+	}
+}
+
+.Sidebar-c-00-Hidden {
+	min-width: 0px !important;
+	width: 0px !important;
+	transition: 0.3s;
+}
+
+.CalendarSidebarNavigator-c-00 {
+	width: calc(100% - 58px);
+	margin: 0px 29px;
+	padding: 20px 0px 3px 0px;
+
+	p {
+		font-size: 18px;
+		font-weight: bold;
+		color: var(--theme-color-middle);
+	}
+
+	button {
+		color: var(--text-color-light);
+		// font-size: 18px;
+		background: var(--background-color);
+		border: 0px solid var(--hover-mint-medium);
+		width: 26px;
+		height: 26px;
+		border-radius: 50%;
+
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		cursor: pointer;
+		margin-left: 5px;
+
+		&:hover {
+			background: var(--hover-mint-medium);
+		}
+	}
+}

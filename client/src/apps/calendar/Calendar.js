@@ -12,7 +12,7 @@ import { ProgressbarProvider } from '../_common/contexts/ProgressbarContext';
 import { SidebarProvider } from '../_common/contexts/SidebarContext';
 import { StepStoreProvider } from '../_common/contexts/StepStoreContext';
 
-export const AuthContext = React.createContext({ auth: null });
+import AuthContext from '../_common/contexts/AuthContext';
 
 let __isNode__ = false;
 if (typeof process === 'object') {
@@ -31,13 +31,15 @@ const Calendar = (props) => {
 	return (
 		<Query query={FETCH_CURRENT_USER}>
 			{({ data, loading, error }) => {
+				console.log(data.currentUser);
+
 				return (
 					<ProgressbarProvider>
 						<SidebarProvider>
 							<StepStoreProvider>
 								<AuthContext.Provider value={{ auth: data.currentUser }}>
 									<div className="Calendar-a-00">
-										<Header2 pathName={pathName} />
+										<Header2 pathName="calendar" />
 										{data.currentUser ? (
 											<div>{renderRoutes(props.route.routes)}</div>
 										) : (

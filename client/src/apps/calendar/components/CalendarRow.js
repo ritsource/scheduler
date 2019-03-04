@@ -25,7 +25,7 @@ const CalendarRow = (props) => {
 
 	return (
 		<div
-			className={miniCalendar ? '' : ''}
+			className={miniCalendar ? 'CalendarRow-c-00-Mini' : 'CalendarRow-c-00'}
 			style={miniCalendar ? miniCalendarStyle : index === 0 ? calendarStyle_first : calendarStyle_rest}
 		>
 			{itemArr.map((x, i) => {
@@ -36,7 +36,7 @@ const CalendarRow = (props) => {
 						key={i}
 						index={i}
 						rowIndex={index} // Index of the Parent Row
-						date={new Date(dateStamp).getDate() || '. . .'} // Date
+						date={new Date(dateStamp).getDate() || index * 7 + i} // Date
 						dateStamp={dateStamp} // Date Timestamp
 						dateDistMap={dateDistMap} // { dateDistMap } from Props
 						dateDistMapInverse={dateDistMapInverse} // { dateDistMap } from Props

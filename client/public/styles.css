@@ -26,7 +26,8 @@ body {
 
 .Flex-Class-Row-Start,
 .Flex-Class-Row-End,
-.Flex-Class-Row-Center {
+.Flex-Class-Row-Center,
+.Flex-Class-Row-Space-Between {
   display: flex;
   flex-direction: row;
   align-items: center; }
@@ -39,6 +40,9 @@ body {
 
 .Flex-Class-Row-Center {
   justify-content: center; }
+
+.Flex-Class-Row-Space-Between {
+  justify-content: space-between; }
 
 a {
   color: inherit;
@@ -258,6 +262,13 @@ button:focus {
   display: flex;
   flex-direction: row; }
 
+.CalendarComp-c-00 {
+  border-top: 1px solid var(--border-color);
+  height: calc(100vh - 70px - 1px);
+  width: 100vw;
+  display: flex;
+  flex-direction: row; }
+
 .Header2-c-00 {
   width: calc(100% - 60px);
   height: 70px;
@@ -402,23 +413,47 @@ button:focus {
   100% {
     width: 95%; } }
 
-.TodoSidebar-c-00 {
+.Sidebar-c-00 {
   border-right: 1px solid var(--border-color);
   width: 250px !important;
   transition: 0.3s;
   height: 100%;
   display: flex;
-  flex-direction: column; }
-  .TodoSidebar-c-00 .TodoSidebar-The-List-01 {
+  flex-direction: column;
+  overflow: hidden; }
+  .Sidebar-c-00 .Sidebar-The-List-01 {
     padding: 0px;
     height: calc(100% - 4px);
     max-height: calc(100% - 4px);
     overflow: auto; }
 
-.TodoSidebar-c-00-Hidden {
+.Sidebar-c-00-Hidden {
   min-width: 0px !important;
   width: 0px !important;
   transition: 0.3s; }
+
+.CalendarSidebarNavigator-c-00 {
+  width: calc(100% - 58px);
+  margin: 0px 29px;
+  padding: 20px 0px 3px 0px; }
+  .CalendarSidebarNavigator-c-00 p {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--theme-color-middle); }
+  .CalendarSidebarNavigator-c-00 button {
+    color: var(--text-color-light);
+    background: var(--background-color);
+    border: 0px solid var(--hover-mint-medium);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: 5px; }
+    .CalendarSidebarNavigator-c-00 button:hover {
+      background: var(--hover-mint-medium); }
 
 .TodoSidebarItem-c-00 {
   display: flex;
@@ -651,4 +686,79 @@ button:focus {
   transition: all 0.2s ease; }
   .EventDetailsBtns-c-00 .EventDetailsBtns-Selected-01:hover {
     padding: 10px 20px; }
+
+.CalendarContent-c-00 {
+  width: 100%;
+  height: 100%;
+  font-family: 'Montserrat', sans-serif; }
+
+.CalendarContent-c-00-Mini {
+  padding: 10px;
+  width: 230px;
+  height: 230px;
+  min-height: 230px;
+  max-height: 230px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+
+.CalendarRow-c-00 {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid var(--border-color);
+  position: relative;
+  overflow: hidden; }
+
+.CalendarRow-c-00-Mini {
+  display: flex;
+  flex-direction: row; }
+
+.CalendarRowItem-c-00-Mini {
+  width: calc(100% / 7);
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .CalendarRowItem-c-00-Mini div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer; }
+    .CalendarRowItem-c-00-Mini div:hover {
+      background: var(--hover-mint-medium); }
+    .CalendarRowItem-c-00-Mini div p {
+      font-weight: bold;
+      font-size: 10px;
+      color: var(--text-color-light); }
+
+.CalendarRowItem-c-00-Mini-Not-In-Month div > p {
+  color: var(--text-color-light-2); }
+
+.CalendarRowItem-c-00-Mini-Active-Date {
+  background: var(--theme-color-middle); }
+  .CalendarRowItem-c-00-Mini-Active-Date:hover {
+    background: var(--theme-color-middle) !important; }
+  .CalendarRowItem-c-00-Mini-Active-Date p {
+    color: white !important; }
+
+.CalendarSidebarItem-c-00 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 58px);
+  margin: 0px 29px; }
+  .CalendarSidebarItem-c-00 input {
+    margin: 5px;
+    padding: 5px;
+    width: calc(100% - 15px); }
+  .CalendarSidebarItem-c-00 .CalendarSidebarItem-Options-Btn-02 {
+    color: var(--text-color-light);
+    background: var(--background-color);
+    border: 1px solid var(--background-color);
+    padding: 0px;
+    cursor: pointer; }
 

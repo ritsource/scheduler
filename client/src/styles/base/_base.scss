@@ -9,7 +9,8 @@ body {
 
 .Flex-Class-Row-Start,
 .Flex-Class-Row-End,
-.Flex-Class-Row-Center {
+.Flex-Class-Row-Center,
+.Flex-Class-Row-Space-Between {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -22,6 +23,9 @@ body {
 }
 .Flex-Class-Row-Center {
 	justify-content: center;
+}
+.Flex-Class-Row-Space-Between {
+	justify-content: space-between;
 }
 
 a {

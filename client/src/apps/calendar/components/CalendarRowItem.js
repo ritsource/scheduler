@@ -12,7 +12,8 @@ const CalendarRowItem = (props) => {
 		dateDistMapInverse,
 		eventDistMap,
 		miniCalendar,
-		miniCalendarState
+		miniCalendarState,
+		handleUrlNavigation
 	} = props;
 
 	const dateProps = miniCalendar ? miniCalendarState : props;
@@ -25,14 +26,13 @@ const CalendarRowItem = (props) => {
 	if (props.miniCalendar) {
 		return (
 			<div
-				className={`calendar-row-item-000-mini ${!aDayOfThisMonth &&
-					'calendar-row-item-000-mini-not-in-month'}`}
+				className={`CalendarRowItem-c-00-Mini ${!aDayOfThisMonth && 'CalendarRowItem-c-00-Mini-Not-In-Month'}`}
 			>
 				<div
-					className={`${_isToday && 'calendar-row-item-mini-active-date'}`}
+					className={`${_isToday && 'CalendarRowItem-c-00-Mini-Active-Date'}`}
 					onClick={() => {
-						props.setReduxCalendar({ year, month });
-						props.handleUrlNavigation(year, month);
+						// props.setReduxCalendar({ year, month });
+						handleUrlNavigation(year, month);
 					}}
 				>
 					<p>{props.date}</p>

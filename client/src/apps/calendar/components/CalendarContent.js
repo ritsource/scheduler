@@ -39,13 +39,16 @@ const CalendarContent = (props) => {
 		setDateDistMapInverse(tempDistMapInverse);
 	};
 
-	useEffect(() => {
-		setDayOneIndex(new Date(year, month, 1).getDay());
-		console.log('NOW! NOW! NOW! NOW!');
+	useEffect(
+		() => {
+			setDayOneIndex(new Date(year, month, 1).getDay());
+			console.log('NOW! NOW! NOW! NOW!');
 
-		updateDateDistribution(year, month);
-		// updateEventDistribution
-	});
+			updateDateDistribution(year, month);
+			// updateEventDistribution
+		},
+		[ year, month ]
+	);
 	// }, [ year, month ])
 
 	// Number of Days Current Month
@@ -58,7 +61,7 @@ const CalendarContent = (props) => {
 	const rowArr = isFiveRows ? [ 1, 2, 3, 4, 5 ] : [ 1, 2, 3, 4, 5, 6 ];
 
 	return (
-		<div className={miniCalendar ? '' : ''}>
+		<div className={miniCalendar ? 'CalendarContent-c-00-Mini' : 'CalendarContent-c-00'}>
 			{rowArr.map((x, i) => {
 				return (
 					<CalendarRow

@@ -4,7 +4,7 @@ import { FaCircle, FaCheckCircle } from 'react-icons/fa';
 import { ApolloConsumer } from 'react-apollo';
 
 import { builtin_color_list } from '../../../utils/constants';
-import { AuthContext as TodoAuthContext } from '../../todo/Todo';
+import AuthContext from '../../_common/contexts/AuthContext';
 
 import { EDIT_GROUP_BY_ID } from '../../../graphql/mutations';
 
@@ -29,10 +29,8 @@ const SubOptionColor = (props) => {
 	const addCustomColor = () => {};
 
 	return (
-		<TodoAuthContext.Consumer>
+		<AuthContext.Consumer>
 			{(context) => {
-				// console.log(context.auth);
-
 				return (
 					<div onClick={(e) => e.stopPropagation()} style={{ background: 'var(--background-color)' }}>
 						<div className="Theme-Dropdown-Content-Item-99 Theme-Slide-Background-onHover-99">
@@ -104,7 +102,7 @@ const SubOptionColor = (props) => {
 					</div>
 				);
 			}}
-		</TodoAuthContext.Consumer>
+		</AuthContext.Consumer>
 	);
 };
 

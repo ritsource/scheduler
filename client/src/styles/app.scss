@@ -10,7 +10,7 @@
 
 @import './pages/About';
 @import './pages/Todo';
-// @import './pages/Todo';
+@import './pages/Calendar';
 // @import './pages/Todo';
 // @import './pages/Todo';
 // @import './pages/Todo';
@@ -20,7 +20,7 @@
 @import './components/Header';
 @import './components/CreadentialsForm';
 @import './components/CustomProgressBar';
-@import './components/TodoSidebar';
+@import './components/Sidebar';
 @import './components/TodoSidebarItem';
 @import './components/ItemSubmitForm';
 @import './components/EventList';
@@ -32,6 +32,15 @@
 @import './components/EventDetails';
 @import './components/EventDetailsItem';
 @import './components/EventDetailsBtns';
+@import './components/CalendarContent';
+@import './components/CalendarRow';
+@import './components/CalendarRowItem';
+@import './components/CalendarSidebar';
+@import './components/CalendarSidebarItem';
+// @import './components/TodoSidebar';
+// @import './components/TodoSidebar';
+// @import './components/TodoSidebar';
+// @import './components/TodoSidebar';
 // @import './components/TodoSidebar';
 // @import './components/TodoSidebar';
 // @import './components/TodoSidebar';

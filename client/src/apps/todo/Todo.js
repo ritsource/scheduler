@@ -12,7 +12,7 @@ import { ProgressbarProvider } from '../_common/contexts/ProgressbarContext';
 import { SidebarProvider } from '../_common/contexts/SidebarContext';
 import { StepStoreProvider } from '../_common/contexts/StepStoreContext';
 
-export const AuthContext = React.createContext({ auth: null });
+import AuthContext from '../_common/contexts/AuthContext';
 
 let __isNode__ = false;
 if (typeof process === 'object') {
@@ -37,7 +37,7 @@ const Todo = (props) => {
 							<StepStoreProvider>
 								<AuthContext.Provider value={{ auth: data.currentUser }}>
 									<div className="Todo-a-00">
-										<Header2 pathName={pathName} />
+										<Header2 pathName="todo" />
 										{data.currentUser ? (
 											<div>{renderRoutes(props.route.routes)}</div>
 										) : (
