@@ -3,6 +3,7 @@ import { createBrowserHistory } from 'history';
 
 import CalendarSidebar from '../components/CalendarSidebar';
 import CalendarContent from '../components/CalendarContent';
+import HeaderNavigator from '../components/HeaderNavigator';
 
 let __isNode__ = false;
 if (typeof process === 'object') {
@@ -59,10 +60,22 @@ const CalendarComp = (props) => {
 	};
 
 	return (
-		<div className="CalendarComp-c-00">
-			<CalendarSidebar staticContext={staticContext} groups={groups} handleUrlNavigation={handleUrlNavigation} />
-			<CalendarContent year={year} month={month} setActiveEvent={setActiveEvent} events={extractEvents(groups)} />
-		</div>
+		<React.Fragment>
+			<HeaderNavigator month={month} year={year} handleUrlNavigation={handleUrlNavigation} />
+			<div className="CalendarComp-c-00">
+				<CalendarSidebar
+					staticContext={staticContext}
+					groups={groups}
+					handleUrlNavigation={handleUrlNavigation}
+				/>
+				<CalendarContent
+					year={year}
+					month={month}
+					setActiveEvent={setActiveEvent}
+					events={extractEvents(groups)}
+				/>
+			</div>
+		</React.Fragment>
 	);
 };
 

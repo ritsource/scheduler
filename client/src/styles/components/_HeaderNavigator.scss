@@ -1,0 +1,45 @@
+.HeaderNavigator-c-00 {
+	// border: 1px solid red;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	margin: auto;
+	width: 300px;
+	right: 50vw;
+	margin-right: -150px;
+	height: 70px; // Just equal to the header
+	margin-top: -70px;
+	z-index: 50;
+
+	p,
+	button {
+		margin: 5px;
+	}
+
+	p {
+		font-family: 'Montserrat', sans-serif;
+		color: var(--theme-color-middle);
+		width: 140px;
+		text-align: left;
+		padding-top: 2px;
+		font-size: 18px;
+		font-weight: bold;
+	}
+
+	.HeaderNavigator-Nav-Btn-01 {
+		// font-size: 20px;
+		// // font-weight: bold;
+		color: var(--text-color-light);
+		// border-radius: 50%;
+		// padding: 3px 9px 3px 9px;
+		border: 1px solid var(--background-color);
+		background: var(--background-color);
+
+		&:hover {
+			border: 1px solid var(--hover-mint-medium);
+			background: var(--hover-mint-medium);
+		}
+	}
+}

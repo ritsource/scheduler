@@ -423,8 +423,8 @@ button:focus {
   overflow: hidden; }
   .Sidebar-c-00 .Sidebar-The-List-01 {
     padding: 0px;
-    height: calc(100% - 4px);
-    max-height: calc(100% - 4px);
+    height: calc(100%);
+    max-height: calc(100%);
     overflow: auto; }
 
 .Sidebar-c-00-Hidden {
@@ -437,9 +437,12 @@ button:focus {
   margin: 0px 29px;
   padding: 20px 0px 3px 0px; }
   .CalendarSidebarNavigator-c-00 p {
+    font-family: 'Montserrat', sans-serif;
     font-size: 18px;
     font-weight: bold;
     color: var(--theme-color-middle); }
+    .CalendarSidebarNavigator-c-00 p span {
+      font-size: 12px; }
   .CalendarSidebarNavigator-c-00 button {
     color: var(--text-color-light);
     background: var(--background-color);
@@ -794,4 +797,36 @@ button:focus {
     opacity: 0; }
   .CalendarSidebarItem-c-00:hover .CalendarSidebarItem-Options-Btn-02 {
     opacity: 1; }
+
+.HeaderNavigator-c-00 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  margin: auto;
+  width: 300px;
+  right: 50vw;
+  margin-right: -150px;
+  height: 70px;
+  margin-top: -70px;
+  z-index: 50; }
+  .HeaderNavigator-c-00 p,
+  .HeaderNavigator-c-00 button {
+    margin: 5px; }
+  .HeaderNavigator-c-00 p {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--theme-color-middle);
+    width: 140px;
+    text-align: left;
+    padding-top: 2px;
+    font-size: 18px;
+    font-weight: bold; }
+  .HeaderNavigator-c-00 .HeaderNavigator-Nav-Btn-01 {
+    color: var(--text-color-light);
+    border: 1px solid var(--background-color);
+    background: var(--background-color); }
+    .HeaderNavigator-c-00 .HeaderNavigator-Nav-Btn-01:hover {
+      border: 1px solid var(--hover-mint-medium);
+      background: var(--hover-mint-medium); }
 

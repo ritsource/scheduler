@@ -4,7 +4,7 @@ import { renderRoutes } from 'react-router-config';
 import { Redirect } from 'react-router-dom';
 import { Query } from 'react-apollo';
 
-import Header2 from '../todo/components/Header2';
+import Header2 from '../_common/components/Header2';
 
 import { FETCH_CURRENT_USER } from '../../graphql/queries';
 
@@ -14,20 +14,7 @@ import { StepStoreProvider } from '../_common/contexts/StepStoreContext';
 
 import AuthContext from '../_common/contexts/AuthContext';
 
-let __isNode__ = false;
-if (typeof process === 'object') {
-	if (typeof process.versions === 'object') {
-		if (typeof process.versions.node !== 'undefined') {
-			__isNode__ = true;
-		}
-	}
-}
-
 const Calendar = (props) => {
-	const pathName = props.staticContext
-		? props.staticContext.pathName
-		: !__isNode__ && window.location.pathname.replace(/^\/([^\/]*).*$/, '$1');
-
 	return (
 		<Query query={FETCH_CURRENT_USER}>
 			{({ data, loading, error }) => {

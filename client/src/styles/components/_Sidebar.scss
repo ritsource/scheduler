@@ -10,8 +10,10 @@
 
 	.Sidebar-The-List-01 {
 		padding: 0px;
-		height: calc(100% - 4px);
-		max-height: calc(100% - 4px);
+		height: calc(100%);
+		max-height: calc(100%);
+		// height: calc(100% - 4px);
+		// max-height: calc(100% - 4px);
 		overflow: auto;
 	}
 }
@@ -28,9 +30,14 @@
 	padding: 20px 0px 3px 0px;
 
 	p {
+		font-family: 'Montserrat', sans-serif;
 		font-size: 18px;
 		font-weight: bold;
 		color: var(--theme-color-middle);
+
+		span {
+			font-size: 12px;
+		}
 	}
 
 	button {

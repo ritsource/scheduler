@@ -8,7 +8,9 @@ const CalendarSidebarNavigator = (props) => {
 
 	return (
 		<div className="CalendarSidebarNavigator-c-00 Flex-Class-Row-Space-Between">
-			<p>{month_name_dictionary[month]}</p>
+			<p>
+				{month_name_dictionary[month]}&nbsp;&nbsp;<span>{year}</span>
+			</p>
 			<div className="Flex-Class-Row-Center">
 				<button onClick={() => handleNavigation(false)}>
 					<FaAngleLeft style={{ margin: 'auto 2px 0px auto' }} />

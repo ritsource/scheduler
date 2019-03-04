@@ -100,7 +100,7 @@ const CalendarSidebar = (props) => {
 		<SidebarContext.Consumer>
 			{(context) => (
 				<div className={`Sidebar-c-00 ${context.sidebar && 'Sidebar-c-00-Hidden'}`}>
-					<CalendarSidebarNavigator month={month} handleNavigation={handleNavigation} />
+					<CalendarSidebarNavigator month={month} year={year} handleNavigation={handleNavigation} />
 					<CalendarContent
 						miniCalendarState={{ year, month }}
 						miniCalendar={true}
