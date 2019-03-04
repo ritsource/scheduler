@@ -12,7 +12,7 @@ const CalendarPage = (props, staticContext) => {
 				return (
 					<React.Fragment>
 						{data.readAllGroups ? (
-							<CalendarComp groups={data.readAllGroups || []} />
+							<CalendarComp staticContext={staticContext} groups={data.readAllGroups || []} />
 						) : (
 							// <h1>Calendar View</h1>
 							<div>Unable to Fetch Data, try Again</div>
