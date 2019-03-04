@@ -28,7 +28,6 @@ export const ADD_NEW_GROUP = gql`
 	mutation createGroup($title: String!) {
 		createGroup(title: $title) {
 			_id
-			title
 		}
 	}
 `;
@@ -37,7 +36,6 @@ export const EDIT_GROUP_BY_ID = gql`
 	mutation editGroupById($groupId: ID!, $title: String, $hex_color: String) {
 		editGroupById(groupId: $groupId, title: $title, hex_color: $hex_color) {
 			_id
-			title
 		}
 	}
 `;
@@ -45,6 +43,22 @@ export const EDIT_GROUP_BY_ID = gql`
 export const DELETE_GROUP = gql`
 	mutation deleteGroup($groupId: ID!) {
 		deleteGroup(groupId: $groupId) {
+			_id
+		}
+	}
+`;
+
+export const EDIT_GROUP_TO_VISIBLE = gql`
+	mutation editGroupToVisible($groupId: ID!) {
+		editGroupToVisible(groupId: $groupId) {
+			_id
+		}
+	}
+`;
+
+export const EDIT_GROUP_TO_INVISIBLE = gql`
+	mutation editGroupToInvisible($groupId: ID!) {
+		editGroupToInvisible(groupId: $groupId) {
 			_id
 		}
 	}

@@ -4,8 +4,11 @@
 	justify-content: space-between;
 	align-items: center;
 
-	width: calc(100% - 58px);
-	margin: 0px 29px;
+	// width: calc(100% - 58px);
+	// margin: 0px 29px;
+
+	width: calc(100% - 54px);
+	margin: 0px 25px 0px 29px;
 
 	input {
 		margin: 5px;
@@ -20,5 +23,12 @@
 		border: 1px solid var(--background-color);
 		padding: 0px;
 		cursor: pointer;
+		opacity: 0;
+	}
+
+	&:hover {
+		.CalendarSidebarItem-Options-Btn-02 {
+			opacity: 1;
+		}
 	}
 }

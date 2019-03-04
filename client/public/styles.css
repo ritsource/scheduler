@@ -749,8 +749,8 @@ button:focus {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: calc(100% - 58px);
-  margin: 0px 29px; }
+  width: calc(100% - 54px);
+  margin: 0px 25px 0px 29px; }
   .CalendarSidebarItem-c-00 input {
     margin: 5px;
     padding: 5px;
@@ -760,5 +760,8 @@ button:focus {
     background: var(--background-color);
     border: 1px solid var(--background-color);
     padding: 0px;
-    cursor: pointer; }
+    cursor: pointer;
+    opacity: 0; }
+  .CalendarSidebarItem-c-00:hover .CalendarSidebarItem-Options-Btn-02 {
+    opacity: 1; }
 

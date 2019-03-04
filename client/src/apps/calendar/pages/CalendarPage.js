@@ -1,18 +1,20 @@
 import React from 'react';
 
-import { FETCH_ALL_GROUPS } from '../../../graphql/queries';
+import { FETCH_ALL_GROUPS_ON_CALENDAR } from '../../../graphql/queries';
 import { Query } from 'react-apollo';
 
 import CalendarComp from './CalendarComp';
 
 const CalendarPage = (props, staticContext) => {
 	return (
-		<Query query={FETCH_ALL_GROUPS}>
+		<Query query={FETCH_ALL_GROUPS_ON_CALENDAR}>
 			{({ data, loading, error }) => {
+				console.log('My data', data);
+
 				return (
 					<React.Fragment>
-						{data.readAllGroups ? (
-							<CalendarComp staticContext={staticContext} groups={data.readAllGroups || []} />
+						{data.readGroupsOnCalendar ? (
+							<CalendarComp staticContext={staticContext} groups={data.readGroupsOnCalendar || []} />
 						) : (
 							// <h1>Calendar View</h1>
 							<div>Unable to Fetch Data, try Again</div>
@@ -27,6 +29,6 @@ const CalendarPage = (props, staticContext) => {
 export default {
 	component: CalendarPage,
 	loadData: function(client) {
-		return client.query({ query: FETCH_ALL_GROUPS });
+		return client.query({ query: FETCH_ALL_GROUPS_ON_CALENDAR });
 	}
 };

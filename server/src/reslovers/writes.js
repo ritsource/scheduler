@@ -1,4 +1,5 @@
 const {
+	readEventsByGroup,
 	createEvent,
 	editEventById,
 	editEventDates,
@@ -65,7 +66,7 @@ module.exports = {
 
 	editGroupToVisible: async (args, req) => {
 		const group = await editGroupToVisible(args, req);
-		group._events = readEventsByGroup.bind(this, { groupId: group._doc._id }, req);
+		// group._events = readEventsByGroup.bind(this, { groupId: group._doc._id }, req);
 
 		return group;
 	}, // to _onCalendar true

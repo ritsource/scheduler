@@ -60,12 +60,11 @@ module.exports = buildSchema(`
 	
 		readAllGroups: [Group!]!
 		readGroupById(groupId: ID!): Group!
+		readGroupsOnCalendar: [Group!]!
 
 		readAllSteps: [Step!]!
 		readStepsByEvent(eventId: ID!): [Step!]!
-
-		satReadAllGroups: [Group!]!
-		satReadGroupsOnCalendar: [Group!]!
+		
 	}
 
 	type RootMutation {

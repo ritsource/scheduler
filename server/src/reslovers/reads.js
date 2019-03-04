@@ -1,5 +1,5 @@
 const { readAllEvents, readEventById, readEventsByGroup, readEventsByTime } = require('../crud/event_funcs');
-const { readAllGroups, readGroupById } = require('../crud/group_funcs');
+const { readAllGroups, readGroupById, readGroupsOnCalendar } = require('../crud/group_funcs');
 const { readAllSteps, readStepsByEvent } = require('../crud/step_funcs');
 
 module.exports = {
@@ -31,15 +31,15 @@ module.exports = {
 	}, // Read all Groups
 
 	readGroupsOnCalendar: async (args, req) => {
-		const groups = await readGroupsOnCalendar(args, req);
+		const groups = await readAllGroups(args, req);
 
 		const satGroups = groups.map((group) => ({
 			...group._doc,
-			_events: readEventsByGroup.bind(this, { groupId: group._doc._id }, req)
+			_events: group._isOnCalendar ? readEventsByGroup.bind(this, { groupId: group._doc._id }, req) : []
 		}));
 
 		return satGroups;
-	}, // Read all Groups active on Calendar
+	}, // Read all Groups, and events for those who are active on Calendar
 
 	readGroupById: async (args, req) => {
 		return await readGroupById(args, req);

@@ -9,7 +9,13 @@ import CalendarSidebarNavigator from './CalendarSidebarNavigator';
 import ItemSubmitForm from '../../_common/components/ItemSubmitForm';
 import SidebarContext from '../../_common/contexts/SidebarContext';
 
-import { ADD_NEW_GROUP, EDIT_GROUP_BY_ID, DELETE_GROUP } from '../../../graphql/mutations';
+import {
+	ADD_NEW_GROUP,
+	EDIT_GROUP_BY_ID,
+	EDIT_GROUP_TO_INVISIBLE,
+	EDIT_GROUP_TO_VISIBLE,
+	DELETE_GROUP
+} from '../../../graphql/mutations';
 
 let __isNode__ = false;
 if (typeof process === 'object') {
@@ -51,7 +57,7 @@ const CalendarSidebar = (props) => {
 			await client.mutate({
 				mutation: EDIT_GROUP_BY_ID,
 				variables: { groupId, title, hex_color },
-				refetchQueries: [ 'readAllGroups' ],
+				refetchQueries: [ 'readGroupsOnCalendar' ],
 				awaitRefetchQueries: true
 			});
 			document.querySelector(`#CalendarSidebarItem-Input-xx-${groupId}`).blur();
@@ -62,7 +68,7 @@ const CalendarSidebar = (props) => {
 		await client.mutate({
 			mutation: DELETE_GROUP,
 			variables: { groupId },
-			refetchQueries: [ 'readAllGroups' ]
+			refetchQueries: [ 'readGroupsOnCalendar' ]
 		});
 	};
 
@@ -73,12 +79,21 @@ const CalendarSidebar = (props) => {
 			.mutate({
 				mutation: ADD_NEW_GROUP,
 				variables: { title },
-				refetchQueries: [ 'readAllGroups' ],
+				refetchQueries: [ 'readGroupsOnCalendar' ],
 				awaitRefetchQueries: true
 			})
 			.then(() => {
 				scrollToBottom('.Sidebar-The-List-01');
 			});
+	};
+
+	const handleGroupVisiblity = async (groupId, bool) => {
+		await client.mutate({
+			mutation: bool ? EDIT_GROUP_TO_VISIBLE : EDIT_GROUP_TO_INVISIBLE,
+			variables: { groupId },
+			refetchQueries: [ 'readGroupsOnCalendar' ]
+			// awaitRefetchQueries: true
+		});
 	};
 
 	return (
@@ -95,6 +110,7 @@ const CalendarSidebar = (props) => {
 							fontSize: '18px',
 							fontWeight: 'bold'
 						}}
+						onClick={() => console.log(groups[1]._events)}
 					>
 						Groups
 					</p>
@@ -108,6 +124,7 @@ const CalendarSidebar = (props) => {
 									group={group}
 									handleGroupRename={handleGroupRename}
 									handleGroupDelete={handleGroupDelete}
+									handleGroupVisiblity={handleGroupVisiblity}
 								/>
 							);
 							// return <p key={i}>{group.title}</p>;
