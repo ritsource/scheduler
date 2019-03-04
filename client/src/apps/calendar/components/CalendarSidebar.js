@@ -27,7 +27,7 @@ if (typeof process === 'object') {
 }
 
 const CalendarSidebar = (props) => {
-	const { staticContext, groups, client } = props;
+	const { staticContext, groups, handleUrlNavigation, handleMainCalendarNavigation, client } = props;
 	const req = __isNode__ && staticContext ? staticContext.req : undefined;
 
 	const urlParams = !__isNode__ ? new URLSearchParams(window.location.search) : { get: () => undefined };
@@ -101,7 +101,12 @@ const CalendarSidebar = (props) => {
 			{(context) => (
 				<div className={`Sidebar-c-00 ${context.sidebar && 'Sidebar-c-00-Hidden'}`}>
 					<CalendarSidebarNavigator month={month} handleNavigation={handleNavigation} />
-					<CalendarContent miniCalendarState={{ year, month }} miniCalendar={true} />
+					<CalendarContent
+						miniCalendarState={{ year, month }}
+						miniCalendar={true}
+						// handleMainCalendarNavigation={handleMainCalendarNavigation}
+						handleUrlNavigation={handleUrlNavigation}
+					/>
 
 					<p
 						style={{

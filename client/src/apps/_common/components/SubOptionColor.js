@@ -9,7 +9,7 @@ import AuthContext from '../../_common/contexts/AuthContext';
 import { EDIT_GROUP_BY_ID } from '../../../graphql/mutations';
 
 const SubOptionColor = (props) => {
-	const { group, client } = props;
+	const { group, pathName, client } = props;
 
 	const [ newColorHex, setNewColorHex ] = useState('#d4e1f4');
 	const [ inputVis, setInputVis ] = useState(true);
@@ -21,7 +21,7 @@ const SubOptionColor = (props) => {
 		await client.mutate({
 			mutation: EDIT_GROUP_BY_ID,
 			variables: { groupId: group._id, hex_color },
-			refetchQueries: [ 'readAllGroups' ],
+			refetchQueries: pathName === 'todo' ? [ 'readAllGroups' ] : [ 'readGroupsOnCalendar' ],
 			awaitRefetchQueries: true
 		});
 	};

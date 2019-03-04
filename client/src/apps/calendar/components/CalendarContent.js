@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { createBrowserHistory } from 'history';
 
 import CalendarRow from './CalendarRow';
 
 const CalendarContent = (props) => {
-	const { miniCalendar, miniCalendarState } = props;
+	const { miniCalendar, miniCalendarState, handleUrlNavigation, handleMainCalendarNavigation } = props;
 
 	const dateProps = miniCalendar ? miniCalendarState : props;
 	const { month, year } = dateProps;
@@ -18,19 +17,14 @@ const CalendarContent = (props) => {
 	// dropdown_visible: false,
 	// dropdown_close: false
 
-	const handleUrlNavigation = (argYear, argMonth) => {
-		const history = createBrowserHistory();
-		history.push(`/calendar?year=${argYear}&month=${argMonth}`);
-	};
-
 	// Grnerate & Update Date Distribution Object
-	const updateDateDistribution = (argYear, argMonth) => {
+	const updateDateDistribution = (argYear, argMonth, argDayOneIdx) => {
 		const tempDistMap = {};
 		const tempDistMapInverse = {};
 
 		// Loop for 42 Times - for 42 Box-es
 		for (let k = 0; k < 42; k++) {
-			const value = new Date(argYear, argMonth, k - dayOneIndex + 1).valueOf();
+			const value = new Date(argYear, argMonth, k - argDayOneIdx + 1).valueOf();
 			tempDistMap[k] = value;
 			tempDistMapInverse[value] = k;
 		}
@@ -42,9 +36,7 @@ const CalendarContent = (props) => {
 	useEffect(
 		() => {
 			setDayOneIndex(new Date(year, month, 1).getDay());
-			console.log('NOW! NOW! NOW! NOW!');
-
-			updateDateDistribution(year, month);
+			updateDateDistribution(year, month, new Date(year, month, 1).getDay());
 			// updateEventDistribution
 		},
 		[ year, month ]
@@ -82,6 +74,7 @@ const CalendarContent = (props) => {
 						// For Big-Calendar Only
 						// toggleEventDetails
 						// newEventModalFunc
+						// handleMainCalendarNavigation={handleMainCalendarNavigation || (() => {})}
 					/>
 				);
 			})}

@@ -69,6 +69,7 @@ const CalendarSidebarItem = (props) => {
 			</div>
 
 			<OptionsGroup
+				pathName="calendar"
 				visible={dropdown}
 				group={group}
 				winHeightDiffer={winHeightDiffer}

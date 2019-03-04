@@ -8,7 +8,16 @@ import EnsureDeletion from './EnsureDeletion';
 import SubOptionColor from './SubOptionColor';
 
 const OptionsGroup = (props) => {
-	const { visible, group, showDropdown, hideDropdown, positionObj, onRenameClick, handleGroupDelete } = props;
+	const {
+		pathName,
+		visible,
+		group,
+		showDropdown,
+		hideDropdown,
+		positionObj,
+		onRenameClick,
+		handleGroupDelete
+	} = props;
 
 	const [ askforDelete, setAskforDelete ] = useState(false);
 	const [ colorPanelState, setColorPanelState ] = useState({ visible: false, screenX: null, screenY: null });
@@ -87,6 +96,7 @@ const OptionsGroup = (props) => {
 							modalContent={() => (
 								<SubOptionColor
 									group={group}
+									pathName={pathName}
 									closeThatShit={() => {
 										setColorPanelState({ screenX: null, screenY: null, visible: false });
 										hideDropdown();

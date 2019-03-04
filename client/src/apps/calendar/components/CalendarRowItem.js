@@ -13,7 +13,8 @@ const CalendarRowItem = (props) => {
 		eventDistMap,
 		miniCalendar,
 		miniCalendarState,
-		handleUrlNavigation
+		handleUrlNavigation,
+		handleMainCalendarNavigation
 	} = props;
 
 	const dateProps = miniCalendar ? miniCalendarState : props;
@@ -31,12 +32,46 @@ const CalendarRowItem = (props) => {
 				<div
 					className={`${_isToday && 'CalendarRowItem-c-00-Mini-Active-Date'}`}
 					onClick={() => {
-						// props.setReduxCalendar({ year, month });
-						handleUrlNavigation(year, month);
+						// handleMainCalendarNavigation({ year, month });
+						handleUrlNavigation({ year, month });
 					}}
 				>
 					<p>{props.date}</p>
 				</div>
+			</div>
+		);
+	} else {
+		return (
+			<div
+				className="CalendarRowItem-c-00"
+				style={props.index === 6 ? { borderRight: '0px solid white' } : {}}
+				onClick={() =>
+					props.newEventModalFunc({
+						// date_from: new Date().setHours(0,0,0,0).valueOf(),
+						// date_to: new Date().setHours(0,0,0,0).valueOf(),
+						date_from: dateStamp,
+						date_to: dateStamp,
+						title: ''
+					})}
+			>
+				<React.Fragment>
+					{rowIndex === 0 && (
+						<div style={{ height: '20px', marginLeft: '10px', display: 'flex', alignItems: 'flex-end' }}>
+							<p className="CalendarRowItem-P-02">{day_name_dictionary[props.index]}</p>
+						</div>
+					)}
+					{_isToday ? (
+						<div className="CalendarRowItem-Div-01 CalendarRowItem-c-00-Mini-Active-Date">
+							<p>{props.date}</p>
+						</div>
+					) : (
+						<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+							<div className="CalendarRowItem-Div-01">
+								<p>{props.date}</p>
+							</div>
+						</div>
+					)}
+				</React.Fragment>
 			</div>
 		);
 	}

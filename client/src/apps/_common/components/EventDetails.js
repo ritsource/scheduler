@@ -24,6 +24,8 @@ import {
 const EventDetails = (props) => {
 	const { event, groups, client, pathName, hex_color, closeEventDetails } = props;
 
+	const gqlRefetchQueries = pathName === 'todo' ? [ 'readAllGroups' ] : [ 'readGroupsOnCalendar' ];
+
 	// Grnerate Steps Obj
 	const genContextObj = (prevObj, array = []) => {
 		// data.readStepsByEvent
@@ -39,7 +41,7 @@ const EventDetails = (props) => {
 		await client.mutate({
 			mutation: DELETE_EVENT,
 			variables: { eventId: event._id },
-			refetchQueries: [ 'readAllGroups' ]
+			refetchQueries: gqlRefetchQueries
 		});
 	};
 
@@ -48,7 +50,7 @@ const EventDetails = (props) => {
 		await client.mutate({
 			mutation: EDIT_EVENT_BY_ID,
 			variables: { eventId: event._id, title, description, _group },
-			refetchQueries: [ 'readAllGroups' ],
+			refetchQueries: gqlRefetchQueries,
 			awaitRefetchQueries: true
 		});
 	};
@@ -57,7 +59,7 @@ const EventDetails = (props) => {
 		await client.mutate({
 			mutation: EDIT_EVENT_DATES,
 			variables: { eventId: event._id, date_from, date_to },
-			refetchQueries: [ 'readAllGroups' ],
+			refetchQueries: gqlRefetchQueries,
 			awaitRefetchQueries: true
 		});
 	};
@@ -67,7 +69,7 @@ const EventDetails = (props) => {
 		await client.mutate({
 			mutation: boolean ? EDIT_EVENT_TO_DONE : EDIT_EVENT_TO_NOT_DONE,
 			variables: { eventId },
-			refetchQueries: [ 'readAllGroups' ]
+			refetchQueries: gqlRefetchQueries
 		});
 	};
 

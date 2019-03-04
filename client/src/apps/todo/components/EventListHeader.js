@@ -76,6 +76,7 @@ const EventListHeader = (props) => {
 			</form>
 
 			<OptionsGroup
+				pathName="todo"
 				visible={dropdown}
 				group={activeGroup}
 				winHeightDiffer={winHeightDiffer}

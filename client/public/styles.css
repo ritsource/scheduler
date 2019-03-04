@@ -688,8 +688,8 @@ button:focus {
     padding: 10px 20px; }
 
 .CalendarContent-c-00 {
-  width: 100%;
-  height: 100%;
+  flex-grow: 1;
+  height: calc(100% - 1px);
   font-family: 'Montserrat', sans-serif; }
 
 .CalendarContent-c-00-Mini {
@@ -743,6 +743,36 @@ button:focus {
     background: var(--theme-color-middle) !important; }
   .CalendarRowItem-c-00-Mini-Active-Date p {
     color: white !important; }
+
+.CalendarRowItem-c-00 {
+  border-right: 1px solid var(--border-color);
+  width: calc((100% / 7) - 1px);
+  cursor: pointer;
+  background: var(--background-color);
+  background: linear-gradient(to right, var(--hover-mint-light) 50%, var(--background-color) 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
+  transition: all 0.2s ease; }
+  .CalendarRowItem-c-00:hover {
+    background-position: left bottom; }
+  .CalendarRowItem-c-00 .CalendarRowItem-P-02 {
+    margin-right: 10px;
+    color: var(--theme-color-middle);
+    font-weight: bold;
+    font-size: 10px; }
+  .CalendarRowItem-c-00 .CalendarRowItem-Div-01 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    margin: 5px auto auto 5px; }
+    .CalendarRowItem-c-00 .CalendarRowItem-Div-01 p {
+      font-weight: normal;
+      font-size: 10px;
+      color: var(--text-color); }
 
 .CalendarSidebarItem-c-00 {
   display: flex;
