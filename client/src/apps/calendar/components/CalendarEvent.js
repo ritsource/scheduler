@@ -4,7 +4,7 @@ import Dropdown from 'react-dropdown-modal';
 import CalendarEventModal from './CalendarEventModal';
 
 const CalendarEvent = (props) => {
-	const { event, visible } = props;
+	const { event, visible, setActiveEvent } = props;
 
 	const [ dropdown, setDropdown ] = useState(false);
 	const [ screenX, setScreenX ] = useState(false);
@@ -66,7 +66,7 @@ const CalendarEvent = (props) => {
 							setDropdown_close(false);
 						}, 200);
 					}}
-					toggleEventDetails={() => {}}
+					setActiveEvent={setActiveEvent}
 				/>
 			)}
 		>

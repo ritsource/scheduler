@@ -12,7 +12,7 @@ import EventDatepicker from '../../_common/components/EventDatepicker';
 import { DELETE_EVENT, EDIT_EVENT_BY_ID, EDIT_EVENT_DATES } from '../../../graphql/mutations';
 
 const CalendarEventModal = (props) => {
-	const { event, toggleEventDetails, animatedClosing, client } = props;
+	const { event, setActiveEvent, animatedClosing, client } = props;
 
 	const [ title, setTitle ] = useState(event.title || '');
 	const [ groups, setGroups ] = useState([]);
@@ -91,7 +91,7 @@ const CalendarEventModal = (props) => {
 				<div>
 					<FaStream
 						style={{ marginLeft: '15px' }}
-						onClick={() => animatedClosing(() => toggleEventDetails(event))}
+						onClick={() => animatedClosing(() => setActiveEvent(event))}
 					/>
 				</div>
 				<EnsureDeletion

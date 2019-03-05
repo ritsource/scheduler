@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import CalendarRow from './CalendarRow';
 
 const CalendarContent = (props) => {
-	const { events, miniCalendar, miniCalendarState, handleUrlNavigation, handleMainCalendarNavigation } = props;
+	const { events, miniCalendar, miniCalendarState, handleUrlNavigation, setActiveEvent } = props;
 
 	const dateProps = miniCalendar ? miniCalendarState : props;
 	const { month, year } = dateProps;
@@ -187,9 +187,8 @@ const CalendarContent = (props) => {
 						miniCalendar={miniCalendar} // If it's Mini-Calendar or Not
 						miniCalendarState={miniCalendarState} // Mini-Calendar State { year } and { month }
 						// For Big-Calendar Only
-						// toggleEventDetails
+						setActiveEvent={setActiveEvent} // For Event Details
 						// newEventModalFunc
-						// handleMainCalendarNavigation={handleMainCalendarNavigation || (() => {})}
 					/>
 				);
 			})}

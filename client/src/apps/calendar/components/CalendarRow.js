@@ -12,7 +12,7 @@ const CalendarRow = (props) => {
 		miniCalendarState,
 		handleUrlNavigation,
 		isFiveRows,
-		handleMainCalendarNavigation
+		setActiveEvent
 	} = props;
 	let itemArr = [ 1, 2, 3, 4, 5, 6, 7 ];
 
@@ -45,7 +45,7 @@ const CalendarRow = (props) => {
 						handleUrlNavigation={handleUrlNavigation} // { handleUrlNavigation } from Props
 						miniCalendar={miniCalendar} // { miniCalendar } from Props
 						miniCalendarState={miniCalendarState} // { miniCalendarState } from Props
-						// toggleEventDetails
+						setActiveEvent={setActiveEvent}
 						// newEventModalFunc
 						// handleMainCalendarNavigation={handleMainCalendarNavigation} // Self Explainatory
 					/>

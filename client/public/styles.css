@@ -891,4 +891,9 @@ button:focus {
     justify-content: flex-start;
     align-items: center;
     margin: 10px 0px; }
+  .CalendarEventModal-c-00 .EventDetailsBtns-Selected-01 {
+    padding: 10px 0px;
+    transition: all 0.2s ease; }
+    .CalendarEventModal-c-00 .EventDetailsBtns-Selected-01:hover {
+      padding: 10px 20px; }
 

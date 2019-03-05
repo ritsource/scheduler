@@ -39,10 +39,7 @@ const EventDetailsBtns = (props) => {
 						onClose={() => {
 							setAskforDelete(false);
 						}}
-						onDelete={async () => {
-							// closeEventDetails();
-							await handleEventDelete();
-						}}
+						onDelete={async () => handleEventDelete()}
 						onCancel={() => {}}
 					>
 						<button

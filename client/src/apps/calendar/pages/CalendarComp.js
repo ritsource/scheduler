@@ -4,6 +4,7 @@ import { createBrowserHistory } from 'history';
 import CalendarSidebar from '../components/CalendarSidebar';
 import CalendarContent from '../components/CalendarContent';
 import HeaderNavigator from '../components/HeaderNavigator';
+import EventDetails from '../../_common/components/EventDetails';
 
 let __isNode__ = false;
 if (typeof process === 'object') {
@@ -23,8 +24,26 @@ const CalendarComp = (props) => {
 	const getParam = (paramKey) => parseInt(__isNode__ && req ? req.query[paramKey] : urlParams.get(paramKey));
 
 	const [ activeEvent, setActiveEvent ] = useState(null);
+	const [ events, setEvents ] = useState([]);
 	const [ year, setYear ] = useState(getParam('year') || new Date().getFullYear());
 	const [ month, setMonth ] = useState(getParam('month') || new Date().getMonth());
+
+	useEffect(
+		() => {
+			if (activeEvent) {
+				const prevId = activeEvent._id;
+				setActiveEvent(events.find(({ _id }) => _id === prevId));
+			}
+		},
+		[ events ]
+	);
+
+	useEffect(
+		() => {
+			setEvents(extractEvents(groups));
+		},
+		[ groups ]
+	);
 
 	useEffect(
 		() => {
@@ -72,8 +91,18 @@ const CalendarComp = (props) => {
 					year={year}
 					month={month}
 					setActiveEvent={setActiveEvent}
-					events={extractEvents(groups)}
+					events={events}
+					setActiveEvent={setActiveEvent}
 				/>
+				{activeEvent && (
+					<EventDetails
+						event={activeEvent}
+						groups={groups}
+						pathName="calendar"
+						hex_color={activeEvent.hex_color}
+						closeEventDetails={() => setActiveEvent(null)}
+					/>
+				)}
 			</div>
 		</React.Fragment>
 	);

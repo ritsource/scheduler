@@ -38,4 +38,13 @@
 		align-items: center;
 		margin: 10px 0px;
 	}
+
+	.EventDetailsBtns-Selected-01 {
+		padding: 10px 0px;
+		transition: all 0.2s ease;
+
+		&:hover {
+			padding: 10px 20px;
+		}
+	}
 }

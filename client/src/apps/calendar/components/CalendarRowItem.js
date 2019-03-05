@@ -15,7 +15,7 @@ const CalendarRowItem = (props) => {
 		miniCalendar,
 		miniCalendarState,
 		handleUrlNavigation,
-		handleMainCalendarNavigation
+		setActiveEvent
 	} = props;
 
 	const dateProps = miniCalendar ? miniCalendarState : props;
@@ -89,11 +89,25 @@ const CalendarRowItem = (props) => {
 									return <div key={i} className="calendar-row-item-empty-event" />;
 								} else if (event.val === false) {
 									// return (<div key={i} className='calendar-row-item-empty-event' style={{ background: 'red', opacity: 0.5 }}></div>);
-									return <CalendarEvent visible={false} key={i} event={event.refEvent} />;
+									return (
+										<CalendarEvent
+											visible={false}
+											key={i}
+											event={event.refEvent}
+											setActiveEvent={setActiveEvent}
+										/>
+									);
 								} else if (event.val) {
 									// console.log('itemIndex', itemIndex);
 
-									return <CalendarEvent visible={true} key={i} event={event.val} />;
+									return (
+										<CalendarEvent
+											visible={true}
+											key={i}
+											event={event.val}
+											setActiveEvent={setActiveEvent}
+										/>
+									);
 								}
 							})}
 					</div>
