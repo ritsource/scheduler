@@ -62,7 +62,7 @@ const CalendarEvent = (props) => {
 						setDropdown_close(true);
 						someFunc();
 						setTimeout(() => {
-							setDropdown(true);
+							setDropdown(false);
 							setDropdown_close(false);
 						}, 200);
 					}}

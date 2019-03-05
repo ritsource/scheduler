@@ -6,11 +6,12 @@ import { ApolloConsumer } from 'react-apollo';
 import { builtin_color_list } from '../../../utils/constants';
 import AuthContext from '../../_common/contexts/AuthContext';
 
-import { EDIT_GROUP_BY_ID, EDIT_EVENT_BY_ID } from '../../../graphql/mutations';
+import { ADD_CUSTOM_COLOR, EDIT_GROUP_BY_ID, EDIT_EVENT_BY_ID } from '../../../graphql/mutations';
 
 const SubOptionColor = (props) => {
 	const { group, event, pathName, client } = props;
 
+	const [ recentColors, setRecentColors ] = useState([]); // Recently Added Colors
 	const [ newColorHex, setNewColorHex ] = useState('#d4e1f4');
 	const [ inputVis, setInputVis ] = useState(true);
 	const [ submit_error, setSubmitError ] = useState(false);
@@ -26,7 +27,14 @@ const SubOptionColor = (props) => {
 		});
 	};
 
-	const addCustomColor = () => {};
+	const addCustomColor = async (hex_color) => {
+		await client.mutate({
+			mutation: ADD_CUSTOM_COLOR,
+			variables: { new_color: hex_color },
+			refetchQueries: 'currentUser',
+			awaitRefetchQueries: true
+		});
+	};
 
 	const currentColor = group ? group.hex_color : event.hex_color;
 
@@ -41,7 +49,11 @@ const SubOptionColor = (props) => {
 						</div>
 
 						<p className="SubOptionColor-P-01">
-							{[ ...builtin_color_list, ...context.auth.custom_colors ].map((hexVal, i) => {
+							{[
+								...builtin_color_list,
+								...context.auth.custom_colors,
+								...recentColors
+							].map((hexVal, i) => {
 								if (hexVal === currentColor) {
 									return (
 										<FaCheckCircle
@@ -71,8 +83,9 @@ const SubOptionColor = (props) => {
 									const value = newColorHex;
 									if (value.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)) {
 										try {
-											const ret = await addCustomColor(value);
+											const res = await addCustomColor(value);
 											setSubmitError(false);
+											setRecentColors([ ...recentColors, value ]);
 										} catch (error) {
 											setSubmitError('Something went wrong');
 										}

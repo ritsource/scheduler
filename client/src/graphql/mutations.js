@@ -24,6 +24,14 @@ export const REGISTER_USER = gql`
 	}
 `;
 
+export const ADD_CUSTOM_COLOR = gql`
+	mutation addCustomColor($new_color: String!) {
+		addCustomColor(new_color: $new_color) {
+			custom_colors
+		}
+	}
+`;
+
 export const ADD_NEW_GROUP = gql`
 	mutation createGroup($title: String!) {
 		createGroup(title: $title) {

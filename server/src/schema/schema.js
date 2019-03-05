@@ -71,6 +71,7 @@ module.exports = buildSchema(`
 		registerUser(name: String! email: String! password: String!): User!
 		loginUser(email: String! password: String!): User!
 		logout: User
+		addCustomColor(new_color: String!): User!
 
 		createEvent(title: String! _group: ID! description: String date_from: Float, date_to: Float): Event!
 		editEventToDone(eventId: ID!): Event!

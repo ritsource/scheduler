@@ -143,7 +143,7 @@ const CalendarContent = (props) => {
 				updateEventDistribution();
 			}
 		},
-		[ dateDistMap, dateDistMapInverse ]
+		[ dateDistMap, dateDistMapInverse, events ]
 	);
 
 	useEffect(

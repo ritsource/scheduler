@@ -2,14 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ApolloConsumer } from 'react-apollo';
 import gql from 'graphql-tag';
 import Dropdown from 'react-dropdown-modal';
-import Datepicker from 'awesome-react-datepicker';
-import { Selector, Option } from 'react-dropdown-selector';
-import { GoCheck } from 'react-icons/go';
-import { FaCircle, FaStream, FaTrash, FaEllipsisV, FaTimes } from 'react-icons/fa';
-import { IoIosBrush } from 'react-icons/io';
-import { MdDelete, MdModeEdit } from 'react-icons/md';
-
-import { builtin_color_list } from '../../../utils/constants';
+import { FaCircle, FaStream, FaTrash } from 'react-icons/fa';
 
 import EnsureDeletion from '../../_common/components/EnsureDeletion';
 import SubOptionColor from '../../_common/components/SubOptionColor';
@@ -180,7 +173,10 @@ const CalendarEventModal = (props) => {
 				</form>
 			</div>
 
-			<EventDatepicker event={event} handleEventDateEdit={handleEventDateEdit} />
+			<EventDatepicker
+				event={event}
+				handleEventDateEdit={(args) => animatedClosing(async () => await handleEventDateEdit(args))}
+			/>
 
 			<div className="CalendarEventModal-Group-Selector-Div-01">
 				{groups.length > 0 && (

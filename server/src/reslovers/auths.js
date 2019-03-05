@@ -1,4 +1,4 @@
-const { registerUser, loginUser } = require('../auth/auth_funcs');
+const { registerUser, loginUser, addCustomColor } = require('../auth/auth_funcs');
 
 module.exports = {
 	// Auth Resolvers
@@ -23,5 +23,9 @@ module.exports = {
 			user.password = null;
 			return user;
 		}
-	} // Get Current Loggedin User
+	}, // Get Current Loggedin User
+
+	addCustomColor: async (args, req) => {
+		return await addCustomColor(args, req);
+	}
 };
