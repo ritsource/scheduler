@@ -1,0 +1,41 @@
+.CalendarEventModal-c-00 {
+	font-family: 'Lato', sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	padding: 20px 20px;
+	display: flex;
+	flex-direction: column;
+	width: 300px;
+	background: var(--background-color);
+
+	.CalendarEventModal-Tools-Div-01 {
+		color: var(--text-color);
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: flex-end;
+		margin-bottom: 10px;
+	}
+
+	.CalendarEventModal-Title-Div-01 {
+		form {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+
+			input {
+				font-size: 20px;
+				padding: 5px 0px;
+				width: 100%;
+			}
+		}
+	}
+
+	.CalendarEventModal {
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+		margin: 10px 0px;
+	}
+}

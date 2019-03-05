@@ -55,6 +55,7 @@ const EventDetails = (props) => {
 		});
 	};
 
+	// Handle  Event Dates Edit
 	const handleEventDateEdit = async ({ date_from, date_to }) => {
 		await client.mutate({
 			mutation: EDIT_EVENT_DATES,

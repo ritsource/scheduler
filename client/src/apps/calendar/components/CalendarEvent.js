@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Dropdown from 'react-dropdown-modal';
 
+import CalendarEventModal from './CalendarEventModal';
+
 const CalendarEvent = (props) => {
 	const { event, visible } = props;
 
@@ -53,19 +55,19 @@ const CalendarEvent = (props) => {
 			modalShadow="0px 3px 13px 0px rgba(0,0,0,0.20)"
 			modalBorder={false}
 			modalContent={() => (
-				// <CalendarEventViewComp
-				// 	addEvent={false}
-				// 	event={event}
-				// 	animatedClosing={(someFunc) => {
-				// 		this.setState({ dropdown_close: true });
-				// 		someFunc();
-				// 		setTimeout(() => {
-				// 			this.setState({ dropdown_visible: false, dropdown_close: false });
-				// 		}, 200);
-				// 	}}
-				// 	toggleEventDetails={this.props.toggleEventDetails}
-				// />
-				<div>Modal</div>
+				<CalendarEventModal
+					addEvent={false}
+					event={event}
+					animatedClosing={(someFunc) => {
+						setDropdown_close(true);
+						someFunc();
+						setTimeout(() => {
+							setDropdown(true);
+							setDropdown_close(false);
+						}, 200);
+					}}
+					toggleEventDetails={() => {}}
+				/>
 			)}
 		>
 			{visible ? (

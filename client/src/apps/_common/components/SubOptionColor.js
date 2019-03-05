@@ -6,10 +6,10 @@ import { ApolloConsumer } from 'react-apollo';
 import { builtin_color_list } from '../../../utils/constants';
 import AuthContext from '../../_common/contexts/AuthContext';
 
-import { EDIT_GROUP_BY_ID } from '../../../graphql/mutations';
+import { EDIT_GROUP_BY_ID, EDIT_EVENT_BY_ID } from '../../../graphql/mutations';
 
 const SubOptionColor = (props) => {
-	const { group, pathName, client } = props;
+	const { group, event, pathName, client } = props;
 
 	const [ newColorHex, setNewColorHex ] = useState('#d4e1f4');
 	const [ inputVis, setInputVis ] = useState(true);
@@ -19,14 +19,16 @@ const SubOptionColor = (props) => {
 		props.closeThatShit();
 
 		await client.mutate({
-			mutation: EDIT_GROUP_BY_ID,
-			variables: { groupId: group._id, hex_color },
+			mutation: group ? EDIT_GROUP_BY_ID : EDIT_EVENT_BY_ID,
+			variables: group ? { groupId: group._id, hex_color } : { eventId: event._id, hex_color },
 			refetchQueries: pathName === 'todo' ? [ 'readAllGroups' ] : [ 'readGroupsOnCalendar' ],
 			awaitRefetchQueries: true
 		});
 	};
 
 	const addCustomColor = () => {};
+
+	const currentColor = group ? group.hex_color : event.hex_color;
 
 	return (
 		<AuthContext.Consumer>
@@ -40,7 +42,7 @@ const SubOptionColor = (props) => {
 
 						<p className="SubOptionColor-P-01">
 							{[ ...builtin_color_list, ...context.auth.custom_colors ].map((hexVal, i) => {
-								if (hexVal === group.hex_color) {
+								if (hexVal === currentColor) {
 									return (
 										<FaCheckCircle
 											key={i}
