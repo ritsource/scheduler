@@ -15,7 +15,8 @@ const CalendarRowItem = (props) => {
 		miniCalendar,
 		miniCalendarState,
 		handleUrlNavigation,
-		setActiveEvent
+		setActiveEvent,
+		newEventModalFunc
 	} = props;
 
 	const dateProps = miniCalendar ? miniCalendarState : props;

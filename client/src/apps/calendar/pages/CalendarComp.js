@@ -90,6 +90,7 @@ const CalendarComp = (props) => {
 				<CalendarContent
 					year={year}
 					month={month}
+					groups={groups}
 					setActiveEvent={setActiveEvent}
 					events={events}
 					setActiveEvent={setActiveEvent}

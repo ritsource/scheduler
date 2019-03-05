@@ -73,8 +73,19 @@ export const EDIT_GROUP_TO_INVISIBLE = gql`
 `;
 
 export const ADD_NEW_EVENT = gql`
-	mutation createEvent($title: String!, $groupId: ID!) {
-		createEvent(title: $title, _group: $groupId) {
+	# mutation createEvent($title: String!, $groupId: ID!) {
+	# 	createEvent(title: $title, _group: $groupId) {
+	# 		_id
+	# 	}
+	# }
+	mutation createEvent($title: String!, $_group: ID!, $description: String, $date_from: Float, $date_to: Float) {
+		createEvent(
+			title: $title
+			_group: $_group
+			description: $description
+			date_from: $date_from
+			date_to: $date_to
+		) {
 			_id
 		}
 	}

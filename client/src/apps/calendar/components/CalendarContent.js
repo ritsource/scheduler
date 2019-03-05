@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import Dropdown from 'react-dropdown-modal';
 
 import CalendarRow from './CalendarRow';
+import CalendarEventForm from './CalendarEventForm';
 
 const CalendarContent = (props) => {
-	const { events, miniCalendar, miniCalendarState, handleUrlNavigation, setActiveEvent } = props;
+	const { groups, events, miniCalendar, miniCalendarState, handleUrlNavigation, setActiveEvent } = props;
 
 	const dateProps = miniCalendar ? miniCalendarState : props;
 	const { month, year } = dateProps;
@@ -14,6 +16,8 @@ const CalendarContent = (props) => {
 	const [ dateDistMapInverse, setDateDistMapInverse ] = useState(null);
 	const [ eventDistMap, setEventDistMap ] = useState(null);
 	const [ newEvent, setNewEvent ] = useState(null);
+	const [ dropdown, setDropdown ] = useState(false);
+	const [ dropdown_close, setDropdown_close ] = useState(false);
 	// dropdown_visible: false,
 	// dropdown_close: false
 
@@ -188,10 +192,45 @@ const CalendarContent = (props) => {
 						miniCalendarState={miniCalendarState} // Mini-Calendar State { year } and { month }
 						// For Big-Calendar Only
 						setActiveEvent={setActiveEvent} // For Event Details
-						// newEventModalFunc
+						newEventModalFunc={(obj) => setNewEvent(obj)}
 					/>
 				);
 			})}
+			{!miniCalendar &&
+			newEvent && (
+				<Dropdown
+					visible={newEvent}
+					onClose={() => setNewEvent(null)}
+					// onButtonClick={() => setDropdown(true)}
+					// preventDefaultClose={false}
+					animation={true}
+					animeType="slideUp"
+					animeDuration={200}
+					animatedClose={dropdown_close}
+					showArrow={false}
+					centerPositioning={true}
+					modalShadow="0px 3px 13px 0px rgba(0,0,0,0.20)"
+					modalBorder={false}
+					modalContent={() => (
+						<CalendarEventForm
+							addEvent={true}
+							event={newEvent}
+							groups={groups}
+							setNewEvent={setNewEvent}
+							animatedClosing={async (someFunc) => {
+								setDropdown_close(true);
+								await someFunc();
+								setTimeout(() => {
+									setNewEvent(null);
+									setDropdown_close(false);
+								}, 200);
+							}}
+						/>
+					)}
+				>
+					<div style={{ background: 'black', height: '300px', display: 'none' }} />
+				</Dropdown>
+			)}
 		</div>
 	);
 };
