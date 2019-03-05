@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { month_name_dictionary, day_name_dictionary } from '../../../utils/constants';
+import CalendarEvent from './CalendarEvent';
 
 const CalendarRowItem = (props) => {
 	const {
@@ -71,6 +72,32 @@ const CalendarRowItem = (props) => {
 							</div>
 						</div>
 					)}
+
+					<div
+						className="CalendarRowItem-Event-Level-01"
+						style={
+							rowIndex === 0 ? (
+								{ marginTop: '5px', height: `calc(100% - 55px)`, width: 'calc(100% / 7)' }
+							) : (
+								{ marginTop: '5px', height: `calc(100% - 35px)`, width: 'calc(100% / 7)' }
+							)
+						}
+					>
+						{eventDistMap[itemIndex] &&
+							eventDistMap[itemIndex].map((event, i) => {
+								if (event.val === null) {
+									return <div key={i} className="calendar-row-item-empty-event" />;
+								} else if (event.val === false) {
+									// return (<div key={i} className='calendar-row-item-empty-event' style={{ background: 'red', opacity: 0.5 }}></div>);
+									return <CalendarEvent visible={false} key={i} event={event.refEvent} />;
+								} else if (event.val) {
+									// console.log('itemIndex', itemIndex);
+
+									return <CalendarEvent visible={true} key={i} event={event.val} />;
+								}
+							})}
+					</div>
+					{/* )} */}
 				</React.Fragment>
 			</div>
 		);

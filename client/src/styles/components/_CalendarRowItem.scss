@@ -58,6 +58,14 @@
 		background-position: left bottom;
 	}
 
+	.CalendarRowItem-Event-Level-01 {
+		font-size: 12px;
+		font-weight: bold;
+		font-family: 'Lato', sans-serif;
+		position: absolute;
+		border: 0px solid yellow;
+	}
+
 	.CalendarRowItem-P-02 {
 		margin-right: 10px;
 		color: var(--theme-color-middle);

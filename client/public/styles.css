@@ -223,7 +223,8 @@ button:focus {
   flex-direction: column; }
 
 .Extra-a-00,
-.Todo-a-00 {
+.Todo-a-00,
+.Calendar-a-00 {
   animation: Page-Fade-In 600ms linear;
   animation-iteration-count: 1; }
 
@@ -758,6 +759,12 @@ button:focus {
   transition: all 0.2s ease; }
   .CalendarRowItem-c-00:hover {
     background-position: left bottom; }
+  .CalendarRowItem-c-00 .CalendarRowItem-Event-Level-01 {
+    font-size: 12px;
+    font-weight: bold;
+    font-family: 'Lato', sans-serif;
+    position: absolute;
+    border: 0px solid yellow; }
   .CalendarRowItem-c-00 .CalendarRowItem-P-02 {
     margin-right: 10px;
     color: var(--theme-color-middle);
@@ -829,4 +836,34 @@ button:focus {
     .HeaderNavigator-c-00 .HeaderNavigator-Nav-Btn-01:hover {
       border: 1px solid var(--hover-mint-medium);
       background: var(--hover-mint-medium); }
+
+.Calendar-c-00 {
+  display: flex;
+  align-items: center;
+  padding: 3px 5px;
+  font-size: 11.5px;
+  height: 12px;
+  min-height: 12px;
+  max-height: 12px;
+  margin-bottom: 2px;
+  margin-left: 4px;
+  color: white;
+  background: var(--theme-color-middle);
+  border-radius: 3px;
+  white-space: nowrap; }
+  .Calendar-c-00 .Calendar-Div-Over-Title-01 {
+    display: flex;
+    align-items: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%; }
+
+.Calendar-Empty-Event-01 {
+  background: rgba(0, 0, 0, 0);
+  padding: 3px 5px;
+  height: 12px;
+  min-height: 12px;
+  max-height: 12px;
+  margin-bottom: 2px;
+  width: calc(100% - 10px); }
 
