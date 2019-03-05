@@ -13,8 +13,8 @@ const Header2 = ({ pathName }) => {
 		<ProgressbarContext.Consumer>
 			{(progressbarContext) => (
 				<React.Fragment>
-					{progressbarContext.progressBar && <CustomProgressBar />}
-					{/* <CustomProgressBar /> */}
+					{/* {progressbarContext.progressBar && <CustomProgressBar />} */}
+					<CustomProgressBar />
 
 					<SidebarContext.Consumer>
 						{(sidebarContext) => (

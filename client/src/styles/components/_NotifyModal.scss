@@ -1,0 +1,35 @@
+.NotifyModal-c-00 {
+	// position: fixed;
+	margin: 10px auto;
+	width: 200px;
+	// right: 50vw;
+	// margin-right: -100px;
+	color: var(--text-color-light);
+	background: var(--background-color);
+	padding: 5px 15px 5px 20px;
+	// border: 1px solid red;
+	border-radius: 4px;
+	border-left: 5px solid var(--theme-color-middle);
+
+	animation: NotifyModal-Slide-Left 400ms linear;
+	animation-iteration-count: 1;
+
+	p {
+		font-weight: bold;
+	}
+
+	button {
+		font-size: 30px;
+		padding: 0px;
+		border-radius: 50%;
+		transform: rotate(45deg);
+		cursor: pointer;
+		border: 1px solid rgba(0, 0, 0, 0);
+		background: rgba(0, 0, 0, 0);
+
+		&:hover {
+			border: 1px solid var(--hover-mint-medium);
+			background: var(--hover-mint-medium);
+		}
+	}
+}

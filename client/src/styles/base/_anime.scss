@@ -49,3 +49,15 @@
 		color: var(--text-color-light);
 	}
 }
+
+@keyframes NotifyModal-Slide-Left {
+	0% {
+		opacity: 0;
+		margin-right: 0px;
+	}
+
+	100% {
+		opacity: 1;
+		margin-right: calc(50vw - 100px);
+	}
+}

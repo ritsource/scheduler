@@ -4,10 +4,12 @@ import { renderRoutes } from 'react-router-config';
 import { Redirect } from 'react-router-dom';
 import { Query } from 'react-apollo';
 
+import NotifyModal from '../_common/components/NotifyModal';
 import Header2 from '../_common/components/Header2';
 
 import { FETCH_CURRENT_USER } from '../../graphql/queries';
 
+import { NotifyQueueProvider } from '../_common/contexts/NotifyQueueContext';
 import { ProgressbarProvider } from '../_common/contexts/ProgressbarContext';
 import { SidebarProvider } from '../_common/contexts/SidebarContext';
 import { StepStoreProvider } from '../_common/contexts/StepStoreContext';
@@ -18,24 +20,27 @@ const Calendar = (props) => {
 	return (
 		<Query query={FETCH_CURRENT_USER}>
 			{({ data, loading, error }) => {
-				console.log(data.currentUser);
+				// console.log(data.currentUser);
 
 				return (
 					<ProgressbarProvider>
-						<SidebarProvider>
-							<StepStoreProvider>
-								<AuthContext.Provider value={{ auth: data.currentUser }}>
-									<div className="Calendar-a-00">
-										<Header2 pathName="calendar" />
-										{data.currentUser ? (
-											<div>{renderRoutes(props.route.routes)}</div>
-										) : (
-											<Redirect to="/login" />
-										)}
-									</div>
-								</AuthContext.Provider>
-							</StepStoreProvider>
-						</SidebarProvider>
+						<NotifyQueueProvider>
+							<SidebarProvider>
+								<StepStoreProvider>
+									<AuthContext.Provider value={{ auth: data.currentUser }}>
+										<div className="Calendar-a-00">
+											<NotifyModal />
+											<Header2 pathName="calendar" />
+											{data.currentUser ? (
+												<div>{renderRoutes(props.route.routes)}</div>
+											) : (
+												<Redirect to="/login" />
+											)}
+										</div>
+									</AuthContext.Provider>
+								</StepStoreProvider>
+							</SidebarProvider>
+						</NotifyQueueProvider>
 					</ProgressbarProvider>
 				);
 			}}
