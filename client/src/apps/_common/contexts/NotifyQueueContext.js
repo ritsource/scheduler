@@ -8,14 +8,17 @@ const NotifyQueueContext = React.createContext({
 });
 
 export const NotifyQueueProvider = (props) => {
-	const [ notifyQueue, setNotifyQueue ] = useState([ 'Fetching..', 'Saving..' ]);
+	const [ notifyQueue, setNotifyQueue ] = useState([]);
 
 	const addToQueue = (text) => {
-		setNotifyQueue(notifyQueue.unshift(text));
-		// setNotifyQueue(notifyQueue.push(text));
+		setNotifyQueue(notifyQueue.concat([ text ]));
 	};
 
-	const popFromQueue = () => setNotifyQueue(notifyQueue.pop());
+	const popFromQueue = () => {
+		const x = [ ...notifyQueue ];
+		x.pop();
+		setNotifyQueue(x);
+	};
 
 	const removeFromQueue = (text) => {
 		setNotifyQueue(notifyQueue.filter((x) => x !== text));

@@ -1,11 +1,32 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Dropdown from 'react-dropdown-modal';
 import { FaArrowRight, FaSortDown } from 'react-icons/fa';
 import { MdSettings, MdInvertColors } from 'react-icons/md';
 import { GoOrganization } from 'react-icons/go';
 
+import changeTheme from '../../../utils/changeTheme';
+import EventDoneIndicator from './EventDoneIndicator';
+
+let __isNode__ = false;
+if (typeof process === 'object') {
+	if (typeof process.versions === 'object') {
+		if (typeof process.versions.node !== 'undefined') {
+			__isNode__ = true;
+		}
+	}
+}
+
 const OptionsHeader = (props) => {
 	const { auth, dropdown, setDropdown } = props;
+
+	const getMyAppTheme = () => (!__isNode__ ? window.localStorage.getItem('myAppTheme') : null);
+
+	useEffect(
+		() => {
+			changeTheme(getMyAppTheme() || 'lightOnly');
+		},
+		[ __isNode__ ]
+	);
 
 	return (
 		<Dropdown
@@ -34,13 +55,20 @@ const OptionsHeader = (props) => {
 					<div
 						className="Theme-Dropdown-Content-Item-99 Theme-Slide-Background-onHover-99"
 						onClick={(e) => {
-							// changeAppTheme(myAppTheme === 'darkOnly' ? 'lightOnly' : 'darkOnly');
+							changeTheme(getMyAppTheme() === 'darkOnly' ? 'lightOnly' : 'darkOnly');
 						}}
 						style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
 					>
 						<MdInvertColors style={{ marginRight: '8px', marginBottom: '-2px' }} />
-						Dark theme
-						<div style={{}} />
+						<div className="Flex-Class-Row-Space-Between" style={{ width: '100%' }}>
+							Dark theme
+							<EventDoneIndicator
+								_isDone={getMyAppTheme() === 'darkOnly'}
+								hex_color="var(--theme-color-middle)"
+								patchFunction={() => {}}
+								propagation={true}
+							/>
+						</div>
 					</div>
 
 					<a href="/about">

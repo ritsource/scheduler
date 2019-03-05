@@ -7,7 +7,9 @@ import CalendarContent from './CalendarContent';
 import CalendarSidebarItem from './CalendarSidebarItem';
 import CalendarSidebarNavigator from './CalendarSidebarNavigator';
 import ItemSubmitForm from '../../_common/components/ItemSubmitForm';
+
 import SidebarContext from '../../_common/contexts/SidebarContext';
+import NotifyQueueContext from '../../_common/contexts/NotifyQueueContext';
 
 import {
 	ADD_NEW_GROUP,
@@ -27,7 +29,7 @@ if (typeof process === 'object') {
 }
 
 const CalendarSidebar = (props) => {
-	const { staticContext, groups, handleUrlNavigation, handleMainCalendarNavigation, client } = props;
+	const { staticContext, groups, handleUrlNavigation, handleMainCalendarNavigation, client, notify } = props;
 	const req = __isNode__ && staticContext ? staticContext.req : undefined;
 
 	const urlParams = !__isNode__ ? new URLSearchParams(window.location.search) : { get: () => undefined };
@@ -88,12 +90,19 @@ const CalendarSidebar = (props) => {
 	};
 
 	const handleGroupVisiblity = async (groupId, bool) => {
-		await client.mutate({
-			mutation: bool ? EDIT_GROUP_TO_VISIBLE : EDIT_GROUP_TO_INVISIBLE,
-			variables: { groupId },
-			refetchQueries: [ 'readGroupsOnCalendar' ]
-			// awaitRefetchQueries: true
-		});
+		if (bool) notify.addToQueue('Fetching...');
+		try {
+			await client.mutate({
+				mutation: bool ? EDIT_GROUP_TO_VISIBLE : EDIT_GROUP_TO_INVISIBLE,
+				variables: { groupId },
+				refetchQueries: [ 'readGroupsOnCalendar' ],
+				awaitRefetchQueries: true
+			});
+			notify.removeFromQueue('Fetching...');
+		} catch (error) {
+			notify.removeFromQueue('Fetching...');
+			notify.addToQueue('Failed!');
+		}
 	};
 
 	return (
@@ -142,4 +151,12 @@ const CalendarSidebar = (props) => {
 	);
 };
 
-export default (props) => <ApolloConsumer>{(client) => <CalendarSidebar {...props} client={client} />}</ApolloConsumer>;
+export default (props) => (
+	<ApolloConsumer>
+		{(client) => (
+			<NotifyQueueContext.Consumer>
+				{(notify) => <CalendarSidebar {...props} client={client} notify={notify} />}
+			</NotifyQueueContext.Consumer>
+		)}
+	</ApolloConsumer>
+);

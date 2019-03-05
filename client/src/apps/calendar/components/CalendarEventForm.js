@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { ApolloConsumer } from 'react-apollo';
-import { GoCheck } from 'react-icons/go';
-import { FaCircle } from 'react-icons/fa';
 
 import EventGroupSelector from '../../_common/components/EventGroupSelector';
 import EventDatepicker from '../../_common/components/EventDatepicker';
 
+import NotifyQueueContext from '../../_common/contexts/NotifyQueueContext';
+
 import { ADD_NEW_EVENT } from '../../../graphql/mutations';
 
 const CalendarEventForm = (props) => {
-	const { event, setNewEvent, groups, animatedClosing, client } = props;
+	const { event, setNewEvent, groups, animatedClosing, client, notify } = props;
 
 	const [ title, setTitle ] = useState(event.title);
 	const [ date_from, setDate_from ] = useState(event.date_from);
@@ -31,12 +31,19 @@ const CalendarEventForm = (props) => {
 	const handleSubmit = () => {
 		if (title.length > 0) {
 			animatedClosing(async () => {
-				await client.mutate({
-					mutation: ADD_NEW_EVENT,
-					variables: { title, _group: selectedGroupId, date_from, date_to },
-					refetchQueries: [ 'readGroupsOnCalendar' ],
-					awaitRefetchQueries: true
-				});
+				notify.addToQueue('Saving...');
+				try {
+					await client.mutate({
+						mutation: ADD_NEW_EVENT,
+						variables: { title, _group: selectedGroupId, date_from, date_to },
+						refetchQueries: [ 'readGroupsOnCalendar' ],
+						awaitRefetchQueries: true
+					});
+					notify.removeFromQueue('Saving...');
+				} catch (error) {
+					notify.removeFromQueue('Saving...');
+					notify.addToQueue('Failed!');
+				}
 			});
 		}
 	};
@@ -87,5 +94,11 @@ const CalendarEventForm = (props) => {
 };
 
 export default (props) => (
-	<ApolloConsumer>{(client) => <CalendarEventForm {...props} client={client} />}</ApolloConsumer>
+	<ApolloConsumer>
+		{(client) => (
+			<NotifyQueueContext.Consumer>
+				{(notify) => <CalendarEventForm {...props} client={client} notify={notify} />}
+			</NotifyQueueContext.Consumer>
+		)}
+	</ApolloConsumer>
 );

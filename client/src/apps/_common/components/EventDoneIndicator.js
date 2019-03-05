@@ -2,7 +2,7 @@ import React from 'react';
 import { FaCheck } from 'react-icons/fa';
 
 const EventDoneIndicator = (props) => {
-	const { _isDone, hex_color, patchFunction } = props;
+	const { _isDone, hex_color, patchFunction, propagation } = props;
 
 	return (
 		<div
@@ -15,7 +15,7 @@ const EventDoneIndicator = (props) => {
 				)
 			}
 			onClick={(e) => {
-				e.stopPropagation();
+				if (!propagation) e.stopPropagation();
 				patchFunction();
 			}}
 		>
