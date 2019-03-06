@@ -9,7 +9,7 @@ const EventDoneIndicator = (props) => {
 			className={`EventDoneIndicator-c-00 ${_isDone && 'EventDoneIndicator-c-00-isDone'}`}
 			style={
 				_isDone ? (
-					{ color: 'var(--background-color)', background: hex_color, border: `1px solid ${hex_color}` }
+					{ color: 'white', background: hex_color, border: `1px solid ${hex_color}` }
 				) : (
 					{ color: 'rgba(0, 0, 0, 0)', background: 'rgba(0, 0, 0, 0)', border: `1px solid ${hex_color}` }
 				)

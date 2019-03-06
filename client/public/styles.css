@@ -277,6 +277,36 @@ button:focus {
   display: flex;
   flex-direction: row; }
 
+.PrivacyPolicy-p-00 {
+  width: calc(100% - 150px);
+  padding: 0px 75px;
+  animation: About-Page-Content-Slide-Up 600ms linear 0ms;
+  animation-iteration-count: 1;
+  height: calc(100vh - 70px);
+  overflow: auto; }
+  .PrivacyPolicy-p-00 h1 {
+    margin: 0px 0px 20px 0px;
+    color: var(--text-color-light);
+    text-align: center; }
+  .PrivacyPolicy-p-00 .PrivacyPolicy-Content-Div-01 {
+    width: calc(100% - 60px);
+    height: calc(100% - 30px);
+    padding: 0px 30px; }
+    .PrivacyPolicy-p-00 .PrivacyPolicy-Content-Div-01 p {
+      color: var(--text-color-light);
+      font-size: 14px;
+      letter-spacing: 0.3px;
+      margin: 10px 0px; }
+      .PrivacyPolicy-p-00 .PrivacyPolicy-Content-Div-01 p b {
+        margin-left: 10px; }
+    .PrivacyPolicy-p-00 .PrivacyPolicy-Content-Div-01 h3 {
+      color: var(--text-color-light);
+      padding: 10px 10px 0px 10px; }
+    .PrivacyPolicy-p-00 .PrivacyPolicy-Content-Div-01 a {
+      color: var(--theme-color); }
+      .PrivacyPolicy-p-00 .PrivacyPolicy-Content-Div-01 a:hover, .PrivacyPolicy-p-00 .PrivacyPolicy-Content-Div-01 a:focus {
+        text-decoration: underline; }
+
 .Header2-c-00 {
   width: calc(100% - 60px);
   height: 70px;

@@ -1,0 +1,48 @@
+.PrivacyPolicy-p-00 {
+	width: calc(100% - 150px);
+	padding: 0px 75px;
+	// padding-bottom: 30px;
+
+	animation: About-Page-Content-Slide-Up 600ms linear 0ms;
+	animation-iteration-count: 1;
+
+	height: calc(100vh - 70px);
+	overflow: auto;
+
+	h1 {
+		margin: 0px 0px 20px 0px;
+		color: var(--text-color-light);
+		text-align: center;
+	}
+
+	.PrivacyPolicy-Content-Div-01 {
+		width: calc(100% - 60px);
+		height: calc(100% - 30px);
+		padding: 0px 30px;
+
+		p {
+			color: var(--text-color-light);
+			font-size: 14px;
+			letter-spacing: 0.3px;
+			margin: 10px 0px;
+
+			b {
+				margin-left: 10px;
+			}
+		}
+
+		h3 {
+			color: var(--text-color-light);
+			padding: 10px 10px 0px 10px;
+		}
+
+		a {
+			color: var(--theme-color);
+
+			&:hover,
+			&:focus {
+				text-decoration: underline;
+			}
+		}
+	}
+}

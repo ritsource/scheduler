@@ -2,19 +2,13 @@ import { setCookie } from './cookie_funcs';
 
 const myAppThemes = {
 	Blue: {
-		'--theme-color-deep': '#0071e2',
-		'--theme-color': '#088cfb',
-		'--theme-color-light': '#00a6f9'
+		'--theme-color': '#088cfb'
 	},
 	Orange: {
-		'--theme-color-deep': '#ff8800',
-		'--theme-color': '#ff9b17',
-		'--theme-color-light': '#ffa42d'
+		'--theme-color': '#ff9b17'
 	},
 	Green: {
-		'--theme-color-deep': '#ff8800',
-		'--theme-color': '#ff9b17',
-		'--theme-color-light': '#ffa42d'
+		'--theme-color': '#00bc60'
 	}
 };
 
