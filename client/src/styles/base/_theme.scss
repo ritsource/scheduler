@@ -79,6 +79,26 @@
 	background: var(--hover-mint-medium);
 }
 
+.Theme-Btn-Type3-Exit-99 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	color: var(--text-color);
+	font-size: 30px;
+	padding: 0px;
+	border-radius: 50%;
+	transform: rotate(45deg);
+	cursor: pointer;
+	border: 1px solid rgba(0, 0, 0, 0);
+	background: rgba(0, 0, 0, 0);
+
+	&:hover {
+		border: 1px solid var(--hover-mint-medium);
+		background: var(--hover-mint-medium);
+	}
+}
+
 .Theme-Input-99 {
 	color: var(--text-color);
 	background: var(--background-color);

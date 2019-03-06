@@ -10,6 +10,7 @@ import AuthContext from '../contexts/AuthContext';
 import EventDoneIndicator from './EventDoneIndicator';
 
 import changeColorMode from '../../../utils/changeColorMode';
+import changeColorTheme from '../../../utils/changeColorTheme';
 import { setCookie, getCookie } from '../../../utils/cookie_funcs';
 
 import { app_theme_options } from '../../../utils/constants';
@@ -27,11 +28,13 @@ const SettingsComp = (props) => {
 	const { setSettings } = props;
 
 	const getMyAppColorMode = () => (!__isNode__ ? getCookie('myAppColorMode') : null);
+	const getMyAppColorTheme = () => (!__isNode__ ? getCookie('myAppColorTheme') : null);
 	const [ appMode, setAddMode ] = useState(getMyAppColorMode());
 
 	useEffect(
 		() => {
 			changeColorMode(getMyAppColorMode() || 'lightOnly');
+			changeColorTheme(getMyAppColorTheme());
 			setAddMode(getMyAppColorMode()); // darkOnly
 		},
 		[ __isNode__ ]
@@ -50,10 +53,7 @@ const SettingsComp = (props) => {
 							</div>
 						</div>
 
-						<button
-							className="SettingsComp-Exit-Btn-02 Flex-Class-Row-Center"
-							onClick={() => setSettings(false)}
-						>
+						<button className="Theme-Btn-Type3-Exit-99" onClick={() => setSettings(false)}>
 							<IoIosAdd />
 						</button>
 					</div>
@@ -108,42 +108,48 @@ const SettingsComp = (props) => {
 					<label style={{ marginBottom: '10px' }}>App Theme</label>
 
 					<Selector
-						onSelect={(id) => {}}
+						onSelect={(id) => {
+							changeColorTheme(id);
+						}}
 						inputHeight={36}
 						optionHeight={36}
-						numOptions={app_theme_options.length}
+						numOptions={3}
 						numOptionsVisible={4}
 						selectorBoxShadow="0px 3px 13px 0px rgba(0,0,0,0.20)"
 						renderBtn={() => (
 							<div className="Theme-Dropdown-Content-Item-99 Theme-Slide-Background-onHover-99 EventDetailsBtns-Selected-01">
 								<FaCircle
 									style={{
-										color: app_theme_options[0].hex_color,
+										color: app_theme_options[getMyAppColorTheme()],
 										marginRight: '8px',
 										marginBottom: '-2px'
 									}}
 								/>
-								{app_theme_options[0].title}
+								{getMyAppColorTheme()}
 							</div>
 						)}
 					>
-						{app_theme_options.map((themeOpt, i) => (
-							<Option key={i} id={themeOpt.title}>
-								<div className="Flex-Class-Row-Space-Between Theme-Dropdown-Content-Item-99 Theme-Slide-Background-onHover-99">
-									<div className="Flex-Class-Row-Center">
-										<FaCircle
-											style={{
-												color: themeOpt.hex_color,
-												marginRight: '8px',
-												marginBottom: '-2px'
-											}}
-										/>
-										{themeOpt.title}
+						{Object.keys(app_theme_options).map((key, i) => {
+							// console.log('app_theme_options[key]', app_theme_options[key]);
+
+							return (
+								<Option key={i} id={key}>
+									<div className="Flex-Class-Row-Space-Between Theme-Dropdown-Content-Item-99 Theme-Slide-Background-onHover-99">
+										<div className="Flex-Class-Row-Center">
+											<FaCircle
+												style={{
+													color: app_theme_options[key],
+													marginRight: '8px',
+													marginBottom: '-2px'
+												}}
+											/>
+											{key}
+										</div>
+										{key === getMyAppColorTheme() && <GoCheck />}
 									</div>
-									{themeOpt._id === app_theme_options[0]._id && <GoCheck />}
-								</div>
-							</Option>
-						))}
+								</Option>
+							);
+						})}
 					</Selector>
 				</div>
 			)}

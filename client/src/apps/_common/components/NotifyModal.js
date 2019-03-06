@@ -27,7 +27,7 @@ const NotifyModal = (props) => {
 									>
 										<p>{text}</p>
 										<button
-											className="Flex-Class-Row-Center"
+											className="Theme-Btn-Type3-Exit-99"
 											onClick={() => context.removeFromQueue(text)}
 										>
 											<IoIosAdd />

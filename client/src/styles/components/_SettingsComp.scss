@@ -43,21 +43,6 @@
 		}
 	}
 
-	.SettingsComp-Exit-Btn-02 {
-		font-size: 30px;
-		padding: 0px;
-		border-radius: 50%;
-		transform: rotate(45deg);
-		cursor: pointer;
-		border: 1px solid rgba(0, 0, 0, 0);
-		background: rgba(0, 0, 0, 0);
-
-		&:hover {
-			border: 1px solid var(--hover-mint-medium);
-			background: var(--hover-mint-medium);
-		}
-	}
-
 	.EventDetailsBtns-Selected-01 {
 		padding: 10px 0px;
 		transition: all 0.2s ease;

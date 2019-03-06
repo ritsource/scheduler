@@ -6,6 +6,8 @@ import { renderRoutes } from 'react-router-config';
 import serialize from 'serialize-javascript';
 
 export default (req, router, client, context, jsfile) => {
+	console.log('req.cookies', req.cookies);
+
 	const content = renderToString(
 		<ApolloProvider client={client}>
 			<StaticRouter location={req.path} context={context}>
@@ -27,9 +29,9 @@ export default (req, router, client, context, jsfile) => {
         <link rel="stylesheet" href="css/normalize.min.css">
         <link href="css/Lato.css" rel="stylesheet">
         <link href="css/Montserrat.css" rel="stylesheet">
-
-        <link rel="stylesheet" href="css/ThemeBlue.css">
-        <link rel="stylesheet" href="css/lightOnly.css">
+        
+        <link rel="stylesheet" href="css/${req.cookies.myAppColorTheme || 'Blue'}.css">
+        <link rel="stylesheet" href="css/${req.cookies.myAppColorMode || 'lightOnly'}.css">
         <link rel="stylesheet" href="styles.css">
 
         <title>My Calendar</title>

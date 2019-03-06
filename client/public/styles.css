@@ -131,6 +131,22 @@ button:focus {
   border: 1px solid var(--hover-mint-medium);
   background: var(--hover-mint-medium); }
 
+.Theme-Btn-Type3-Exit-99 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-color);
+  font-size: 30px;
+  padding: 0px;
+  border-radius: 50%;
+  transform: rotate(45deg);
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0);
+  background: rgba(0, 0, 0, 0); }
+  .Theme-Btn-Type3-Exit-99:hover {
+    border: 1px solid var(--hover-mint-medium);
+    background: var(--hover-mint-medium); }
+
 .Theme-Input-99 {
   color: var(--text-color);
   background: var(--background-color);
@@ -900,17 +916,6 @@ button:focus {
   animation-iteration-count: 1; }
   .NotifyModal-c-00 p {
     font-weight: bold; }
-  .NotifyModal-c-00 button {
-    font-size: 30px;
-    padding: 0px;
-    border-radius: 50%;
-    transform: rotate(45deg);
-    cursor: pointer;
-    border: 1px solid rgba(0, 0, 0, 0);
-    background: rgba(0, 0, 0, 0); }
-    .NotifyModal-c-00 button:hover {
-      border: 1px solid var(--hover-mint-medium);
-      background: var(--hover-mint-medium); }
 
 .SettingsComp-c-00 .SettingsComp-Setting-Div-01 {
   display: flex;
@@ -942,18 +947,6 @@ button:focus {
     height: 50px;
     border-radius: 4px;
     margin-right: 15px; }
-
-.SettingsComp-c-00 .SettingsComp-Exit-Btn-02 {
-  font-size: 30px;
-  padding: 0px;
-  border-radius: 50%;
-  transform: rotate(45deg);
-  cursor: pointer;
-  border: 1px solid rgba(0, 0, 0, 0);
-  background: rgba(0, 0, 0, 0); }
-  .SettingsComp-c-00 .SettingsComp-Exit-Btn-02:hover {
-    border: 1px solid var(--hover-mint-medium);
-    background: var(--hover-mint-medium); }
 
 .SettingsComp-c-00 .EventDetailsBtns-Selected-01 {
   padding: 10px 0px;

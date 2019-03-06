@@ -1,9 +1,11 @@
 import '@babel/polyfill';
 import 'cross-fetch/polyfill';
 import express from 'express';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 
+app.use(cookieParser());
 app.use(express.static('public'));
 
 import extraRoute from './routes/extra_route';
