@@ -9,6 +9,7 @@ import Header2 from '../_common/components/Header2';
 
 import { FETCH_CURRENT_USER } from '../../graphql/queries';
 
+import { SettingsProvider } from '../_common/contexts/SettingsContext';
 import { NotifyQueueProvider } from '../_common/contexts/NotifyQueueContext';
 import { ProgressbarProvider } from '../_common/contexts/ProgressbarContext';
 import { SidebarProvider } from '../_common/contexts/SidebarContext';
@@ -25,21 +26,23 @@ const Calendar = (props) => {
 				return (
 					<ProgressbarProvider>
 						<NotifyQueueProvider>
-							<SidebarProvider>
-								<StepStoreProvider>
-									<AuthContext.Provider value={{ auth: data.currentUser }}>
-										<div className="Calendar-a-00">
-											<NotifyModal />
-											<Header2 pathName="calendar" />
-											{data.currentUser ? (
-												<div>{renderRoutes(props.route.routes)}</div>
-											) : (
-												<Redirect to="/login" />
-											)}
-										</div>
-									</AuthContext.Provider>
-								</StepStoreProvider>
-							</SidebarProvider>
+							<SettingsProvider>
+								<SidebarProvider>
+									<StepStoreProvider>
+										<AuthContext.Provider value={{ auth: data.currentUser }}>
+											<div className="Calendar-a-00">
+												<NotifyModal />
+												<Header2 pathName="calendar" />
+												{data.currentUser ? (
+													<div>{renderRoutes(props.route.routes)}</div>
+												) : (
+													<Redirect to="/login" />
+												)}
+											</div>
+										</AuthContext.Provider>
+									</StepStoreProvider>
+								</SidebarProvider>
+							</SettingsProvider>
 						</NotifyQueueProvider>
 					</ProgressbarProvider>
 				);

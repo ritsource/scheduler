@@ -6,6 +6,8 @@ import CalendarContent from '../components/CalendarContent';
 import HeaderNavigator from '../components/HeaderNavigator';
 import EventDetails from '../../_common/components/EventDetails';
 
+import SettingsContext from '../../_common/contexts/SettingsContext';
+
 let __isNode__ = false;
 if (typeof process === 'object') {
 	if (typeof process.versions === 'object') {
@@ -79,33 +81,43 @@ const CalendarComp = (props) => {
 	};
 
 	return (
-		<React.Fragment>
-			<HeaderNavigator month={month} year={year} handleUrlNavigation={handleUrlNavigation} />
-			<div className="CalendarComp-c-00">
-				<CalendarSidebar
-					staticContext={staticContext}
-					groups={groups}
-					handleUrlNavigation={handleUrlNavigation}
-				/>
-				<CalendarContent
-					year={year}
-					month={month}
-					groups={groups}
-					setActiveEvent={setActiveEvent}
-					events={events}
-					setActiveEvent={setActiveEvent}
-				/>
-				{activeEvent && (
-					<EventDetails
-						event={activeEvent}
-						groups={groups}
-						pathName="calendar"
-						hex_color={activeEvent.hex_color}
-						closeEventDetails={() => setActiveEvent(null)}
-					/>
-				)}
-			</div>
-		</React.Fragment>
+		<SettingsContext.Consumer>
+			{({ settings, setSettings }) => (
+				<React.Fragment>
+					<HeaderNavigator month={month} year={year} handleUrlNavigation={handleUrlNavigation} />
+					<div className="CalendarComp-c-00">
+						<CalendarSidebar
+							staticContext={staticContext}
+							groups={groups}
+							handleUrlNavigation={handleUrlNavigation}
+						/>
+						<CalendarContent
+							year={year}
+							month={month}
+							groups={groups}
+							setActiveEvent={(event) => {
+								setSettings(null);
+								setActiveEvent(event);
+							}}
+							events={events}
+						/>
+						{settings ? (
+							<div>settings</div>
+						) : activeEvent ? (
+							<EventDetails
+								event={activeEvent}
+								groups={groups}
+								pathName="calendar"
+								hex_color={activeEvent.hex_color}
+								closeEventDetails={() => setActiveEvent(null)}
+							/>
+						) : (
+							<React.Fragment />
+						)}
+					</div>
+				</React.Fragment>
+			)}
+		</SettingsContext.Consumer>
 	);
 };
 

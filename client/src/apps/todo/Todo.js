@@ -8,6 +8,7 @@ import Header2 from '../_common/components/Header2';
 
 import { FETCH_CURRENT_USER } from '../../graphql/queries';
 
+import { SettingsProvider } from '../_common/contexts/SettingsContext';
 import { ProgressbarProvider } from '../_common/contexts/ProgressbarContext';
 import { SidebarProvider } from '../_common/contexts/SidebarContext';
 import { StepStoreProvider } from '../_common/contexts/StepStoreContext';
@@ -20,20 +21,22 @@ const Todo = (props) => {
 			{({ data, loading, error }) => {
 				return (
 					<ProgressbarProvider>
-						<SidebarProvider>
-							<StepStoreProvider>
-								<AuthContext.Provider value={{ auth: data.currentUser }}>
-									<div className="Todo-a-00">
-										<Header2 pathName="todo" />
-										{data.currentUser ? (
-											<div>{renderRoutes(props.route.routes)}</div>
-										) : (
-											<Redirect to="/login" />
-										)}
-									</div>
-								</AuthContext.Provider>
-							</StepStoreProvider>
-						</SidebarProvider>
+						<SettingsProvider>
+							<SidebarProvider>
+								<StepStoreProvider>
+									<AuthContext.Provider value={{ auth: data.currentUser }}>
+										<div className="Todo-a-00">
+											<Header2 pathName="todo" />
+											{data.currentUser ? (
+												<div>{renderRoutes(props.route.routes)}</div>
+											) : (
+												<Redirect to="/login" />
+											)}
+										</div>
+									</AuthContext.Provider>
+								</StepStoreProvider>
+							</SidebarProvider>
+						</SettingsProvider>
 					</ProgressbarProvider>
 				);
 			}}

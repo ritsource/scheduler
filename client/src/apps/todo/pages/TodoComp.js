@@ -5,6 +5,8 @@ import TodoSidebar from '../components/TodoSidebar';
 import EventList from '../components/EventList';
 import EventDetails from '../../_common/components/EventDetails';
 
+import SettingsContext from '../../_common/contexts/SettingsContext';
+
 let __isNode__ = false;
 if (typeof process === 'object') {
 	if (typeof process.versions === 'object') {
@@ -88,23 +90,37 @@ const TodoComp = (props) => {
 	};
 
 	return (
-		<div className="TodoComp-c-00">
-			<TodoSidebar groups={groups} activeGroupId={groupId} changeGroupId={changeGroupId} />
+		<SettingsContext.Consumer>
+			{({ settings, setSettings }) => (
+				<div className="TodoComp-c-00">
+					<TodoSidebar groups={groups} activeGroupId={groupId} changeGroupId={changeGroupId} />
 
-			{activeGroup && (
-				<EventList events={activeGroup._events} activeGroup={activeGroup} changeEventId={changeEventId} />
+					{activeGroup && (
+						<EventList
+							events={activeGroup._events}
+							activeGroup={activeGroup}
+							changeEventId={(id) => {
+								setSettings(null);
+								changeEventId(id);
+							}}
+						/>
+					)}
+					{settings ? (
+						<div />
+					) : activeEvent ? (
+						<EventDetails
+							event={activeEvent}
+							groups={groups}
+							pathName="todo"
+							hex_color={activeGroup.hex_color}
+							closeEventDetails={() => changeGroupId(groupId)}
+						/>
+					) : (
+						<React.Fragment />
+					)}
+				</div>
 			)}
-
-			{activeEvent && (
-				<EventDetails
-					event={activeEvent}
-					groups={groups}
-					pathName="todo"
-					hex_color={activeGroup.hex_color}
-					closeEventDetails={() => changeGroupId(groupId)}
-				/>
-			)}
-		</div>
+		</SettingsContext.Consumer>
 	);
 };
 

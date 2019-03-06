@@ -7,6 +7,8 @@ import { GoOrganization } from 'react-icons/go';
 import changeTheme from '../../../utils/changeTheme';
 import EventDoneIndicator from './EventDoneIndicator';
 
+import SettingsContext from '../contexts/SettingsContext';
+
 let __isNode__ = false;
 if (typeof process === 'object') {
 	if (typeof process.versions === 'object') {
@@ -45,12 +47,19 @@ const OptionsHeader = (props) => {
 						Signed in as <span style={{ fontWeight: 'bold' }}>{auth.name.split(' ')[0]}</span>
 					</div>
 
-					<a href="/settings">
-						<div className="Theme-Dropdown-Content-Item-99 Theme-Slide-Background-onHover-99">
-							<MdSettings style={{ marginRight: '8px', marginBottom: '-2px' }} />
-							Settings
-						</div>
-					</a>
+					<SettingsContext.Consumer>
+						{({ settings, setSettings }) => {
+							return (
+								<div
+									onClick={() => setSettings(true)}
+									className="Theme-Dropdown-Content-Item-99 Theme-Slide-Background-onHover-99"
+								>
+									<MdSettings style={{ marginRight: '8px', marginBottom: '-2px' }} />
+									Settings
+								</div>
+							);
+						}}
+					</SettingsContext.Consumer>
 
 					<div
 						className="Theme-Dropdown-Content-Item-99 Theme-Slide-Background-onHover-99"
