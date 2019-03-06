@@ -26,7 +26,7 @@ module.exports = (passport) => {
 						else return done(null, false, { message: 'Incorrect password' });
 					});
 				} else {
-					done(null, false, { message: 'Incorrect email' });
+					done(null, false, { message: 'Incorrect password' });
 				}
 			}
 		)

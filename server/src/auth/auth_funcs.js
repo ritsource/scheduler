@@ -56,11 +56,7 @@ const registerUser = async ({ name, email, password, req }) => {
 };
 
 const addCustomColor = async ({ new_color }, req) => {
-	return User.findOneAndUpdate(
-		{ _id: req.user._id },
-		{ $addToSet: { custom_colors: new_color } },
-		{ new: true }
-	);
-}
+	return User.findOneAndUpdate({ _id: req.user._id }, { $addToSet: { custom_colors: new_color } }, { new: true });
+};
 
 module.exports = { registerUser, loginUser, addCustomColor };
