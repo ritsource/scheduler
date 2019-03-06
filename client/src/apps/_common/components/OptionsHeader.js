@@ -4,7 +4,9 @@ import { FaArrowRight, FaSortDown } from 'react-icons/fa';
 import { MdSettings, MdInvertColors } from 'react-icons/md';
 import { GoOrganization } from 'react-icons/go';
 
-import changeTheme from '../../../utils/changeTheme';
+import changeColorMode from '../../../utils/changeColorMode';
+import { setCookie, getCookie } from '../../../utils/cookie_funcs';
+
 import EventDoneIndicator from './EventDoneIndicator';
 
 import SettingsContext from '../contexts/SettingsContext';
@@ -21,11 +23,11 @@ if (typeof process === 'object') {
 const OptionsHeader = (props) => {
 	const { auth, dropdown, setDropdown } = props;
 
-	const getMyAppTheme = () => (!__isNode__ ? window.localStorage.getItem('myAppTheme') : null);
+	const getMyAppColorMode = () => (!__isNode__ ? getCookie('myAppColorMode') : null);
 
 	useEffect(
 		() => {
-			changeTheme(getMyAppTheme() || 'lightOnly');
+			changeColorMode(getMyAppColorMode() || 'lightOnly');
 		},
 		[ __isNode__ ]
 	);
@@ -64,7 +66,7 @@ const OptionsHeader = (props) => {
 					<div
 						className="Theme-Dropdown-Content-Item-99 Theme-Slide-Background-onHover-99"
 						onClick={(e) => {
-							changeTheme(getMyAppTheme() === 'darkOnly' ? 'lightOnly' : 'darkOnly');
+							changeColorMode(getMyAppColorMode() === 'darkOnly' ? 'lightOnly' : 'darkOnly');
 						}}
 						style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}
 					>
@@ -72,8 +74,8 @@ const OptionsHeader = (props) => {
 						<div className="Flex-Class-Row-Space-Between" style={{ width: '100%' }}>
 							Dark Mode
 							<EventDoneIndicator
-								_isDone={getMyAppTheme() === 'darkOnly'}
-								hex_color="var(--theme-color-middle)"
+								_isDone={getMyAppColorMode() === 'darkOnly'}
+								hex_color="var(--theme-color)"
 								patchFunction={() => {}}
 								propagation={true}
 							/>

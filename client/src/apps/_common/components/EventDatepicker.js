@@ -12,7 +12,7 @@ const EventDatepicker = (props) => {
 		<div className="Flex-Class-Row-Start" style={{ width: '100%', padding: '10px 0px' }}>
 			<Datepicker
 				initDate={new Date(event.date_from)}
-				themeColor="var(--theme-color-middle)"
+				themeColor="var(--theme-color)"
 				borderColor="1px solid var(--border-color)"
 				borderRadius="2px"
 				onDateSelect={async (timeStamp) => {
@@ -43,7 +43,7 @@ const EventDatepicker = (props) => {
 			<p style={{ margin: '5px' }}>to</p>
 
 			<Datepicker
-				themeColor="var(--theme-color-middle)"
+				themeColor="var(--theme-color)"
 				initDate={new Date(event.date_to)}
 				onDateSelect={async (timeStamp) => {
 					setDToAsync(true);

@@ -120,7 +120,7 @@ const CalendarSidebar = (props) => {
 					<p
 						style={{
 							margin: '15px 29px 10px 29px',
-							color: 'var(--theme-color-middle)',
+							color: 'var(--theme-color)',
 							fontSize: '18px',
 							fontWeight: 'bold'
 						}}

@@ -1,0 +1,16 @@
+:root {
+	--danger-red-color: #f03434;
+	--safe-green-color: #019031;
+
+	--background-color: white;
+	--border-color: #d8d8d8;
+	--hover-mint-light: #f3f3f3;
+	--hover-mint-medium: #f3f3f3;
+	--hover-mint-deep: #dddddd;
+
+	--text-color: #424242;
+	--text-color-light: #707070;
+	--text-color-light-2: #b8b8b8;
+	--text-color-light-3: #707070;
+	--modal-mask-color: rgba(0, 0, 0, 0.3);
+}

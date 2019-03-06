@@ -18,15 +18,13 @@ export const day_name_dictionary = [ 'SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', '
 export const builtin_color_list = [
 	'#f03434', // Redish
 	'#088cfb', // Blueish
-	'#f7ca18', // Yellowish
+	'#ffc63f', // Yellowish
 	'#ff9b17', // Orangish
 	'#00bc60' // Greenish
 ];
 
 export const app_theme_options = [
-	{ title: 'Red', hex_color: '#f03434' },
 	{ title: 'Blue', hex_color: '#088cfb' },
-	{ title: 'Yellow', hex_color: '#f7ca18' },
 	{ title: 'Orange', hex_color: '#ff9b17' },
 	{ title: 'Green', hex_color: '#00bc60' }
 ];

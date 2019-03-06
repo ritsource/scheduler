@@ -3,3 +3,5 @@ build/
 public/todo.js
 public/extra.js
 public/calendar.js
+public/main.js
+public/styles.css

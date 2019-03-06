@@ -9,7 +9,9 @@ import AuthContext from '../contexts/AuthContext';
 
 import EventDoneIndicator from './EventDoneIndicator';
 
-import changeTheme from '../../../utils/changeTheme';
+import changeColorMode from '../../../utils/changeColorMode';
+import { setCookie, getCookie } from '../../../utils/cookie_funcs';
+
 import { app_theme_options } from '../../../utils/constants';
 
 let __isNode__ = false;
@@ -24,13 +26,13 @@ if (typeof process === 'object') {
 const SettingsComp = (props) => {
 	const { setSettings } = props;
 
-	const getMyAppTheme = () => (!__isNode__ ? window.localStorage.getItem('myAppTheme') : null);
-	const [ appMode, setAddMode ] = useState(getMyAppTheme());
+	const getMyAppColorMode = () => (!__isNode__ ? getCookie('myAppColorMode') : null);
+	const [ appMode, setAddMode ] = useState(getMyAppColorMode());
 
 	useEffect(
 		() => {
-			changeTheme(getMyAppTheme() || 'lightOnly');
-			setAddMode(getMyAppTheme()); // darkOnly
+			changeColorMode(getMyAppColorMode() || 'lightOnly');
+			setAddMode(getMyAppColorMode()); // darkOnly
 		},
 		[ __isNode__ ]
 	);
@@ -95,10 +97,10 @@ const SettingsComp = (props) => {
 						</div>
 						<EventDoneIndicator
 							_isDone={appMode === 'darkOnly'}
-							hex_color="var(--theme-color-middle)"
+							hex_color="var(--theme-color)"
 							patchFunction={() => {
-								changeTheme(getMyAppTheme() === 'darkOnly' ? 'lightOnly' : 'darkOnly');
-								setAddMode(getMyAppTheme());
+								changeColorMode(getMyAppColorMode() === 'darkOnly' ? 'lightOnly' : 'darkOnly');
+								setAddMode(getMyAppColorMode());
 							}}
 						/>
 					</div>
@@ -143,21 +145,6 @@ const SettingsComp = (props) => {
 							</Option>
 						))}
 					</Selector>
-
-					{/* <div className="SettingsComp-Setting-Div-01 ">
-						<div className="Flex-Class-Row-Start">
-							<MdInvertColors />
-							<p>Dark Mode</p>
-						</div>
-						<EventDoneIndicator
-							_isDone={appMode === 'darkOnly'}
-							hex_color="var(--theme-color-middle)"
-							patchFunction={() => {
-								changeTheme(getMyAppTheme() === 'darkOnly' ? 'lightOnly' : 'darkOnly');
-								setAddMode(getMyAppTheme());
-							}}
-						/>
-					</div> */}
 				</div>
 			)}
 		</AuthContext.Consumer>

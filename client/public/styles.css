@@ -1,23 +1,6 @@
 @keyframes fadeIn{0%{opacity:0}to{opacity:1}}@keyframes fadeIn_rev{0%{opacity:1}to{opacity:0}}@keyframes slideDown{0%{opacity:0;background-color:transparent}50%{opacity:1}to{opacity:1}}@keyframes slideDown_rev{0%{opacity:1}to{opacity:0}}@keyframes slideDown_child{0%{margin-top:-200px}70%{margin-top:20px}to{margin-top:0}}@keyframes slideDown_child_rev{0%{margin-top:0}to{margin-top:-240px}}@keyframes slideUp{0%{opacity:0;background-color:transparent}50%{opacity:1}to{opacity:1}}@keyframes slideUp_rev{0%{opacity:1}to{opacity:0}}@keyframes slideUp_child{0%{margin-top:200px}70%{margin-top:-20px}to{margin-top:0}}@keyframes slideUp_child_rev{0%{margin-top:0}to{margin-top:240px}}@keyframes slideRight{0%{opacity:0;background-color:transparent}50%{opacity:1}to{opacity:1}}@keyframes slideRight_rev{0%{opacity:1}to{opacity:0}}@keyframes slideRight_child{0%{margin-left:-200px}70%{margin-left:20px}to{margin-left:0}}@keyframes slideRight_child_rev{0%{margin-left:0}to{margin-left:-240px}}@keyframes slideLeft{0%{opacity:0;background-color:transparent}50%{opacity:1}to{opacity:1}}@keyframes slideLeft_rev{0%{opacity:1}to{opacity:0}}@keyframes slideLeft_child{0%{margin-left:200px}70%{margin-left:-20px}to{margin-left:0}}@keyframes slideLeft_child_rev{0%{margin-left:0}to{margin-left:240px}}.gib-r-drpd-m-_ModalMask{height:100vh;width:100vw;display:flex;position:fixed;top:0;bottom:0;left:0;right:0}.gib-r-drpd-m-_ModalMask-m-centered{display:flex;align-items:center;justify-content:center}.gib-r-drpd-m-_Modal{position:absolute;top:auto;bottom:auto;right:auto;left:auto;animation-iteration-count:1}.gib-r-drpd-m-_ModalArrow{width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:7px solid #fff;margin-top:-7px}.gib-r-drpd-m-_ModalContent{display:flex;flex-direction:column}.gib-r-drpd-m-_ModalContent_btn_001{color:#606060;padding:6px 14px;background:#fff;font-size:13px;border:0 solid #fff;border-top:1px solid #e2e2e2;cursor:pointer}.gib-r-drpd-m-_ModalContent_btn_001 :focus{outline:none}.gib-r-drpd-m-_ModalContent_btn_001 :hover{background:#f9f9f9}
 .react-dropdown-selector_Option,.react-dropdown-selector_Selector{font-size:14px;color:#424242;padding:10px 20px;cursor:pointer;word-spacing:2px}.react-dropdown-selector_Option{background:#fff;background:linear-gradient(90deg,#ebebeb 50%,#fff 0);background-size:200% 100%;background-position:100% 100%;transition:all .2s ease}.react-dropdown-selector_Option:hover{background-position:0 100%}.react-dropdown-selector_Selector{background:#ebebeb}
 @keyframes fadeIn{0%{opacity:0}to{opacity:1}}@keyframes fadeIn_rev{0%{opacity:1}to{opacity:0}}@keyframes slideDown{0%{opacity:0;background-color:transparent}50%{opacity:1}to{opacity:1}}@keyframes slideDown_rev{0%{opacity:1}to{opacity:0}}@keyframes slideDown_child{0%{margin-top:-200px}70%{margin-top:20px}to{margin-top:0}}@keyframes slideDown_child_rev{0%{margin-top:0}to{margin-top:-240px}}@keyframes slideUp{0%{opacity:0;background-color:transparent}50%{opacity:1}to{opacity:1}}@keyframes slideUp_rev{0%{opacity:1}to{opacity:0}}@keyframes slideUp_child{0%{margin-top:200px}70%{margin-top:-20px}to{margin-top:0}}@keyframes slideUp_child_rev{0%{margin-top:0}to{margin-top:240px}}@keyframes slideRight{0%{opacity:0;background-color:transparent}50%{opacity:1}to{opacity:1}}@keyframes slideRight_rev{0%{opacity:1}to{opacity:0}}@keyframes slideRight_child{0%{margin-left:-200px}70%{margin-left:20px}to{margin-left:0}}@keyframes slideRight_child_rev{0%{margin-left:0}to{margin-left:-240px}}@keyframes slideLeft{0%{opacity:0;background-color:transparent}50%{opacity:1}to{opacity:1}}@keyframes slideLeft_rev{0%{opacity:1}to{opacity:0}}@keyframes slideLeft_child{0%{margin-left:200px}70%{margin-left:-20px}to{margin-left:0}}@keyframes slideLeft_child_rev{0%{margin-left:0}to{margin-left:240px}}.gib-r-drpd-m-_ModalMask{height:100vh;width:100vw;display:flex;position:fixed;top:0;bottom:0;left:0;right:0}.gib-r-drpd-m-_ModalMask-m-centered{display:flex;align-items:center;justify-content:center}.gib-r-drpd-m-_Modal{position:absolute;top:auto;bottom:auto;right:auto;left:auto;animation-iteration-count:1}.gib-r-drpd-m-_ModalArrow{width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:7px solid #fff;margin-top:-7px}.gib-r-drpd-m-_ModalContent{display:flex;flex-direction:column}.gib-r-drpd-m-_ModalContent_btn_001{color:#606060;padding:6px 14px;background:#fff;font-size:13px;border:0 solid #fff;border-top:1px solid #e2e2e2;cursor:pointer}.gib-r-drpd-m-_ModalContent_btn_001 :focus{outline:none}.gib-r-drpd-m-_ModalContent_btn_001 :hover{background:#f9f9f9}.awesome-react-datepicker-_Dateinput{padding:0;cursor:pointer;z-index:inherit}.awesome-react-datepicker-_Dateinput_p_001{font-size:13px;margin:6px 10px;padding:0}.awesome-react-datepicker-_Datepicker{position:absolute}.awesome-react-datepicker-_Navigator{padding:15px 18px 0;display:flex;flex-direction:row;justify-content:space-between}.awesome-react-datepicker-_Navigator_h3_001{font-size:15px;padding:0;margin:0}.awesome-react-datepicker-_Navigator_div_002{display:flex;flex-direction:row;margin-right:-10px}.awesome-react-datepicker-_Navigator_btn_003{display:flex;align-items:center;justify-content:center;border:0 solid #fff;font-weight:700;font-size:10px;cursor:pointer;border-radius:50%;height:25px;width:25px;margin-bottom:-5px}.awesome-react-datepicker-_Navigator_btn_003 :focus{outline:none}.awesome-react-datepicker-_Calendar{padding:10px;width:200px;height:200px;font-size:12px}.awesome-react-datepicker-_CalendarRow{display:flex;flex-direction:row}.awesome-react-datepicker-_CalendarRowItem{width:14.28571%}.awesome-react-datepicker-_CalendarRowItem_div_001{display:flex;align-items:center;justify-content:center;height:100%}.awesome-react-datepicker-_CalendarRowItem_p_002{display:flex;align-items:center;justify-content:center;text-align:center;width:25px;height:25px;border-radius:50%;cursor:pointer;font-size:12px}
-:root {
-  --danger-red-color: #f03434;
-  --safe-green-color: #019031;
-  --background-color: white;
-  --border-color: #d8d8d8;
-  --hover-mint-light: #f3f3f3;
-  --hover-mint-medium: #f3f3f3;
-  --hover-mint-deep: #dddddd;
-  --theme-color: #0071e2;
-  --theme-color-middle: #088cfb;
-  --theme-color-light: #00a6f9;
-  --text-color: #424242;
-  --text-color-light: #707070;
-  --text-color-light-2: #b8b8b8;
-  --text-color-light-3: #707070;
-  --modal-mask-color: rgba(0, 0, 0, 0.3); }
-
 body {
   color: var(--text-color);
   font-size: 14px;
@@ -97,7 +80,7 @@ button:focus {
 
 .Theme-Btn-Normal-99 {
   color: white;
-  background: var(--theme-color-middle); }
+  background: var(--theme-color); }
 
 .Theme-Btn-White-99 {
   color: var(--text-color);
@@ -133,8 +116,8 @@ button:focus {
 
 .Theme-Btn-Type2-Normal-99 {
   color: white;
-  border: 1px solid var(--theme-color-middle);
-  background: var(--theme-color-middle);
+  border: 1px solid var(--theme-color);
+  background: var(--theme-color);
   font-weight: bold; }
 
 .Theme-Btn-Type2-Red-99 {
@@ -165,7 +148,7 @@ button:focus {
   background: var(--background-color);
   transition: border 0.3s ease-out; }
   .Theme-Input-Underline-OnFoucs-99:focus {
-    border-bottom: 1px solid var(--theme-color-middle); }
+    border-bottom: 1px solid var(--theme-color); }
 
 .Theme-Dropdown-Content-Item-99 {
   font-family: 'Lato', sans-serif;
@@ -204,7 +187,7 @@ button:focus {
   0% {
     border: 1px solid var(--hover-mint-medium); }
   50% {
-    border: 1px solid var(--theme-color-middle); }
+    border: 1px solid var(--theme-color); }
   100% {
     border: 1px solid var(--hover-mint-medium); } }
 
@@ -212,7 +195,7 @@ button:focus {
   0% {
     color: var(--text-color-light); }
   50% {
-    color: var(--theme-color-middle); }
+    color: var(--theme-color); }
   100% {
     color: var(--text-color-light); } }
 
@@ -255,7 +238,7 @@ button:focus {
   .About-p-00 p {
     margin: 5px; }
     .About-p-00 p a {
-      color: var(--theme-color-middle); }
+      color: var(--theme-color); }
   .About-p-00 .About-Side-Git-Btns-Container-01 {
     right: 10px;
     bottom: 40px;
@@ -364,7 +347,7 @@ button:focus {
     .Header1-c-00 .Header2-Left-Div-01 h2,
     .Header2-c-00 .Header1-Left-Div-01 h2,
     .Header2-c-00 .Header2-Left-Div-01 h2 {
-      color: var(--theme-color-middle);
+      color: var(--theme-color);
       align-items: center;
       display: flex;
       flex-direction: row; }
@@ -449,7 +432,7 @@ button:focus {
     font-family: 'Montserrat', sans-serif;
     font-size: 18px;
     font-weight: bold;
-    color: var(--theme-color-middle); }
+    color: var(--theme-color); }
     .CalendarSidebarNavigator-c-00 p span {
       font-size: 12px; }
   .CalendarSidebarNavigator-c-00 button {
@@ -516,7 +499,7 @@ button:focus {
     .ItemSubmitForm-c-00 input:focus {
       outline: none; }
     .ItemSubmitForm-c-00 input::placeholder {
-      color: var(--theme-color-middle);
+      color: var(--theme-color);
       opacity: 1;
       font-weight: bold;
       font-size: 15px; }
@@ -744,9 +727,9 @@ button:focus {
   color: var(--text-color-light-2); }
 
 .CalendarRowItem-c-00-Mini-Active-Date {
-  background: var(--theme-color-middle); }
+  background: var(--theme-color); }
   .CalendarRowItem-c-00-Mini-Active-Date:hover {
-    background: var(--theme-color-middle) !important; }
+    background: var(--theme-color) !important; }
   .CalendarRowItem-c-00-Mini-Active-Date p {
     color: white !important; }
 
@@ -769,7 +752,7 @@ button:focus {
     border: 0px solid yellow; }
   .CalendarRowItem-c-00 .CalendarRowItem-P-02 {
     margin-right: 10px;
-    color: var(--theme-color-middle);
+    color: var(--theme-color);
     font-weight: bold;
     font-size: 10px; }
   .CalendarRowItem-c-00 .CalendarRowItem-Div-01 {
@@ -825,7 +808,7 @@ button:focus {
     margin: 5px; }
   .HeaderNavigator-c-00 p {
     font-family: 'Montserrat', sans-serif;
-    color: var(--theme-color-middle);
+    color: var(--theme-color);
     width: 140px;
     text-align: left;
     padding-top: 2px;
@@ -850,7 +833,7 @@ button:focus {
   margin-bottom: 2px;
   margin-left: 4px;
   color: white;
-  background: var(--theme-color-middle);
+  background: var(--theme-color);
   border-radius: 3px;
   white-space: nowrap; }
   .Calendar-c-00 .Calendar-Div-Over-Title-01 {
@@ -912,7 +895,7 @@ button:focus {
   background: var(--background-color);
   padding: 5px 15px 5px 20px;
   border-radius: 4px;
-  border-left: 5px solid var(--theme-color-middle);
+  border-left: 5px solid var(--theme-color);
   animation: NotifyModal-Slide-Left 400ms linear;
   animation-iteration-count: 1; }
   .NotifyModal-c-00 p {

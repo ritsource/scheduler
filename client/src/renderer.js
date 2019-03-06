@@ -21,11 +21,17 @@ export default (req, router, client, context, jsfile) => {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
         <link rel="icon" href="favicon.ico">
-        <link rel="stylesheet" href="3ed_party/normalize.min.css">
-        <link href="3ed_party/Lato.css" rel="stylesheet">
-        <link href="3ed_party/Montserrat.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="css/normalize.min.css">
+        <link href="css/Lato.css" rel="stylesheet">
+        <link href="css/Montserrat.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="css/ThemeBlue.css">
+        <link rel="stylesheet" href="css/lightOnly.css">
         <link rel="stylesheet" href="styles.css">
+
         <title>My Calendar</title>
       </head>
       <body>

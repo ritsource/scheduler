@@ -32,10 +32,10 @@
 }
 
 .CalendarRowItem-c-00-Mini-Active-Date {
-	background: var(--theme-color-middle);
+	background: var(--theme-color);
 
 	&:hover {
-		background: var(--theme-color-middle) !important;
+		background: var(--theme-color) !important;
 	}
 
 	p {
@@ -68,7 +68,7 @@
 
 	.CalendarRowItem-P-02 {
 		margin-right: 10px;
-		color: var(--theme-color-middle);
+		color: var(--theme-color);
 		// color: var(--text-color-light);
 		font-weight: bold;
 		font-size: 10px;
