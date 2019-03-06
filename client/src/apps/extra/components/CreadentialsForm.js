@@ -11,7 +11,7 @@ const CreadentialsForm = ({ pathName }, context) => {
 	const [ name, setName ] = useState('');
 	const [ email, setEmail ] = useState('');
 	const [ password, setPassword ] = useState('');
-	const [ errorMsg, setErrorMag ] = useState(false);
+	const [ errorMsg, setErrorMsg ] = useState(false);
 
 	const loginUser = async () => {
 		return await client.mutate({
@@ -43,23 +43,23 @@ const CreadentialsForm = ({ pathName }, context) => {
 
 							if (pathName === 'signup') {
 								context.setProgressBar(true);
-								setErrorMag(false);
+								setErrorMsg(false);
 								try {
 									await registerUser();
 									window.location.href = '/todo';
 								} catch (error) {
 									context.setProgressBar(false);
-									setErrorMag('Something went wrong. Try later.');
+									setErrorMsg('Something went wrong. Try later.');
 								}
 							} else {
 								context.setProgressBar(true);
-								setErrorMag(false);
+								setErrorMsg(false);
 								try {
 									await loginUser();
 									window.location.href = '/todo';
 								} catch (error) {
 									context.setProgressBar(false);
-									setErrorMag('Invalid email or password');
+									setErrorMsg('Invalid email or password');
 								}
 							}
 						}}

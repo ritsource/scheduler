@@ -3,6 +3,8 @@ import Extra from './Extra';
 import AboutPage from './pages/About';
 import LoginPage from './pages/Login';
 import SignupPage from './pages/Signup';
+import ForgetPassPage from './pages/ForgetPass';
+import ResetPassPage from './pages/ResetPass';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 
 import NotFoundPage from '../_common/pages/NotFound';
@@ -24,8 +26,8 @@ const ExtraRouter = [
 			{ ...AboutPage, path: '/about', exact: true },
 			{ ...LoginPage, path: '/login', exact: true },
 			{ ...SignupPage, path: '/signup', exact: true },
-			// { ...ForgotPasswordPage, path: '/forgot_password', exact: true },
-			// { ...ResetPasswordPage, path: '/reset_password', exact: true },
+			{ ...ForgetPassPage, path: '/forgot-password', exact: true },
+			{ ...ResetPassPage, path: '/reset-password', exact: true },
 			{ ...PrivacyPolicyPage, path: '/privacy-policy' },
 			{ ...NotFoundPage }
 		]
