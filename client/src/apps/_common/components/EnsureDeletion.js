@@ -13,7 +13,7 @@ const EnsureDeletion = (props) => {
 			centerPositioning={true}
 			modalBackground="var(--background-color)"
 			backgroundMaskColor="var(--modal-mask-color)"
-			customZIndex={30}
+			customZIndex={52}
 			animation={true}
 			animeType="slideDown"
 			animeDuration={300}

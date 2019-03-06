@@ -5,6 +5,7 @@ import CalendarSidebar from '../components/CalendarSidebar';
 import CalendarContent from '../components/CalendarContent';
 import HeaderNavigator from '../components/HeaderNavigator';
 import EventDetails from '../../_common/components/EventDetails';
+import SettingsComp from '../../_common/components/SettingsComp';
 
 import SettingsContext from '../../_common/contexts/SettingsContext';
 
@@ -102,7 +103,7 @@ const CalendarComp = (props) => {
 							events={events}
 						/>
 						{settings ? (
-							<div>settings</div>
+							<SettingsComp setSettings={setSettings} />
 						) : activeEvent ? (
 							<EventDetails
 								event={activeEvent}

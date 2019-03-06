@@ -70,7 +70,7 @@ const OptionsHeader = (props) => {
 					>
 						<MdInvertColors style={{ marginRight: '8px', marginBottom: '-2px' }} />
 						<div className="Flex-Class-Row-Space-Between" style={{ width: '100%' }}>
-							Dark theme
+							Dark Mode
 							<EventDoneIndicator
 								_isDone={getMyAppTheme() === 'darkOnly'}
 								hex_color="var(--theme-color-middle)"

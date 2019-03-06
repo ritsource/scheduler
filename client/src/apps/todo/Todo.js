@@ -21,10 +21,10 @@ const Todo = (props) => {
 			{({ data, loading, error }) => {
 				return (
 					<ProgressbarProvider>
-						<SettingsProvider>
-							<SidebarProvider>
-								<StepStoreProvider>
-									<AuthContext.Provider value={{ auth: data.currentUser }}>
+						<SidebarProvider>
+							<StepStoreProvider>
+								<AuthContext.Provider value={{ auth: data.currentUser }}>
+									<SettingsProvider>
 										<div className="Todo-a-00">
 											<Header2 pathName="todo" />
 											{data.currentUser ? (
@@ -33,10 +33,10 @@ const Todo = (props) => {
 												<Redirect to="/login" />
 											)}
 										</div>
-									</AuthContext.Provider>
-								</StepStoreProvider>
-							</SidebarProvider>
-						</SettingsProvider>
+									</SettingsProvider>
+								</AuthContext.Provider>
+							</StepStoreProvider>
+						</SidebarProvider>
 					</ProgressbarProvider>
 				);
 			}}

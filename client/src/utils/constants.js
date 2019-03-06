@@ -22,3 +22,11 @@ export const builtin_color_list = [
 	'#ff9b17', // Orangish
 	'#00bc60' // Greenish
 ];
+
+export const app_theme_options = [
+	{ title: 'Red', hex_color: '#f03434' },
+	{ title: 'Blue', hex_color: '#088cfb' },
+	{ title: 'Yellow', hex_color: '#f7ca18' },
+	{ title: 'Orange', hex_color: '#ff9b17' },
+	{ title: 'Green', hex_color: '#00bc60' }
+];

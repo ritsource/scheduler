@@ -1,0 +1,69 @@
+.SettingsComp-c-00 {
+	.SettingsComp-Setting-Div-01 {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+
+		margin: 5px 0px;
+		padding: 10px 0px;
+		width: 100%;
+		transition: all 0.2s ease;
+		cursor: pointer;
+
+		p {
+			margin-left: 10px;
+		}
+	}
+
+	.SettingsComp-Setting-Div-Flexible-01 {
+		&:hover {
+			padding: 10px 20px;
+			width: calc(100% - 40px);
+		}
+	}
+
+	label {
+		// font-size: 16px;
+		color: var(--theme-color);
+		font-weight: bold;
+		margin: 10px 0px 5px 0px;
+	}
+
+	.SettingsComp-Auth-Info-02 {
+		margin-bottom: 10px;
+		p {
+			color: var(--text-color-light);
+		}
+
+		img {
+			height: 50px;
+			border-radius: 4px;
+			margin-right: 15px;
+		}
+	}
+
+	.SettingsComp-Exit-Btn-02 {
+		font-size: 30px;
+		padding: 0px;
+		border-radius: 50%;
+		transform: rotate(45deg);
+		cursor: pointer;
+		border: 1px solid rgba(0, 0, 0, 0);
+		background: rgba(0, 0, 0, 0);
+
+		&:hover {
+			border: 1px solid var(--hover-mint-medium);
+			background: var(--hover-mint-medium);
+		}
+	}
+
+	.EventDetailsBtns-Selected-01 {
+		padding: 10px 0px;
+		transition: all 0.2s ease;
+
+		&:hover {
+			padding: 10px 20px;
+		}
+	}
+}

@@ -4,6 +4,7 @@ import { createBrowserHistory } from 'history';
 import TodoSidebar from '../components/TodoSidebar';
 import EventList from '../components/EventList';
 import EventDetails from '../../_common/components/EventDetails';
+import SettingsComp from '../../_common/components/SettingsComp';
 
 import SettingsContext from '../../_common/contexts/SettingsContext';
 
@@ -106,7 +107,7 @@ const TodoComp = (props) => {
 						/>
 					)}
 					{settings ? (
-						<div />
+						<SettingsComp />
 					) : activeEvent ? (
 						<EventDetails
 							event={activeEvent}

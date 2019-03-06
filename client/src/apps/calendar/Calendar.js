@@ -26,10 +26,10 @@ const Calendar = (props) => {
 				return (
 					<ProgressbarProvider>
 						<NotifyQueueProvider>
-							<SettingsProvider>
-								<SidebarProvider>
-									<StepStoreProvider>
-										<AuthContext.Provider value={{ auth: data.currentUser }}>
+							<SidebarProvider>
+								<StepStoreProvider>
+									<AuthContext.Provider value={{ auth: data.currentUser }}>
+										<SettingsProvider>
 											<div className="Calendar-a-00">
 												<NotifyModal />
 												<Header2 pathName="calendar" />
@@ -39,10 +39,10 @@ const Calendar = (props) => {
 													<Redirect to="/login" />
 												)}
 											</div>
-										</AuthContext.Provider>
-									</StepStoreProvider>
-								</SidebarProvider>
-							</SettingsProvider>
+										</SettingsProvider>
+									</AuthContext.Provider>
+								</StepStoreProvider>
+							</SidebarProvider>
 						</NotifyQueueProvider>
 					</ProgressbarProvider>
 				);
