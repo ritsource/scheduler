@@ -72,6 +72,14 @@ export const EDIT_GROUP_TO_INVISIBLE = gql`
 	}
 `;
 
+export const REARRANGE_GROUP = gql`
+	mutation rearrangeGroups($focusedGroup: ID!, $fromRank: Int!, $toRank: Int!, $movedGroups: [ID!]!) {
+		rearrangeGroups(focusedGroup: $focusedGroup, fromRank: $fromRank, toRank: $toRank, movedGroups: $movedGroups) {
+			_id
+		}
+	}
+`;
+
 export const ADD_NEW_EVENT = gql`
 	mutation createEvent(
 		$title: String!

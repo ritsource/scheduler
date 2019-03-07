@@ -278,8 +278,8 @@ button:focus {
   flex-direction: row; }
 
 .PrivacyPolicy-p-00 {
-  width: calc(100% - 150px);
-  padding: 0px 75px;
+  width: calc(100% - 400px);
+  padding: 0px 200px;
   animation: About-Page-Content-Slide-Up 600ms linear 0ms;
   animation-iteration-count: 1;
   height: calc(100vh - 70px);
@@ -301,7 +301,8 @@ button:focus {
         margin-left: 10px; }
     .PrivacyPolicy-p-00 .PrivacyPolicy-Content-Div-01 h3 {
       color: var(--text-color-light);
-      padding: 10px 10px 0px 10px; }
+      padding: 10px 10px 0px 10px;
+      text-align: center; }
     .PrivacyPolicy-p-00 .PrivacyPolicy-Content-Div-01 a {
       color: var(--theme-color); }
       .PrivacyPolicy-p-00 .PrivacyPolicy-Content-Div-01 a:hover, .PrivacyPolicy-p-00 .PrivacyPolicy-Content-Div-01 a:focus {

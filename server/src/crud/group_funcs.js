@@ -17,7 +17,7 @@ module.exports = {
 			const allGroups = await Group.find({
 				_creator: req.user._id,
 				_isDeleted: false
-			});
+			}).sort({ _rank: 1 });
 
 			return allGroups;
 		} catch (error) {

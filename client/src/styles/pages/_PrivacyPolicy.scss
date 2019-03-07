@@ -1,6 +1,6 @@
 .PrivacyPolicy-p-00 {
-	width: calc(100% - 150px);
-	padding: 0px 75px;
+	width: calc(100% - 400px);
+	padding: 0px 200px;
 	// padding-bottom: 30px;
 
 	animation: About-Page-Content-Slide-Up 600ms linear 0ms;
@@ -34,6 +34,7 @@
 		h3 {
 			color: var(--text-color-light);
 			padding: 10px 10px 0px 10px;
+			text-align: center;
 		}
 
 		a {
