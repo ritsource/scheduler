@@ -15,7 +15,7 @@ module.exports = {
 			const allEvents = await Event.find({
 				_creator: req.user._id,
 				_isDeleted: false
-			});
+			}).sort({ _rank: 1 });
 
 			return allEvents;
 		} catch (error) {
@@ -48,7 +48,7 @@ module.exports = {
 				date_to: { $gte: from },
 				date_from: { $lte: to },
 				_isDeleted: false
-			});
+			}).sort({ _rank: 1 });
 
 			return allEvents;
 		} catch (error) {
@@ -64,7 +64,7 @@ module.exports = {
 				_group: groupId,
 				_creator: req.user._id,
 				_isDeleted: false
-			});
+			}).sort({ _rank: 1 });
 
 			// console.log(allEvents);
 

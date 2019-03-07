@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { ApolloConsumer, Query } from 'react-apollo';
 
 import StepStoreContext from '../contexts/StepStoreContext';
@@ -18,23 +19,26 @@ import {
 	EDIT_STEP_BY_ID,
 	DELETE_STEP,
 	EDIT_STEP_TO_DONE,
-	EDIT_STEP_TO_NOT_DONE
+	EDIT_STEP_TO_NOT_DONE,
+	REARRANGE_STEPS
 } from '../../../graphql/mutations';
 
 const EventDetails = (props) => {
-	const { event, groups, client, pathName, hex_color, closeEventDetails } = props;
+	const { event, groups, contextSteps, setContextSteps, client, pathName, hex_color, closeEventDetails } = props;
+
+	const [ steps, setSteps ] = useState([]);
 
 	const gqlRefetchQueries = pathName === 'todo' ? [ 'readAllGroups' ] : [ 'readGroupsOnCalendar' ];
 
-	// Grnerate Steps Obj
-	const genContextObj = (prevObj, array = []) => {
-		// data.readStepsByEvent
-		array.map((step) => {
-			prevObj[step._rank] = step;
-		});
-
-		return prevObj;
-	};
+	useEffect(
+		() => {
+			// readAndSaveStepsData();
+			if (steps.length > 0) {
+				setContextSteps([ ...contextSteps.filter(({ _event }) => _event !== event._id), ...steps ]);
+			}
+		},
+		[ steps ]
+	);
 
 	// Handle Event Delete
 	const handleEventDelete = async () => {
@@ -113,61 +117,116 @@ const EventDetails = (props) => {
 		});
 	};
 
-	return (
-		<StepStoreContext.Consumer>
-			{(context) => {
-				return (
-					<div className="EventDetails-c-00">
-						<EventDetailsHeader
-							hex_color={pathName === 'todo' ? hex_color : event.hex_color}
-							event={event}
-							handleEventEdit={handleEventEdit}
-							eventDoneHandeler={eventDoneHandeler}
-						/>
+	const onDragEnd = async (result) => {
+		if (result.source.index === result.destination.index) return;
 
+		const tempSteps = [ ...steps ];
+
+		const fromIndex = result.source.index;
+		const toIndex = result.destination.index;
+
+		const movedSteps =
+			fromIndex < toIndex
+				? tempSteps.slice(fromIndex + 1, toIndex + 1).map(({ _id }) => _id)
+				: tempSteps.slice(toIndex, fromIndex).map(({ _id }) => _id);
+
+		await client.mutate({
+			mutation: REARRANGE_STEPS,
+			variables: {
+				focusedStep: result.draggableId,
+				fromRank: tempSteps[fromIndex]._rank,
+				toRank: tempSteps[toIndex]._rank,
+				movedSteps: movedSteps
+			},
+			refetchQueries: [ 'readStepsByEvent' ],
+			awaitRefetchQueries: true
+		});
+	};
+
+	return (
+		<div className="EventDetails-c-00">
+			<EventDetailsHeader
+				hex_color={pathName === 'todo' ? hex_color : event.hex_color}
+				event={event}
+				handleEventEdit={handleEventEdit}
+				eventDoneHandeler={eventDoneHandeler}
+			/>
+			<DragDropContext onDragEnd={onDragEnd}>
+				<Droppable droppableId={event._id} type="STEP_DND">
+					{(provided) => (
 						<Query query={FETCH_STEPS_BY_EVENT} variables={{ eventId: event._id }}>
-							{({ data, loading, error }) => {
-								if (data) {
-									genContextObj(context.steps, data.readStepsByEvent);
+							{({ loading, error, data, refetch }) => {
+								if (error) {
+									return console.log('Error', error);
+								}
+
+								if (data.readStepsByEvent) {
+									console.log('data.readStepsByEvent');
+									setSteps(data.readStepsByEvent);
 								}
 
 								return (
-									<div className="EventDetails-The-List-01">
-										{Object.values(context.steps).map((step, i) => {
-											if (step && step._event === event._id) {
+									<div
+										className="EventDetails-The-List-01"
+										ref={provided.innerRef}
+										{...provided.droppableProps}
+									>
+										{data.readStepsByEvent &&
+											data.readStepsByEvent.map((eachStep, i) => {
+												if (i === 0) console.log('XXX');
+												console.log(i, eachStep.title);
+
+												// FIXME: A Bug Exist Here!
+												// "contextSteps" isn't getting rerendered after Drag&Drop ends
+
 												return (
 													<EventDetailsItem
 														key={i}
-														step={step}
+														index={i}
+														step={eachStep}
 														hex_color={hex_color}
 														handleStepEdit={handleStepEdit}
 														handleStepDelete={handleStepDelete}
 														stepDoneHandeler={stepDoneHandeler}
 													/>
 												);
-											}
-										})}
+											})}
 									</div>
 								);
 							}}
 						</Query>
+					)}
+				</Droppable>
+			</DragDropContext>
 
-						<ItemSubmitForm placeholder="+ Add Step" onSubmit={onStepSubmit} />
+			<ItemSubmitForm placeholder="+ Add Step" onSubmit={onStepSubmit} />
 
-						<EventDetailsBtns
-							event={event}
-							groups={groups}
-							hex_color={hex_color}
-							handleEventEdit={handleEventEdit}
-							handleEventDateEdit={handleEventDateEdit}
-							handleEventDelete={handleEventDelete}
-							closeEventDetails={closeEventDetails}
-						/>
-					</div>
-				);
-			}}
-		</StepStoreContext.Consumer>
+			<EventDetailsBtns
+				event={event}
+				groups={groups}
+				hex_color={hex_color}
+				handleEventEdit={handleEventEdit}
+				handleEventDateEdit={handleEventDateEdit}
+				handleEventDelete={handleEventDelete}
+				closeEventDetails={closeEventDetails}
+			/>
+		</div>
 	);
 };
 
-export default (props) => <ApolloConsumer>{(client) => <EventDetails {...props} client={client} />}</ApolloConsumer>;
+export default (props) => (
+	<StepStoreContext.Consumer>
+		{(context) => (
+			<ApolloConsumer>
+				{(client) => (
+					<EventDetails
+						contextSteps={context.steps}
+						setContextSteps={context.setSteps}
+						{...props}
+						client={client}
+					/>
+				)}
+			</ApolloConsumer>
+		)}
+	</StepStoreContext.Consumer>
+);

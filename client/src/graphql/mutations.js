@@ -72,7 +72,7 @@ export const EDIT_GROUP_TO_INVISIBLE = gql`
 	}
 `;
 
-export const REARRANGE_GROUP = gql`
+export const REARRANGE_GROUPS = gql`
 	mutation rearrangeGroups($focusedGroup: ID!, $fromRank: Int!, $toRank: Int!, $movedGroups: [ID!]!) {
 		rearrangeGroups(focusedGroup: $focusedGroup, fromRank: $fromRank, toRank: $toRank, movedGroups: $movedGroups) {
 			_id
@@ -158,6 +158,14 @@ export const DELETE_EVENT = gql`
 	}
 `;
 
+export const REARRANGE_EVENTS = gql`
+	mutation rearrangeEvents($focusedEvent: ID!, $fromRank: Int!, $toRank: Int!, $movedEvents: [ID!]!) {
+		rearrangeEvents(focusedEvent: $focusedEvent, fromRank: $fromRank, toRank: $toRank, movedEvents: $movedEvents) {
+			_id
+		}
+	}
+`;
+
 export const ADD_NEW_STEP = gql`
 	mutation createStep($title: String!, $_event: ID!) {
 		createStep(title: $title, _event: $_event) {
@@ -199,4 +207,10 @@ export const EDIT_STEP_TO_NOT_DONE = gql`
 	}
 `;
 
-//
+export const REARRANGE_STEPS = gql`
+	mutation rearrangeSteps($focusedStep: ID!, $fromRank: Int!, $toRank: Int!, $movedSteps: [ID!]!) {
+		rearrangeSteps(focusedStep: $focusedStep, fromRank: $fromRank, toRank: $toRank, movedSteps: $movedSteps) {
+			_id
+		}
+	}
+`;

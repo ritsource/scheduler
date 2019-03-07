@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { ApolloConsumer } from 'react-apollo';
 
@@ -6,13 +6,56 @@ import EventListHeader from './EventListHeader';
 import EventListItem from './EventListItem';
 import ItemSubmitForm from '../../_common/components/ItemSubmitForm';
 
-import { ADD_NEW_EVENT, EDIT_EVENT_TO_DONE, EDIT_EVENT_TO_NOT_DONE } from '../../../graphql/mutations';
+import {
+	ADD_NEW_EVENT,
+	EDIT_EVENT_TO_DONE,
+	EDIT_EVENT_TO_NOT_DONE,
+	REARRANGE_EVENTS
+} from '../../../graphql/mutations';
 
 const EventList = (props) => {
-	const { events, activeGroup, client, changeEventId } = props;
+	const { activeGroup, client, changeEventId } = props;
+
+	const [ events, setEvents ] = useState(props.events);
+
+	useEffect(
+		() => {
+			setEvents(props.events);
+		},
+		[ props.events ]
+	);
 
 	// Handle DnD
-	const onDragEnd = () => {};
+	const onDragEnd = (result) => {
+		if (result.source.index === result.destination.index) return;
+
+		const tempEvents = [ ...events ];
+
+		const fromIndex = result.source.index;
+		const toIndex = result.destination.index;
+
+		const movedEvents =
+			fromIndex < toIndex
+				? tempEvents.slice(fromIndex + 1, toIndex + 1).map(({ _id }) => _id)
+				: tempEvents.slice(toIndex, fromIndex).map(({ _id }) => _id);
+
+		client.mutate({
+			mutation: REARRANGE_EVENTS,
+			variables: {
+				focusedEvent: result.draggableId,
+				fromRank: tempEvents[fromIndex]._rank,
+				toRank: tempEvents[toIndex]._rank,
+				movedEvents: movedEvents
+			},
+			refetchQueries: 'readAllGroups',
+			awaitRefetchQueries: true
+		});
+
+		const focusedEvent = tempEvents.splice(fromIndex, 1)[0];
+		tempEvents.splice(toIndex, 0, focusedEvent);
+
+		setEvents(tempEvents);
+	};
 
 	// Handle Event Done & Undone
 	const eventDoneHandeler = async (eventId, boolean) => {

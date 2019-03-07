@@ -15,7 +15,7 @@ module.exports = {
 			const allSteps = await Step.find({
 				_creator: req.user._id,
 				_isDeleted: false
-			});
+			}).sort({ _rank: 1 });
 
 			return allSteps;
 		} catch (error) {
@@ -31,7 +31,7 @@ module.exports = {
 				_event: eventId,
 				_creator: req.user._id,
 				_isDeleted: false
-			});
+			}).sort({ _rank: 1 });
 
 			return allSteps;
 		} catch (error) {
