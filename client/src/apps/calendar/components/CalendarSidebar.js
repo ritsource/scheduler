@@ -56,26 +56,47 @@ const CalendarSidebar = (props) => {
 
 	const handleGroupRename = async ({ groupId, title, hex_color }) => {
 		if (title.length > 0) {
-			await client.mutate({
-				mutation: EDIT_GROUP_BY_ID,
-				variables: { groupId, title, hex_color },
-				refetchQueries: [ 'readGroupsOnCalendar' ],
-				awaitRefetchQueries: true
-			});
-			document.querySelector(`#CalendarSidebarItem-Input-xx-${groupId}`).blur();
+			notify.addToQueue('Saving...');
+
+			client
+				.mutate({
+					mutation: EDIT_GROUP_BY_ID,
+					variables: { groupId, title, hex_color },
+					refetchQueries: [ 'readGroupsOnCalendar' ],
+					awaitRefetchQueries: true
+				})
+				.then(() => {
+					notify.removeFromQueue('Saving...');
+					document.querySelector(`#CalendarSidebarItem-Input-xx-${groupId}`).blur();
+				})
+				.catch(() => {
+					notify.removeFromQueue('Saving...');
+					notify.addToQueue('Failed!');
+				});
 		}
 	};
 
-	const handleGroupDelete = async (groupId) => {
-		await client.mutate({
-			mutation: DELETE_GROUP,
-			variables: { groupId },
-			refetchQueries: [ 'readGroupsOnCalendar' ]
-		});
+	const handleGroupDelete = (groupId) => {
+		notify.addToQueue('Deleting...');
+		client
+			.mutate({
+				mutation: DELETE_GROUP,
+				variables: { groupId },
+				refetchQueries: [ 'readGroupsOnCalendar' ],
+				awaitRefetchQueries: true
+			})
+			.then(() => {
+				notify.removeFromQueue('Deleting...');
+			})
+			.catch(() => {
+				notify.removeFromQueue('Deleting...');
+				notify.addToQueue('Failed!');
+			});
 	};
 
 	// Handeler for adding new group
 	const onGroupSubmit = (title) => {
+		notify.addToQueue('Saving...');
 		// ADD_NEW_GROUP
 		client
 			.mutate({
@@ -85,7 +106,12 @@ const CalendarSidebar = (props) => {
 				awaitRefetchQueries: true
 			})
 			.then(() => {
+				notify.removeFromQueue('Saving...');
 				scrollToBottom('.Sidebar-The-List-01');
+			})
+			.catch(() => {
+				notify.removeFromQueue('Saving...');
+				notify.addToQueue('Failed!');
 			});
 	};
 
@@ -120,7 +146,7 @@ const CalendarSidebar = (props) => {
 					<p
 						style={{
 							margin: '15px 29px 10px 29px',
-							color: 'var(--theme-color)',
+							color: 'var(--theme-color-middle)',
 							fontSize: '18px',
 							fontWeight: 'bold'
 						}}

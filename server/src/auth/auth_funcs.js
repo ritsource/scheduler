@@ -7,18 +7,23 @@ const Group = mongoose.model('Group');
 const loginUser = async ({ email, password, req }) => {
 	return new Promise((resolve, reject) => {
 		passport.authenticate('local', (err, user) => {
-			if (err) reject(err);
-			if (!user) reject('Invalid credentials');
+			if (err) return reject(err);
 
-			req.logIn(user, (err) => {
-				if (err) reject(err);
+			if (user) {
+				req.logIn(user, (err) => {
+					if (err) return reject(err);
 
-				user.password = null;
-				resolve(user);
-			});
+					if (user) user.password = null;
+					resolve(user);
+				});
+			} else {
+				return reject('Something went wrong');
+			}
 		})({ body: { email, password } });
 	});
 };
+
+// ritwiksaha310@gmail.com
 
 // User Register Function
 const registerUser = async ({ name, email, password, req }) => {
@@ -49,7 +54,7 @@ const registerUser = async ({ name, email, password, req }) => {
 				reject(err);
 			}
 
-			newUser.password = null;
+			if (newUser) newUser.password = null;
 			resolve(newUser);
 		});
 	});

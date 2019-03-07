@@ -35,7 +35,13 @@ const CalendarEventForm = (props) => {
 				try {
 					await client.mutate({
 						mutation: ADD_NEW_EVENT,
-						variables: { title, _group: selectedGroupId, date_from, date_to },
+						variables: {
+							title,
+							_group: selectedGroupId,
+							date_from,
+							date_to,
+							hex_color: groups.find(({ _id }) => _id === selectedGroupId).hex_color
+						},
 						refetchQueries: [ 'readGroupsOnCalendar' ],
 						awaitRefetchQueries: true
 					});

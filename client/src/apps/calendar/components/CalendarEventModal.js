@@ -9,10 +9,12 @@ import SubOptionColor from '../../_common/components/SubOptionColor';
 import EventGroupSelector from '../../_common/components/EventGroupSelector';
 import EventDatepicker from '../../_common/components/EventDatepicker';
 
+import NotifyQueueContext from '../../_common/contexts/NotifyQueueContext';
+
 import { DELETE_EVENT, EDIT_EVENT_BY_ID, EDIT_EVENT_DATES } from '../../../graphql/mutations';
 
 const CalendarEventModal = (props) => {
-	const { event, setActiveEvent, animatedClosing, client } = props;
+	const { event, setActiveEvent, animatedClosing, client, notify } = props;
 
 	const [ title, setTitle ] = useState(event.title || '');
 	const [ groups, setGroups ] = useState([]);
@@ -20,22 +22,41 @@ const CalendarEventModal = (props) => {
 	const [ colorPanelState, setColorPanelState ] = useState({ visible: false, screenX: null, screenY: null });
 
 	// Handle Event Delete
-	const handleEventDelete = async () => {
-		await client.mutate({
-			mutation: DELETE_EVENT,
-			variables: { eventId: event._id },
-			refetchQueries: [ 'readGroupsOnCalendar' ]
-		});
+	const handleEventDelete = () => {
+		notify.addToQueue('Deleting...');
+		client
+			.mutate({
+				mutation: DELETE_EVENT,
+				variables: { eventId: event._id },
+				refetchQueries: [ 'readGroupsOnCalendar' ],
+				awaitRefetchQueries: true
+			})
+			.then(() => {
+				notify.removeFromQueue('Deleting...');
+			})
+			.catch(() => {
+				notify.removeFromQueue('Deleting...');
+				notify.addToQueue('Failed!');
+			});
 	};
 
 	// Handle Event Edit
 	const handleEventEdit = async ({ title, description, _group }) => {
-		await client.mutate({
-			mutation: EDIT_EVENT_BY_ID,
-			variables: { eventId: event._id, title, description, _group },
-			refetchQueries: [ 'readGroupsOnCalendar' ],
-			awaitRefetchQueries: true
-		});
+		notify.addToQueue('Saving...');
+		client
+			.mutate({
+				mutation: EDIT_EVENT_BY_ID,
+				variables: { eventId: event._id, title, description, _group },
+				refetchQueries: [ 'readGroupsOnCalendar' ],
+				awaitRefetchQueries: true
+			})
+			.then(() => {
+				notify.removeFromQueue('Saving...');
+			})
+			.catch(() => {
+				notify.removeFromQueue('Saving...');
+				notify.addToQueue('Failed!');
+			});
 	};
 
 	// Handle  Event Dates Edit
@@ -188,5 +209,11 @@ const CalendarEventModal = (props) => {
 };
 
 export default (props) => (
-	<ApolloConsumer>{(client) => <CalendarEventModal {...props} client={client} />}</ApolloConsumer>
+	<ApolloConsumer>
+		{(client) => (
+			<NotifyQueueContext.Consumer>
+				{(notify) => <CalendarEventModal {...props} client={client} notify={notify} />}
+			</NotifyQueueContext.Consumer>
+		)}
+	</ApolloConsumer>
 );

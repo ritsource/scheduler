@@ -74,7 +74,7 @@ module.exports = {
 		}
 	},
 
-	createEvent: async ({ title, description, date_from, date_to, _group }, req) => {
+	createEvent: async ({ title, description, date_from, date_to, _group, hex_color }, req) => {
 		requireAuth(req);
 
 		try {
@@ -89,9 +89,15 @@ module.exports = {
 				date_to = new Date().setHours(0, 0, 0, 0).valueOf();
 			}
 
+			const bodyObj = {};
+			if (title) bodyObj.title = title;
+			if (description) bodyObj.description = description;
+			if (hex_color) bodyObj.hex_color = hex_color;
+
+			if (!_group) throw new Error('Group required');
+
 			const newEvent = await new Event({
-				title,
-				description,
+				...bodyObj,
 				date_from,
 				date_to,
 				_group,

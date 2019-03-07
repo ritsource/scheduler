@@ -13,18 +13,37 @@ const CreadentialsForm = ({ pathName }, context) => {
 	const [ password, setPassword ] = useState('');
 	const [ errorMsg, setErrorMsg ] = useState(false);
 
-	const loginUser = async () => {
-		return await client.mutate({
-			mutation: LOGIN_USER,
-			variables: { email, password }
-		});
+	const loginUser = async (setProgressBar) => {
+		setProgressBar(true);
+		setErrorMsg(false);
+
+		try {
+			await client.mutate({
+				mutation: LOGIN_USER,
+				variables: { email, password }
+			});
+			window.location.href = '/calendar';
+		} catch (error) {
+			// console.log(error.graphQLErrors);
+			setProgressBar(false);
+			setErrorMsg('Incorrect email or password');
+		}
 	};
 
-	const registerUser = async () => {
-		return await client.mutate({
-			mutation: REGISTER_USER,
-			variables: { name, email, password }
-		});
+	const registerUser = async (setProgressBar) => {
+		setProgressBar(true);
+		setErrorMsg(false);
+
+		try {
+			await client.mutate({
+				mutation: REGISTER_USER,
+				variables: { name, email, password }
+			});
+			window.location.href = '/calendar';
+		} catch (error) {
+			setProgressBar(false);
+			setErrorMsg('Something went wrong, Try Again');
+		}
 	};
 
 	return (
@@ -42,25 +61,9 @@ const CreadentialsForm = ({ pathName }, context) => {
 							e.preventDefault();
 
 							if (pathName === 'signup') {
-								context.setProgressBar(true);
-								setErrorMsg(false);
-								try {
-									await registerUser();
-									window.location.href = '/todo';
-								} catch (error) {
-									context.setProgressBar(false);
-									setErrorMsg('Something went wrong. Try later.');
-								}
+								registerUser(context.setProgressBar);
 							} else {
-								context.setProgressBar(true);
-								setErrorMsg(false);
-								try {
-									await loginUser();
-									window.location.href = '/todo';
-								} catch (error) {
-									context.setProgressBar(false);
-									setErrorMsg('Invalid email or password');
-								}
+								loginUser(context.setProgressBar);
 							}
 						}}
 					>

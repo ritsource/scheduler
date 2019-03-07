@@ -23,10 +23,10 @@ module.exports = (passport) => {
 						if (err) return err;
 
 						if (isMatch) return done(null, oldUser);
-						else return done(null, false, { message: 'Incorrect password' });
+						else return done('Incorrect password', null);
 					});
 				} else {
-					done(null, false, { message: 'Incorrect password' });
+					done('No user with this email', null);
 				}
 			}
 		)
