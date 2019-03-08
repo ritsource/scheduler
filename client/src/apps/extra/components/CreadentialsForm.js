@@ -56,6 +56,11 @@ const CreadentialsForm = ({ pathName }, context) => {
 					{errorMsg && (
 						<p style={{ width: '100%', margin: '0px', color: 'var(--danger-red-color)' }}>{errorMsg}</p>
 					)}
+					{errorMsg === 'Incorrect email or password' && (
+						<p style={{ margin: '10px 0px 0px 0px', width: '100%' }}>
+							Forgot password? - <Link to="/forgot-password">Reset It</Link>
+						</p>
+					)}
 					<form
 						onSubmit={async (e) => {
 							e.preventDefault();

@@ -72,7 +72,7 @@ const SettingsComp = (props) => {
 						<div className="SettingsComp-Setting-Div-01 SettingsComp-Setting-Div-Flexible-01 Theme-Slide-Background-onHover-99">
 							<div className="Flex-Class-Row-Start">
 								<GoVersions />
-								<p>Version - 2.0.0</p>
+								<p>Version - 2.0.0-beta.1</p>
 							</div>
 							<FaArrowRight />
 						</div>

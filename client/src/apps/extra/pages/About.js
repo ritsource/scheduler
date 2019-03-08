@@ -1,8 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { GoMarkGithub, GoStar, GoRepoForked } from 'react-icons/go';
+import axios from 'axios';
 
 const AboutPage = () => {
+	const [ forks, setForks ] = useState(0);
+	const [ starts, setStars ] = useState(0);
+
+	useEffect(() => {
+		axios.get('https://api.github.com/repos/ritwik310/scheduler/forks').then(({ data }) => {
+			setForks(data.length);
+		});
+		axios.get('https://api.github.com/repos/ritwik310/scheduler/stargazers').then(({ data }) => {
+			setStars(data.length);
+		});
+	}, []);
+
 	return (
 		<div className="About-p-00">
 			<h1>Schedule your work in Style</h1>
@@ -31,7 +44,7 @@ const AboutPage = () => {
 			</div>
 
 			<p>
-				<strong>Version 2.0</strong> - Report any bugs {' '}
+				<strong>Version 2.0.0-beta.1</strong> - Report any bugs {' '}
 				<a href="/contact" target="_black">
 					here
 				</a>
@@ -47,7 +60,7 @@ const AboutPage = () => {
 						style={{ margin: '5px 0px', padding: '10px' }}
 						className="Theme-Btn-Black-99 Theme-Btn-Shadow-99"
 					>
-						27
+						{forks}
 					</button>
 				</a>
 				<div>
@@ -60,7 +73,7 @@ const AboutPage = () => {
 							style={{ margin: '5px 0px', padding: '10px' }}
 							className="Theme-Btn-Black-99 Theme-Btn-Shadow-99"
 						>
-							105
+							{starts}
 						</button>
 					</a>
 				</div>

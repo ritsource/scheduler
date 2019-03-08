@@ -26,8 +26,8 @@ module.exports = (req, res, next) => {
 	let mailOptions = {
 		from: keys.mail_sender_address,
 		to: recieverEmail,
-		subject: 'Reset Password - My Calendar',
-		// text: 'My Calendar',
+		subject: 'Scheduler - Reset Password',
+		text: 'Scheduler',
 		html: outputTemp,
 		auth: {
 			user: keys.mail_sender_address,

@@ -16,7 +16,7 @@ const ResetPassPage = () => {
 
 		try {
 			await axios.post('/auth/password_reset', { token: urlParams.get('token'), password: password1 });
-			window.location.replace('/calendar');
+			window.location.replace('/login');
 		} catch (error) {
 			setProgressBar(false);
 			if (error.response.status === 422) setErrorMsg('Unable to change password');
