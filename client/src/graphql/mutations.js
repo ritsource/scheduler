@@ -169,7 +169,11 @@ export const REARRANGE_EVENTS = gql`
 export const ADD_NEW_STEP = gql`
 	mutation createStep($title: String!, $_event: ID!) {
 		createStep(title: $title, _event: $_event) {
+			_id
 			title
+			_isDone
+			_rank
+			_event
 		}
 	}
 `;
