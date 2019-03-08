@@ -15,15 +15,6 @@ services:
     volumes:
       - /app/node_modules
       - ./client:/app
-  api_server:
-    build:
-      context: ./api_server
-      dockerfile: dev.Dockerfile
-    volumes:
-      - /app/node_modules
-      - ./api_server:/app
-    environment:
-      - AUTH_REDIRECT_URL_BASE=http://localhost:4001
   server:
     build:
       context: ./server

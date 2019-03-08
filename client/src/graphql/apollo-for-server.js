@@ -9,7 +9,6 @@ export default (req) => {
 		cache: new InMemoryCache(),
 		link: new HttpLink({
 			uri: 'http://server:5000/graphql',
-			// uri: 'http://api_server:5000/graphql',
 			credentials: 'same-origin',
 			// fetch: fetch,
 			headers: {
