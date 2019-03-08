@@ -30,6 +30,28 @@ or using **https**
 $ git clone https://github.com/ritwik310/scheduler.git
 ```
 
+### Some Configuration
+> **Note:** Before you can run the app on your local computer you need to do a little bit of configuration in place.
+
+**Add a 'dev_keys' File**
+- Create a file names **dev_keys** inside the config directory on for server `/server/src/config/dev_keys.js`
+
+- Copy & Paste the following code in that file
+```javascript
+module.exports  = {
+	mongo_uri: 'mongodb://mongo:27017/scheduler-dev',
+	google_client_id: '',
+	google_client_secret:  '',
+	google_refresh_token: '',
+	google_access_token: '',
+	mail_sender_address: '',
+	facebook_app_id: '',
+	facebook_app_secret: '',
+	cookie_key: '$-ANY-RANDOM-STRING',
+};
+```
+- The code above will do the job. But if you want to enable **Google-OAuth** and **Facebook-OAuth** login. Then you need to go to [Google](https://console.cloud.google.com) and [Facebook's](https://developers.facebook.com/) developer website and generate credentials to use.
+
 ### Starting the App
 
 After getting into the root directory using `cd ./schedular`, you can start the project by running :point_down:
