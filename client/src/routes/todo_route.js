@@ -14,7 +14,7 @@ export default (app) => {
 		if (req._isAuth) {
 			const context = { req };
 			const client = getApolloClient(req);
-			const jsfile = 'todo.js';
+			const jsfile = 'todo';
 
 			const promises = matchRoutes(TodoRouter, req.path).map(({ route }) => {
 				return route.loadData ? route.loadData(client, context) : null;

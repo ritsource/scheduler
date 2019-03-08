@@ -50,7 +50,7 @@ const CalendarComp = (props) => {
 
 	useEffect(
 		() => {
-			console.log(getParam('year'), getParam('month'));
+			// console.log(getParam('year'), getParam('month'));
 			setYear(getParam('year') || new Date().getFullYear());
 			setMonth(getParam('month') || new Date().getMonth());
 		},

@@ -150,7 +150,6 @@ const CalendarSidebar = (props) => {
 							fontSize: '18px',
 							fontWeight: 'bold'
 						}}
-						onClick={() => console.log(groups[1]._events)}
 					>
 						Groups
 					</p>

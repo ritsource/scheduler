@@ -12,7 +12,7 @@ export default (app) => {
 		} else {
 			const context = { req };
 			const client = getApolloClient(req);
-			const jsfile = 'extra.js';
+			const jsfile = 'extra';
 
 			const html = renderer(req, ExtraRouter, client, context, jsfile);
 			res.status(404).send(html);

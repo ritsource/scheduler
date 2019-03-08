@@ -6,6 +6,8 @@ import EventListHeader from './EventListHeader';
 import EventListItem from './EventListItem';
 import ItemSubmitForm from '../../_common/components/ItemSubmitForm';
 
+import NotifyQueueContext from '../../_common/contexts/NotifyQueueContext';
+
 import {
 	ADD_NEW_EVENT,
 	EDIT_EVENT_TO_DONE,
@@ -14,7 +16,7 @@ import {
 } from '../../../graphql/mutations';
 
 const EventList = (props) => {
-	const { activeGroup, client, changeEventId } = props;
+	const { activeGroup, client, notify, changeEventId } = props;
 
 	const [ events, setEvents ] = useState(props.events);
 
@@ -69,15 +71,21 @@ const EventList = (props) => {
 
 	// Handle new Event Submit
 	const onEventSubmit = (title) => {
+		notify.addToQueue('Saving...');
 		client
 			.mutate({
 				mutation: ADD_NEW_EVENT,
-				variables: { title, groupId: activeGroup._id },
+				variables: { title, _group: activeGroup._id },
 				refetchQueries: [ 'readAllGroups' ],
 				awaitRefetchQueries: true
 			})
 			.then(() => {
+				notify.removeFromQueue('Saving...');
 				scrollToBottom('.EventList-The-List-01');
+			})
+			.catch(() => {
+				notify.removeFromQueue('Saving...');
+				notify.addToQueue('Failed!');
 			});
 	};
 
@@ -110,4 +118,12 @@ const EventList = (props) => {
 	);
 };
 
-export default (props) => <ApolloConsumer>{(client) => <EventList {...props} client={client} />}</ApolloConsumer>;
+export default (props) => (
+	<ApolloConsumer>
+		{(client) => (
+			<NotifyQueueContext.Consumer>
+				{(notify) => <EventList {...props} client={client} notify={notify} />}
+			</NotifyQueueContext.Consumer>
+		)}
+	</ApolloConsumer>
+);

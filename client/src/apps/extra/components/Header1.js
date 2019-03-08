@@ -21,8 +21,6 @@ const Header1 = ({ pathName }) => {
 				<React.Fragment>
 					<CustomProgressBar />
 					{context.progressBar && <CustomProgressBar force={true} />}
-					{/* {(() => console.log('context.progressBar', context.progressBar))()} */}
-
 					<div className="Header1-c-00">
 						<div className="Header1-Left-Div-01">
 							<Link to="/">

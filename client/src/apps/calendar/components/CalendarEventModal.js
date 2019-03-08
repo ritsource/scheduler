@@ -84,11 +84,9 @@ const CalendarEventModal = (props) => {
 				`
 			});
 
-			console.log(readGroupsOnCalendar);
-
 			setGroups(readGroupsOnCalendar);
 		} catch (error) {
-			console.log(error);
+			// console.log(error);
 		}
 	};
 

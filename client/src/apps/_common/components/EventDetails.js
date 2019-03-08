@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { ApolloConsumer, Query } from 'react-apollo';
 
 import StepStoreContext from '../contexts/StepStoreContext';
+import NotifyQueueContext from '../../_common/contexts/NotifyQueueContext';
+
 import EventDetailsHeader from '../components/EventDetailsHeader';
 import ItemSubmitForm from './ItemSubmitForm';
 import EventDetailsItem from './EventDetailsItem';
@@ -22,7 +24,7 @@ import {
 } from '../../../graphql/mutations';
 
 const EventDetails = (props) => {
-	const { event, groups, client, pathName, hex_color, closeEventDetails } = props;
+	const { event, groups, client, notify, pathName, hex_color, closeEventDetails } = props;
 
 	const gqlRefetchQueries = pathName === 'todo' ? [ 'readAllGroups' ] : [ 'readGroupsOnCalendar' ];
 
@@ -37,12 +39,23 @@ const EventDetails = (props) => {
 	};
 
 	// Handle Event Delete
-	const handleEventDelete = async () => {
-		await client.mutate({
-			mutation: DELETE_EVENT,
-			variables: { eventId: event._id },
-			refetchQueries: gqlRefetchQueries
-		});
+	const handleEventDelete = () => {
+		notify.addToQueue('Deleting...');
+		client
+			.mutate({
+				mutation: DELETE_EVENT,
+				variables: { eventId: event._id },
+				refetchQueries: gqlRefetchQueries,
+				awaitRefetchQueries: true
+			})
+			.then(() => {
+				closeEventDetails();
+				notify.removeFromQueue('Deleting...');
+			})
+			.catch(() => {
+				notify.removeFromQueue('Deleting...');
+				notify.addToQueue('Failed!');
+			});
 	};
 
 	// Handle Event Edit
@@ -76,6 +89,7 @@ const EventDetails = (props) => {
 
 	// Handle New Step Submit
 	const onStepSubmit = (title) => {
+		notify.addToQueue('Saving...');
 		client
 			.mutate({
 				mutation: ADD_NEW_STEP,
@@ -84,7 +98,12 @@ const EventDetails = (props) => {
 				awaitRefetchQueries: true
 			})
 			.then(() => {
+				notify.removeFromQueue('Saving...');
 				scrollToBottom('.EventDetails-The-List-01');
+			})
+			.catch(() => {
+				notify.removeFromQueue('Saving...');
+				notify.addToQueue('Failed!');
 			});
 	};
 
@@ -170,4 +189,12 @@ const EventDetails = (props) => {
 	);
 };
 
-export default (props) => <ApolloConsumer>{(client) => <EventDetails {...props} client={client} />}</ApolloConsumer>;
+export default (props) => (
+	<ApolloConsumer>
+		{(client) => (
+			<NotifyQueueContext.Consumer>
+				{(notify) => <EventDetails {...props} client={client} notify={notify} />}
+			</NotifyQueueContext.Consumer>
+		)}
+	</ApolloConsumer>
+);

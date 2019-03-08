@@ -4,7 +4,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = {
-	mode: 'development',
+	mode: 'production',
 	entry: './src/styles/app.scss',
 	output: {
 		path: path.resolve(__dirname, 'public')
@@ -21,7 +21,7 @@ module.exports = {
 	},
 	plugins: [
 		new MiniCssExtractPlugin({
-			filename: 'styles.css'
+			filename: 'styles.v2.0.0.css'
 		})
 	],
 	module: {

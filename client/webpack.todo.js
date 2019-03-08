@@ -5,7 +5,7 @@ const baseConfig = require('./webpack.base.js');
 const config = {
 	entry: './src/apps/todo/index.js',
 	output: {
-		filename: 'todo.js',
+		filename: 'todo.v2.0.0.js',
 		path: path.resolve(__dirname, 'public')
 	}
 };

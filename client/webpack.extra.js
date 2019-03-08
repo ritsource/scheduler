@@ -5,7 +5,7 @@ const baseConfig = require('./webpack.base.js');
 const config = {
 	entry: './src/apps/extra/index.js',
 	output: {
-		filename: 'extra.js',
+		filename: 'extra.v2.0.0.js',
 		path: path.resolve(__dirname, 'public')
 	}
 };

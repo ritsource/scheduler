@@ -17,9 +17,9 @@ window.scrollToBottom = (selector) => {
 window.__isClient__ = true;
 
 (function() {
-	console.log('window.__isJsDone__', window.__javascript__);
+	// console.log('window.__isJsDone__', window.__javascript__);
 	window.__javascript__ = true;
-	console.log('window.__isJsDone__', window.__javascript__);
+	// console.log('window.__isJsDone__', window.__javascript__);
 })();
 
 ReactDOM.hydrate(

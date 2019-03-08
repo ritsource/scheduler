@@ -9,14 +9,16 @@ import { ADD_NEW_GROUP, REARRANGE_GROUPS } from '../../../graphql/mutations';
 import { FETCH_ALL_GROUPS } from '../../../graphql/queries';
 
 import SidebarContext from '../../_common/contexts/SidebarContext';
+import NotifyQueueContext from '../../_common/contexts/NotifyQueueContext';
 
 const TodoSidebar = (props) => {
-	const { groups, changeGroupId, client } = props;
+	const { groups, changeGroupId, client, notify } = props;
 
 	// const [] = useState(groups);
 
 	// Handeler for adding new group
 	const onGroupSubmit = (title) => {
+		notify.addToQueue('Saving...');
 		// ADD_NEW_GROUP
 		client
 			.mutate({
@@ -26,7 +28,12 @@ const TodoSidebar = (props) => {
 				awaitRefetchQueries: true
 			})
 			.then(() => {
+				notify.removeFromQueue('Saving...');
 				scrollToBottom('.Sidebar-The-List-01');
+			})
+			.catch(() => {
+				notify.removeFromQueue('Saving...');
+				notify.addToQueue('Failed!');
 			});
 	};
 
@@ -100,4 +107,12 @@ const TodoSidebar = (props) => {
 	);
 };
 
-export default (props) => <ApolloConsumer>{(client) => <TodoSidebar {...props} client={client} />}</ApolloConsumer>;
+export default (props) => (
+	<ApolloConsumer>
+		{(client) => (
+			<NotifyQueueContext.Consumer>
+				{(notify) => <TodoSidebar {...props} client={client} notify={notify} />}
+			</NotifyQueueContext.Consumer>
+		)}
+	</ApolloConsumer>
+);

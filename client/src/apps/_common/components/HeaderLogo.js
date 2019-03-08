@@ -17,7 +17,6 @@ const HeaderLogo = (props) => {
 	const toggleSidebar = () => {
 		if (!__isNode__) {
 			const instState = JSON.parse(window.localStorage.getItem('sidebarVisible'));
-			// console.log(instState);
 
 			if (instState === null) {
 				window.localStorage.setItem('sidebarVisible', false);

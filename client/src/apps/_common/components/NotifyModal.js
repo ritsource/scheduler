@@ -7,8 +7,6 @@ const NotifyModal = (props) => {
 	return (
 		<NotifyQueueContext.Consumer>
 			{(context) => {
-				console.log('contextcontextcontextcontextcontextcontextcontextcontext', context);
-
 				return (
 					<React.Fragment>
 						<div>

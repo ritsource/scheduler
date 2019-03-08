@@ -7,7 +7,7 @@ export default (app) => {
 	app.get([ '/about', '/login', '/signup', '/forget-password', '/reset-password', '/privacy-policy' ], (req, res) => {
 		const context = { req };
 		const client = getApolloClient(req);
-		const jsfile = 'extra.js';
+		const jsfile = 'extra';
 
 		const html = renderer(req, ExtraRouter, client, context, jsfile);
 		res.send(html);

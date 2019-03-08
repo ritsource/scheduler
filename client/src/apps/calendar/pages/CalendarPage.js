@@ -9,7 +9,7 @@ const CalendarPage = (props, staticContext) => {
 	return (
 		<Query query={FETCH_ALL_GROUPS_ON_CALENDAR}>
 			{({ data, loading, error }) => {
-				console.log('My data', data);
+				// console.log('My data', data);
 
 				return (
 					<React.Fragment>

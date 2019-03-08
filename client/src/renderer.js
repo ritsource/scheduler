@@ -5,7 +5,7 @@ import { ApolloProvider } from 'react-apollo';
 import { renderRoutes } from 'react-router-config';
 import serialize from 'serialize-javascript';
 
-export default (req, router, client, context, jsfile) => {
+export default (req, router, client, context, jsfilename) => {
 	console.log('req.cookies', req.cookies);
 
 	const content = renderToString(
@@ -32,7 +32,7 @@ export default (req, router, client, context, jsfile) => {
         
         <link rel="stylesheet" href="css/${req.cookies.myAppColorTheme || 'Blue'}.css">
         <link rel="stylesheet" href="css/${req.cookies.myAppColorMode || 'lightOnly'}.css">
-        <link rel="stylesheet" href="styles.css">
+        <link rel="stylesheet" href="styles.v2.0.0.css">
 
         <title>My Calendar</title>
       </head>
@@ -40,7 +40,7 @@ export default (req, router, client, context, jsfile) => {
         <div id="root">${content}<div>
       </body>
       <script>window.__APOLLO_STATE__ = ${JSON.stringify(client.extract())}</script>
-      <script src="${jsfile}"></script>
+      <script src="${jsfilename}.v2.0.0.js"></script>
     </html>
   `;
 };

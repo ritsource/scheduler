@@ -67,8 +67,6 @@ const EventDetailsBtns = (props) => {
 				className="EventDetailsBtns-Desc-Submit-Btn-01"
 				style={{ background: hex_color, color: 'white' }}
 				onClick={async () => {
-					console.log(description);
-
 					await handleEventEdit({ description: description });
 					document.querySelector('.EventDetailsBtns-Textarea-01').blur();
 				}}

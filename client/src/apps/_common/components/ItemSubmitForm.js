@@ -7,9 +7,7 @@ const ItemSubmitForm = (props) => {
 	return (
 		<form
 			onSubmit={async (e) => {
-				console.log(e);
 				e.preventDefault();
-				// e.preventDefault();
 
 				setValue('');
 				if (value.length > 0) {

@@ -1,3 +1,7 @@
 :root {
 	--theme-color: #088cfb;
+	--theme-color-dark: #0061c3;
+	--theme-color-light: #00a6f9;
+	--secondary-color-dark: #ff9b17;
+	--secondary-color-light: #ffc63f;
 }

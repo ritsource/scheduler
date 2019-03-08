@@ -130,8 +130,6 @@ const SettingsComp = (props) => {
 						)}
 					>
 						{Object.keys(app_theme_options).map((key, i) => {
-							// console.log('app_theme_options[key]', app_theme_options[key]);
-
 							return (
 								<Option key={i} id={key}>
 									<div className="Flex-Class-Row-Space-Between Theme-Dropdown-Content-Item-99 Theme-Slide-Background-onHover-99">

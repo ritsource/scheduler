@@ -21,8 +21,6 @@ const Calendar = (props) => {
 	return (
 		<Query query={FETCH_CURRENT_USER}>
 			{({ data, loading, error }) => {
-				// console.log(data.currentUser);
-
 				return (
 					<ProgressbarProvider>
 						<NotifyQueueProvider>

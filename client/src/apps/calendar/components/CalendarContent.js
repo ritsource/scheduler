@@ -135,8 +135,6 @@ const CalendarContent = (props) => {
 				}
 			});
 
-			console.log('LOL 2', tempEventDistMap);
-
 			await setEventDistMap(tempEventDistMap);
 		}
 	};
@@ -172,7 +170,6 @@ const CalendarContent = (props) => {
 
 	return (
 		<div className={miniCalendar ? 'CalendarContent-c-00-Mini' : 'CalendarContent-c-00'}>
-			{/* <button style={{ position: 'fixed', zIndex: '60' }} onClick={() => console.log(dateDistMap)} /> */}
 			{rowArr.map((x, i) => {
 				return (
 					<CalendarRow

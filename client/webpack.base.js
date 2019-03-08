@@ -1,12 +1,12 @@
 module.exports = {
-  mode: 'development',
-  module: {
-    rules: [
-      {
-        test: /\.js?$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/
-      }
-    ]
-  }
-}
+	mode: 'production',
+	module: {
+		rules: [
+			{
+				test: /\.js?$/,
+				loader: 'babel-loader',
+				exclude: /node_modules/
+			}
+		]
+	}
+};
