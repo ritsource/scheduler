@@ -1,5 +1,9 @@
 version: '3'
 services:
+  mongo:
+    image: 'mongo:4.1.8-xenial'
+    ports:
+      - '27017:27017'
   nginx:
     build:
       context: ./nginx
@@ -22,3 +26,4 @@ services:
       - ./server:/app
     environment:
       - AUTH_REDIRECT_URL_BASE=http://localhost:4001
+      - NODE_ENV=development

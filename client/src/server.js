@@ -3,6 +3,8 @@ import 'cross-fetch/polyfill';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 
+import checkAuth from './middlewares/check_auth';
+
 const app = express();
 
 app.use(cookieParser());
@@ -12,6 +14,14 @@ import extraRoute from './routes/extra_route';
 import todoRoute from './routes/todo_route';
 import calendarRoute from './routes/calendar_route';
 import notFoundRoute from './routes/404_route';
+
+app.get('/', checkAuth, (req, res) => {
+	if (req._isAuth) {
+		res.redirect('/calendar');
+	} else {
+		res.redirect('/about');
+	}
+});
 
 extraRoute(app);
 todoRoute(app);

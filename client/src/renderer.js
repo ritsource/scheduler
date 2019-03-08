@@ -41,7 +41,7 @@ export default (req, router, client, context, jsfilename) => {
         <link rel="stylesheet" href="css/${req.cookies.myAppColorMode || 'lightOnly'}.css" />
         <link rel="stylesheet" href="styles.v2.0.0.css" />
 
-        <title>${req.path.charAt(1).toUpperCase() + req.path.slice(2)} - Scheduler</title>
+        <title>${req.path.charAt(1).toUpperCase() + req.path.slice(2) || 'About'} - Scheduler</title>
       </head>
       <body>
         <div id="root">${content}<div>
