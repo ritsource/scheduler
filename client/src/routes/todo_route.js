@@ -27,8 +27,7 @@ export default (app) => {
 					res.send(html);
 				})
 				.catch((error) => {
-					console.log('error', error.message);
-
+					// console.log('error', error.message);
 					res.send(error);
 				});
 		} else {

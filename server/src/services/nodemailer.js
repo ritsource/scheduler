@@ -39,7 +39,7 @@ module.exports = (req, res, next) => {
 
 	transporter.sendMail(mailOptions, (error, info) => {
 		if (error) {
-			console.log('error', error);
+			// console.log('error', error);
 			return res.status(405).send();
 		}
 

@@ -13,8 +13,10 @@ const EventDatepicker = (props) => {
 			<Datepicker
 				initDate={new Date(event.date_from)}
 				themeColor="var(--theme-color)"
+				textColor="var(--text-color-light)"
 				borderColor="1px solid var(--border-color)"
-				borderRadius="2px"
+				backgroundColor="var(--background-color)"
+				borderRadius="0px"
 				onDateSelect={async (timeStamp) => {
 					setDFromAsync(true);
 					await handleEventDateEdit({ date_from: timeStamp });
@@ -43,8 +45,12 @@ const EventDatepicker = (props) => {
 			<p style={{ margin: '5px' }}>to</p>
 
 			<Datepicker
-				themeColor="var(--theme-color)"
 				initDate={new Date(event.date_to)}
+				themeColor="var(--theme-color)"
+				textColor="var(--text-color-light)"
+				borderColor="1px solid var(--border-color)"
+				backgroundColor="var(--background-color)"
+				borderRadius="0px"
 				onDateSelect={async (timeStamp) => {
 					setDToAsync(true);
 					await handleEventDateEdit({ date_to: timeStamp });

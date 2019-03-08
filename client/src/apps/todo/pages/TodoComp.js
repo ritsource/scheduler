@@ -107,7 +107,7 @@ const TodoComp = (props) => {
 						/>
 					)}
 					{settings ? (
-						<SettingsComp />
+						<SettingsComp setSettings={setSettings} />
 					) : activeEvent ? (
 						<EventDetails
 							event={activeEvent}

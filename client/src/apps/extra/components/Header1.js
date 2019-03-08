@@ -34,7 +34,7 @@ const Header1 = ({ pathName }) => {
 											width: 'auto'
 										}}
 									/>
-									Schedular
+									Scheduler
 								</h2>
 							</Link>
 						</div>

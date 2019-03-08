@@ -51,7 +51,7 @@ const CreadentialsForm = ({ pathName }, context) => {
 			{(context) => (
 				<div className="CreadentialsForm-c-00">
 					<h2 style={{ textAlign: 'left', margin: '10px 0px', width: '100%' }}>
-						{pathName === 'signup' ? 'Create a new Account' : 'Login to Schedular'}
+						{pathName === 'signup' ? 'Create a new Account' : 'Login to Scheduler'}
 					</h2>
 					{errorMsg && (
 						<p style={{ width: '100%', margin: '0px', color: 'var(--danger-red-color)' }}>{errorMsg}</p>

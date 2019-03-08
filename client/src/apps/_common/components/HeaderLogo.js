@@ -46,7 +46,7 @@ const HeaderLogo = (props) => {
 							width: 'auto'
 						}}
 					/>
-					Schedular
+					Scheduler
 				</h2>
 			</Link>
 		</div>

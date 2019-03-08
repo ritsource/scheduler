@@ -1,7 +1,7 @@
 node_modules/
 build/
-public/todo.js
-public/extra.js
-public/calendar.js
-public/main.js
-public/styles.css
+public/todo*.js
+public/extra*.js
+public/calendar*.js
+public/main*.js
+public/styles*.css

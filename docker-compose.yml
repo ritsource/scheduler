@@ -1,7 +1,5 @@
 version: '3'
 services:
-  redis:
-    image: 'redis:5.0.3-alpine'
   nginx:
     build:
       context: ./nginx

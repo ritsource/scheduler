@@ -9,8 +9,6 @@ import CalendarRouter from '../apps/calendar/CalendarRouter';
 
 export default (app) => {
 	app.get('/calendar', checkAuth, (req, res) => {
-		console.log('req._isAuth **********************', req._isAuth);
-
 		if (req._isAuth) {
 			const context = { req };
 			const client = getApolloClient(req);
