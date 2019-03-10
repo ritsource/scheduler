@@ -7,9 +7,10 @@ WORKDIR /app
 # Copy Files and Install Dependencies
 COPY ./package.json ./
 RUN yarn install
+COPY ./ ./
 
-# Volumes will do the Job
-# COPY ./ ./
+# Build Production Bundles
+RUN yarn run build
 
 # Start Server
-CMD ["yarn", "run", "dev"]
+CMD ["yarn", "run", "start"]

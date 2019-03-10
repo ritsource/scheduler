@@ -1,7 +1,7 @@
 {
-	"name": "application2",
-	"version": "1.0.0",
-	"main": "index.js",
+	"name": "client",
+	"version": "2.0.0",
+	"main": "src/server.js",
 	"license": "MIT",
 	"scripts": {
 		"dev:server": "nodemon --watch build --exec \"node build/bundle.js\"",
@@ -17,8 +17,6 @@
 		"prod:build-styles": "webpack --config webpack.styles.js",
 		"build": "npm-run-all prod:*",
 		"dev": "npm-run-all --parallel dev:*",
-		"test": "jest",
-		"test:watch": "jest --watch",
 		"start": "node build/bundle.js"
 	},
 	"dependencies": {

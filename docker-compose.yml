@@ -17,6 +17,8 @@ services:
     volumes:
       - /app/node_modules
       - ./client:/app
+    environment:
+      - NODE_ENV=development
   server:
     build:
       context: ./server

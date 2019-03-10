@@ -3,8 +3,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
+const isProd = process.env.NODE_ENV !== 'development';
+
 module.exports = {
-	mode: 'production',
+	mode: isProd ? 'production' : 'development',
 	entry: './src/styles/app.scss',
 	output: {
 		path: path.resolve(__dirname, 'public')
