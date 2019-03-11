@@ -19,6 +19,7 @@ services:
       - ./client:/app
     environment:
       - NODE_ENV=development
+      - SERVER_URI=server
   server:
     build:
       context: ./server
