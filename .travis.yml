@@ -14,7 +14,8 @@ script:
   - cd tests
   - yarn install
   - yarn run test
-
+  - cd ..
+  
 deploy:
   provider: script
   script: bash ./deploy.sh
