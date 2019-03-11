@@ -7,6 +7,7 @@ env:
     - VERSION=2.0.0
 
 before_install:
+  - gem install bundler
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 deploy:
