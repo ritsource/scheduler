@@ -12,6 +12,7 @@ before_install:
 
 script:
   - cd tests
+  - yarn install
   - yarn run test
 
 deploy:
