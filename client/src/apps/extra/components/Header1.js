@@ -6,6 +6,15 @@ import ProgressbarContext from '../../_common/contexts/ProgressbarContext';
 import CustomProgressBar from '../../_common/components/CustomProgressBar';
 
 const Header1 = ({ pathName }) => {
+	const path =
+		pathName && !!pathName.match(/about/)
+			? 'about'
+			: pathName && !!pathName.match(/login/)
+				? 'login'
+				: pathName && !!pathName.match(/signup/)
+					? 'signup'
+					: pathName && !!pathName.match(/contact/) ? 'contact' : null;
+
 	return (
 		<ProgressbarContext.Consumer>
 			{(context) => (
@@ -31,18 +40,15 @@ const Header1 = ({ pathName }) => {
 						</div>
 						<div className="Header1-Links-Container-01">
 							<Link to="/about">
-								<p className={`${!!pathName.match(/about/) && 'Header1-Links-Active'}`}>ABOUT</p>
+								<p className={`${path === 'about' && 'Header1-Links-Active'}`}>ABOUT</p>
 							</Link>
 							<Link to="/login">
-								<p
-									className={`${(!!pathName.match(/login/) || !!pathName.match(/signup/)) &&
-										'Header1-Links-Active'}`}
-								>
+								<p className={`${(path === 'login' || path === 'signup') && 'Header1-Links-Active'}`}>
 									LOGIN
 								</p>
 							</Link>
 							<Link to="/contact">
-								<p className={`${!!pathName.match(/contact/) && 'Header1-Links-Active'}`}>CONTACT</p>
+								<p className={`${path === 'contact' && 'Header1-Links-Active'}`}>CONTACT</p>
 							</Link>
 						</div>
 					</div>
