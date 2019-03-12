@@ -9,14 +9,7 @@ import SettingsComp from '../../_common/components/SettingsComp';
 
 import SettingsContext from '../../_common/contexts/SettingsContext';
 
-let __isNode__ = false;
-if (typeof process === 'object') {
-	if (typeof process.versions === 'object') {
-		if (typeof process.versions.node !== 'undefined') {
-			__isNode__ = true;
-		}
-	}
-}
+import __isNode__ from '../../../utils/isNode';
 
 const CalendarComp = (props) => {
 	const { staticContext, groups } = props;

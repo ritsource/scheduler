@@ -15,14 +15,7 @@ import { setCookie, getCookie } from '../../../utils/cookie_funcs';
 
 import { app_theme_options } from '../../../utils/constants';
 
-let __isNode__ = false;
-if (typeof process === 'object') {
-	if (typeof process.versions === 'object') {
-		if (typeof process.versions.node !== 'undefined') {
-			__isNode__ = true;
-		}
-	}
-}
+import __isNode__ from '../../../utils/isNode';
 
 const SettingsComp = (props) => {
 	const { setSettings } = props;

@@ -11,14 +11,7 @@ import EventDoneIndicator from './EventDoneIndicator';
 
 import SettingsContext from '../contexts/SettingsContext';
 
-let __isNode__ = false;
-if (typeof process === 'object') {
-	if (typeof process.versions === 'object') {
-		if (typeof process.versions.node !== 'undefined') {
-			__isNode__ = true;
-		}
-	}
-}
+import __isNode__ from '../../../utils/isNode';
 
 const OptionsHeader = (props) => {
 	const { auth, dropdown, setDropdown } = props;
