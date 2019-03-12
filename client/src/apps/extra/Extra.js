@@ -6,8 +6,18 @@ import Header1 from './components/Header1';
 
 import __isNode__ from '../../utils/isNode';
 
+// let __isNode__ = false;
+
+// if (typeof process === 'object') {
+// 	if (typeof process.versions === 'object') {
+// 		if (typeof process.versions.node !== 'undefined') {
+// 			__isNode__ = true;
+// 		}
+// 	}
+// }
+
 const Extra = (props) => {
-	const pathName = props.staticContext ? props.staticContext.req.pathName : !__isNode__ && window.location.pathname;
+	const pathName = props.staticContext ? props.staticContext.req.path : !__isNode__ && window.location.pathname;
 
 	return (
 		<ProgressbarProvider>
