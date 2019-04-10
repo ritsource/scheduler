@@ -3,21 +3,21 @@
 	"containerDefinitions": [
 		{
 			"name": "client",
-			"image": "ritwik310/scheduler-client",
+			"image": "ritwik310/scheduler-client:5cdfec9d0189737f6aa002d7771ccdc715d6df3b",
 			"hostname": "client",
 			"essential": false,
 			"memory": 128
 		},
 		{
 			"name": "server",
-			"image": "ritwik310/scheduler-server",
+			"image": "ritwik310/scheduler-server:5cdfec9d0189737f6aa002d7771ccdc715d6df3b",
 			"hostname": "server",
 			"essential": false,
 			"memory": 128
 		},
 		{
 			"name": "nginx",
-			"image": "ritwik310/scheduler-nginx",
+			"image": "ritwik310/scheduler-nginx:5cdfec9d0189737f6aa002d7771ccdc715d6df3b",
 			"hostname": "nginx",
 			"essential": true,
 			"portMappings": [
