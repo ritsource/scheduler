@@ -30,7 +30,7 @@ deploy:
   provider: elasticbeanstalk
   region: "ap-south-1"
   app: Scheduler
-  env: Scheduler-env
+  env: Scheduler-env-1
   bucket_name: elasticbeanstalk-ap-south-1-729767835831
   bucket_path: Scheduler
   on:
