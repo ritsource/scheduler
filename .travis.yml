@@ -19,7 +19,6 @@ script:
   - bash ./deploy.dockerhub.sh
 
 # Deploy to Docker Hub
-
 # deploy:
 #   provider: script
 #   script: bash ./deploy.dockerhub.sh
