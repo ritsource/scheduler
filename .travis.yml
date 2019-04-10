@@ -15,9 +15,27 @@ script:
   - yarn install
   - yarn run test
   - cd ..
-  
+  # Deploy to docker-hub
+  - bash ./deploy.dockerhub.sh
+
+# Deploy to Docker Hub
+
+# deploy:
+#   provider: script
+#   script: bash ./deploy.dockerhub.sh
+#   on:
+#     branch: master
+
+# Deploy to AWS
 deploy:
-  provider: script
-  script: bash ./deploy.sh
+  provider: elasticbeanstalk
+  region: "ap-south-1"
+  app: Scheduler
+  env: Scheduler-env
+  bucket_name: elasticbeanstalk-ap-south-1-729767835831
+  bucket_path: Scheduler
   on:
     branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
