@@ -6,6 +6,7 @@
 			"image": "ritwik310/scheduler-client",
 			"hostname": "client",
 			"essential": false,
+			"links": [ "server" ],
 			"memory": 128
 		},
 		{

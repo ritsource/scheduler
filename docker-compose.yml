@@ -5,17 +5,15 @@ services:
     ports:
       - '27017:27017'
   nginx:
-    image: ritwik310/scheduler-nginx
-    # build:
-    #   context: ./nginx
-    #   dockerfile: Dockerfile
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
     ports:
       - '4001:80'
   client:
-    image: ritwik310/scheduler-client
-    # build:
-    #   context: ./client
-    #   dockerfile: dev.Dockerfile
+    build:
+      context: ./client
+      dockerfile: dev.Dockerfile
     volumes:
       - /app/node_modules
       - ./client:/app
@@ -23,10 +21,9 @@ services:
       - NODE_ENV=development
       - SERVER_URI=server
   server:
-    image: ritwik310/scheduler-server
-    # build:
-    #   context: ./server
-    #   dockerfile: dev.Dockerfile
+    build:
+      context: ./server
+      dockerfile: dev.Dockerfile
     volumes:
       - /app/node_modules
       - ./server:/app
