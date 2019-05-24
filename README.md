@@ -1,17 +1,53 @@
+Visit the App - [https://scheduler.ritwiksaha.com](https://scheduler.ritwiksaha.com)
 
-# Welcome to Scheduler!
+View Source-code - [https://github.com/ritwik310/scheduler](https://github.com/ritwik310/scheduler)
 
-**Play with** [Schedular](https://scheduler.ritwiksaha.com/),
+  
+
+# About
 
 **Scheduler**, a schedule management application for your daily tasks. Its easy-to-use interactive interface makes it's really fun. This app is inspired by [Google Calendar](https://calendar.google.com/) and [Microsoft Todo](https://to-do.microsoft.com/). Programmers are people who love to find solutions to problems that are already been solved. And this project is no exception. But there are a couple of things that could be a deal maker for your use-cases. The main motivation behind building this is that I previously used both of the applications mentioned above for keeping track of my schedule and although it wasn't so hard I thought it would be fun to create something that has both views, and that's it. So, if you want to use it then you certainly can, for free (at least for now, I mean almost forever). Good luck.
 
-# Files
+# Repository Details
 
-As you can possibly see this project contains 3 main directories, **client**, **server** & **nginx**. The **client** contains necessary files to run a **Docker** container for the client side of the application, a server-side rendered **React** app that uses **GraphQL** for data-queries and communicates via **docker-compose** to the **API-Server** in development.  
-  
-This brings us to the **server** directory. Here we are running a **Node/Express/GraphQL** server in a **Docker** container. It uses **MongoDB** for writing & reading data, and that also runs inside a container and uses **persistent volumes (Kubernetes)** to store data in production. [here's](https://github.com/ritwik310/my-k8s-config) the configuration for the **Kubernetes cluster**.
+You can find the **Source-code** for this application in this [Github Repository](https://github.com/ritwik310/scheduler) 
 
-And, the **nginx** directory contains configuration for running an **Nginx server** in a container for mainly routing management in development.
+The repository contains 3 main directories,  **client**,  **server**  &  **nginx**. The  **client**  contains necessary files to run a  **Docker**  container for the client side of the application, a server-side rendered  **React**  app that uses  **GraphQL**  for data-queries and communicates via  **docker-compose**  to the  **API-Server**  in development.
+
+This brings us to the  **server**  directory. Here we are running a  **Node/Express/GraphQL**  server in a  **Docker**  container. It uses  **MongoDB**  for writing & reading data, and that also runs inside a container and uses  **persistent volumes (Kubernetes)**  to store data in production.  [here's](https://github.com/ritwik310/my-k8s-config)  the configuration for the  **Kubernetes cluster**.
+
+And, the  **nginx**  directory contains configuration for running an  **Nginx server**  in a container for mainly routing management in development.
+
+# Application Services
+
+The application has been hosted on a **Kubernetes cluster**. Here's a very simple design of the system. This contains an **API-server**, a **Rendering-server** (renders a react app), a **MongoDB database** (uses PVC to store data), and a **Redis server** (for data caching, excluded in v2).
+
+Configuration files for Kubernetes Cluster [here](https://github.com/ritwik310/scheduler-k8s)  
+
+
+<img  style="float: right;"  src="https://gitlab.com/ritwik310/project-documents/raw/master/Scheduler/Scheduler-Microservices-Mockup-0.png">
+
+> **Note:** Currently hosted on AWS Elastic Beanstalk (Free Tier), as it has no commercial usage.
+
+## Application Renderer (Client)
+The **Client** service is responsible for rendering the user interface (a web-app). This runs a **Node/Express.js** server, that renders a **React-app** from the **Server-side**. The Client communicates to the **API-server** using **GraphQL** (Apollo).
+
+Client includes multiple **"apps"**, each responsible for rendering different parts of the **UI**. For example, **Calender**, **Todo**, and **Extra** are 3 different **apps** (respectively responsible for **Calendar-UI**, **Todo-UI**, and **Login-&-About-UI**). Each **app** gets rendered separately according to user requests, and eventually minimizes the bundle size by chunking **javascript** in 3 parts.
+
+Each **app** get's rendered on **different routes** from the Server-side. Here's the list of "apps"...
+
+Calendar - [/calendar](https://scheduler.ritwiksaha.com/calendar)   
+Todo - [/todo](https://scheduler.ritwiksaha.com/todo)   
+Extra - [/about](https://scheduler.ritwiksaha.com/about) (every route other than first two)   
+
+## API-Server (Server)
+
+A pretty straightforward **Node.js/GraphQL** server with a **MongoDB** database. Moreover, it uses Passport.js for authentication handling and Nodemailer for passport recovery.
+
+## Other Parts
+In development, it uses **Nginx** to handle routing between **docker-compose** services. Same for Routing in AWS-EB (production) and uses a remote **MongoDB cluster** as the production database.
+
+In **Kubernetes** too, it uses **Ingress-Nginx** for Routing, but as mentioned earlier, **Persistent-volume** for data storage.
 
 # Running on your Local Server
 
@@ -60,4 +96,4 @@ $ docker-compose up
 ```
 You need **Docker and Docker-Compose** installed for the above command. Once the containers are running you can visit [http://127.0.0.1:4001](http://127.0.0.1:4001) and play with the application.
 
-# :metal: Good Luck
+**Happy Hacking**
