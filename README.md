@@ -1,8 +1,8 @@
+# Scheduler
+
+Scheduler helps in managing your schedule & todos on a Calendar.
+
 Visit the App - [https://scheduler.ritwiksaha.com](https://scheduler.ritwiksaha.com)
-
-View Source-code - [https://github.com/ritwik310/scheduler](https://github.com/ritwik310/scheduler)
-
-  
 
 # About
 
