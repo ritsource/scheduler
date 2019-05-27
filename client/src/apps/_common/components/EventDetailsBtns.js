@@ -19,6 +19,10 @@ const EventDetailsBtns = (props) => {
 	const [ description, setDescription ] = useState(event.description);
 	const [ askforDelete, setAskforDelete ] = useState(false);
 
+	useEffect(() => {
+		setDescription(event.description);
+	}, [event])
+
 	return (
 		<div className="EventDetailsBtns-c-00">
 			{groups.length > 0 && (

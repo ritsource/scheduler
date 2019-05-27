@@ -82,12 +82,8 @@ module.exports = {
 				_creator: req.user._id
 			});
 
-			if (!date_from && date_to) date_from = date_to;
-			else if (date_from && !date_to) date_to = date_from;
-			else if (!date_from && !date_to) {
-				date_from = new Date().setHours(0, 0, 0, 0).valueOf();
-				date_to = new Date().setHours(0, 0, 0, 0).valueOf();
-			}
+			if (!date_from) date_from = new Date().setHours(0, 0, 0, 0).valueOf();
+			if (!date_to || date_to < date_from) date_to = date_from
 
 			const bodyObj = {};
 			if (title) bodyObj.title = title;
