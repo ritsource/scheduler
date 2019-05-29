@@ -10,8 +10,6 @@ Visit the App - [https://scheduler.ritwiksaha.com](https://scheduler.ritwiksaha.
 
 # Repository Details
 
-You can find the **Source-code** for this application in this [Github Repository](https://github.com/ritwik310/scheduler) 
-
 The repository contains 3 main directories,  **client**,  **server**  &  **nginx**. The  **client**  contains necessary files to run a  **Docker**  container for the client side of the application, a server-side rendered  **React**  app that uses  **GraphQL**  for data-queries and communicates via  **docker-compose**  to the  **API-Server**  in development.
 
 This brings us to the  **server**  directory. Here we are running a  **Node/Express/GraphQL**  server in a  **Docker**  container. It uses  **MongoDB**  for writing & reading data, and that also runs inside a container and uses  **persistent volumes (Kubernetes)**  to store data in production.  [here's](https://github.com/ritwik310/my-k8s-config)  the configuration for the  **Kubernetes cluster**.
