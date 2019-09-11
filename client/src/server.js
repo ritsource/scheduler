@@ -17,15 +17,15 @@ import notFoundRoute from './routes/404_route';
 
 if (process.env.IS_GETAWAY_SERVICE === 'true') {
 	app.get('/api*', (req, res) => {
-		res.redirect(`http://"${process.env.SERVER_URI}${req.path}`);
+		res.redirect(`${process.env.SERVER_URI}${req.path}`);
 	});
 
 	app.get('/auth*', (req, res) => {
-		res.redirect(`http://"${process.env.SERVER_URI}${req.path}`);
+		res.redirect(`${process.env.SERVER_URI}${req.path}`);
 	});
 
 	app.get('/graphql*', (req, res) => {
-		res.redirect(`http://"${process.env.SERVER_URI}${req.path}`);
+		res.redirect(`${process.env.SERVER_URI}${req.path}`);
 	});
 }
 
