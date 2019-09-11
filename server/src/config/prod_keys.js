@@ -10,3 +10,5 @@ module.exports = {
 	facebook_app_secret: process.env.FACEBOOK_APP_SECRET,
 	cookie_key: process.env.COOKIE_KEY
 };
+
+// ANOTHER VARIABLE = IS_GETAWAY_SERVICE

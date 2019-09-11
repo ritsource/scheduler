@@ -2,6 +2,7 @@ import '@babel/polyfill';
 import 'cross-fetch/polyfill';
 import express from 'express';
 import cookieParser from 'cookie-parser';
+import proxy from 'http-proxy-middleware';
 
 import checkAuth from './middlewares/check_auth';
 
@@ -10,24 +11,18 @@ const app = express();
 app.use(cookieParser());
 app.use(express.static('public'));
 
+if (process.env.IS_GETAWAY_SERVICE === 'true') {
+	app.use('/api', proxy({ target: `${process.env.SERVER_URI}${req.path}`, changeOrigin: true }));
+
+	app.use('/auth', proxy({ target: `${process.env.SERVER_URI}${req.path}`, changeOrigin: true }));
+
+	app.use('/graphql', proxy({ target: `${process.env.SERVER_URI}${req.path}`, changeOrigin: true }));
+}
+
 import extraRoute from './routes/extra_route';
 import todoRoute from './routes/todo_route';
 import calendarRoute from './routes/calendar_route';
 import notFoundRoute from './routes/404_route';
-
-if (process.env.IS_GETAWAY_SERVICE === 'true') {
-	app.get('/api*', (req, res) => {
-		res.redirect(`${process.env.SERVER_URI}${req.path}`);
-	});
-
-	app.get('/auth*', (req, res) => {
-		res.redirect(`${process.env.SERVER_URI}${req.path}`);
-	});
-
-	app.get('/graphql*', (req, res) => {
-		res.redirect(`${process.env.SERVER_URI}${req.path}`);
-	});
-}
 
 app.get('/', checkAuth, (req, res) => {
 	if (req._isAuth) {
