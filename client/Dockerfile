@@ -12,5 +12,8 @@ COPY ./ ./
 # Build Production Bundles
 RUN yarn run build
 
+# PORT environment variable for Google-Cloud-Runhosting
+ENV PORT 3000
+
 # Start Server
 CMD ["yarn", "run", "start"]

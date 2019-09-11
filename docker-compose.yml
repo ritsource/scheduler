@@ -19,7 +19,7 @@ services:
       - ./client:/app
     environment:
       - NODE_ENV=development
-      - SERVER_URI=server
+      - SERVER_URI=server:5000
   server:
     build:
       context: ./server

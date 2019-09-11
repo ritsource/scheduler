@@ -8,7 +8,7 @@ export default (req) => {
 		ssrMode: true,
 		cache: new InMemoryCache(),
 		link: new HttpLink({
-			uri: `http://${process.env.SERVER_URI}:5000/graphql`,
+			uri: `http://${process.env.SERVER_URI}/graphql`,
 			credentials: 'same-origin',
 			// fetch: fetch,
 			headers: {

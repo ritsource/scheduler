@@ -9,5 +9,8 @@ COPY ./package.json ./
 RUN yarn install
 COPY ./ ./
 
+# PORT environment variable for Google-Cloud-Runhosting
+ENV PORT 5000
+
 # Start Server
 CMD ["yarn", "run", "start"]

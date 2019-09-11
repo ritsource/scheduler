@@ -3,7 +3,7 @@ import axios from 'axios';
 export default async (req, res, next) => {
 	try {
 		const response = await axios({
-			url: `http://${process.env.SERVER_URI}:5000/graphql`,
+			url: `http://${process.env.SERVER_URI}/graphql`,
 			method: 'post',
 			headers: { cookie: req.get('cookie') || '' },
 			data: {
