@@ -15,6 +15,20 @@ import todoRoute from './routes/todo_route';
 import calendarRoute from './routes/calendar_route';
 import notFoundRoute from './routes/404_route';
 
+if (process.env.IS_GETAWAY_SERVICE === 'true') {
+	app.get('/api*', (req, res) => {
+		res.redirect(`http://"${process.env.SERVER_URI}${req.path}`);
+	});
+
+	app.get('/auth*', (req, res) => {
+		res.redirect(`http://"${process.env.SERVER_URI}${req.path}`);
+	});
+
+	app.get('/graphql*', (req, res) => {
+		res.redirect(`http://"${process.env.SERVER_URI}${req.path}`);
+	});
+}
+
 app.get('/', checkAuth, (req, res) => {
 	if (req._isAuth) {
 		res.redirect('/calendar');

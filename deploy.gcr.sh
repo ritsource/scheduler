@@ -16,8 +16,8 @@ else
 fi
 
 # building docker containers for server and client
-docker build -t ritwik310/scheduler-v2-client ./client/Dockerfile ./client
-docker build -t ritwik310/scheduler-v2-server ./server/Dockerfile ./server
+docker build -t ritwik310/scheduler-v2-client ./client
+docker build -t ritwik310/scheduler-v2-server ./server
 
 # pushing to google container registary
 docker tag ritwik310/scheduler-v2-client gcr.io/$PROJECT_ID/scheduler-v2-client:latest
