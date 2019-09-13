@@ -7,7 +7,8 @@ const passport = require('passport');
 const cookieSession = require('cookie-session');
 const graphqlHTTP = require('express-graphql');
 
-require('./db/mongoose'); // Mongoose
+const mgodb = require('./db/mongoose'); // Mongoose
+// require('./db/mongoose'); // Mongoose
 require('./models/user'); // User Model
 require('./models/event'); // Event Model
 require('./models/group'); // Group Model
@@ -24,6 +25,7 @@ const app = express();
 // Middlewares
 app.use(cors());
 app.use(bodyParser.json());
+app.use(mgodb.connect());
 
 app.use(
 	cookieSession({
@@ -39,12 +41,17 @@ app.use(passport.session());
 app.use(cors());
 app.use(bodyParser.json());
 
+// app.post('/graphql', (req, res) => {
+// 	console.log('request', req.body);
+// 	res.send('hello', 204);
+// });
+
 app.use(
 	'/graphql',
 	graphqlHTTP({
 		schema,
 		rootValue: resolvers,
-		graphiql: true
+		graphiql: process.env.NODE_ENV === 'development'
 	})
 ); // GraphQL
 

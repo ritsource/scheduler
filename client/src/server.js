@@ -8,16 +8,12 @@ import checkAuth from './middlewares/check_auth';
 
 const app = express();
 
+// forwarding requests to api-server, useful when client is teh gateaway server
+// console.log('process.env.SERVER_URI', process.env.SERVER_URI);
+app.use([ '/api', '/auth', '/graphql' ], proxy({ target: process.env.SERVER_URI, changeOrigin: true }));
+
 app.use(cookieParser());
 app.use(express.static('public'));
-
-if (process.env.IS_GETAWAY_SERVICE === 'true') {
-	app.use('/api', proxy({ target: `${process.env.SERVER_URI}${req.path}`, changeOrigin: true }));
-
-	app.use('/auth', proxy({ target: `${process.env.SERVER_URI}${req.path}`, changeOrigin: true }));
-
-	app.use('/graphql', proxy({ target: `${process.env.SERVER_URI}${req.path}`, changeOrigin: true }));
-}
 
 import extraRoute from './routes/extra_route';
 import todoRoute from './routes/todo_route';

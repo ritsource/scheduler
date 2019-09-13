@@ -13,8 +13,11 @@ if (__isNode__) {
 	cache = new InMemoryCache().restore(window.__APOLLO_STATE__);
 }
 
+// console.log('process.env.SERVER_URI', process.env.SERVER_URI);
+
 const link = new HttpLink({
-	uri: '/graphql'
+	uri: `/graphql`
+	// uri: `${process.env.SERVER_URI}/graphql`
 });
 
 const client = new ApolloClient({
