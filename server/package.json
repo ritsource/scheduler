@@ -19,7 +19,7 @@
 		"graphql": "14.1.1",
 		"http-proxy-middleware": "0.20.0",
 		"jsonwebtoken": "8.5.0",
-		"lodash": "4.17.11",
+		"lodash": "4.17.19",
 		"mongoose": "5.4.15",
 		"nodemailer": "5.1.1",
 		"nodemon": "1.18.10",
